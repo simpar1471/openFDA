@@ -45,7 +45,7 @@ website](https://open.fda.gov/apis/) to get a full feel for the API
 itself.
 
 The R package lets you query the API directly from R, using
-[httr2](https://httr2.r-lib.org/)\`.
+[httr2](https://httr2.r-lib.org/).
 
 ``` r
 search <- openFDA(
@@ -77,7 +77,8 @@ json$results[[1]]$openfda$pharm_class_epc
 #> [1] "Loop Diuretic [EPC]"
 ```
 
-I’ve found `{purrr}` to be very useful for parsing this data quickly.
+I’ve found [purrr](https://purrr.tidyverse.org/) to be very useful for
+parsing this data quickly.
 
 ``` r
 purrr::map_chr(
