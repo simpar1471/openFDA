@@ -39,6 +39,10 @@ This short guide will get you started with `{openFDA}`, and show you how to put 
 library(openFDA)
 ```
 
+```{r set_key}
+set_api_key("tvzdUXoC3Yi21hhxtKKochJlQgm6y1Lr7uhmjcpT")
+```
+
 # The openFDA API
 The openFDA API makes public FDA data available from a simple, public API.
 Users of this API have access to FDA data on food, human and veterinary drugs, devices, and more.

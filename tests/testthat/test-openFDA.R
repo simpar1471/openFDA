@@ -70,6 +70,8 @@ test_that("openFDA throws formatted HTTP errors", {
 })
 
 test_that("openFDA errors on certain bad inputs", {
+  set_api_key("api_key_string")
+
   expect_error(
     openFDA(
       search = c("openfda.brand_name" = "3129084"),

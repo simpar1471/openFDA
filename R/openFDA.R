@@ -30,7 +30,8 @@
 #'   * `"drug-event"`: Adverse event reports from [FDA Adverse Event Reporting
 #'     System](https://open.fda.gov/data/faers/)
 #'   * `"drug-label"`: Drug documentation in the [Structured Product
-#'     Labeling](https://labels.fda.gov/) (SPL) format.
+#'     Labeling](https://www.fda.gov/industry/fda-data-standards-advisory-board/structured-product-labeling-resources)
+#'     (SPL) format.
 #'   * `"drug-ndc"`: Data from the [National Drug Code
 #'     Directory](https://open.fda.gov/data/ndc/) (NDC).
 #'   * `"drug-enforcement"`: Data from the [FDA Recall Enterprise
@@ -51,7 +52,7 @@
 #'   * `"device-recall"`: Data on product recalls for medical devices which
 #'     violate FDA law.
 #'   * `"device-reglist"`: Data on FDA [Device Registrations and
-#'     Listings](https://www.fda.gov/medical-devices/how-to-study-and-market-your-device/device-registration-and-listing/).
+#'     Listings](https://www.fda.gov/medical-devices/how-study-and-market-your-device/device-registration-and-listing).
 #'   * `"device-covid19serology"`: Data from [independent evaluations of COVID-19
 #'     serological tests](https://open.fda.gov/apis/device/covid19serology/).
 #'   * `"device-udi"`: Data from the FDA's Global Unique Device Identification
