@@ -11,17 +11,18 @@ has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
-`{openFDA}` makes querying the [openFDA API](https://open.fda.gov/apis/)
+openFDA makes querying the [openFDA API](https://open.fda.gov/apis/)
 from R a breeze. The API itself serves publicly available data from the
 FDA about foods, drugs, devices, and more. This data includes data such
-as recall enforcement reports, adverse events, manufacturer details, and
-more. Note that the data on openFDA has not been validated for clinical
-or production use.
+as recall enforcement reports, adverse events, manufacturer details,
+and - again - even more! Note that the data on openFDA has not been
+validated for clinical or production use.
 
 ## Installation
 
 You can install the development version of openFDA from GitHub using
-either `{pak}` or `{devtools}`:
+either [pak](https://pak.r-lib.org/) or
+[devtools](https://devtools.r-lib.org/):
 
 ``` r
 # install.packages("pak")
@@ -43,7 +44,8 @@ The full documentation for the API is online, so look at the [openFDA
 website](https://open.fda.gov/apis/) to get a full feel for the API
 itself.
 
-The R package lets you query the API directly from R, using `{httr2}`.
+The R package lets you query the API directly from R, using
+[httr2](https://httr2.r-lib.org/)\`.
 
 ``` r
 search <- openFDA(
@@ -101,5 +103,5 @@ working with the response object and parsing the underlying JSON
 yourself permits more powerful interactions with the API.
 
 There is also [FDAopenR](https://github.com/ck2136/FDAopenR/), which I
-couldn’t quiet wrap my head around. The package appears to be in working
+couldn’t quite wrap my head around. The package appears to be in working
 order, though!
