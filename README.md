@@ -9,6 +9,8 @@
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Codecov test
+coverage](https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg)](https://app.codecov.io/gh/simpar1471/openFDA)
 <!-- badges: end -->
 
 openFDA makes querying the [openFDA API](https://open.fda.gov/apis/)
@@ -59,7 +61,7 @@ search
 #> https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&search=openfda.generic_name:furosemide&limit=5
 #> Status: 200 OK
 #> Content-Type: application/json
-#> Body: In memory (22363 bytes)
+#> Body: In memory (17286 bytes)
 ```
 
 The underlying response is JSON data - you can use
@@ -85,11 +87,9 @@ purrr::map_chr(
   .x = json$results, 
   .f = \(result) purrr::pluck(result, "openfda", "manufacturer_name", 1)
 )
-#> [1] "Meitheal Pharmaceuticals Inc."                                
-#> [2] "Hospira, Inc."                                                
-#> [3] "Heritage Pharmaceuticals Inc. d/b/a Avet Pharmaceuticals Inc."
-#> [4] "scPharmaceuticals Inc."                                       
-#> [5] "Graviti Pharmaceuticals Private Limited"
+#> [1] "Amneal Pharmaceuticals LLC" "Gland Pharma Limited"      
+#> [3] "Solco Healthcare LLC"       "Lifestar Pharma LLC"       
+#> [5] "Ipca Laboratories Limited"
 ```
 
 ## Other R packages for openFDA
