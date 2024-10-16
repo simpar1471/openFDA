@@ -2,21 +2,23 @@ url: https://simpar1471.github.io/openFDA/
 template:
   bootstrap: 5
   bslib:
-    base_font: {google: "Source Sans Pro"}
-    heading_font: {google: "Merriweather"}
-    code_font: {google: "Fira Code"}
-  light-switch: true
+    base_font:
+      google: Source Sans Pro
+    heading_font:
+      google: Merriweather
+    code_font:
+      google: Fira Code
+  light-switch: yes
 reference:
-  - title: Query the openFDA API
-    contents:
-      - openFDA
-  - title: Construct openFDA query components
-    contents:
-      - format_search_term
-      - format_sort_term
-  - title: Get/set your openFDA API key
-    contents:
-      - set_api_key
+- title: Query the openFDA API
+  contents: openFDA
+- title: Construct openFDA query components
+  contents:
+  - format_search_term
+  - format_sort_term
+- title: Get/set your openFDA API key
+  contents: set_api_key
 navbar:
   bg: default
   type: light
+

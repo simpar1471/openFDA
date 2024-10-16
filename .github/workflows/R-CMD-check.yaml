@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      OPENFDA_KEY: ${{ secrets.OPENFDA_KEY }}
+      OPENFDA_TOKEN: ${{ secrets.OPENFDA_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
     steps:
       - uses: actions/checkout@v4
