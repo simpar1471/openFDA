@@ -142,19 +142,136 @@ endpoint</a>.</p>
 <span></span>
 <span><span class="co"># The JSON object contains information including the generic and brand names </span></span>
 <span><span class="va">bnf_search_json</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
-<span><span class="co">#&gt; $application_number</span></span>
-<span><span class="co">#&gt; $application_number[[1]]</span></span>
-<span><span class="co">#&gt; [1] "ANDA078710"</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [[1]]$product_number</span></span>
+<span><span class="co">#&gt; [1] "002"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$reference_drug</span></span>
+<span><span class="co">#&gt; [1] "No"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$brand_name</span></span>
+<span><span class="co">#&gt; [1] "LISINOPRIL AND HYDROCHLOROTHIAZIDE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients</span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[1]]</span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[1]]$name</span></span>
+<span><span class="co">#&gt; [1] "HYDROCHLOROTHIAZIDE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[1]]$strength</span></span>
+<span><span class="co">#&gt; [1] "12.5MG"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $brand_name</span></span>
-<span><span class="co">#&gt; $brand_name[[1]]</span></span>
-<span><span class="co">#&gt; [1] "TELMISARTAN"</span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[2]]</span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[2]]$name</span></span>
+<span><span class="co">#&gt; [1] "LISINOPRIL"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[2]]$strength</span></span>
+<span><span class="co">#&gt; [1] "20MG"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $generic_name</span></span>
-<span><span class="co">#&gt; $generic_name[[1]]</span></span>
-<span><span class="co">#&gt; [1] "TELMISARTAN"</span></span></code></pre></div>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$reference_standard</span></span>
+<span><span class="co">#&gt; [1] "No"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$dosage_form</span></span>
+<span><span class="co">#&gt; [1] "TABLET"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$route</span></span>
+<span><span class="co">#&gt; [1] "ORAL"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$marketing_status</span></span>
+<span><span class="co">#&gt; [1] "Prescription"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$te_code</span></span>
+<span><span class="co">#&gt; [1] "AB"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [[2]]$product_number</span></span>
+<span><span class="co">#&gt; [1] "003"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$reference_drug</span></span>
+<span><span class="co">#&gt; [1] "No"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$brand_name</span></span>
+<span><span class="co">#&gt; [1] "LISINOPRIL AND HYDROCHLOROTHIAZIDE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$active_ingredients</span></span>
+<span><span class="co">#&gt; [[2]]$active_ingredients[[1]]</span></span>
+<span><span class="co">#&gt; [[2]]$active_ingredients[[1]]$name</span></span>
+<span><span class="co">#&gt; [1] "HYDROCHLOROTHIAZIDE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$active_ingredients[[1]]$strength</span></span>
+<span><span class="co">#&gt; [1] "25MG"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$active_ingredients[[2]]</span></span>
+<span><span class="co">#&gt; [[2]]$active_ingredients[[2]]$name</span></span>
+<span><span class="co">#&gt; [1] "LISINOPRIL"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$active_ingredients[[2]]$strength</span></span>
+<span><span class="co">#&gt; [1] "20MG"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$reference_standard</span></span>
+<span><span class="co">#&gt; [1] "No"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$dosage_form</span></span>
+<span><span class="co">#&gt; [1] "TABLET"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$route</span></span>
+<span><span class="co">#&gt; [1] "ORAL"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$marketing_status</span></span>
+<span><span class="co">#&gt; [1] "Prescription"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]$te_code</span></span>
+<span><span class="co">#&gt; [1] "AB"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [[3]]$product_number</span></span>
+<span><span class="co">#&gt; [1] "001"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$reference_drug</span></span>
+<span><span class="co">#&gt; [1] "No"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$brand_name</span></span>
+<span><span class="co">#&gt; [1] "LISINOPRIL AND HYDROCHLOROTHIAZIDE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$active_ingredients</span></span>
+<span><span class="co">#&gt; [[3]]$active_ingredients[[1]]</span></span>
+<span><span class="co">#&gt; [[3]]$active_ingredients[[1]]$name</span></span>
+<span><span class="co">#&gt; [1] "HYDROCHLOROTHIAZIDE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$active_ingredients[[1]]$strength</span></span>
+<span><span class="co">#&gt; [1] "12.5MG"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$active_ingredients[[2]]</span></span>
+<span><span class="co">#&gt; [[3]]$active_ingredients[[2]]$name</span></span>
+<span><span class="co">#&gt; [1] "LISINOPRIL"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$active_ingredients[[2]]$strength</span></span>
+<span><span class="co">#&gt; [1] "10MG"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$reference_standard</span></span>
+<span><span class="co">#&gt; [1] "No"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$dosage_form</span></span>
+<span><span class="co">#&gt; [1] "TABLET"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$route</span></span>
+<span><span class="co">#&gt; [1] "ORAL"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$marketing_status</span></span>
+<span><span class="co">#&gt; [1] "Prescription"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]$te_code</span></span>
+<span><span class="co">#&gt; [1] "AB"</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="extracting-openfda-fields-programmatically">Extracting openFDA fields programmatically<a class="anchor" aria-label="anchor" href="#extracting-openfda-fields-programmatically"></a>
 </h3>
@@ -190,12 +307,9 @@ API above.</p>
 <code class="sourceCode R"><span><span class="va">openFDA_brand_names</span> <span class="op">&lt;-</span> <span class="fu">extract_openFDA_field</span><span class="op">(</span><span class="va">bnf_search_json</span>, <span class="st">"brand_name"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">openFDA_brand_names</span><span class="op">[</span><span class="fl">25</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "ENALAPRIL MALEATE"                    </span></span>
-<span><span class="co">#&gt; [2] "VYTORIN"                              </span></span>
-<span><span class="co">#&gt; [3] "EZETIMIBE"                            </span></span>
-<span><span class="co">#&gt; [4] "JANUMET XR"                           </span></span>
-<span><span class="co">#&gt; [5] "METFORMIN HYDROCHLORIDE ORAL SOLUTION"</span></span>
-<span><span class="co">#&gt; [6] "VERAPAMIL HYDROCHLORIDE"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "RYBELSUS"                            "BENICAR HCT"                        </span></span>
+<span><span class="co">#&gt; [3] "TELMISARTAN AND HYDROCHLOROTHIAZIDE" "OLMESARTAN MEDOXOMIL"               </span></span>
+<span><span class="co">#&gt; [5] "FELODIPINE"                          "TELMISARTAN"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="established-pharmacological-classes">Established pharmacological classes<a class="anchor" aria-label="anchor" href="#established-pharmacological-classes"></a>
@@ -209,7 +323,7 @@ generic drugs which were not within our BNF drug list.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lengths.html" class="external-link">lengths</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>brand_names <span class="op">=</span> <span class="va">openFDA_brand_names</span>, </span>
 <span>             EPCs <span class="op">=</span> <span class="va">openfda_EPCs</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; brand_names        EPCs </span></span>
-<span><span class="co">#&gt;         176          19</span></span></code></pre></div>
+<span><span class="co">#&gt;         171          18</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -223,25 +337,24 @@ supplying them in the <code>search</code> strategy.</p>
 <code class="sourceCode R"><span><span class="va">openfda_EPCs</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="va">openfda_EPCs</span>, pattern <span class="op">=</span> <span class="st">" \\[.*\\]"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">openfda_EPCs</span></span>
-<span><span class="co">#&gt;  [1] "Angiotensin 2 Receptor Blocker"                </span></span>
-<span><span class="co">#&gt;  [2] "Dietary Cholesterol Absorption Inhibitor"      </span></span>
-<span><span class="co">#&gt;  [3] "HMG-CoA Reductase Inhibitor"                   </span></span>
-<span><span class="co">#&gt;  [4] "Thiazide Diuretic"                             </span></span>
-<span><span class="co">#&gt;  [5] "Dihydropyridine Calcium Channel Blocker"       </span></span>
-<span><span class="co">#&gt;  [6] "Angiotensin Converting Enzyme Inhibitor"       </span></span>
-<span><span class="co">#&gt;  [7] "Loop Diuretic"                                 </span></span>
-<span><span class="co">#&gt;  [8] "Sulfonylurea"                                  </span></span>
-<span><span class="co">#&gt;  [9] "Dipeptidyl Peptidase 4 Inhibitor"              </span></span>
-<span><span class="co">#&gt; [10] "Sodium-Glucose Cotransporter 2 Inhibitor"      </span></span>
-<span><span class="co">#&gt; [11] "Potassium-sparing Diuretic"                    </span></span>
-<span><span class="co">#&gt; [12] "GLP-1 Receptor Agonist"                        </span></span>
+<span><span class="co">#&gt;  [1] "GLP-1 Receptor Agonist"                        </span></span>
+<span><span class="co">#&gt;  [2] "Angiotensin 2 Receptor Blocker"                </span></span>
+<span><span class="co">#&gt;  [3] "Thiazide Diuretic"                             </span></span>
+<span><span class="co">#&gt;  [4] "Potassium-sparing Diuretic"                    </span></span>
+<span><span class="co">#&gt;  [5] "Dietary Cholesterol Absorption Inhibitor"      </span></span>
+<span><span class="co">#&gt;  [6] "Insulin Analog"                                </span></span>
+<span><span class="co">#&gt;  [7] "Dihydropyridine Calcium Channel Blocker"       </span></span>
+<span><span class="co">#&gt;  [8] "Angiotensin Converting Enzyme Inhibitor"       </span></span>
+<span><span class="co">#&gt;  [9] "Sulfonylurea"                                  </span></span>
+<span><span class="co">#&gt; [10] "Loop Diuretic"                                 </span></span>
+<span><span class="co">#&gt; [11] "HMG-CoA Reductase Inhibitor"                   </span></span>
+<span><span class="co">#&gt; [12] "Dipeptidyl Peptidase 4 Inhibitor"              </span></span>
 <span><span class="co">#&gt; [13] "Thiazide-like Diuretic"                        </span></span>
-<span><span class="co">#&gt; [14] "Calcium Channel Blocker"                       </span></span>
-<span><span class="co">#&gt; [15] "Aldosterone Antagonist"                        </span></span>
-<span><span class="co">#&gt; [16] "Insulin Analog"                                </span></span>
-<span><span class="co">#&gt; [17] "Peroxisome Proliferator Receptor alpha Agonist"</span></span>
-<span><span class="co">#&gt; [18] "Peroxisome Proliferator Receptor gamma Agonist"</span></span>
-<span><span class="co">#&gt; [19] "Thiazolidinedione"</span></span></code></pre></div>
+<span><span class="co">#&gt; [14] "Aldosterone Antagonist"                        </span></span>
+<span><span class="co">#&gt; [15] "Sodium-Glucose Cotransporter 2 Inhibitor"      </span></span>
+<span><span class="co">#&gt; [16] "PCSK9 Inhibitor"                               </span></span>
+<span><span class="co">#&gt; [17] "Adenosine Triphosphate-Citrate Lyase Inhibitor"</span></span>
+<span><span class="co">#&gt; [18] "Calcium Channel Blocker"</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="query-openfda-with-our-epcs">Query openFDA with our EPCs<a class="anchor" aria-label="anchor" href="#query-openfda-with-our-epcs"></a>
 </h3>
@@ -277,26 +390,25 @@ we have retrieved by searching with EPCs.</p>
 <span><span class="va">epc_generics</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="va">bnf_regex</span>, value <span class="op">=</span> <span class="cn">TRUE</span>, invert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "sparsentan"                         "lovastatin"                        </span></span>
-<span><span class="co">#&gt;  [3] "pitavastatin magnesium"             "pitavastatin"                      </span></span>
-<span><span class="co">#&gt;  [5] "chlorothiazide"                     "isradipine"                        </span></span>
-<span><span class="co">#&gt;  [7] "nisoldipine"                        "clevidipine"                       </span></span>
-<span><span class="co">#&gt;  [9] "clevipidine"                        "ethacrynic acid"                   </span></span>
-<span><span class="co">#&gt; [11] "furosemide"                         "torsemide"                         </span></span>
-<span><span class="co">#&gt; [13] "furosemide injection 80 mg/ 10 ml"  "glyburide"                         </span></span>
-<span><span class="co">#&gt; [15] "sotagliflozin"                      "bexagliflozin"                     </span></span>
-<span><span class="co">#&gt; [17] "triamterene"                        "triamterene capsules"              </span></span>
-<span><span class="co">#&gt; [19] "tirzepatide"                        "chlorthalidone"                    </span></span>
-<span><span class="co">#&gt; [21] "atenolol and chlorthalidone tablet" "atenolol and chlorthalidone"       </span></span>
-<span><span class="co">#&gt; [23] "metolazone"                         "eplerenone"                        </span></span>
-<span><span class="co">#&gt; [25] "spironolactone"                     "carospir"                          </span></span>
-<span><span class="co">#&gt; [27] "insulin glargine"                   "insulin lispro"                    </span></span>
-<span><span class="co">#&gt; [29] "insulin aspart"                     "insulin lispro-aabc"               </span></span>
-<span><span class="co">#&gt; [31] "insulin detemir"                    "insulin aspart injection"          </span></span>
-<span><span class="co">#&gt; [33] "insulin glulisine"                  "insulin glargine-yfgn"             </span></span>
-<span><span class="co">#&gt; [35] "insulin degludec"                   "insulin glargine-aglr"             </span></span>
-<span><span class="co">#&gt; [37] "water injection"                    "fenofibrate"                       </span></span>
-<span><span class="co">#&gt; [39] "fenofibric acid"                    "gemfibrozil"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] "tirzepatide"                        "sparsentan"                        </span></span>
+<span><span class="co">#&gt;  [3] "chlorothiazide"                     "triamterene capsules"              </span></span>
+<span><span class="co">#&gt;  [5] "triamterene"                        "insulin lispro-aabc"               </span></span>
+<span><span class="co">#&gt;  [7] "insulin detemir"                    "insulin lispro"                    </span></span>
+<span><span class="co">#&gt;  [9] "insulin aspart injection"           "insulin aspart"                    </span></span>
+<span><span class="co">#&gt; [11] "insulin glulisine"                  "insulin glargine-yfgn"             </span></span>
+<span><span class="co">#&gt; [13] "insulin degludec"                   "insulin glargine-aglr"             </span></span>
+<span><span class="co">#&gt; [15] "water injection"                    "insulin glargine"                  </span></span>
+<span><span class="co">#&gt; [17] "nisoldipine"                        "isradipine"                        </span></span>
+<span><span class="co">#&gt; [19] "clevidipine"                        "clevipidine"                       </span></span>
+<span><span class="co">#&gt; [21] "glyburide"                          "furosemide"                        </span></span>
+<span><span class="co">#&gt; [23] "ethacrynic acid"                    "torsemide"                         </span></span>
+<span><span class="co">#&gt; [25] "furosemide injection 80 mg/ 10 ml"  "lovastatin"                        </span></span>
+<span><span class="co">#&gt; [27] "pitavastatin magnesium"             "pitavastatin"                      </span></span>
+<span><span class="co">#&gt; [29] "atenolol and chlorthalidone"        "chlorthalidone"                    </span></span>
+<span><span class="co">#&gt; [31] "metolazone"                         "atenolol and chlorthalidone tablet"</span></span>
+<span><span class="co">#&gt; [33] "spironolactone"                     "eplerenone"                        </span></span>
+<span><span class="co">#&gt; [35] "carospir"                           "bexagliflozin"                     </span></span>
+<span><span class="co">#&gt; [37] "sotagliflozin"                      "bempedoic acid"</span></span></code></pre></div>
 <p>Of these drugs, the following are of interest:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fda_generics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pitavastatin"</span>, <span class="st">"lovastatin"</span>,</span>
@@ -331,14 +443,14 @@ names:</p>
 <span></span>
 <span><span class="va">more_brand_names</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="co">#&gt; $pitavastatin</span></span>
-<span><span class="co">#&gt; [1] "pitavastatin calcium" "pitavastatin"         "livalo"              </span></span>
-<span><span class="co">#&gt; [4] "zypitamag"            "nikita"              </span></span>
+<span><span class="co">#&gt; [1] "pitavastatin"         "livalo"               "zypitamag"           </span></span>
+<span><span class="co">#&gt; [4] "nikita"               "pitavastatin calcium"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lovastatin</span></span>
 <span><span class="co">#&gt; [1] "lovastatin" "altoprev"  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $chlorothiazide</span></span>
-<span><span class="co">#&gt; [1] "chlorothiazide"        "diuril"                "chlorothiazide sodium"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "chlorothiazide sodium" "chlorothiazide"        "diuril"</span></span></code></pre></div>
 </div>
 </div>
 </div>
