@@ -1,0 +1,243 @@
+---
+title: "Extracting FDA data with BNF terms"
+description: >
+  Using openFDA to retrieve lists of drugs based on BNF generic drug terms.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Extracting FDA data with BNF terms}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Setup
+
+```{r setup_hidden, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Let's start by loading the package.
+
+```{r setup}
+library(openFDA)
+```
+
+# Get brand names and EPCs from generic BNF terms
+
+First, we'll use `openFDA()` to retrieve brand names for the drugs we are interested in from the BNF. We first initialise a vector of drug names from the
+BNF.
+
+```{r bnf_vec}
+bnf <- c("captopril", "enalapril", "fosinopril", "imidapril", "lisinopril",
+         "perindopril", "quinapril", "ramipril", "trandolapril",
+
+         "amlodipine", "diltiazem", "felodipine", "lacidipine", "lercanidipine",
+         "nicardipine", "nifedipine", "nimodipine", "verapamil",
+
+         "azilsartan", "candesartan", "eprosartan", "irbesartan",
+         "losartan", "olmesartan", "telmisartan", "valsartan",
+
+         "bumetanide", "bendroflumethiazide", "chlortalidone",
+
+         "hydrochlorothiazide", "indapamide",
+
+         "atorvastatin", "fluvastatin",
+         "pravastatin", "rosuvastatin", "simvastatin",
+
+         "ezetimibe",
+
+         "alirocumab", "evolocumab",
+
+         "metformin",
+
+         "gliclazide", "glimepiride", "tolbutamide", "glipizide",
+
+         "alogliptin", "linagliptin", "saxagliptin", "sitagliptin",
+         "vildagliptin",
+
+         "canagliflozin", "dapagliflozin", "empagliflozin", "ertugliflozin",
+
+         "dulaglutide", "exenatide", "liraglutide", "lixisenatide",
+         "semaglutide",
+
+         "pioglitazone")
+```
+
+We can then paste these into a single search string, and use them to search 
+against the `"openfda.generic_name"` field in the [Drugs@FDA endpoint](https://open.fda.gov/apis/drug/drugsfda/).
+
+```{r bnf_search}
+bnf_search_term <- format_search_term(
+  c("openfda.generic_name" = paste0(bnf, collapse = "+")),
+  exact = FALSE
+)
+bnf_search <- openFDA(search = bnf_search_term, endpoint = "drug-drugsfda")
+
+bnf_search_json <- httr2::resp_body_json(bnf_search)
+
+# The JSON object contains information including the generic and brand names 
+bnf_search_json$results[[1]][4][[1]][1:3]
+```
+
+## Extracting openFDA fields programmatically
+
+The JSON data from `openFDA()` is useful, and can be easily parsed with tools from `{purrr}` and `{vctrs}`.
+The following function dips into the JSON data from `openFDA()` and pulls out data from specific fields.
+It extracts all occurrences of data within the requested field, then condenses these down into a single character vector.
+
+```{r extract_openFDA_field}
+#' Extract openFDA field data from openFDA JSON objects
+#' @param json
+#' @param openFDA_field A single string denoting an openFDA field to extract.
+#'   Should be a valid field name, e.g. `"openfda.generic_name"` or 
+#'   `"openfda.pharm_class_moa"`.
+#' @returns A character vector with all unique values of `openfda_field` for 
+#'   your given search.
+extract_openFDA_field <- function(json, openfda_field) {
+  json |>
+    purrr::pluck("results") |>
+    purrr::map(.f = \(x) purrr::pluck(x, "openfda", openfda_field)) |>
+    vctrs::list_drop_empty() |>
+    unlist() |>
+    unique()
+}
+```
+
+### Brand names
+
+Now that we have our function for data extraction, we can pull out the brand names associated with the generic drugs we queried against the API above.
+
+```{r extract_brand_names}
+openFDA_brand_names <- extract_openFDA_field(bnf_search_json, "brand_name")
+
+print(openFDA_brand_names[25:30])
+```
+
+### Established pharmacological classes
+
+We'll also extract the established pharmacological classes (EPCs) of our drugs.
+We will use these EPCs as their own query term below, to find generic drugs which were not within our BNF drug list.
+
+```{r extract_pharm_class_data}
+openfda_EPCs <- extract_openFDA_field(bnf_search_json, "pharm_class_epc")
+
+lengths(list(brand_names = openFDA_brand_names, 
+             EPCs = openfda_EPCs))
+```
+
+# Query openFDA with EPCs
+
+We can use EPCs to run queries against the openFDA API.
+We do this by removing the `"[EPC]"` tags from our retrieved data, then supplying them in the `search` strategy.
+
+```{r remove_epc_moa_tags}
+openfda_EPCs <- stringr::str_remove(openfda_EPCs, pattern = " \\[.*\\]")
+```
+
+```{r found_EPCs}
+openfda_EPCs
+```
+
+## Query openFDA with our EPCs 
+
+Before supplying these strings as search terms to openFDA, we surround them with double-quotation marks (`"`).
+This ensures openFDA considers each term as a single string, instead of a set of strings. 
+Without the quotes, a term such as `"Thiazide Diuretic"` will be treated as a search for any drugs with either "Thiazide" or "Diuretic" in the EPC, instead of a search for specifically thiazide diuretics.
+
+```{r query_EPCs}
+epc_search <- purrr::map(
+  .x = openfda_EPCs,
+  .f = \(epc) {
+    openFDA(search = c("openfda.pharm_class_epc" = epc),
+            endpoint = "drug-drugsfda") |>
+      httr2::resp_body_json()
+})
+
+epc_generics <- purrr::map(
+  .x = epc_search, 
+  .f = \(json) extract_openFDA_field(json, openfda_field = "generic_name")) |>
+  purrr::flatten_chr() |>
+  unique()
+```
+
+### Compare new generic names to BNF terms
+
+Using some pattern matching, we can see which new generic drug terms we have retrieved by searching with EPCs.
+
+```{r compare_generics_bnf_vs_epc, width.cutoff = 120}
+
+bnf_regex <- paste0("(", paste0(bnf, collapse = "|"), ")")
+epc_generics |>
+  tolower() |>
+  grep(pattern = bnf_regex, value = TRUE, invert = TRUE)
+```
+
+Of these drugs, the following are of interest:
+
+```{r subset_new_generics}
+fda_generics <- c("pitavastatin", "lovastatin",
+                  "chlorothiazide", 
+                  "sparsentan",
+                  "nisoldipine", "isradipine", "clevidipine", 
+                  "glyburide", "glibenclamide",
+                  "tirzepatide", 
+                  "bexagliflozin", "sotagliflozin",
+                  "chlorthalidone", "metolazone", 
+                  "spironolactone", "eplerenone", 
+                  "bempedoic acid", "fenofibrate", "fenofibric acid",
+                  "gemfibrozil")
+```
+
+We can use these generic names of interest to get even more brand names:
+
+```{r search_new_generics, message = FALSE}
+more_brand_names <- purrr::map(
+  .x = fda_generics,
+  .f = \(generic) {
+    openFDA(c("openfda.generic_name" = paste0("\"", generic, "\""))) |>
+      httr2::resp_body_json() |>
+      extract_openFDA_field(openfda_field = "brand_name") |>
+      tolower()
+  }
+) |>
+  setNames(fda_generics)
+
+more_brand_names[1:3]
+```
+
+# Queries about ANGPLT3 inhibitors
+
+Finally, let's collect some data on angiopoietin-like 3 (ANGPLT3) inhibitors, which can be used in familial homozygous hypercholesteremia in the UK and US.
+
+```{r evinacumab_search}
+evinacumab_search <- openFDA(search = c("openfda.generic_name" = "evinacumab"),
+                             endpoint = "drug-drugsfda")
+evinacumab_epc <- evinacumab_search |>
+  httr2::resp_body_json() |>
+  extract_openFDA_field("pharm_class_epc") |>
+  stringr::str_remove(pattern = " \\[.*\\]")
+
+agplt3_inhibitors_search <- openFDA(
+  search = c("openfda.pharm_class_epc" = evinacumab_epc),
+  endpoint = "drug-drugsfda"
+)
+
+agplt3_inhibitors_brands <- agplt3_inhibitors_search |>
+  httr2::resp_body_json() |> 
+  extract_openFDA_field("brand_name")
+
+agplt3_inhibitors_generics <- agplt3_inhibitors_search |>
+  httr2::resp_body_json() |> 
+  extract_openFDA_field("generic_name")
+
+c("AGPLT3-I brands" = agplt3_inhibitors_brands, 
+  "AGPLT3-I generics" = agplt3_inhibitors_generics)
+```
+
+## Session info
+
+```{r}
+sessionInfo()
+```

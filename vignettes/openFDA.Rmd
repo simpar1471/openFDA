@@ -1,0 +1,227 @@
+---
+title: "openFDA"
+description: >
+  Get up and running with accessing openFDA from R.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{openFDA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+# save the built-in output hook
+hook_output <- knitr::knit_hooks$get("output")
+
+# set a new output hook to truncate text output
+knitr::knit_hooks$set(output = function(x, options) {
+  if (!is.null(n <- options$out.lines)) {
+    x <- strsplit(x, split = "\n")[[1]]
+    if (length(x) > n) {
+      # truncate the output
+      x <- c(head(x, n), "....\n")
+    }
+    x <- paste(x, collapse = "\n")
+  }
+  hook_output(x, options)
+})
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Using `{openFDA}` can be a breeze, if you know how to construct good queries.
+This short guide will get you started with `{openFDA}`, and show you how to put together more complicated queries.
+
+```{r load_openFDA}
+library(openFDA)
+```
+
+# The openFDA API
+The openFDA API makes public FDA data available from a simple, public API.
+Users of this API have access to FDA data on food, human and veterinary drugs, devices, and more.
+You can read all about it at their [website](https://open.fda.gov/).
+
+# A simple openFDA query
+The simplest way to query the openFDA API is to identify the **endpoint** you want to use and provide other search terms.
+For example, this snippet retrieves 1 record about **adverse events** in the **drugs** endpoint.
+The empty search string (`""`) means the results will be non-specific.
+
+```{r example1}
+search <- openFDA(search = "", endpoint = "drug-event", limit = 1)
+search
+```
+
+## openFDA results
+The function returns an `{httr2}` response object, with attached JSON data.
+We use `httr2::resp_body_json()` to extract the underlying data.
+
+```{r example2_json}
+json <- httr2::resp_body_json(search)
+```
+
+If you don't specify a field to `count` on, the JSON data has two sections - `meta` and `results`.
+
+### Meta
+The `meta` section has important metadata on your results, which includes:
+
+* `disclaimer` - An important disclaimer regarding the data provided by openFDA.
+* `license` - A webpage with license terms that govern the openFDA API.
+* `last_updated` - The last date when this openFDA endpoint was updated.
+* `results.skip` - How many results were skipped? Set by the `skip` parameter in `openFDA()`.
+* `results.limit` - How many results were retrieved? Set by the `limit` parameter in `openFDA()`.
+* `results.total` - How many results were there in total matching your `search` criteria?
+
+```{r example_2a_json_meta}
+json$meta
+```
+
+### Results
+
+For non-`count` queries, this will be a set of records which were found in the endpoint and match your `search` term.
+
+```{r example_2b_json_results, out.lines = 10}
+json$results
+```
+
+### Results when `count`-ing
+If you set the `count` query, then the openFDA API will not return full records.
+Instead, it will count the number of records for each member in the openFDA field you specified for `count`.
+For example, let's look at drug manufacturers in the [Drugs@FDA endpoint](https://open.fda.gov/apis/drug/drugsfda/) for `"paracetamol"`.
+We'll use the `limit` parameter to limit our results to the first 3 drug manufacturers found.
+
+```{r example_3_count}
+count <- openFDA(search = "",
+                 endpoint = "drug-drugsfda",
+                 limit = 3,
+                 count = "openfda.manufacturer_name.exact") |>
+  httr2::resp_body_json()
+count$results
+```
+
+You can count on fields with a date to create a time series, as demonstrated on the [openFDA website](https://open.fda.gov/apis/timeseries/).
+
+# Using search terms
+We can increase the complexity of our query using the `search` parameter, which lets us search against specific openFDA API fields.
+These fields are harmonised to different degrees in each API, which you will need to check [online](https://open.fda.gov/apis/openfda-fields/).
+
+## Searching on one field
+You can provide search strategies to `openFDA()` as single strings.
+They are constructed as `[FIELD_NAME]:[STRING]`, where `FIELD_NAME` is the openFDA field you want to search on.
+If your `STRING` contains spaces, you must surround it with double quotes, or openFDA will search against each word in the string.
+So, for example, a search for drugs with the class `"thiazide diuretic`" should be formatted as `"openfda.pharm_class_epc:\"thiazide diuretic\""`, or the API will collect all drugs which have the words `"thiazide"` or `"diuretic"` in their established pharmacological class (EPC).
+Let's do an unrefined search first:
+
+```{r example3a_single_search_term_unrefined, out.lines = 15}
+search_unrefined <- openFDA(
+  search = "openfda.pharm_class_epc:thiazide diuretic",
+  endpoint = "drug-drugsfda",
+  limit = 1
+)
+httr2::resp_body_json(search_unrefined)$meta$results$total
+```
+
+Let's compare this to our refined search, where we add double-quotes around the search term:
+
+```{r example3a_single_search_term_refined, out.lines = 15}
+search_refined <- openFDA(
+  search = "openfda.pharm_class_epc:\"thiazide diuretic\"",
+  endpoint = "drug-drugsfda",
+  limit = 1
+)
+httr2::resp_body_json(search_refined)$meta$results$total
+```
+
+As you can see, the unrefined search picked up `r httr2::resp_body_json(search_unrefined)$meta$results$total - httr2::resp_body_json(search_refined)$meta$results$total` more results, most of which would have probably been non-thiazide diuretics.
+
+## Searching on multiple fields
+The openFDA API lets you search on various fields at once.
+Simple methods for doing this are implemented in `{openFDA}`.
+
+### Write your own search term
+Using the guides on the [openFDA website](https://open.fda.gov/apis/query-parameters/), you can put together your own query.
+For example, the following query looks for up to 5 records which were submitted by Walmart and are taken orally.
+We can use `{purrr}` functions to extract a brand name for each record.
+Note that though a single record can have multiple brand names, we are choosing to only extract the first one.
+
+```{r example 3b_supply_scalar_search_term}
+search_term <- "openfda.manufacturer_name:Walmart+AND+openfda.route=oral"
+search <- openFDA(search = search_term,
+                  limit = 5,
+                  endpoint = "drug-drugsfda")
+json <- httr2::resp_body_json(search)
+purrr::map(json$results, .f = \(x) {
+  purrr::pluck(x, "openfda", "brand_name", 1)
+})
+```
+
+### Let `openFDA()` construct the search term
+You can let the package do the heavy lifting for you with `openFDA()`, by providing a named character vector with many field/search term pairs to the `search` parameter.
+The function will automatically add double quotes (`""`) around your search terms, if you're providing field/value pairs like this.
+
+```{r example3b_format_scalar_search_term, out.lines = 15}
+search <- openFDA(search = c("openfda.generic_name" = "amoxicillin"),
+                  endpoint = "drug-drugsfda")
+httr2::resp_body_json(search)$meta$results$total
+```
+
+You can include as many fields as you like, as long as you only provide each field once.
+By default, the terms are combined with an `OR` operator in `openFDA()`.
+The below search strategy will therefore pick up all entries in [Drugs@FDA](https://open.fda.gov/apis/drug/drugsfda/) which are taken by mouth.
+
+```{r example3b_format_nonscalar_search_term, out.lines = 15}
+search <- openFDA(search = c("openfda.generic_name" = "amoxicillin",
+                             "openfda.route" = "oral"),
+                  endpoint = "drug-drugsfda", limit = 1)
+httr2::resp_body_json(search)$meta$results$total
+```
+
+### Pre-construct a search term
+
+To apply multiple search terms with `AND` operators, use `format_search_term()` with `mode = "and"`:
+```{r example3b_format_nonscalar_search_term_with_and, out.lines = 15}
+search_term <- format_search_term(c("openfda.generic_name" = "amoxicillin",
+                                    "openfda.route" = "oral"),
+                                  mode = "and")
+search <- openFDA(search = search_term,
+                  endpoint = "drug-drugsfda", limit = 1)
+httr2::resp_body_json(search)$meta$results$total
+```
+
+## Wildcards
+You can use the wildcard character `"*"` to match zero or more characters.
+For example, we could take the prototypical ending to a common drug class - e.g. the **sartans**, which are angiotensin-II receptor blockers - and see which manufacturers are most represented in Drugs@FDA for this class.
+When using wildcards, either pre-format the string yourself *without double-quotes* or use `format_search_term()` with `exact = FALSE`.
+If you try to search with both double-quotes and the wildcard character, you will get a 404 error from openFDA.
+
+```{r example4_wildcards, out.lines = 15}
+search_term <- format_search_term(c("openfda.generic_name" = "*sartan"),
+                                  exact = FALSE)
+search <- openFDA(search = search_term,
+                  count = "openfda.manufacturer_name.exact",
+                  endpoint = "drug-drugsfda",
+                  limit = 5)
+terms <- purrr::map(
+  .x = httr2::resp_body_json(search)$results,
+  .f = purrr::pluck("term")
+)
+counts <- purrr::map(
+  .x = httr2::resp_body_json(search)$results,
+  .f = purrr::pluck("count")
+)
+
+setNames(counts, terms)
+```
+
+It looks like `"Alembic Pharmaceuticals"` is very active in this space - interesting!
+
+# Other openFDA API features
+This short guide does not cover all aspects of openFDA.
+It is recommended that you go to the [openFDA API website](https://open.fda.gov/apis/) and check out the resources there to see information on:
+
+* [Date ands ranges](https://open.fda.gov/apis/dates-and-ranges/)
+* [Search for fields with missing values](https://open.fda.gov/apis/missing-values/)
+* [Generating time series](https://open.fda.gov/apis/timeseries/)
+* [Paging larger queries](https://open.fda.gov/apis/paging/)

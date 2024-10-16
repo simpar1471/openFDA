@@ -1,0 +1,13 @@
+^.idea$
+^openFDA\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^vignettes/articles$
+^vignettes/*_files$
+^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^doc$
+^Meta$
+^cran-comments\.md$
