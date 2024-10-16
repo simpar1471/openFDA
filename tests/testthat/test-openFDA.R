@@ -1,8 +1,7 @@
-test_that("openFDA can call its API", {
-  skip_on_cran()
-  encrypted_api_key <-
-    "TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ"
+encrypted_api_key <-
+  "TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ"
 
+test_that("openFDA can call its API", {
   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
 
   # Simple query
@@ -15,6 +14,8 @@ test_that("openFDA can call its API", {
 
 
 test_that("openFDA throws formatted HTTP errors", {
+  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+
   # Error 400
   expect_warning(
     resp <- openFDA(
@@ -152,7 +153,8 @@ test_that("openFDA errors on certain bad inputs", {
     class = "openFDA_wohe_invalid_length"
   )
   expect_error(
-    openFDA(search = "", warn_on_http_error = NA)
+    openFDA(search = "", warn_on_http_error = NA),
+    class = "openFDA_wohe_is_NA"
   )
 })
 

@@ -28,7 +28,7 @@ check_warn_on_http_error_arg <- function(warn_on_http_error,
         message = paste0("{.var warn_on_http_error} must not be missing ",
                          "({.val {warn_on_http_error}})."),
         call = call,
-        class = "openFDA_warn_on_http_error_is_NA"
+        class = "openFDA_wohe_is_NA"
       )
     }
   }
