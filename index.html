@@ -73,13 +73,17 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of openFDA from GitHub using either <a href="https://pak.r-lib.org/" class="external-link">pak</a> or <a href="https://devtools.r-lib.org/" class="external-link">devtools</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># The easiest way to get openFDA is to install it from CRAN:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"openFDA"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="dev-version">Dev version<a class="anchor" aria-label="anchor" href="#dev-version"></a>
+</h3>
+<p>Alternatively, you can install the development version of openFDA from GitHub using either <a href="https://pak.r-lib.org/" class="external-link">pak</a>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"simpar1471/openFDA"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"simpar1471/openFDA"</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="using-openfda">Using openFDA<a class="anchor" aria-label="anchor" href="#using-openfda"></a>
@@ -100,14 +104,14 @@
 <span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&amp;search=openfda.generic_name:furosemide&amp;limit=5</span></span>
 <span><span class="co">#&gt; Status: 200 OK</span></span>
 <span><span class="co">#&gt; Content-Type: application/json</span></span>
-<span><span class="co">#&gt; Body: In memory (17286 bytes)</span></span></code></pre></div>
+<span><span class="co">#&gt; Body: In memory (26060 bytes)</span></span></code></pre></div>
 <p>The underlying response is JSON data - you can use <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to get the JSON data as a nested list, then extract the fields you want.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">json</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">json</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">openfda</span><span class="op">$</span><span class="va">brand_name</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "FUROSEMIDE"</span></span>
+<span><span class="co">#&gt; [1] "FUROSCIX"</span></span>
 <span><span class="va">json</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">openfda</span><span class="op">$</span><span class="va">pharm_class_epc</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [1] "Loop Diuretic [EPC]"</span></span></code></pre></div>
@@ -117,9 +121,11 @@
 <span>  .x <span class="op">=</span> <span class="va">json</span><span class="op">$</span><span class="va">results</span>, </span>
 <span>  .f <span class="op">=</span> \<span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"openfda"</span>, <span class="st">"manufacturer_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Amneal Pharmaceuticals LLC" "Gland Pharma Limited"      </span></span>
-<span><span class="co">#&gt; [3] "Solco Healthcare LLC"       "Lifestar Pharma LLC"       </span></span>
-<span><span class="co">#&gt; [5] "Ipca Laboratories Limited"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "scPharmaceuticals Inc."                 </span></span>
+<span><span class="co">#&gt; [2] "Graviti Pharmaceuticals Private Limited"</span></span>
+<span><span class="co">#&gt; [3] "Hikma Pharmaceuticals USA Inc."         </span></span>
+<span><span class="co">#&gt; [4] "Civica, Inc."                           </span></span>
+<span><span class="co">#&gt; [5] "Eugia US LLC"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="other-r-packages-for-openfda">Other R packages for openFDA<a class="anchor" aria-label="anchor" href="#other-r-packages-for-openfda"></a>
@@ -162,8 +168,9 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
+<li><a href="https://CRAN.R-project.org/package=openFDA" class="external-link"><img src="https://www.r-pkg.org/badges/version/openFDA" alt="CRAN status"></a></li>
+<li><a href="https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml" class="external-link"><img src="https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests/badge.svg" alt="R-CMD-check-no-suggests"></a></li>
 <li><a href="https://app.codecov.io/gh/simpar1471/openFDA" class="external-link"><img src="https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
