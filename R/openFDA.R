@@ -101,9 +101,14 @@
 #'           api_key = "BAD_API_KEY",
 #'           limit = 1)
 #' )
+#' @references
+#' Kass-Hout TA, Xu Z, Mohebbi M, Nelsen H, Baker A, LEvine J, Johansen E,
+#' Bright RA. **OpenFDA: an innovative platform providing access to a wealth of
+#' FDA's publicly available data** *J Am Med Inform Assoc* 2016,
+#' **23(3):596-600.** \doi{10.1093/jamia/ocv153}
 #' @seealso [format_search_term()] documents how input `search` vectors are
 #'   converted to openFDA API searches.
-#' @returns An `httr2` response object from [httr2::req_perform()]. You can use
+#' @return An `httr2` response object from [httr2::req_perform()]. You can use
 #'   [httr2::resp_body_json()] to extract JSON data from the response.
 #' @rdname openFDA
 #' @export

@@ -121,6 +121,12 @@ try(
           limit = 1)
 )
 }
+\references{
+Kass-Hout TA, Xu Z, Mohebbi M, Nelsen H, Baker A, LEvine J, Johansen E,
+Bright RA. \strong{OpenFDA: an innovative platform providing access to a wealth of
+FDA's publicly available data} \emph{J Am Med Inform Assoc} 2016,
+\strong{23(3):596-600.} \doi{10.1093/jamia/ocv153}
+}
 \seealso{
 \code{\link[=format_search_term]{format_search_term()}} documents how input \code{search} vectors are
 converted to openFDA API searches.

@@ -16,7 +16,7 @@
 #' # Errors will be thrown if you supply a bad input
 #' try(format_sort_term("receivedate:no_order"))
 #' try(format_sort_term(c("receivedate" = "ascending")))
-#' @returns A character vector of the S3 class `<AsIS>`, with a formatted search
+#' @return A character vector of the S3 class `<AsIS>`, with a formatted search
 #'   term which can be supplied to `openFDA()`.
 #' @seealso
 #' * [format_search_term()] performs similar formatting for the `search`

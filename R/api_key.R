@@ -16,7 +16,7 @@
 #' set_api_key("")
 #'
 #' try(get_api_key())
-#' @returns A single length character vector with your API key. For
+#' @return A single length character vector with your API key. For
 #'   `set_api_key()`, this is returned invisibly.
 #' @rdname api_key
 #' @export

@@ -44,7 +44,7 @@
 #' format_search_term(c("openfda.generic_name" = "verapamil",
 #'                      "openfda.manufacturer_name" = "glaxo*"),
 #'                    mode = "and")
-#' @returns A character vector of the S3 class `<AsIS>`, with a formatted search
+#' @return A character vector of the S3 class `<AsIS>`, with a formatted search
 #'   term which can be supplied to `openFDA()`.
 #' @seealso
 #' * [format_sort_term()] performs similar formatting for the `sort` component
