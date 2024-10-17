@@ -5,10 +5,10 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/openFDA)](https://CRAN.R-project.org/package=openFDA)
 [![R-CMD-check](https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml)
-[![Project Status: WIP – Initial development is in progress, but there
-has not yet been a stable, usable release suitable for the
-public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![check-no-suggests](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg)](https://app.codecov.io/gh/simpar1471/openFDA)
 <!-- badges: end -->
@@ -22,18 +22,19 @@ validated for clinical or production use.
 
 ## Installation
 
-You can install the development version of openFDA from GitHub using
-either [pak](https://pak.r-lib.org/) or
-[devtools](https://devtools.r-lib.org/):
+``` r
+# The easiest way to get openFDA is to install it from CRAN:
+install.packages("openFDA")
+```
+
+### Dev version
+
+Alternatively, you can install the development version of openFDA from
+GitHub using either [pak](https://pak.r-lib.org/):
 
 ``` r
 # install.packages("pak")
 pak::pkg_install("simpar1471/openFDA")
-```
-
-``` r
-# install.packages("devtools")
-devtools::install_github("simpar1471/openFDA")
 ```
 
 ## Using openFDA
@@ -61,7 +62,7 @@ search
 #> https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&search=openfda.generic_name:furosemide&limit=5
 #> Status: 200 OK
 #> Content-Type: application/json
-#> Body: In memory (17286 bytes)
+#> Body: In memory (26060 bytes)
 ```
 
 The underlying response is JSON data - you can use
@@ -73,7 +74,7 @@ json <- httr2::resp_body_json(search)
 
 json$results[[1]]$openfda$brand_name
 #> [[1]]
-#> [1] "FUROSEMIDE"
+#> [1] "FUROSCIX"
 json$results[[1]]$openfda$pharm_class_epc
 #> [[1]]
 #> [1] "Loop Diuretic [EPC]"
@@ -87,9 +88,11 @@ purrr::map_chr(
   .x = json$results, 
   .f = \(result) purrr::pluck(result, "openfda", "manufacturer_name", 1)
 )
-#> [1] "Amneal Pharmaceuticals LLC" "Gland Pharma Limited"      
-#> [3] "Solco Healthcare LLC"       "Lifestar Pharma LLC"       
-#> [5] "Ipca Laboratories Limited"
+#> [1] "scPharmaceuticals Inc."                 
+#> [2] "Graviti Pharmaceuticals Private Limited"
+#> [3] "Hikma Pharmaceuticals USA Inc."         
+#> [4] "Civica, Inc."                           
+#> [5] "Eugia US LLC"
 ```
 
 ## Other R packages for openFDA
