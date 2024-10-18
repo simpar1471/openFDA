@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">openFDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -216,7 +216,7 @@ manufacturers found.</p>
 <span><span class="co">#&gt; [1] "Aurobindo Pharma Limited"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$count</span></span>
-<span><span class="co">#&gt; [1] 393</span></span>
+<span><span class="co">#&gt; [1] 392</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
@@ -304,19 +304,19 @@ brand names, we are choosing to only extract the first one.</p>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"openfda"</span>, <span class="st">"brand_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "FOSTER AND THRIVE NICOTINE"</span></span>
+<span><span class="co">#&gt; [1] "NICOTINE MINI"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] "COUNTERACT ALLERGY"</span></span>
+<span><span class="co">#&gt; [1] "GOOD SENSE DUAL ACTION BACK PAIN"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1] "IBUPROFEN 200 MG AND DIPHENHYDRAMINE CITRATE 38 MG"</span></span>
+<span><span class="co">#&gt; [1] "MUCUS RELIEF D"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt; [1] "PURELAX"</span></span>
+<span><span class="co">#&gt; [1] "ALL DAY ALLERGY"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[5]]</span></span>
-<span><span class="co">#&gt; [1] "OMEPRAZOLE"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "NAPROXEN SODIUM 220MG"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="let-openfda-construct-the-search-term">Let <code>openFDA()</code> construct the search term<a class="anchor" aria-label="anchor" href="#let-openfda-construct-the-search-term"></a>
@@ -341,7 +341,7 @@ taken by mouth.</p>
 <span>                             <span class="st">"openfda.route"</span> <span class="op">=</span> <span class="st">"oral"</span><span class="op">)</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>, limit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
-<span><span class="co">#&gt; [1] 6929</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 6934</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="pre-construct-a-search-term">Pre-construct a search term<a class="anchor" aria-label="anchor" href="#pre-construct-a-search-term"></a>
