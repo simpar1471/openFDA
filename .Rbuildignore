@@ -1,4 +1,4 @@
-^.idea$
+^\.idea$
 ^openFDA\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
@@ -12,3 +12,4 @@
 ^Meta$
 ^cran-comments\.md$
 ^\.github$
+^CRAN-SUBMISSION$

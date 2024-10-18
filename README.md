@@ -22,18 +22,17 @@ validated for clinical or production use.
 
 ## Installation
 
-You can install the development version of openFDA from GitHub using
-either [pak](https://pak.r-lib.org/) or
-[devtools](https://devtools.r-lib.org/):
+The easiest way to install openFDA is to get it from CRAN:
+
+``` r
+install.packages("openFDA")
+```
+
+### Development version
 
 ``` r
 # install.packages("pak")
 pak::pkg_install("simpar1471/openFDA")
-```
-
-``` r
-# install.packages("devtools")
-devtools::install_github("simpar1471/openFDA")
 ```
 
 ## Using openFDA

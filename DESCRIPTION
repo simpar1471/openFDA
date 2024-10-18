@@ -1,6 +1,6 @@
 Package: openFDA
 Title: 'openFDA' API
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Simon", "Parker", , "simon.parker.24@ucl.ac.uk",
            role = c("aut", "cre", "cph"),
