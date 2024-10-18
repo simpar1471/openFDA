@@ -1,3 +1,7 @@
+# openFDA (development version)
+
+* Added minimum R version (4.1.0)
+
 # openFDA 0.1.0
 
 * Basic openFDA functions:
