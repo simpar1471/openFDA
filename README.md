@@ -11,6 +11,10 @@ status](https://www.r-pkg.org/badges/version/openFDA)](https://CRAN.R-project.or
 [![check-no-suggests](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg)](https://app.codecov.io/gh/simpar1471/openFDA)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![pkgcheck](https://github.com/simpar1471/openFDA/workflows/pkgcheck/badge.svg)](https://github.com/simpar1471/openFDA/actions?query=workflow%3Apkgcheck)
 <!-- badges: end -->
 
 openFDA makes querying the [openFDA API](https://open.fda.gov/apis/)
