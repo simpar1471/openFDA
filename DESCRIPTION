@@ -1,5 +1,5 @@
 Package: openFDA
-Title: Access To The 'openFDA' API
+Title: 'openFDA' API
 Version: 0.1.0.9000
 Authors@R: 
     person("Simon", "Parker", , "simon.parker.24@ucl.ac.uk",
