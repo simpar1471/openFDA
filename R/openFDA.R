@@ -76,7 +76,7 @@
 #'
 #'   This argument is case-sensitive. By default, the package will target the
 #'   Drugs@FDA endpoint (`"drugs-drugsfda"`).
-#' @param warn_on_http_error A scalar logical value.  If `TRUE` (the default),
+#' @param warn_on_http_error A scalar logical value. If `TRUE` (the default),
 #'   common openFDA HTTP errors will cause explanatory warnings to be printed
 #'   If `FALSE`, the underlying httr2 response object will be returned with
 #'   no extra warnings.
