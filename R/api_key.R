@@ -2,8 +2,9 @@
 #' @param api_key A single-length character vector with your openFDA API key.
 #'   You can generate an API key on the
 #'   [FDA website](https://open.fda.gov/apis/authentication/).
-#' @note To permanently set the API key for a given project, set `OPENFDA_TOKEN`
-#'   in `.Renviron`.
+#' @note The function stores your API key in the environment variable
+#'   `OPENFDA_TOKEN` unti lthe end of the current R session. To permanently set
+#'   the API key for a given project, set `OPENFDA_TOKEN` in `.Renviron`.
 #' @examples
 #' # Set your openFDA API key with `set_api_key()`
 #' api_key <- "example_api_key"
@@ -37,7 +38,8 @@ get_api_key <- function() {
 
 #' Throw an error if a user attempts to use the openFDA package without an API
 #' key
-#' @param call Used to add information to the error given when
+#' @param call Used to add information about the calling environment to the
+#'   error when this function is required.
 #' @noRd
 throw_api_key_error <- function(call = rlang::caller_env()) {
   cli::cli_abort(

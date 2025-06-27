@@ -18,7 +18,8 @@ check_warn_on_http_error_arg <- function(warn_on_http_error,
     if (length(warn_on_http_error) != 1) {
       cli::cli_abort(
         c("{.var warn_on_http_error} must be of length 1.",
-          "x" = "{.var warn_on_http_error} has {length(warn_on_http_error)} element{?s}."),
+          "x" = paste0("{.var warn_on_http_error} has",
+                       " {length(warn_on_http_error)} element{?s}.")),
         call = call,
         class = "openFDA_wohe_invalid_length"
       )
