@@ -5,17 +5,17 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>openFDA API • openFDA</title>
+<title>Access To The openFDA API • openFDA</title>
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="deps/Fira_Code-0.4.9/font.css" rel="stylesheet">
-<link href="deps/Merriweather-0.4.9/font.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="openFDA API">
-<meta name="description" content="The openFDA API facilitates access to U.S. Food and Drug Administration (FDA) data on drugs, devices, foodstuffs, tobacco, and more with httr2. This package makes the API easily accessible, returning objects which the user can convert to JSON data and parse. Kass-Hout TA, Xu Z, Mohebbi M et al. (2016) &lt;doi:10.1093/jamia/ocv153&gt;.">
-<meta property="og:description" content="The openFDA API facilitates access to U.S. Food and Drug Administration (FDA) data on drugs, devices, foodstuffs, tobacco, and more with httr2. This package makes the API easily accessible, returning objects which the user can convert to JSON data and parse. Kass-Hout TA, Xu Z, Mohebbi M et al. (2016) &lt;doi:10.1093/jamia/ocv153&gt;.">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Fira_Code-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Merriweather-0.4.10/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access To The openFDA API">
+<meta name="description" content="The openFDA API facilitates access to U.S. Food and Drug Administration (FDA) data on drugs, devices, foodstuffs, tobacco, and more. This package makes the API easily accessible with httr2, returning objects which the user can convert to JSON data and parse. Kass-Hout TA, Xu Z, Mohebbi M et al. (2016) &lt;doi:10.1093/jamia/ocv153&gt;.">
+<meta property="og:description" content="The openFDA API facilitates access to U.S. Food and Drug Administration (FDA) data on drugs, devices, foodstuffs, tobacco, and more. This package makes the API easily accessible with httr2, returning objects which the user can convert to JSON data and parse. Kass-Hout TA, Xu Z, Mohebbi M et al. (2016) &lt;doi:10.1093/jamia/ocv153&gt;.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -90,8 +90,21 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simpar1471/openFDA" class="external-link">openFDA</a></span><span class="op">)</span></span></code></pre></div>
 <p>The full documentation for the API is online, so look at the <a href="https://open.fda.gov/apis/" class="external-link">openFDA website</a> to get a full feel for the API itself.</p>
-<p>The R package lets you query the API directly from R, using <a href="https://httr2.r-lib.org/" class="external-link">httr2</a>.</p>
+<p>Before using the package, you will need to generate one at the <a href="https://open.fda.gov/apis/authentication/" class="external-link">openFDA webpage</a>. With an API key you can make 240 requests per minute, and are limited to 120,000 requests per day. Without a key, you can only make 1000 requests a day. For this package, if you try to run <code><a href="reference/openFDA.html">openFDA()</a></code> without setting an API key, it will fail:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/openFDA.html">openFDA</a></span><span class="op">(</span></span>
+<span>  search <span class="op">=</span> <span class="st">"openfda.generic_name:furosemide"</span>,</span>
+<span>  limit <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in `get_api_key()`:</span></span>
+<span><span class="co">#&gt; ! To use openFDA, you must set an openFDA API key.</span></span>
+<span><span class="co">#&gt; ℹ Go to &lt;https://open.fda.gov/apis/authentication/&gt; to get an openFDA API key,</span></span>
+<span><span class="co">#&gt;   then supply it to `set_api_key()` to cache it for use in this session.</span></span></code></pre></div>
+<p>That’s not good. To fix this error, get an API key from the webpage linked above. Once you have your API key, use <code><a href="reference/api_key.html">set_api_key()</a></code> to store your API key. Once you run this function, <strong>openFDA</strong> will ‘know’ your API key until the session ends. Let’s try using <code><a href="reference/openFDA.html">openFDA()</a></code> again, after setting an API key:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># n.b. this API key is a fake, just for demonstration</span></span>
+<span><span class="fu"><a href="reference/api_key.html">set_api_key</a></span><span class="op">(</span>api_key <span class="op">=</span> <span class="st">"iHXeqlbXtlYEwX9MYLwyCBuiZxfn98Sj3oX2FNtSx"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/openFDA.html">openFDA</a></span><span class="op">(</span></span>
 <span>  search <span class="op">=</span> <span class="st">"openfda.generic_name:furosemide"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">5</span></span>
@@ -103,34 +116,32 @@
 <span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&amp;search=openfda.generic_name:furosemide&amp;limit=5</span></span>
 <span><span class="co">#&gt; Status: 200 OK</span></span>
 <span><span class="co">#&gt; Content-Type: application/json</span></span>
-<span><span class="co">#&gt; Body: In memory (26060 bytes)</span></span></code></pre></div>
-<p>The underlying response is JSON data - you can use <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to get the JSON data as a nested list, then extract the fields you want.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; Body: In memory (37784 bytes)</span></span></code></pre></div>
+<p>The returned <code>httr2</code> response object contains JSON data from the API - you can use <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to extract the JSON data as a nested list, then extract the fields you want.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">json</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">json</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">openfda</span><span class="op">$</span><span class="va">brand_name</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "FUROSCIX"</span></span>
+<span><span class="co">#&gt; [1] "FUROSEMIDE"</span></span>
 <span><span class="va">json</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">openfda</span><span class="op">$</span><span class="va">pharm_class_epc</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [1] "Loop Diuretic [EPC]"</span></span></code></pre></div>
 <p>I’ve found <a href="https://purrr.tidyverse.org/" class="external-link">purrr</a> to be very useful for parsing this data quickly.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span></span>
 <span>  .x <span class="op">=</span> <span class="va">json</span><span class="op">$</span><span class="va">results</span>, </span>
 <span>  .f <span class="op">=</span> \<span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"openfda"</span>, <span class="st">"manufacturer_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "scPharmaceuticals Inc."                 </span></span>
-<span><span class="co">#&gt; [2] "Graviti Pharmaceuticals Private Limited"</span></span>
-<span><span class="co">#&gt; [3] "Hikma Pharmaceuticals USA Inc."         </span></span>
-<span><span class="co">#&gt; [4] "Civica, Inc."                           </span></span>
-<span><span class="co">#&gt; [5] "Eugia US LLC"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Hikma Pharmaceuticals USA Inc." "Hikma Pharmaceuticals USA Inc."</span></span>
+<span><span class="co">#&gt; [3] "Hikma Pharmaceuticals USA Inc." "Camber Pharmaceuticals, Inc."  </span></span>
+<span><span class="co">#&gt; [5] "Gland Pharma Limited"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="other-r-packages-for-openfda">Other R packages for openFDA<a class="anchor" aria-label="anchor" href="#other-r-packages-for-openfda"></a>
 </h2>
 <p>The <a href="https://github.com/rOpenHealth/openfda" class="external-link">openfda</a> package from <code>rOpenHealth</code> also wraps the openFDA API from R, and is available on GitHub. It’s got a pretty neat structure whereby you build up a query using individual functions for each parameter - though it’s my personal preference to keep these as parameters to a single function. It also makes results available in data frames, which is nice, but I think working with the response object and parsing the underlying JSON yourself permits more powerful interactions with the API.</p>
-<p>There is also <a href="https://github.com/ck2136/FDAopenR/" class="external-link">FDAopenR</a>, which I couldn’t quite wrap my head around. The package appears to be in working order, though!</p>
+<p>There is also <a href="https://github.com/ck2136/FDAopenR/" class="external-link">FDAopenR</a>, which is all object-oriented. I couldn’t quite wrap my head around it, but it all appears to be in working order!</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -161,7 +172,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Simon Parker <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0009-0003-8214-4496" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Simon Parker <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0009-0003-8214-4496" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -184,7 +195,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
