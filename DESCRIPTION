@@ -1,13 +1,13 @@
 Package: openFDA
-Title: 'openFDA' API
+Title: Access To The 'openFDA' API
 Version: 0.1.0.9000
 Authors@R: 
     person("Simon", "Parker", , "simon.parker.24@ucl.ac.uk",
            role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0003-8214-4496"))
 Description: The 'openFDA' API facilitates access to U.S. Food and Drug 
-    Administration (FDA) data on drugs, devices, foodstuffs, tobacco, and more
-    with 'httr2'. This package makes the API easily accessible, returning
+    Administration (FDA) data on drugs, devices, foodstuffs, tobacco, and more.
+    This package makes the API easily accessible with 'httr2', returning
     objects which the user can convert to JSON data and parse. Kass-Hout TA, Xu
     Z, Mohebbi M et al. (2016) <doi:10.1093/jamia/ocv153>.
 License: GPL (>= 3)
