@@ -202,7 +202,7 @@ openFDA_error_handling <- function(resp, warn_on_http_error) {
 }
 
 #' HTTP error-handling functions for openFDA
-#' @param resp An `httr2` `<response>` object.
+#' @param resp An httr2 response object made when calling `openFDA()`.
 #' @rdname openFDA_http_errors
 #' @noRd
 openFDA_err_generic_msg <- function(resp) {
