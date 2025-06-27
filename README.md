@@ -45,8 +45,34 @@ The full documentation for the API is online, so look at the [openFDA
 website](https://open.fda.gov/apis/) to get a full feel for the API
 itself.
 
-The R package lets you query the API directly from R, using
-[httr2](https://httr2.r-lib.org/).
+Before using the package, you will need to generate one at the [openFDA
+webpage](https://open.fda.gov/apis/authentication/). With an API key you
+can make 240 requests per minute, and are limited to 120,000 requests
+per day. Without a key, you can only make 1000 requests a day. For this
+package, if you try to run `openFDA()` without setting an API key, it
+will fail:
+
+``` r
+search <- openFDA(
+  search = "openfda.generic_name:furosemide",
+  limit = 5
+)
+#> Error in `get_api_key()`:
+#> ! To use openFDA, you must set an openFDA API key.
+#> ℹ Go to <https://open.fda.gov/apis/authentication/> to get an openFDA API key,
+#>   then supply it to `set_api_key()` to cache it for use in this session.
+```
+
+That’s not good. To fix this error, get an API key from the webpage
+linked above. Once you have your API key, use `set_api_key()` to store
+your API key. Once you run this function, **openFDA** will ‘know’ your
+API key until the session ends. Let’s try using `openFDA()` again, after
+setting an API key:
+
+``` r
+# n.b. this API key is a fake, just for demonstration
+set_api_key(api_key = "iHXeqlbXtlYEwX9MYLwyCBuiZxfn98Sj3oX2FNtSx")
+```
 
 ``` r
 search <- openFDA(
@@ -60,19 +86,19 @@ search
 #> https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&search=openfda.generic_name:furosemide&limit=5
 #> Status: 200 OK
 #> Content-Type: application/json
-#> Body: In memory (26060 bytes)
+#> Body: In memory (37784 bytes)
 ```
 
-The underlying response is JSON data - you can use
-`httr2::resp_body_json()` to get the JSON data as a nested list, then
-extract the fields you want.
+The returned `httr2` response object contains JSON data from the API -
+you can use `httr2::resp_body_json()` to extract the JSON data as a
+nested list, then extract the fields you want.
 
 ``` r
 json <- httr2::resp_body_json(search)
 
 json$results[[1]]$openfda$brand_name
 #> [[1]]
-#> [1] "FUROSCIX"
+#> [1] "FUROSEMIDE"
 json$results[[1]]$openfda$pharm_class_epc
 #> [[1]]
 #> [1] "Loop Diuretic [EPC]"
@@ -86,11 +112,9 @@ purrr::map_chr(
   .x = json$results, 
   .f = \(result) purrr::pluck(result, "openfda", "manufacturer_name", 1)
 )
-#> [1] "scPharmaceuticals Inc."                 
-#> [2] "Graviti Pharmaceuticals Private Limited"
-#> [3] "Hikma Pharmaceuticals USA Inc."         
-#> [4] "Civica, Inc."                           
-#> [5] "Eugia US LLC"
+#> [1] "Hikma Pharmaceuticals USA Inc." "Hikma Pharmaceuticals USA Inc."
+#> [3] "Hikma Pharmaceuticals USA Inc." "Camber Pharmaceuticals, Inc."  
+#> [5] "Gland Pharma Limited"
 ```
 
 ## Other R packages for openFDA
@@ -104,6 +128,6 @@ makes results available in data frames, which is nice, but I think
 working with the response object and parsing the underlying JSON
 yourself permits more powerful interactions with the API.
 
-There is also [FDAopenR](https://github.com/ck2136/FDAopenR/), which I
-couldn’t quite wrap my head around. The package appears to be in working
-order, though!
+There is also [FDAopenR](https://github.com/ck2136/FDAopenR/), which is
+all object-oriented. I couldn’t quite wrap my head around it, but it all
+appears to be in working order!
