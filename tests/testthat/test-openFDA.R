@@ -213,6 +213,11 @@ test_that("openFDA errors on certain bad inputs", {
   )
   expect_error(
     openFDA(search = c("openfda.brand_name" = "ozempic"),
+            paging = "bad-value"),
+    regexp = "`paging` must be one of"
+  )
+  expect_error(
+    openFDA(search = c("openfda.brand_name" = "ozempic"),
             paging = c("test", "this")),
     class = "openFDA_invalid_string_param_length"
   )
@@ -233,15 +238,5 @@ test_that("openFDA errors on certain bad inputs", {
   expect_error(
     openFDA(search = "", warn_on_http_error = NA),
     class = "openFDA_wohe_is_NA"
-  )
-})
-
-test_that("openFDA errors on certain bad inputs - with skip for CI", {
-  # skip_on_ci()
-  set_api_key("api_key_string")
-  expect_error(
-    openFDA(search = c("openfda.brand_name" = "ozempic"),
-            paging = "bad-value"),
-    pattern = "`paging` must be one of"
   )
 })
