@@ -24,8 +24,9 @@ For \code{get_api_key()}, an error will be thrown if no key has been set.
 Get and set your openFDA API keys
 }
 \note{
-To permanently set the API key for a given project, set \code{OPENFDA_TOKEN}
-in \code{.Renviron}.
+The function stores your API key in the environment variable
+\code{OPENFDA_TOKEN} unti lthe end of the current R session. To permanently set
+the API key for a given project, set \code{OPENFDA_TOKEN} in \code{.Renviron}.
 }
 \examples{
 # Set your openFDA API key with `set_api_key()`

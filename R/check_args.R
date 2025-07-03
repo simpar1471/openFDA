@@ -128,8 +128,8 @@ check_sort_arg <- function(sort, call = rlang::caller_env()) {
   sort
 }
 
-#' Assert that users have passed integerish data to the right openFDA parameters
-#' @param param The `count` or `api_key` arguments from [openFDA()].
+#' Assert that users have passed string data to the right openFDA parameters
+#' @param param The `count`, `api_key`, or `paging` arguments from [openFDA()].
 #' @return Invisibly returns `param` if checks are satisfied, or throws an
 #'   error.
 #' @noRd
