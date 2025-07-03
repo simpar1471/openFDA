@@ -48,7 +48,7 @@ test_that("openFDA paging is possible", {
 
 test_that(
   desc = "openFDA paging fails if `paging == \"ask\" but not interactive", {
-  skip_if_not(!interactive())
+  skip_if(interactive())
   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
 
     # Query which requires paging
@@ -213,11 +213,6 @@ test_that("openFDA errors on certain bad inputs", {
   )
   expect_error(
     openFDA(search = c("openfda.brand_name" = "ozempic"),
-            paging = "bad-value"),
-    pattern = "`paging` must be one of"
-  )
-  expect_error(
-    openFDA(search = c("openfda.brand_name" = "ozempic"),
             paging = c("test", "this")),
     class = "openFDA_invalid_string_param_length"
   )
@@ -241,3 +236,12 @@ test_that("openFDA errors on certain bad inputs", {
   )
 })
 
+test_that("openFDA errors on certain bad inputs - with skip for CI", {
+  # skip_on_ci()
+  set_api_key("api_key_string")
+  expect_error(
+    openFDA(search = c("openfda.brand_name" = "ozempic"),
+            paging = "bad-value"),
+    pattern = "`paging` must be one of"
+  )
+})
