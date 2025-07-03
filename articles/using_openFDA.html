@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">openFDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,8 @@
 </h2>
 <p>Let’s start by loading the package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simpar1471/openFDA" class="external-link">openFDA</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simpar1471/openFDA" class="external-link">openFDA</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openFDA.paging"</span> <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="get-brand-names-and-epcs-from-generic-bnf-terms">Get brand names and EPCs from generic BNF terms<a class="anchor" aria-label="anchor" href="#get-brand-names-and-epcs-from-generic-bnf-terms"></a>
@@ -144,21 +145,29 @@ endpoint</a>.</p>
 <span><span class="va">bnf_search_json</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$product_number</span></span>
-<span><span class="co">#&gt; [1] "003"</span></span>
+<span><span class="co">#&gt; [1] "001"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$reference_drug</span></span>
 <span><span class="co">#&gt; [1] "No"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$brand_name</span></span>
-<span><span class="co">#&gt; [1] "FOSINOPRIL SODIUM"</span></span>
+<span><span class="co">#&gt; [1] "SPIRONOLACTONE AND HYDROCHLOROTHIAZIDE"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$active_ingredients</span></span>
 <span><span class="co">#&gt; [[1]]$active_ingredients[[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$active_ingredients[[1]]$name</span></span>
-<span><span class="co">#&gt; [1] "FOSINOPRIL SODIUM"</span></span>
+<span><span class="co">#&gt; [1] "HYDROCHLOROTHIAZIDE"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[1]]$active_ingredients[[1]]$strength</span></span>
-<span><span class="co">#&gt; [1] "40MG"</span></span>
+<span><span class="co">#&gt; [1] "25MG"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[2]]</span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[2]]$name</span></span>
+<span><span class="co">#&gt; [1] "SPIRONOLACTONE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[1]]$active_ingredients[[2]]$strength</span></span>
+<span><span class="co">#&gt; [1] "25MG"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -176,69 +185,10 @@ endpoint</a>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [[2]]$product_number</span></span>
-<span><span class="co">#&gt; [1] "001"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$reference_drug</span></span>
-<span><span class="co">#&gt; [1] "No"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$brand_name</span></span>
-<span><span class="co">#&gt; [1] "FOSINOPRIL SODIUM"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$active_ingredients</span></span>
-<span><span class="co">#&gt; [[2]]$active_ingredients[[1]]</span></span>
-<span><span class="co">#&gt; [[2]]$active_ingredients[[1]]$name</span></span>
-<span><span class="co">#&gt; [1] "FOSINOPRIL SODIUM"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$active_ingredients[[1]]$strength</span></span>
-<span><span class="co">#&gt; [1] "10MG"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$reference_standard</span></span>
-<span><span class="co">#&gt; [1] "No"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$dosage_form</span></span>
-<span><span class="co">#&gt; [1] "TABLET"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$route</span></span>
-<span><span class="co">#&gt; [1] "ORAL"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$marketing_status</span></span>
-<span><span class="co">#&gt; [1] "Discontinued"</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; NULL</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [[3]]$product_number</span></span>
-<span><span class="co">#&gt; [1] "002"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$reference_drug</span></span>
-<span><span class="co">#&gt; [1] "No"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$brand_name</span></span>
-<span><span class="co">#&gt; [1] "FOSINOPRIL SODIUM"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$active_ingredients</span></span>
-<span><span class="co">#&gt; [[3]]$active_ingredients[[1]]</span></span>
-<span><span class="co">#&gt; [[3]]$active_ingredients[[1]]$name</span></span>
-<span><span class="co">#&gt; [1] "FOSINOPRIL SODIUM"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$active_ingredients[[1]]$strength</span></span>
-<span><span class="co">#&gt; [1] "20MG"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$reference_standard</span></span>
-<span><span class="co">#&gt; [1] "No"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$dosage_form</span></span>
-<span><span class="co">#&gt; [1] "TABLET"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$route</span></span>
-<span><span class="co">#&gt; [1] "ORAL"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$marketing_status</span></span>
-<span><span class="co">#&gt; [1] "Discontinued"</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="extracting-openfda-fields-programmatically">Extracting openFDA fields programmatically<a class="anchor" aria-label="anchor" href="#extracting-openfda-fields-programmatically"></a>
 </h3>
@@ -275,9 +225,12 @@ API above.</p>
 <code class="sourceCode R"><span><span class="va">openFDA_brand_names</span> <span class="op">&lt;-</span> <span class="fu">extract_openFDA_field</span><span class="op">(</span><span class="va">bnf_search_json</span>, <span class="st">"brand_name"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">openFDA_brand_names</span><span class="op">[</span><span class="fl">25</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "ENALAPRIL MALEATE"          "VASOTEC"                   </span></span>
-<span><span class="co">#&gt; [3] "TELMISARTAN AND AMLODIPINE" "NORVASC"                   </span></span>
-<span><span class="co">#&gt; [5] "AMLODIPINE BESYLATE"        "FELODIPINE"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "SACUBITRIL AND VALSARTAN"                 </span></span>
+<span><span class="co">#&gt; [2] "FOSINOPRIL SODIUM AND HYDROCHLOROTHIAZIDE"</span></span>
+<span><span class="co">#&gt; [3] "PIOGLITAZONE"                             </span></span>
+<span><span class="co">#&gt; [4] "ATORVASTATIN CALCIUM"                     </span></span>
+<span><span class="co">#&gt; [5] "PROCARDIA XL"                             </span></span>
+<span><span class="co">#&gt; [6] "NIFEDIPINE"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="established-pharmacological-classes">Established pharmacological classes<a class="anchor" aria-label="anchor" href="#established-pharmacological-classes"></a>
@@ -291,7 +244,7 @@ generic drugs which were not within our BNF drug list.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lengths.html" class="external-link">lengths</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>brand_names <span class="op">=</span> <span class="va">openFDA_brand_names</span>, </span>
 <span>             EPCs <span class="op">=</span> <span class="va">openfda_EPCs</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; brand_names        EPCs </span></span>
-<span><span class="co">#&gt;         172          20</span></span></code></pre></div>
+<span><span class="co">#&gt;         176          17</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -306,25 +259,22 @@ supplying them in the <code>search</code> strategy.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">openfda_EPCs</span></span>
 <span><span class="co">#&gt;  [1] "Thiazide Diuretic"                             </span></span>
-<span><span class="co">#&gt;  [2] "HMG-CoA Reductase Inhibitor"                   </span></span>
-<span><span class="co">#&gt;  [3] "Angiotensin 2 Receptor Blocker"                </span></span>
-<span><span class="co">#&gt;  [4] "Dietary Cholesterol Absorption Inhibitor"      </span></span>
-<span><span class="co">#&gt;  [5] "Loop Diuretic"                                 </span></span>
-<span><span class="co">#&gt;  [6] "Dihydropyridine Calcium Channel Blocker"       </span></span>
-<span><span class="co">#&gt;  [7] "Dipeptidyl Peptidase 4 Inhibitor"              </span></span>
-<span><span class="co">#&gt;  [8] "Thiazide-like Diuretic"                        </span></span>
-<span><span class="co">#&gt;  [9] "Angiotensin Converting Enzyme Inhibitor"       </span></span>
-<span><span class="co">#&gt; [10] "GLP-1 Receptor Agonist"                        </span></span>
-<span><span class="co">#&gt; [11] "Sodium-Glucose Cotransporter 2 Inhibitor"      </span></span>
-<span><span class="co">#&gt; [12] "Sulfonylurea"                                  </span></span>
-<span><span class="co">#&gt; [13] "Potassium-sparing Diuretic"                    </span></span>
-<span><span class="co">#&gt; [14] "Calcium Channel Blocker"                       </span></span>
-<span><span class="co">#&gt; [15] "Aldosterone Antagonist"                        </span></span>
-<span><span class="co">#&gt; [16] "Peroxisome Proliferator Receptor alpha Agonist"</span></span>
-<span><span class="co">#&gt; [17] "Peroxisome Proliferator Receptor gamma Agonist"</span></span>
-<span><span class="co">#&gt; [18] "Thiazolidinedione"                             </span></span>
-<span><span class="co">#&gt; [19] "Insulin Analog"                                </span></span>
-<span><span class="co">#&gt; [20] "Adenosine Triphosphate-Citrate Lyase Inhibitor"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [2] "Aldosterone Antagonist"                        </span></span>
+<span><span class="co">#&gt;  [3] "Angiotensin Converting Enzyme Inhibitor"       </span></span>
+<span><span class="co">#&gt;  [4] "Dipeptidyl Peptidase 4 Inhibitor"              </span></span>
+<span><span class="co">#&gt;  [5] "Dihydropyridine Calcium Channel Blocker"       </span></span>
+<span><span class="co">#&gt;  [6] "Dietary Cholesterol Absorption Inhibitor"      </span></span>
+<span><span class="co">#&gt;  [7] "HMG-CoA Reductase Inhibitor"                   </span></span>
+<span><span class="co">#&gt;  [8] "Angiotensin 2 Receptor Blocker"                </span></span>
+<span><span class="co">#&gt;  [9] "PCSK9 Inhibitor"                               </span></span>
+<span><span class="co">#&gt; [10] "Loop Diuretic"                                 </span></span>
+<span><span class="co">#&gt; [11] "Sulfonylurea"                                  </span></span>
+<span><span class="co">#&gt; [12] "Potassium-sparing Diuretic"                    </span></span>
+<span><span class="co">#&gt; [13] "Sodium-Glucose Cotransporter 2 Inhibitor"      </span></span>
+<span><span class="co">#&gt; [14] "GLP-1 Receptor Agonist"                        </span></span>
+<span><span class="co">#&gt; [15] "Thiazide-like Diuretic"                        </span></span>
+<span><span class="co">#&gt; [16] "Adenosine Triphosphate-Citrate Lyase Inhibitor"</span></span>
+<span><span class="co">#&gt; [17] "Calcium Channel Blocker"</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="query-openfda-with-our-epcs">Query openFDA with our EPCs<a class="anchor" aria-label="anchor" href="#query-openfda-with-our-epcs"></a>
 </h3>
@@ -360,28 +310,20 @@ we have retrieved by searching with EPCs.</p>
 <span><span class="va">epc_generics</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="va">bnf_regex</span>, value <span class="op">=</span> <span class="cn">TRUE</span>, invert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "chlorothiazide"                     "pitavastatin magnesium"            </span></span>
-<span><span class="co">#&gt;  [3] "lovastatin"                         "pitavastatin"                      </span></span>
-<span><span class="co">#&gt;  [5] "sparsentan"                         "torsemide"                         </span></span>
-<span><span class="co">#&gt;  [7] "furosemide"                         "ethacrynic acid"                   </span></span>
-<span><span class="co">#&gt;  [9] "furosemide injection 80 mg/ 10 ml"  "isradipine"                        </span></span>
-<span><span class="co">#&gt; [11] "nisoldipine"                        "clevidipine"                       </span></span>
-<span><span class="co">#&gt; [13] "clevipidine"                        "chlorthalidone"                    </span></span>
-<span><span class="co">#&gt; [15] "metolazone"                         "atenolol and chlorthalidone"       </span></span>
-<span><span class="co">#&gt; [17] "atenolol and chlorthalidone tablet" "tirzepatide"                       </span></span>
-<span><span class="co">#&gt; [19] "bexagliflozin"                      "sotagliflozin"                     </span></span>
-<span><span class="co">#&gt; [21] "glyburide"                          "triamterene capsules"              </span></span>
-<span><span class="co">#&gt; [23] "triamterene"                        "spironolactone"                    </span></span>
-<span><span class="co">#&gt; [25] "carospir"                           "eplerenone"                        </span></span>
-<span><span class="co">#&gt; [27] "fenofibrate"                        "fenofibric acid"                   </span></span>
-<span><span class="co">#&gt; [29] "gemfibrozil"                        "insulin aspart injection"          </span></span>
-<span><span class="co">#&gt; [31] "insulin aspart"                     "insulin glargine"                  </span></span>
-<span><span class="co">#&gt; [33] "insulin lispro"                     "insulin detemir"                   </span></span>
-<span><span class="co">#&gt; [35] "insulin lispro-aabc"                "insulin glulisine"                 </span></span>
-<span><span class="co">#&gt; [37] "water injection"                    "insulin glargine-yfgn"             </span></span>
-<span><span class="co">#&gt; [39] "insulin glargine-aglr"              "diluent"                           </span></span>
-<span><span class="co">#&gt; [41] "insulin aspart-szjj"                "insulin degludec"                  </span></span>
-<span><span class="co">#&gt; [43] "bempedoic acid"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] "chlorothiazide"                     "eplerenone"                        </span></span>
+<span><span class="co">#&gt;  [3] "spironolactone"                     "carospir"                          </span></span>
+<span><span class="co">#&gt;  [5] "isradipine"                         "nisoldipine"                       </span></span>
+<span><span class="co">#&gt;  [7] "clevidipine"                        "clevipidine"                       </span></span>
+<span><span class="co">#&gt;  [9] "pitavastatin magnesium"             "lovastatin"                        </span></span>
+<span><span class="co">#&gt; [11] "pitavastatin"                       "sparsentan"                        </span></span>
+<span><span class="co">#&gt; [13] "furosemide"                         "ethacrynic acid"                   </span></span>
+<span><span class="co">#&gt; [15] "torsemide"                          "furosemide injection 80 mg/ 10 ml" </span></span>
+<span><span class="co">#&gt; [17] "glyburide"                          "triamterene capsules"              </span></span>
+<span><span class="co">#&gt; [19] "triamterene"                        "bexagliflozin"                     </span></span>
+<span><span class="co">#&gt; [21] "sotagliflozin"                      "tirzepatide"                       </span></span>
+<span><span class="co">#&gt; [23] "chlorthalidone"                     "atenolol and chlorthalidone tablet"</span></span>
+<span><span class="co">#&gt; [25] "atenolol and chlorthalidone"        "metolazone"                        </span></span>
+<span><span class="co">#&gt; [27] "bempedoic acid"</span></span></code></pre></div>
 <p>Of these drugs, the following are of interest:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fda_generics</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pitavastatin"</span>, <span class="st">"lovastatin"</span>,</span>
@@ -416,14 +358,14 @@ names:</p>
 <span></span>
 <span><span class="va">more_brand_names</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="co">#&gt; $pitavastatin</span></span>
-<span><span class="co">#&gt; [1] "zypitamag"            "pitavastatin calcium" "nikita"              </span></span>
-<span><span class="co">#&gt; [4] "livalo"               "pitavastatin"        </span></span>
+<span><span class="co">#&gt; [1] "pitavastatin"         "zypitamag"            "pitavastatin calcium"</span></span>
+<span><span class="co">#&gt; [4] "nikita"               "livalo"              </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $lovastatin</span></span>
 <span><span class="co">#&gt; [1] "lovastatin" "altoprev"  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $chlorothiazide</span></span>
-<span><span class="co">#&gt; [1] "chlorothiazide"        "chlorothiazide sodium" "diuril"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "chlorothiazide sodium" "chlorothiazide"        "diuril"</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -484,7 +426,7 @@ in the UK and US.</p>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] openFDA_0.1.0.9000</span></span>
+<span><span class="co">#&gt; [1] openFDA_0.1.0.9001</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] vctrs_0.6.5       cli_3.6.5         knitr_1.50        rlang_1.1.6      </span></span>

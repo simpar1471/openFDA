@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">openFDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +58,7 @@
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>  api_key <span class="op">=</span> <span class="fu"><a href="api_key.html">get_api_key</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  paging <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/local_options.html" class="external-link">peek_option</a></span><span class="op">(</span><span class="st">"openFDA.paging"</span><span class="op">)</span>,</span>
 <span>  warn_on_http_error <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -104,7 +105,8 @@ API will return a 404 error.</p></dd>
 
 <dt id="arg-endpoint">endpoint<a class="anchor" aria-label="anchor" href="#arg-endpoint"></a></dt>
 <dd><p>A single-length character vector describing which openFDA
-endpoint to target.</p><ul><li><p><code>"animal-event"</code>: Adverse event reports for animal/veterinary drugs.</p></li>
+endpoint to target.</p><ul><li><p><code>"animalandveterinary-event"</code>: Adverse event reports for
+animal/veterinary drugs.</p></li>
 <li><p><code>"drug-event"</code>: Adverse event reports from <a href="https://open.fda.gov/data/faers/" class="external-link">FDA Adverse Event Reporting System</a></p></li>
 <li><p><code>"drug-label"</code>: Drug documentation in the <a href="https://www.fda.gov/industry/fda-data-standards-advisory-board/structured-product-labeling-resources" class="external-link">Structured Product Labeling</a>
 (SPL) format.</p></li>
@@ -112,6 +114,9 @@ endpoint to target.</p><ul><li><p><code>"animal-event"</code>: Adverse event rep
 <li><p><code>"drug-enforcement"</code>: Data from the <a href="https://open.fda.gov/data/res/" class="external-link">FDA Recall Enterprise System</a> about drug products.</p></li>
 <li><p><code>"drug-drugsfda"</code>: Data on products approved for human use by the FDA
 since 1939, with mostly complete data after 1998.</p></li>
+<li><p><code>"drug-shortages"</code>: Data on
+<a href="https://open.fda.gov/data/drugshortages/" class="external-link">drug shortages</a> as compiled by
+the FDA.</p></li>
 <li><p><code>"device-510k"</code>: Data from 510(k) submissions to the FDA regarding
 medical devices.</p></li>
 <li><p><code>"device-classification"</code>: Data from the FDA <a href="https://open.fda.gov/data/product-classification/" class="external-link">Product Classification Database</a> for medical
@@ -123,7 +128,7 @@ medical devices.</p></li>
 the FDA.</p></li>
 <li><p><code>"device-recall"</code>: Data on product recalls for medical devices which
 violate FDA law.</p></li>
-<li><p><code>"device-reglist"</code>: Data on FDA <a href="https://www.fda.gov/medical-devices/how-study-and-market-your-device/device-registration-and-listing" class="external-link">Device Registrations and Listings</a>.</p></li>
+<li><p><code>"device-registrationlisting"</code>: Data on FDA <a href="https://www.fda.gov/medical-devices/how-study-and-market-your-device/device-registration-and-listing" class="external-link">Device Registrations and Listings</a>.</p></li>
 <li><p><code>"device-covid19serology"</code>: Data from <a href="https://open.fda.gov/apis/device/covid19serology/" class="external-link">independent evaluations of COVID-19 serological tests</a>.</p></li>
 <li><p><code>"device-udi"</code>: Data from the FDA's Global Unique Device Identification
 Database (GUDID).</p></li>
@@ -147,8 +152,27 @@ By default this is the result of <code><a href="api_key.html">get_api_key()</a><
 string, an error will be thrown.</p></dd>
 
 
+<dt id="arg-paging">paging<a class="anchor" aria-label="anchor" href="#arg-paging"></a></dt>
+<dd><p>A single string describing whether results should be paged,
+and whether relevant alerts should be printed to the console. By default,
+<code>openFDA()</code> uses the string stored in <code>options("openFDA.paging")</code>, which
+has the value <code>"ask"</code>. Permissible values include:</p><ul><li><p><code>"ask"</code> - <code>openFDA()</code> will warn you that pagination is required and ask
+if you want this to be done. Depending on user input, either a single
+httr2 response object or a list of httr2 response objects will be
+returned</p></li>
+<li><p><code>"yes"</code> - information on pagination will be printed to the console and
+done automatically; a list of responses will be returned</p></li>
+<li><p><code>"no"</code> - information on pagination will be printed to the console but
+will not be performed; only the first response will be returned</p></li>
+<li><p><code>"yes-quiet"</code> - same as <code>paging = "yes"</code> except no alert is printed to
+the console</p></li>
+<li><p><code>"no-quiet"</code> - same as <code>paging = "no"</code> except no alert is printed to
+the console</p></li>
+</ul></dd>
+
+
 <dt id="arg-warn-on-http-error">warn_on_http_error<a class="anchor" aria-label="anchor" href="#arg-warn-on-http-error"></a></dt>
-<dd><p>A scalar logical value.  If <code>TRUE</code> (the default),
+<dd><p>A scalar logical value. If <code>TRUE</code> (the default),
 common openFDA HTTP errors will cause explanatory warnings to be printed
 If <code>FALSE</code>, the underlying httr2 response object will be returned with
 no extra warnings.</p></dd>
@@ -156,8 +180,9 @@ no extra warnings.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An <code>httr2</code> response object from <code><a href="https://httr2.r-lib.org/reference/req_perform.html" class="external-link">httr2::req_perform()</a></code>. You can use
-<code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to extract JSON data from the response.</p>
+    <p>Either an <code>httr2</code> response object from <code><a href="https://httr2.r-lib.org/reference/req_perform.html" class="external-link">httr2::req_perform()</a></code> or list
+of these objects, depending on whether pagination was required. You can use
+<code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to extract JSON data from these responses.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -169,7 +194,9 @@ FDA's publicly available data</strong> <em>J Am Med Inform Assoc</em> 2016,
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="format_search_term.html">format_search_term()</a></code> documents how input <code>search</code> vectors are
-converted to openFDA API searches.</p></div>
+converted to openFDA API searches. Check out the openFDA
+<a href="openFDA_options.html">options</a> documentation to see how to set paging behaviour
+across multiple <code>openFDA()</code> calls.</p></div>
     </div>
 
     <div class="section level2">
@@ -182,7 +209,8 @@ converted to openFDA API searches.</p></div>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">openFDA</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"openfda.manufacturer_name:gilead*"</span>,</span></span>
 <span class="r-in"><span>                  limit <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>                  skip <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  skip <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># The function returns an `httr2` object</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></span>
@@ -192,7 +220,7 @@ converted to openFDA API searches.</p></div>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&amp;search=openfda.manufacturer_name:gilead%2A&amp;limit=2&amp;skip=10</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 200 OK</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Content-Type</span>: application/json</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (45149 bytes)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (18929 bytes)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Bad inputs will cause informative errors - here, a bad API key is supplied</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
@@ -200,15 +228,9 @@ converted to openFDA API searches.</p></div>
 <span class="r-in"><span>          api_key <span class="op">=</span> <span class="st">"BAD_API_KEY"</span>,</span></span>
 <span class="r-in"><span>          limit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The openFDA API returned a 403 error.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> This usually means that an invalid `api_key` was used.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Your API key was <span style="color: #0000BB;">"BAD_API_KEY"</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&amp;search=openfda.manufacturer_name:gilead%2A&amp;limit=1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 403 Forbidden</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Content-Type</span>: application/json</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (136 bytes)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in openFDA(search = "openfda.manufacturer_name:gilead*", api_key = "BAD_API_KEY",  : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BBBB00;">!</span> The `paging` argument must not be `"ask"`if R is not running</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   interactively.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
