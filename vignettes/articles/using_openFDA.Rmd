@@ -22,6 +22,7 @@ Let's start by loading the package.
 
 ```{r setup}
 library(openFDA)
+options("openFDA.paging" = "no-quiet")
 ```
 
 # Get brand names and EPCs from generic BNF terms

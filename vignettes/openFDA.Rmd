@@ -32,14 +32,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-Using `{openFDA}` can be a breeze, if you know how to construct good queries.
+Using openFDA can be a breeze, if you know how to construct good queries.
 This short guide will get you started with `{openFDA}`, and show you how to put together more complicated queries.
+We start by loading openFDA.
 
 ```{r load_openFDA}
 library(openFDA)
 ```
 
-```{r set_key}
+```{r set_key, echo = FALSE}
 set_api_key("tvzdUXoC3Yi21hhxtKKochJlQgm6y1Lr7uhmjcpT")
 ```
 
@@ -47,14 +48,36 @@ set_api_key("tvzdUXoC3Yi21hhxtKKochJlQgm6y1Lr7uhmjcpT")
 The openFDA API makes public FDA data available from a simple, public API.
 Users of this API have access to FDA data on food, human and veterinary drugs, devices, and more.
 You can read all about it at their [website](https://open.fda.gov/).
+The API limits results sets to 1000, and pages through results if a user submits a query with >1000 results.
+By default, `openFDA()` will ask you if you want to perform paging, but this tends to break vignettes.
+Therefore, we set the option `openFDA.paging` to `"yes"` in order to automatically perform paging when needed.
+
+```{r set-paging, echo = FALSE}
+options("openFDA.paging" = "no-quiet")
+```
 
 # A simple openFDA query
 The simplest way to query the openFDA API is to identify the **endpoint** you want to use and provide other search terms.
-For example, this snippet retrieves 1 record about **adverse events** in the **drugs** endpoint.
+For example, this snippet retrieves 2 records about **adverse events** in the **drugs** endpoint.
 The empty search string (`""`) means the results will be non-specific.
 
 ```{r example1}
-search <- openFDA(search = "", endpoint = "drug-event", limit = 1)
+search <- openFDA(search = "",
+                  endpoint = "drug-event",
+                  limit = 2,
+                  paging = "no")
+search
+```
+
+The warning given about pagination is because we searched on the whole dataset, but used `limit` to only pull out the first two results.
+We can suppress this warning by setting `paging` to `"no-quiet"`.
+This ensures you don't page the whole dataset (which would take eleven hours) and suppresses the warning:
+
+```{r example2}
+search <- openFDA(search = "",
+                  endpoint = "drug-event",
+                  limit = 2,
+                  paging = "no-quiet")
 search
 ```
 
@@ -62,7 +85,7 @@ search
 The function returns an `{httr2}` response object, with attached JSON data.
 We use `httr2::resp_body_json()` to extract the underlying data.
 
-```{r example2_json}
+```{r example_3a_json}
 json <- httr2::resp_body_json(search)
 ```
 
@@ -73,12 +96,12 @@ The `meta` section has important metadata on your results, which includes:
 
 * `disclaimer` - An important disclaimer regarding the data provided by openFDA.
 * `license` - A webpage with license terms that govern the openFDA API.
-* `last_updated` - The last date when this openFDA endpoint was updated.
+* `last_updated` - The last date at which this openFDA endpoint was updated.
 * `results.skip` - How many results were skipped? Set by the `skip` parameter in `openFDA()`.
 * `results.limit` - How many results were retrieved? Set by the `limit` parameter in `openFDA()`.
 * `results.total` - How many results were there in total matching your `search` criteria?
 
-```{r example_2a_json_meta}
+```{r example_3b_json_meta}
 json$meta
 ```
 
@@ -86,7 +109,7 @@ json$meta
 
 For non-`count` queries, this will be a set of records which were found in the endpoint and match your `search` term.
 
-```{r example_2b_json_results, out.lines = 10}
+```{r example_3c_json_results, out.lines = 10}
 json$results
 ```
 
@@ -94,18 +117,37 @@ json$results
 If you set the `count` query, then the openFDA API will not return full records.
 Instead, it will count the number of records for each member in the openFDA field you specified for `count`.
 For example, let's look at drug manufacturers in the [Drugs@FDA endpoint](https://open.fda.gov/apis/drug/drugsfda/) for `"paracetamol"`.
-We'll use the `limit` parameter to limit our results to the first 3 drug manufacturers found.
 
-```{r example_3_count}
-count <- openFDA(search = "",
+```{r example_4a_count_names}
+count <- openFDA(search = "openfda.generic_name:ketamine",
                  endpoint = "drug-drugsfda",
-                 limit = 3,
-                 count = "openfda.manufacturer_name.exact") |>
+                 count = "openfda.manufacturer_name.exact",
+                 paging = "no") |>
   httr2::resp_body_json()
 count$results
 ```
 
-You can count on fields with a date to create a time series, as demonstrated on the [openFDA website](https://open.fda.gov/apis/timeseries/).
+### Using `count` to make a time series
+You can count on fields with a date to create a time series.
+This is demonstrated on the [openFDA
+website](https://open.fda.gov/apis/timeseries/), where they count the number of received records per day in the `drug/event` endpoint.
+With the openFDA package, you could do it in R like this:
+
+```{r example_4b_count_timeseries, fig.alt = "A scatter plot of date (on x axis) against number of adverse events reported to the FDA (y-axis)."}
+resp <- openFDA(endpoint = "drug-event", count = "receiptdate")
+# Extract the counts from the response as a data frame
+data <- httr2::resp_body_json(resp, simplifyDataFrame = TRUE) |>
+  purrr::pluck("results")
+data$date <- as.Date.character(data$time, format = "%Y%m%d")
+# Sort on date column
+data <- data[order(data$date), ]
+# Restrict to data from 2000 to 2019
+data <- data[data$date >= as.Date("2019-01-01") &
+                     data$date < as.Date("2019-12-31"), ]
+# Plot
+plot(x = data$date, y = data$count,
+     xlab = "Date", ylab = "Number of adverse events reported")
+```
 
 # Using search terms
 We can increase the complexity of our query using the `search` parameter, which lets us search against specific openFDA API fields.
@@ -115,24 +157,26 @@ These fields are harmonised to different degrees in each API, which you will nee
 You can provide search strategies to `openFDA()` as single strings.
 They are constructed as `[FIELD_NAME]:[STRING]`, where `FIELD_NAME` is the openFDA field you want to search on.
 If your `STRING` contains spaces, you must surround it with double quotes, or openFDA will search against each word in the string.
-So, for example, a search for drugs with the class `"thiazide diuretic`" should be formatted as `"openfda.pharm_class_epc:\"thiazide diuretic\""`, or the API will collect all drugs which have the words `"thiazide"` or `"diuretic"` in their established pharmacological class (EPC).
+So, for example, a search for drugs with the class `"thiazide diuretic"` should be formatted as `"openfda.pharm_class_epc:\"thiazide diuretic\""`, or the API will collect all drugs which have the words `"thiazide"` or `"diuretic"` in their established pharmacological class (EPC).
 Let's do an unrefined search first:
 
-```{r example3a_single_search_term_unrefined, out.lines = 15}
+```{r example_5a_single_search_term_unrefined, out.lines = 15}
 search_unrefined <- openFDA(
   search = "openfda.pharm_class_epc:thiazide diuretic",
   endpoint = "drug-drugsfda",
-  limit = 1
+  limit = 1,
+  paging = "no-quiet"
 )
 httr2::resp_body_json(search_unrefined)$meta$results$total
 ```
 
 Let's compare this to our refined search, where we add double-quotes around the search term:
 
-```{r example3a_single_search_term_refined, out.lines = 15}
+```{r example_5b_single_search_term_refined, out.lines = 15}
 search_refined <- openFDA(
   search = "openfda.pharm_class_epc:\"thiazide diuretic\"",
   endpoint = "drug-drugsfda",
+  paging = "no-quiet",
   limit = 1
 )
 httr2::resp_body_json(search_refined)$meta$results$total
@@ -141,8 +185,8 @@ httr2::resp_body_json(search_refined)$meta$results$total
 As you can see, the unrefined search picked up `r httr2::resp_body_json(search_unrefined)$meta$results$total - httr2::resp_body_json(search_refined)$meta$results$total` more results, most of which would have probably been non-thiazide diuretics.
 
 ## Searching on multiple fields
-The openFDA API lets you search on various fields at once.
-Simple methods for doing this are implemented in `{openFDA}`.
+The openFDA API also lets you search on various fields at once, to construct increasingly more specific queries.
+You can either write your own complex search queries, or let the package do (some of) the heavier lifting for you.
 
 ### Write your own search term
 Using the guides on the [openFDA website](https://open.fda.gov/apis/query-parameters/), you can put together your own query.
@@ -150,11 +194,12 @@ For example, the following query looks for up to 5 records which were submitted 
 We can use `{purrr}` functions to extract a brand name for each record.
 Note that though a single record can have multiple brand names, we are choosing to only extract the first one.
 
-```{r example 3b_supply_scalar_search_term}
+```{r example_5c_supply_scalar_search_term}
 search_term <- "openfda.manufacturer_name:Walmart+AND+openfda.route=oral"
 search <- openFDA(search = search_term,
-                  limit = 5,
-                  endpoint = "drug-drugsfda")
+                  endpoint = "drug-drugsfda",
+                  paging = "no-quiet",
+                  limit = 5)
 json <- httr2::resp_body_json(search)
 purrr::map(json$results, .f = \(x) {
   purrr::pluck(x, "openfda", "brand_name", 1)
@@ -162,12 +207,14 @@ purrr::map(json$results, .f = \(x) {
 ```
 
 ### Let `openFDA()` construct the search term
-You can let the package do the heavy lifting for you with `openFDA()`, by providing a named character vector with many field/search term pairs to the `search` parameter.
+In `openFDA()`, you can provide a named character vector with many field/search term pairs to the `search` parameter.
 The function will automatically add double quotes (`""`) around your search terms, if you're providing field/value pairs like this.
 
-```{r example3b_format_scalar_search_term, out.lines = 15}
+```{r example_5d_format_scalar_search_term, out.lines = 15}
 search <- openFDA(search = c("openfda.generic_name" = "amoxicillin"),
-                  endpoint = "drug-drugsfda")
+                  endpoint = "drug-drugsfda",
+                  limit = 1,
+                  paging = "no-quiet")
 httr2::resp_body_json(search)$meta$results$total
 ```
 
@@ -175,22 +222,26 @@ You can include as many fields as you like, as long as you only provide each fie
 By default, the terms are combined with an `OR` operator in `openFDA()`.
 The below search strategy will therefore pick up all entries in [Drugs@FDA](https://open.fda.gov/apis/drug/drugsfda/) which are taken by mouth.
 
-```{r example3b_format_nonscalar_search_term, out.lines = 15}
+```{r example_5e_format_nonscalar_search_term, out.lines = 15}
 search <- openFDA(search = c("openfda.generic_name" = "amoxicillin",
                              "openfda.route" = "oral"),
-                  endpoint = "drug-drugsfda", limit = 1)
+                  endpoint = "drug-drugsfda",
+                  limit = 1,
+                  paging = "no-quiet")
 httr2::resp_body_json(search)$meta$results$total
 ```
 
 ### Pre-construct a search term
 
 To apply multiple search terms with `AND` operators, use `format_search_term()` with `mode = "and"`:
-```{r example3b_format_nonscalar_search_term_with_and, out.lines = 15}
+```{r example5f_format_nonscalar_search_term_with_and, out.lines = 15}
 search_term <- format_search_term(c("openfda.generic_name" = "amoxicillin",
                                     "openfda.route" = "oral"),
                                   mode = "and")
 search <- openFDA(search = search_term,
-                  endpoint = "drug-drugsfda", limit = 1)
+                  endpoint = "drug-drugsfda",
+                  limit = 1,
+                  paging = "no-quiet")
 httr2::resp_body_json(search)$meta$results$total
 ```
 
@@ -200,26 +251,42 @@ For example, we could take the prototypical ending to a common drug class - e.g.
 When using wildcards, either pre-format the string yourself *without double-quotes* or use `format_search_term()` with `exact = FALSE`.
 If you try to search with both double-quotes and the wildcard character, you will get a 404 error from openFDA.
 
-```{r example4_wildcards, out.lines = 15}
+```{r example_6_wildcards, out.lines = 15}
 search_term <- format_search_term(c("openfda.generic_name" = "*sartan"),
                                   exact = FALSE)
 search <- openFDA(search = search_term,
                   count = "openfda.manufacturer_name.exact",
                   endpoint = "drug-drugsfda",
-                  limit = 5)
-terms <- purrr::map(
-  .x = httr2::resp_body_json(search)$results,
-  .f = purrr::pluck("term")
-)
-counts <- purrr::map(
-  .x = httr2::resp_body_json(search)$results,
-  .f = purrr::pluck("count")
-)
-
-setNames(counts, terms)
+                  paging = "yes")
+results <- httr2::resp_body_json(search, simplifyDataFrame = TRUE) |>
+        purrr::pluck("results")
+head(results, n = 10)
 ```
 
 It looks like `"Alembic Pharmaceuticals"` is very active in this space - interesting!
+
+# Large result sets
+The openFDA API only returns up to 1000 results at one time.
+To return a results set larger than 1000 records, a basic paging system is implemented.
+On a per-call basis, this is controlled by the `paging` parameter in `openFDA()`.
+To change this behaviour for the duration of an R session, edit the option `"openFDA.paging"`, as demonstrated above.
+
+This argument must take one of these values:
+
+* `"ask"` (default; only valid if R is running interactively) - ask before performing paging
+* `"yes"` - always perform paging where necessary, but print a message to the console
+* `"yes-quiet"` - always perform paging where necessary, but don't print a message to the console
+* `"no"` - never perform paging, but print a message to the console
+* `"no-quiet"` - never perform paging, but don't print a message to the console
+
+When paging is performed, `openFDA()` returns a list of [httr2] response objects, instead of a single response:
+
+```{r example_7_paging}
+resps <- openFDA(search = "openfda.manufacturer_name:Pharma",
+                 limit = 500,
+                 endpoint = "drug-drugsfda",
+                 paging = "yes")
+```
 
 # Other openFDA API features
 This short guide does not cover all aspects of openFDA.
@@ -227,5 +294,3 @@ It is recommended that you go to the [openFDA API website](https://open.fda.gov/
 
 * [Date ands ranges](https://open.fda.gov/apis/dates-and-ranges/)
 * [Search for fields with missing values](https://open.fda.gov/apis/missing-values/)
-* [Generating time series](https://open.fda.gov/apis/timeseries/)
-* [Paging larger queries](https://open.fda.gov/apis/paging/)
