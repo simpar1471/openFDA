@@ -45,7 +45,7 @@ API will return a 404 error.}
 \item{endpoint}{A single-length character vector describing which openFDA
 endpoint to target.
 \itemize{
-\item \code{"animal-event"}: Adverse event reports for animal/veterinary drugs.
+\item \code{"animalandveterinary-event"}: Adverse event reports for animal/veterinary drugs.
 \item \code{"drug-event"}: Adverse event reports from \href{https://open.fda.gov/data/faers/}{FDA Adverse Event Reporting System}
 \item \code{"drug-label"}: Drug documentation in the \href{https://www.fda.gov/industry/fda-data-standards-advisory-board/structured-product-labeling-resources}{Structured Product Labeling}
 (SPL) format.
@@ -53,6 +53,9 @@ endpoint to target.
 \item \code{"drug-enforcement"}: Data from the \href{https://open.fda.gov/data/res/}{FDA Recall Enterprise System} about drug products.
 \item \code{"drug-drugsfda"}: Data on products approved for human use by the FDA
 since 1939, with mostly complete data after 1998.
+\item \code{"drug-shortages"}: Data on
+\href{https://open.fda.gov/data/drugshortages/}{drug shortages} as compiled by
+the FDA.
 \item \code{"device-510k"}: Data from 510(k) submissions to the FDA regarding
 medical devices.
 \item \code{"device-classification"}: Data from the FDA \href{https://open.fda.gov/data/product-classification/}{Product Classification Database} for medical
@@ -64,7 +67,7 @@ medical devices.
 the FDA.
 \item \code{"device-recall"}: Data on product recalls for medical devices which
 violate FDA law.
-\item \code{"device-reglist"}: Data on FDA \href{https://www.fda.gov/medical-devices/how-study-and-market-your-device/device-registration-and-listing}{Device Registrations and Listings}.
+\item \code{"device-registrationlisting"}: Data on FDA \href{https://www.fda.gov/medical-devices/how-study-and-market-your-device/device-registration-and-listing}{Device Registrations and Listings}.
 \item \code{"device-covid19serology"}: Data from \href{https://open.fda.gov/apis/device/covid19serology/}{independent evaluations of COVID-19 serological tests}.
 \item \code{"device-udi"}: Data from the FDA's Global Unique Device Identification
 Database (GUDID).

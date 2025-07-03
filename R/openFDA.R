@@ -26,7 +26,8 @@
 #' @param endpoint A single-length character vector describing which openFDA
 #'   endpoint to target.
 #'
-#'   * `"animal-event"`: Adverse event reports for animal/veterinary drugs.
+#'   * `"animalandveterinary-event"`: Adverse event reports for
+#'     animal/veterinary drugs.
 #'   * `"drug-event"`: Adverse event reports from [FDA Adverse Event Reporting
 #'     System](https://open.fda.gov/data/faers/)
 #'   * `"drug-label"`: Drug documentation in the [Structured Product
@@ -38,6 +39,9 @@
 #'     System](https://open.fda.gov/data/res/) about drug products.
 #'   * `"drug-drugsfda"`: Data on products approved for human use by the FDA
 #'     since 1939, with mostly complete data after 1998.
+#'   * `"drug-shortages"`: Data on
+#'     [drug shortages](https://open.fda.gov/data/drugshortages/) as compiled by
+#'     the FDA.
 #'   * `"device-510k"`: Data from 510(k) submissions to the FDA regarding
 #'     medical devices.
 #'   * `"device-classification"`: Data from the FDA [Product Classification
@@ -51,10 +55,11 @@
 #'     the FDA.
 #'   * `"device-recall"`: Data on product recalls for medical devices which
 #'     violate FDA law.
-#'   * `"device-reglist"`: Data on FDA [Device Registrations and
+#'   * `"device-registrationlisting"`: Data on FDA [Device Registrations and
 #'     Listings](https://www.fda.gov/medical-devices/how-study-and-market-your-device/device-registration-and-listing).
-#'   * `"device-covid19serology"`: Data from [independent evaluations of COVID-19
-#'     serological tests](https://open.fda.gov/apis/device/covid19serology/).
+#'   * `"device-covid19serology"`: Data from [independent evaluations of
+#'     COVID-19 serological
+#'     tests](https://open.fda.gov/apis/device/covid19serology/).
 #'   * `"device-udi"`: Data from the FDA's Global Unique Device Identification
 #'     Database (GUDID).
 #'   * `"food-enforcement"`: Data from the [FDA Recall Enterprise
@@ -154,14 +159,15 @@ openFDA <- function(search = "",
 #' @inheritParams openFDA
 #' @noRd
 endpoint_url <- function(endpoint) {
-  valid_endpoints <- c("animal-event", "drug-event", "drug-event", "drug-label",
+  valid_endpoints <- c("animalandveterinary-event", "drug-event", "drug-label",
                        "drug-ndc", "drug-enforcement", "drug-drugsfda",
-                       "device-510k", "device-classification",
+                       "drug-shortages", "device-510k", "device-classification",
                        "device-enforcement", "device-event", "device-pma",
-                       "device-recall", "device-reglist",
-                       "device-covid19serology", "food-enforcement",
-                       "food-event", "other-historicaldocument", "other-nsde",
-                       "other-substance", "other-unii", "tobacco-problem" )
+                       "device-recall", "device-registrationlisting",
+                       "device-covid19serology", "device-udi",
+                       "food-enforcement", "food-event",
+                       "other-historicaldocument", "other-nsde",
+                       "other-substance", "other-unii", "tobacco-problem")
   if (!endpoint %in% valid_endpoints) {
     cli::cli_abort(
       c("You must select an appropriate {.var endpoint} value.",

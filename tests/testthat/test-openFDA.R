@@ -12,6 +12,27 @@ test_that("openFDA can call its API", {
   expect_s3_class(resp, "httr2_response")
 })
 
+test_that("All openFDA endpoints are valid", {
+  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+
+  endpoints <- c("animalandveterinary-event", "drug-event",
+                 "drug-label", "drug-ndc", "drug-enforcement",
+                 "drug-drugsfda", "drug-shortages", "device-510k",
+                 "device-classification", "device-enforcement",
+                 "device-event", "device-pma", "device-recall",
+                 "device-registrationlisting", "device-covid19serology",
+                 "device-udi", "food-enforcement", "food-event",
+                 "other-historicaldocument", "other-nsde",
+                 "other-substance", "other-unii", "tobacco-problem")
+  purrr::map(endpoints, function(endpoint) {
+    resp <- expect_no_warning(openFDA(search = "",
+                                      endpoint = endpoint,
+                                      limit = 1,
+                                      paging = "no-quiet"))
+    expect_s3_class(resp, class = "httr2_response")
+  })
+})
+
 
 test_that("openFDA throws formatted HTTP errors", {
   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
