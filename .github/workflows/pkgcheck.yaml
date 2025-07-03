@@ -19,5 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
+    env:
+      OPENFDA_KEY: ${{ secrets.OPENFDA_KEY }}
+      OPENFDA_TOKEN: ${{ secrets.OPENFDA_TOKEN }}
     steps:
       - uses: ropensci-review-tools/pkgcheck-action@main
