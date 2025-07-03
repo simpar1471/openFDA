@@ -27,7 +27,7 @@
 #'
 #'   * `"ask"` - `openFDA()` will warn you that pagination is required and ask
 #'     if you want this to be done. Depending on user input, either a single
-#'     {httr2} response object or a list of {httr2} response objects will be
+#'     `httr2` response object or a list of `httr2` response objects will be
 #'     returned
 #'   * `"yes"` - information on pagination will be printed to the console and
 #'     done automatically; a list of responses will be returned

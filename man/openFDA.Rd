@@ -99,7 +99,7 @@ has the value \code{"ask"}. Permissible values include:
 \itemize{
 \item \code{"ask"} - \code{openFDA()} will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
-{httr2} response object or a list of {httr2} response objects will be
+\code{httr2} response object or a list of \code{httr2} response objects will be
 returned
 \item \code{"yes"} - information on pagination will be printed to the console and
 done automatically; a list of responses will be returned
