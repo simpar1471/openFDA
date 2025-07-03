@@ -20,6 +20,23 @@
 #' @param skip A single integer describing how many records should be skipped.
 #'   If more records are skipped than are found in your search, the openFDA
 #'   API will return a 404 error.
+#' @param paging A single string describing whether results should be paged,
+#'   and whether relevant alerts should be printed to the console. By default,
+#'   `openFDA()` uses the string stored in `options("openFDA.paging")`, which
+#'   has the value `"ask"`. Permissible values include:
+#'
+#'   * `"ask"` - `openFDA()` will warn you that pagination is required and ask
+#'     if you want this to be done. Depending on user input, either a single
+#'     {httr2} response object or a list of {httr2} response objects will be
+#'     returned
+#'   * `"yes"` - information on pagination will be printed to the console and
+#'     done automatically; a list of responses will be returned
+#'   * `"no"` - information on pagination will be printed to the console but
+#'     will not be performed; only the first response will be returned
+#'   * `"yes-quiet"` - same as `paging = "yes"` except no alert is printed to
+#'     the console
+#'   * `"no-quiet"` - same as `paging = "no"` except no alert is printed to
+#'     the console
 #' @param api_key A single-length character vector with your openFDA API key.
 #'   By default this is the result of `get_api_key()`. If `api_key` is an empty
 #'   string, an error will be thrown.
@@ -112,9 +129,12 @@
 #' FDA's publicly available data** *J Am Med Inform Assoc* 2016,
 #' **23(3):596-600.** \doi{10.1093/jamia/ocv153}
 #' @seealso [format_search_term()] documents how input `search` vectors are
-#'   converted to openFDA API searches.
-#' @return An `httr2` response object from [httr2::req_perform()]. You can use
-#'   [httr2::resp_body_json()] to extract JSON data from the response.
+#'   converted to openFDA API searches. Check out the openFDA
+#'   [options][openFDA_options] documentation to see how to set paging behaviour
+#'   across multiple `openFDA()` calls.
+#' @return Either an `httr2` response object from [httr2::req_perform()] or list
+#'   of these objects, depending on whether pagination was required. You can use
+#'   [httr2::resp_body_json()] to extract JSON data from these responses.
 #' @rdname openFDA
 #' @export
 openFDA <- function(search = "",
@@ -124,9 +144,11 @@ openFDA <- function(search = "",
                     skip = NULL,
                     endpoint = "drug-drugsfda",
                     api_key = get_api_key(),
+                    paging = rlang::peek_option("openFDA.paging"),
                     warn_on_http_error = TRUE) {
   # Check params and drop NULL entries
   check_warn_on_http_error_arg(warn_on_http_error)
+  paging <- check_paging_arg(paging)
   req_params <- list(api_key = check_openFDA_string_arg(api_key, "api_key"),
                      search = format_search_term(search),
                      sort = format_sort_term(sort),
@@ -146,11 +168,75 @@ openFDA <- function(search = "",
     httr2::req_throttle(240 / 60)
   resp_openFDA <- httr2::req_perform(req_openFDA)
 
-  # Sanitise output if running in examples/vignettes
+  if (resp_openFDA$status_code == 200) {
+    if (paging_as_lgl(resp_openFDA, paging)) {
+      resp_openFDA <- req_openFDA |>
+        httr2::req_perform_iterative(
+          next_req = httr2::iterate_with_link_url(rel = "next"),
+          max_reqs = Inf,
+          progress = TRUE
+        )
+    }
+  }
+
+  # Sanitise output if running in examples/vignettes, as OPENFDA_KEY will be
+  # present
   if (httr2::secret_has_key("OPENFDA_KEY")) {
-    resp_openFDA <- sanitise_api_key(resp_openFDA)
+    if (inherits(resp_openFDA, "httr2_response")) {
+      resp_openFDA <- sanitise_api_key(resp_openFDA)
+    } else {
+      resp_openFDA <- purrr::map(resp_openFDA, sanitise_api_key)
+    }
   }
   resp_openFDA
+}
+
+# openFDA() paging logic (internal) --------------------------------------------
+
+paging_as_lgl <- function(resp_openFDA, paging) {
+  resp_has_link_header <- httr2::resp_header_exists(resp_openFDA,
+                                                    header = "Link")
+  json <- httr2::resp_body_json(resp_openFDA)
+  if (!resp_has_link_header | !("results" %in% names(json$meta))) {
+    return(FALSE)
+  }
+  n_resps_mthan_limit <-  json$meta$results$total > json$meta$results$limit
+  if (!n_resps_mthan_limit) {
+    return(FALSE)
+  }
+  results <- httr2::resp_body_json(resp_openFDA)$meta$results
+  if (paging %in% c("yes", "ask", "no")) {
+    paging_inform(results$total, results$limit)
+  }
+  if (paging == "ask") {
+    if (paging_ask(results$total, results$limit) == 1) {
+      return(TRUE)
+    }
+  }
+  grepl(paging, pattern = "^yes")
+}
+
+paging_inform <- function(total, limit) {
+  n_queries <- ceiling(total / limit)
+  cli_n_queries <- prettyNum(n_queries, big.mark = ",")
+  min_time <- prettyunits::pretty_sec(ceiling(n_queries / 240))
+  cli::cli_inform(c(
+    "!" = cli::format_inline("openFDA returned more results ({total}) than your ",
+                             "`limit` ({limit})."),
+    "i" = paste0("With {limit} results per page, pagination will require ",
+                 "{cli_n_queries} queries to retrieve all of these ",
+                 "results. This will take at least {min_time}.")
+  ))
+  cat("\n")
+}
+
+paging_ask <- function(total, limit) {
+  input <- utils::menu(
+    title = "Do you want openFDA to retrieve all results?",
+    choices = c(paste0("Yes (will perform ", ceiling(total / limit),
+                       " requests)"),
+                "No (will return first response only)"))
+  input
 }
 
 # Generate an openFDA endpoint URL (internal) ----------------------------------

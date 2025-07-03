@@ -12,6 +12,7 @@ openFDA(
   skip = NULL,
   endpoint = "drug-drugsfda",
   api_key = get_api_key(),
+  paging = rlang::peek_option("openFDA.paging"),
   warn_on_http_error = TRUE
 )
 }
@@ -45,7 +46,8 @@ API will return a 404 error.}
 \item{endpoint}{A single-length character vector describing which openFDA
 endpoint to target.
 \itemize{
-\item \code{"animalandveterinary-event"}: Adverse event reports for animal/veterinary drugs.
+\item \code{"animalandveterinary-event"}: Adverse event reports for
+animal/veterinary drugs.
 \item \code{"drug-event"}: Adverse event reports from \href{https://open.fda.gov/data/faers/}{FDA Adverse Event Reporting System}
 \item \code{"drug-label"}: Drug documentation in the \href{https://www.fda.gov/industry/fda-data-standards-advisory-board/structured-product-labeling-resources}{Structured Product Labeling}
 (SPL) format.
@@ -90,14 +92,34 @@ Drugs@FDA endpoint (\code{"drugs-drugsfda"}).}
 By default this is the result of \code{get_api_key()}. If \code{api_key} is an empty
 string, an error will be thrown.}
 
-\item{warn_on_http_error}{A scalar logical value.  If \code{TRUE} (the default),
+\item{paging}{A single string describing whether results should be paged,
+and whether relevant alerts should be printed to the console. By default,
+\code{openFDA()} uses the string stored in \code{options("openFDA.paging")}, which
+has the value \code{"ask"}. Permissible values include:
+\itemize{
+\item \code{"ask"} - \code{openFDA()} will warn you that pagination is required and ask
+if you want this to be done. Depending on user input, either a single
+{httr2} response object or a list of {httr2} response objects will be
+returned
+\item \code{"yes"} - information on pagination will be printed to the console and
+done automatically; a list of responses will be returned
+\item \code{"no"} - information on pagination will be printed to the console but
+will not be performed; only the first response will be returned
+\item \code{"yes-quiet"} - same as \code{paging = "yes"} except no alert is printed to
+the console
+\item \code{"no-quiet"} - same as \code{paging = "no"} except no alert is printed to
+the console
+}}
+
+\item{warn_on_http_error}{A scalar logical value. If \code{TRUE} (the default),
 common openFDA HTTP errors will cause explanatory warnings to be printed
 If \code{FALSE}, the underlying httr2 response object will be returned with
 no extra warnings.}
 }
 \value{
-An \code{httr2} response object from \code{\link[httr2:req_perform]{httr2::req_perform()}}. You can use
-\code{\link[httr2:resp_body_raw]{httr2::resp_body_json()}} to extract JSON data from the response.
+Either an \code{httr2} response object from \code{\link[httr2:req_perform]{httr2::req_perform()}} or list
+of these objects, depending on whether pagination was required. You can use
+\code{\link[httr2:resp_body_raw]{httr2::resp_body_json()}} to extract JSON data from these responses.
 }
 \description{
 Send requests to the openFDA API
@@ -132,5 +154,7 @@ FDA's publicly available data} \emph{J Am Med Inform Assoc} 2016,
 }
 \seealso{
 \code{\link[=format_search_term]{format_search_term()}} documents how input \code{search} vectors are
-converted to openFDA API searches.
+converted to openFDA API searches. Check out the openFDA
+\link[=openFDA_options]{options} documentation to see how to set paging behaviour
+across multiple \code{openFDA()} calls.
 }

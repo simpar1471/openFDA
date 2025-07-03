@@ -25,5 +25,5 @@ test_that("API key functions throw expected errors", {
   set_api_key("")
 
   expect_error(get_api_key(), class = "openFDA_no_api_key")
-  expect_error(openFDA(), class = "openFDA_no_api_key")
+  expect_error(openFDA(paging = "no-quiet"), class = "openFDA_no_api_key")
 })

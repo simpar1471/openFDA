@@ -245,3 +245,22 @@ check_mode_arg <- function(mode) {
     )
   }
 }
+
+#' Check that the `paging` argument in `openFDA()` is appropriate
+#' @inheritParams openFDA
+#' @noRd
+check_paging_arg <- function(paging, call = rlang::caller_env()) {
+  check_openFDA_string_arg(paging, vname = "paging", call = call)
+  rlang::arg_match(arg = paging,
+                   values = c("ask", "yes", "yes-quiet", "no", "no-quiet"),
+                   error_call = call)
+  if (paging == "ask" && !interactive()) {
+    cli::cli_abort(
+      message = c("!" = paste0("The `paging` argument must not be `\"ask\"`",
+                               "if R is not running interactively.")),
+      class = "openfda_paging_is_ask_when_uninteractive",
+      call = call
+    )
+  }
+  paging
+}
