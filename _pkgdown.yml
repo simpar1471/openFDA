@@ -18,6 +18,8 @@ reference:
   - format_sort_term
 - title: Get/set your openFDA API key
   contents: set_api_key
+- title: openFDA package-level options
+  contents: openFDA_options
 navbar:
   bg: default
   type: light
