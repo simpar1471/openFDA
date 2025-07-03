@@ -22,7 +22,8 @@ Imports:
     checkmate,
     purrr,
     rlang,
-    vctrs
+    vctrs,
+    prettyunits
 Config/Needs/website: rmarkdown
 Suggests: 
     knitr,
