@@ -21,5 +21,5 @@ NULL
 #'   required](https://open.fda.gov/apis/paging/). The new value of this option
 #'   should be one of `c("ask", "yes", "no", "yes-quiet", "no-quiet")`.
 #'
-#' @name openFDA_options
+#' @rdname openFDA_options
 NULL
