@@ -280,7 +280,7 @@ endpoint_url <- function(endpoint) {
 #' @noRd
 openFDA_error_handling <- function(resp, warn_on_http_error) {
   status <- httr2::resp_status(resp)
-  if (status != 200 & warn_on_http_error) {
+  if (status != 200 && warn_on_http_error) {
     call <- rlang::caller_env(n = 6)
     msg <- switch(as.character(status),
                   `400` = openFDA_err_400_msg(resp),

@@ -180,7 +180,7 @@ check_openFDA_int_arg <- function(param, vname, call = rlang::caller_env()) {
         class = "openFDA_invalid_int_param_length"
       )
     }
-    if (param < 1 & vname != "limit") {
+    if (param < 1 && vname != "limit") {
       cli::cli_abort(
         c("{.var {vname}} must be more than {.val {0L}}.",
           "x" = "{.var {vname}} was {.val {param}}."),
