@@ -300,7 +300,7 @@ This argument must take one of these values:
 * `"no"` - never perform paging, but print a message to the console
 * `"no-quiet"` - never perform paging, but don't print a message to the console
 
-When paging is performed, `openFDA()` returns a list of **httr2** response objects, instead of a single response:
+When paging is performed, `openFDA()` returns a list of `{httr2}` response objects, instead of a single response:
 
 ```{r example_7_paging}
 resps <- openFDA(search = "openfda.manufacturer_name:Pharma",
