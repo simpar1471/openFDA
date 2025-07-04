@@ -27,8 +27,8 @@ options("openFDA.paging" = "no-quiet")
 
 # Get brand names and EPCs from generic BNF terms
 
-First, we'll use `openFDA()` to retrieve brand names for the drugs we are interested in from the BNF. We first initialise a vector of drug names from the
-BNF.
+First, we'll use `openFDA()` to retrieve brand names for the drugs we are interested in from the British National Formulary (BNF), a reference book for prescribed used in the United Kingdom.
+We first initialise a vector of drug names from the BNF:
 
 ```{r bnf_vec}
 bnf <- c("captopril", "enalapril", "fosinopril", "imidapril", "lisinopril",
@@ -202,8 +202,7 @@ more_brand_names <- purrr::map(
       httr2::resp_body_json() |>
       extract_openFDA_field(openfda_field = "brand_name") |>
       tolower()
-  }
-) |>
+  }) |>
   setNames(fda_generics)
 
 more_brand_names[1:3]
