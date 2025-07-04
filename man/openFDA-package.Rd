@@ -5,7 +5,7 @@
 \alias{openFDA-package}
 \title{openFDA: 'openFDA' API}
 \description{
-The 'openFDA' API facilitates access to U.S. Food and Drug Administration (FDA) data on drugs, devices, foodstuffs, tobacco, and more. This package makes the API easily accessible with 'httr2', returning objects which the user can convert to JSON data and parse. Kass-Hout TA, Xu Z, Mohebbi M et al. (2016) \doi{10.1093/jamia/ocv153}.
+The 'openFDA' API facilitates access to U.S. Food and Drug Administration (FDA) data on drugs, devices, foodstuffs, tobacco, and more. This package makes the API easily accessible with 'httr2', returning objects which the user can convert to JSON data and parse. The API is described in: Kass-Hout TA, Xu Z, Mohebbi M et al. (2016) \doi{10.1093/jamia/ocv153}.
 }
 \seealso{
 Useful links:

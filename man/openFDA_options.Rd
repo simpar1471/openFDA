@@ -19,3 +19,19 @@ should be one of \code{c("ask", "yes", "no", "yes-quiet", "no-quiet")}.
 }
 }
 
+\examples{
+# Access with base R...
+options("openFDA.paging")
+
+# ... or use the rlang package
+rlang::peek_options("openFDA.paging")
+
+# Set using base R...
+options(openFDA.paging = "yes")
+
+# ... or use the rlang package
+rlang::push_options(openFDA.paging = "no")
+
+# (Just to check it's changed)
+rlang::peek_options("openFDA.paging")
+}

@@ -16,10 +16,27 @@ NULL
 #'
 #' @section Options for the openFDA package:
 #'
-#' * `openFDA.paging`: customize the default behaviour of `openFDA()` when there
+#' * `openFDA.paging`: customise the default behaviour of `openFDA()` when there
 #'   are enough results that [paging is
 #'   required](https://open.fda.gov/apis/paging/). The new value of this option
 #'   should be one of `c("ask", "yes", "no", "yes-quiet", "no-quiet")`.
+#' * `openFDA.verbosity_paging`: customise openFDA's verbosity when paging. This
+#'   should have the value
 #'
-#' @rdname openFDA_options
+#' @examples
+#' # Access with base R...
+#' options("openFDA.paging")
+#'
+#' # ... or use the rlang package
+#' rlang::peek_options("openFDA.paging")
+#'
+#' # Set using base R...
+#' options(openFDA.paging = "yes")
+#'
+#' # ... or use the rlang package
+#' rlang::push_options(openFDA.paging = "no")
+#'
+#' # (Just to check it's changed)
+#' rlang::peek_options("openFDA.paging")
+#' @name openFDA_options
 NULL
