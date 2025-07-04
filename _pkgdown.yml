@@ -7,7 +7,7 @@ template:
     heading_font:
       google: Merriweather
     code_font:
-      google: Fira Code
+      google: Source Code Pro
   light-switch: yes
 reference:
 - title: Query the openFDA API
