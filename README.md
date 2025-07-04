@@ -20,8 +20,8 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 openFDA makes querying the [openFDA API](https://open.fda.gov/apis/)
 from R a breeze. The API itself serves publicly available data from the
 FDA about foods, drugs, devices, and more. This data includes data such
-as recall enforcement reports, adverse events, manufacturer details,
-and - again - even more! Note that the data on openFDA has not been
+as recall enforcement reports, adverse events, manufacturer details, and
+– again – even more! Note that the data on openFDA has not been
 validated for clinical or production use.
 
 ## Installation
@@ -52,9 +52,9 @@ itself.
 Before using the package, you will need to generate one at the [openFDA
 webpage](https://open.fda.gov/apis/authentication/). With an API key you
 can make 240 requests per minute, and are limited to 120,000 requests
-per day. Without a key, you can only make 1000 requests a day. For this
-package, if you try to run `openFDA()` without setting an API key, it
-will fail:
+per day (the package will handle this request rate throttling for you).
+Without a key, you can only make 1000 requests a day. For this package,
+if you try to run `openFDA()` without setting an API key, it will fail:
 
 ``` r
 search <- openFDA(
@@ -90,7 +90,7 @@ search
 #> https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&search=openfda.generic_name:furosemide&limit=5
 #> Status: 200 OK
 #> Content-Type: application/json
-#> Body: In memory (37784 bytes)
+#> Body: In memory (44596 bytes)
 ```
 
 The returned `httr2` response object contains JSON data from the API -
@@ -116,9 +116,9 @@ purrr::map_chr(
   .x = json$results, 
   .f = \(result) purrr::pluck(result, "openfda", "manufacturer_name", 1)
 )
-#> [1] "Hikma Pharmaceuticals USA Inc." "Hikma Pharmaceuticals USA Inc."
-#> [3] "Hikma Pharmaceuticals USA Inc." "Camber Pharmaceuticals, Inc."  
-#> [5] "Gland Pharma Limited"
+#> [1] "Hospira, Inc."                  "Hikma Pharmaceuticals USA Inc."
+#> [3] "Hikma Pharmaceuticals USA Inc." "Hikma Pharmaceuticals USA Inc."
+#> [5] "Camber Pharmaceuticals, Inc."
 ```
 
 ## Other R packages for openFDA
