@@ -32,7 +32,7 @@ set_api_key <- function(api_key) {
 #' @export
 get_api_key <- function() {
   api_key <- Sys.getenv("OPENFDA_TOKEN")
-  if (api_key == "") throw_api_key_error()
+  if (!nzchar(api_key)) throw_api_key_error()
   api_key
 }
 
@@ -44,9 +44,6 @@ get_api_key <- function() {
 throw_api_key_error <- function(call = rlang::caller_env()) {
   cli::cli_abort(
     c("To use {.pkg openFDA}, you must set an openFDA API key.",
-      "i" = paste0("Go to <https://open.fda.gov/apis/authentication/> ",
-                   "to get an openFDA API key, then supply it to ",
-                   "{.fun set_api_key} to cache it for use in this session.")),
       "i" = "Go to {.url https://open.fda.gov/apis/authentication/}
             to get an openFDA API key, then supply it to
             {.fun set_api_key} to cache it for use in this session."
