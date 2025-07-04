@@ -48,11 +48,17 @@ set_api_key("tvzdUXoC3Yi21hhxtKKochJlQgm6y1Lr7uhmjcpT")
 The openFDA API makes public FDA data available from a simple, public API.
 Users of this API have access to FDA data on food, human and veterinary drugs, devices, and more.
 You can read all about it at their [website](https://open.fda.gov/).
-The API limits results sets to 1000, and pages through results if a user submits a query with >1000 results.
-By default, `openFDA()` will ask you if you want to perform paging, but this tends to break vignettes.
-Therefore, we set the option `openFDA.paging` to `"yes"` in order to automatically perform paging when needed.
+The API limits results sets to 1000 records.
+To access over 1000 results, you'd usually need to manually submit multiple requests which skip past larger and larger chunks of the dataset ([see online for more info](https://open.fda.gov/apis/paging/)).
 
-```{r set-paging, echo = FALSE}
+With this package, however, that can be handled for you.
+By default, `openFDA()` will ask you if you want to retrieve all possible results.
+However, asking for user input isn't possible when in a vignette.
+Additionally, we don't want to do paging for these examples, as our searches get lots of results.
+Therefore, to prevent paging, we set the package-level option `openFDA.paging` to `"no"`.
+Now `openFDA()` will automatically **not** perform paging, even when it's possible.
+
+```{r set-paging}
 options("openFDA.paging" = "no-quiet")
 ```
 
