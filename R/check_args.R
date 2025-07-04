@@ -10,24 +10,24 @@ check_warn_on_http_error_arg <- function(warn_on_http_error,
     if (!inherits(warn_on_http_error, "logical")) {
       cli::cli_abort(
         c("{.var warn_on_http_error} must be of class {.cls logical}.",
-          "x" = paste0("{.var warn_on_http_error} was class ",
-                       "{.cls {class(warn_on_http_error)}}.")),
+          "x" = "{.var warn_on_http_error} was class {.cls
+                 {class(warn_on_http_error)}}."),
         call = call,
         class = "openFDA_wohe_invalid_class")
     }
     if (length(warn_on_http_error) != 1) {
       cli::cli_abort(
         c("{.var warn_on_http_error} must be of length 1.",
-          "x" = paste0("{.var warn_on_http_error} has",
-                       " {length(warn_on_http_error)} element{?s}.")),
+          "x" = "{.var warn_on_http_error} has {length(warn_on_http_error)}
+                 element{?s}."),
         call = call,
         class = "openFDA_wohe_invalid_length"
       )
     }
     if (is.na(warn_on_http_error)) {
       cli::cli_abort(
-        message = paste0("{.var warn_on_http_error} must not be missing ",
-                         "({.val {warn_on_http_error}})."),
+        message = "{.var warn_on_http_error} must not be missing ({.val
+                   {warn_on_http_error}}).",
         call = call,
         class = "openFDA_wohe_is_NA"
       )
@@ -64,9 +64,8 @@ check_search_arg <- function(search, call = rlang::caller_env()) {
       qty_missing_elems <- cli::qty(sum(missing_elems))
       cli::cli_abort(
         c("{.var search} must have no missing ({.val {NA}}) elements.",
-          "x" = paste0("{qty_missing_elems}Element{?s} ",
-                       "{.val {which(missing_elems)}} {qty_missing_elems}",
-                       "{?was/were} missing ({.val {NA}}).")),
+          "x" = "{qty_missing_elems}Element{?s} {.val {which(missing_elems)}}
+                 {qty_missing_elems} {?was/were} missing ({.val {NA}})."),
         call = call,
         class = "openFDA_search_has_NAs"
       )
@@ -256,8 +255,8 @@ check_paging_arg <- function(paging, call = rlang::caller_env()) {
                    error_call = call)
   if (paging == "ask" && !interactive()) {
     cli::cli_abort(
-      message = c("!" = paste0("The `paging` argument must not be `\"ask\"`",
-                               "if R is not running interactively.")),
+      message = c("!" = "The `paging` argument must not be `\"ask\"` if R is not
+                         running interactively."),
       class = "openfda_paging_is_ask_when_uninteractive",
       call = call
     )

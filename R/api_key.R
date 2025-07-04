@@ -47,6 +47,10 @@ throw_api_key_error <- function(call = rlang::caller_env()) {
       "i" = paste0("Go to <https://open.fda.gov/apis/authentication/> ",
                    "to get an openFDA API key, then supply it to ",
                    "{.fun set_api_key} to cache it for use in this session.")),
+      "i" = "Go to {.url https://open.fda.gov/apis/authentication/}
+            to get an openFDA API key, then supply it to
+            {.fun set_api_key} to cache it for use in this session."
+    ),
     class = "openFDA_no_api_key",
     call = call
   )

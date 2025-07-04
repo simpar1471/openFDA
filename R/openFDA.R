@@ -224,9 +224,9 @@ paging_inform <- function(total, limit) {
   cli::cli_inform(c(
     "!" = cli::format_inline("openFDA returned more results ({total}) than your ",
                              "`limit` ({limit})."),
-    "i" = paste0("With {limit} results per page, pagination will require ",
-                 "{cli_n_queries} queries to retrieve all of these ",
-                 "results. This will take at least {min_time}.")
+    "i" = "With {limit} results per page, pagination will require
+           {cli_n_queries} queries to retrieve all of these results. This will
+           take at least {min_time}."
   ))
   cat("\n")
 }
@@ -258,8 +258,8 @@ endpoint_url <- function(endpoint) {
   if (!endpoint %in% valid_endpoints) {
     cli::cli_abort(
       c("You must select an appropriate {.var endpoint} value.",
-        "i" = paste0("Valid endpoints can be seen in the {.fun openFDA} ",
-                     "documentation."),
+        "i" = "Valid endpoints can be seen in the {.fun openFDA}
+               documentation.",
         "x" = "You supplied {.val {endpoint}}."),
       call = rlang::caller_env(),
       class = "openFDA_invalid_endpoint"
@@ -343,8 +343,8 @@ openFDA_err_404_msg <- function(resp) {
   }
   if (!is.null(skip)) {
     skip_str <- cli::format_inline(
-      paste0("Skipping more results than were found. Your ",
-             "{.var skip} value was {.val {as.integer(skip)}}.")
+      "Skipping more results than were found. Your {.var skip} value was {.val
+      {as.integer(skip)}}."
     )
   } else {
     skip_str <- NULL
