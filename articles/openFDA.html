@@ -9,7 +9,7 @@
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
-<link href="../deps/Fira_Code-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/Merriweather-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -244,58 +244,7 @@ endpoint</a> for <code>"paracetamol"</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [[2]]$term</span></span>
-<span><span class="co">#&gt; [1] "Endo USA, Inc."</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]$count</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [[3]]$term</span></span>
-<span><span class="co">#&gt; [1] "Eugia US LLC"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]$count</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt; [[4]]$term</span></span>
-<span><span class="co">#&gt; [1] "Fresenius Kabi USA, LLC"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[4]]$count</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[5]]</span></span>
-<span><span class="co">#&gt; [[5]]$term</span></span>
-<span><span class="co">#&gt; [1] "Gland Pharma Limited"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[5]]$count</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[6]]</span></span>
-<span><span class="co">#&gt; [[6]]$term</span></span>
-<span><span class="co">#&gt; [1] "Hikma Pharmaceuticals USA Inc."</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[6]]$count</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[7]]</span></span>
-<span><span class="co">#&gt; [[7]]$term</span></span>
-<span><span class="co">#&gt; [1] "Hospira, Inc."</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[7]]$count</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[8]]</span></span>
-<span><span class="co">#&gt; [[8]]$term</span></span>
-<span><span class="co">#&gt; [1] "Sagent Pharmaceuticals"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[8]]$count</span></span>
-<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+<span><span class="va">....</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="using-count-to-make-a-time-series">Using <code>count</code> to make a time series<a class="anchor" aria-label="anchor" href="#using-count-to-make-a-time-series"></a>
@@ -343,7 +292,11 @@ string. So, for example, a search for drugs with the class
 <code>"openfda.pharm_class_epc:\"thiazide diuretic\""</code>, or the API
 will collect all drugs which have the words <code>"thiazide"</code> or
 <code>"diuretic"</code> in their established pharmacological class
-(EPC). Let’s do an unrefined search first:</p>
+(EPC).</p>
+<p>Note that there are helpers in the package
+(i.e. <code>construct_search_term()</code>) for assembling search terms;
+they are discussed below.</p>
+<p>Let’s do an unrefined search first:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search_unrefined</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span></span>
 <span>  search <span class="op">=</span> <span class="st">"openfda.pharm_class_epc:thiazide diuretic"</span>,</span>
@@ -394,19 +347,19 @@ brand names, we are choosing to only extract the first one.</p>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"openfda"</span>, <span class="st">"brand_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "KIRKLAND SIGNATURE ESOMEPRAZOLE MAGNESIUM"</span></span>
+<span><span class="co">#&gt; [1] "NAPROXEN"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] "NICOTINE MINI"</span></span>
+<span><span class="co">#&gt; [1] "OMEPRAZOLE"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1] "NAPROXEN SODIUM 220MG"</span></span>
+<span><span class="co">#&gt; [1] "BASIC CARE LANSOPRAZOLE"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt; [1] "CHILDREN ALLERGY"</span></span>
+<span><span class="co">#&gt; [1] "ALL DAY ALLERGY"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[5]]</span></span>
-<span><span class="co">#&gt; [1] "COUNTERACT ALLERGY"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "FEXOFENADINE HCL AND PSEUDOEPHEDRINE HCI"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="let-openfda-construct-the-search-term">Let <code>openFDA()</code> construct the search term<a class="anchor" aria-label="anchor" href="#let-openfda-construct-the-search-term"></a>
@@ -421,8 +374,8 @@ this.</p>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
-<span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
-<span><span class="co">#&gt; [1] 60</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Number of results: 60"</span></span></code></pre></div>
 <p>You can include as many fields as you like, as long as you only
 provide each field once. By default, the terms are combined with an
 <code>OR</code> operator in <code><a href="../reference/openFDA.html">openFDA()</a></code>. The below search
@@ -434,24 +387,36 @@ taken by mouth.</p>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
-<span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
-<span><span class="co">#&gt; [1] 7009</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Number of results: 7027"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="pre-construct-a-search-term">Pre-construct a search term<a class="anchor" aria-label="anchor" href="#pre-construct-a-search-term"></a>
 </h4>
-<p>To apply multiple search terms with <code>AND</code> operators, use
-<code><a href="../reference/format_search_term.html">format_search_term()</a></code> with <code>mode = "and"</code>:</p>
+<p>You can use <code><a href="../reference/format_search_term.html">format_search_term()</a></code> to pre-generate strings
+to pass to <code><a href="../reference/openFDA.html">openFDA()</a></code> as <code>search</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">search_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_search_term.html">format_search_term</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"amoxicillin"</span>,</span>
-<span>                                    <span class="st">"openfda.route"</span> <span class="op">=</span> <span class="st">"oral"</span><span class="op">)</span>,</span>
-<span>                                  mode <span class="op">=</span> <span class="st">"and"</span><span class="op">)</span></span>
-<span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="va">search_term</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/format_search_term.html">format_search_term</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"amoxicillin"</span>, <span class="st">"openfda.route"</span> <span class="op">=</span> <span class="st">"oral"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "openfda.generic_name:%22amoxicillin%22+openfda.route:%22oral%22"</span></span></code></pre></div>
+<p>Sometimes you will want to combine multiple search terms with
+<code>AND</code> operators. To do this, set the <code>mode</code>
+argument to <code>"and"</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">search_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_search_term.html">format_search_term</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"amoxicillin"</span>, <span class="st">"openfda.route"</span> <span class="op">=</span> <span class="st">"oral"</span><span class="op">)</span>,</span>
+<span>  mode <span class="op">=</span> <span class="st">"and"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">search_term</span></span>
+<span><span class="co">#&gt; [1] "openfda.generic_name:%22amoxicillin%22+AND+openfda.route:%22oral%22"</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="va">search_term</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
-<span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
-<span><span class="co">#&gt; [1] 57</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Number of results: 57"</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -467,7 +432,7 @@ yourself <em>without double-quotes</em> or use
 <code><a href="../reference/format_search_term.html">format_search_term()</a></code> with <code>exact = FALSE</code>. If
 you try to search with both double-quotes and the wildcard character,
 you will get a 404 error from openFDA.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_search_term.html">format_search_term</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"*sartan"</span><span class="op">)</span>,</span>
 <span>                                  exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="va">search_term</span>,</span>
@@ -480,7 +445,7 @@ you will get a 404 error from openFDA.</p>
 <span><span class="co">#&gt;                                    term count</span></span>
 <span><span class="co">#&gt; 1       Alembic Pharmaceuticals Limited    15</span></span>
 <span><span class="co">#&gt; 2      Macleods Pharmaceuticals Limited    15</span></span>
-<span><span class="co">#&gt; 3          Alembic Pharmaceuticals Inc.    13</span></span>
+<span><span class="co">#&gt; 3          Alembic Pharmaceuticals Inc.    14</span></span>
 <span><span class="co">#&gt; 4              Aurobindo Pharma Limited    13</span></span>
 <span><span class="co">#&gt; 5           Lupin Pharmaceuticals, Inc.    10</span></span>
 <span><span class="co">#&gt; 6            Mylan Pharmaceuticals Inc.     7</span></span>
@@ -520,13 +485,14 @@ console</li>
 message to the console</li>
 </ul>
 <p>When paging is performed, <code><a href="../reference/openFDA.html">openFDA()</a></code> returns a list of
-[httr2] response objects, instead of a single response:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<strong>httr2</strong> response objects, instead of a single
+response:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"openfda.manufacturer_name:Pharma"</span>,</span>
 <span>                 limit <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>                 endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                 paging <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1980) than your `limit` (500).</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1990) than your `limit` (500).</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> With 500 results per page, pagination will require 4 queries to retrieve all</span></span>
 <span><span class="co">#&gt;   of these results. This will take at least 1s.</span></span></code></pre></div>
 </div>
