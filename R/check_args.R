@@ -7,7 +7,7 @@ check_warn_on_http_error_arg <- function(warn_on_http_error,
   is_valid <- checkmate::test_logical(warn_on_http_error, len = 1,
                                       any.missing = FALSE)
   if (!is_valid) {
-    if (!inherits(warn_on_http_error, "logical")) {
+    if (!is.logical(warn_on_http_error)) {
       cli::cli_abort(
         c("{.var warn_on_http_error} must be of class {.cls logical}.",
           "x" = "{.var warn_on_http_error} was class {.cls
@@ -51,7 +51,7 @@ check_search_arg <- function(search, call = rlang::caller_env()) {
         class = "openFDA_search_invalid_length"
       )
     }
-    if (!inherits(search, "character")) {
+    if (!is.character(search)) {
       cli::cli_abort(
         c("{.var search} must be of class {.cls character}.",
           "x" = "{.var search} was class {.cls {class(search)}}."),
@@ -89,7 +89,7 @@ check_sort_arg <- function(sort, call = rlang::caller_env()) {
         class = "openFDA_sort_invalid_length"
       )
     }
-    if (!inherits(sort, "character")) {
+    if (!is.character(sort)) {
       cli::cli_abort(
         c("{.var sort} must be of class {.cls character}.",
           "x" = "{.var sort} was class {.cls {class(sort)}}."),
@@ -135,7 +135,7 @@ check_sort_arg <- function(sort, call = rlang::caller_env()) {
 check_openFDA_string_arg <- function(param, vname, call = rlang::caller_env()) {
   is_valid <- checkmate::test_string(param, null.ok = TRUE)
   if (!is_valid) {
-    if (!(inherits(param, "character"))) {
+    if (!is.character(param)) {
       cli::cli_abort(
         c("{.var {vname}} must be be of class {.cls character}.",
           "x" = "{.var {vname}} was class {.cls {class(param)}}."),
@@ -164,7 +164,7 @@ check_openFDA_int_arg <- function(param, vname, call = rlang::caller_env()) {
   is_valid <- checkmate::test_integerish(param, len = 1, null.ok = TRUE,
                                          lower = 0)
   if (!is_valid) {
-    if (!inherits(param, "numeric")) {
+    if (!is.numeric(param)) {
       cli::cli_abort(
         c("{.var {vname}} must be either {.cls numeric} or {.cls integer}.",
           "x" = "{.var {vname}} was class {.cls {class(param)}}."),
@@ -226,7 +226,7 @@ check_mode_arg <- function(mode) {
           class = "openFDA_mode_invalid_length"
         )
       }
-      if (!inherits(mode, "character")) {
+      if (!is.character(mode)) {
         cli::cli_abort(
           c("{.var mode} must be of class {.cls character}.",
             "x" = "{.var mode} was class {.cls {class(mode)}}."),
