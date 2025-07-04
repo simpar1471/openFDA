@@ -118,7 +118,7 @@ If you set the `count` query, then the openFDA API will not return full records.
 Instead, it will count the number of records for each member in the openFDA field you specified for `count`.
 For example, let's look at drug manufacturers in the [Drugs@FDA endpoint](https://open.fda.gov/apis/drug/drugsfda/) for `"paracetamol"`.
 
-```{r example_4a_count_names}
+```{r example_4a_count_names, out.lines = 10}
 count <- openFDA(search = "openfda.generic_name:ketamine",
                  endpoint = "drug-drugsfda",
                  count = "openfda.manufacturer_name.exact",
@@ -158,9 +158,12 @@ You can provide search strategies to `openFDA()` as single strings.
 They are constructed as `[FIELD_NAME]:[STRING]`, where `FIELD_NAME` is the openFDA field you want to search on.
 If your `STRING` contains spaces, you must surround it with double quotes, or openFDA will search against each word in the string.
 So, for example, a search for drugs with the class `"thiazide diuretic"` should be formatted as `"openfda.pharm_class_epc:\"thiazide diuretic\""`, or the API will collect all drugs which have the words `"thiazide"` or `"diuretic"` in their established pharmacological class (EPC).
+
+Note that there are helpers in the package (i.e. `construct_search_term()`) for assembling search terms; they are discussed below.
+
 Let's do an unrefined search first:
 
-```{r example_5a_single_search_term_unrefined, out.lines = 15}
+```{r example_5a_single_search_term_unrefined}
 search_unrefined <- openFDA(
   search = "openfda.pharm_class_epc:thiazide diuretic",
   endpoint = "drug-drugsfda",
@@ -172,7 +175,7 @@ httr2::resp_body_json(search_unrefined)$meta$results$total
 
 Let's compare this to our refined search, where we add double-quotes around the search term:
 
-```{r example_5b_single_search_term_refined, out.lines = 15}
+```{r example_5b_single_search_term_refined}
 search_refined <- openFDA(
   search = "openfda.pharm_class_epc:\"thiazide diuretic\"",
   endpoint = "drug-drugsfda",
@@ -210,39 +213,51 @@ purrr::map(json$results, .f = \(x) {
 In `openFDA()`, you can provide a named character vector with many field/search term pairs to the `search` parameter.
 The function will automatically add double quotes (`""`) around your search terms, if you're providing field/value pairs like this.
 
-```{r example_5d_format_scalar_search_term, out.lines = 15}
+```{r example_5d_format_scalar_search_term}
 search <- openFDA(search = c("openfda.generic_name" = "amoxicillin"),
                   endpoint = "drug-drugsfda",
                   limit = 1,
                   paging = "no-quiet")
-httr2::resp_body_json(search)$meta$results$total
+paste("Number of results:", httr2::resp_body_json(search)$meta$results$total)
 ```
 
 You can include as many fields as you like, as long as you only provide each field once.
 By default, the terms are combined with an `OR` operator in `openFDA()`.
 The below search strategy will therefore pick up all entries in [Drugs@FDA](https://open.fda.gov/apis/drug/drugsfda/) which are taken by mouth.
 
-```{r example_5e_format_nonscalar_search_term, out.lines = 15}
+```{r example_5e_format_nonscalar_search_term}
 search <- openFDA(search = c("openfda.generic_name" = "amoxicillin",
                              "openfda.route" = "oral"),
                   endpoint = "drug-drugsfda",
                   limit = 1,
                   paging = "no-quiet")
-httr2::resp_body_json(search)$meta$results$total
+paste("Number of results:", httr2::resp_body_json(search)$meta$results$total)
 ```
 
 ### Pre-construct a search term
+You can use `format_search_term()` to pre-generate strings to pass to `openFDA()` as `search`:
 
-To apply multiple search terms with `AND` operators, use `format_search_term()` with `mode = "and"`:
-```{r example5f_format_nonscalar_search_term_with_and, out.lines = 15}
-search_term <- format_search_term(c("openfda.generic_name" = "amoxicillin",
-                                    "openfda.route" = "oral"),
-                                  mode = "and")
+```{r example_5f_nonscalar_search_term_OR}
+format_search_term(
+  c("openfda.generic_name" = "amoxicillin", "openfda.route" = "oral")
+)
+```
+
+Sometimes you will want to combine multiple search terms with `AND` operators.
+To do this, set the `mode` argument to `"and"`:
+```{r example_5g_nonscalar_search_term_AND}
+search_term <- format_search_term(
+  c("openfda.generic_name" = "amoxicillin", "openfda.route" = "oral"),
+  mode = "and"
+)
+search_term
+```
+```{r example_5h_nonscalar_search_term_run}
 search <- openFDA(search = search_term,
                   endpoint = "drug-drugsfda",
                   limit = 1,
                   paging = "no-quiet")
-httr2::resp_body_json(search)$meta$results$total
+paste("Number of results:", httr2::resp_body_json(search)$meta$results$total)
 ```
 
 ## Wildcards
@@ -279,7 +294,7 @@ This argument must take one of these values:
 * `"no"` - never perform paging, but print a message to the console
 * `"no-quiet"` - never perform paging, but don't print a message to the console
 
-When paging is performed, `openFDA()` returns a list of [httr2] response objects, instead of a single response:
+When paging is performed, `openFDA()` returns a list of **httr2** response objects, instead of a single response:
 
 ```{r example_7_paging}
 resps <- openFDA(search = "openfda.manufacturer_name:Pharma",
