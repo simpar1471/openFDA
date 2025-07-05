@@ -46,6 +46,16 @@ test_that("openFDA paging is possible", {
   purrr::map(resps, \(resp) expect_s3_class(resp, "httr2_response"))
 })
 
+test_that("openFDA paging information is printed", {
+  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+
+  # Query which requires paging
+  expect_message(
+    openFDA(search = "openfda.brand_name:o*", limit = 300, paging = "no"),
+    class = "openfda_message_paging"
+  )
+})
+
 test_that(
   desc = "openFDA paging fails if `paging == \"ask\" but not interactive", {
   skip_if(interactive())

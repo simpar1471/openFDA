@@ -217,12 +217,13 @@ paging_inform <- function(total, limit) {
   cli_n_queries <- prettyNum(n_queries, big.mark = ",")
   min_time <- prettyunits::pretty_sec(ceiling(n_queries / 240))
   cli::cli_inform(c(
-    "!" = cli::format_inline("openFDA returned more results ({total}) than your ",
-                             "`limit` ({limit})."),
+    "!" = cli::format_inline("openFDA returned more results ({total}) than your
+                             `limit` ({limit})."),
     "i" = "With {limit} results per page, pagination will require
            {cli_n_queries} queries to retrieve all of these results. This will
-           take at least {min_time}."
-  ))
+           take at least {min_time}."),
+    class = "openfda_message_paging"
+  )
   cat("\n")
 }
 
