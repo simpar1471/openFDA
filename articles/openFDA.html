@@ -128,7 +128,7 @@ non-specific.</p>
 <span><span class="co">#&gt;   retrieve all of these results. This will take at least 11h 43s.</span></span>
 <span><span class="va">search</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">GET</span> https://api.fda.gov/drug/event.json?api_key=[API_KEY]&amp;search=&amp;limit=2</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">GET</span> https://api.fda.gov/drug/event.json?search=&amp;limit=2</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Status</span>: 200 OK</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Content-Type</span>: application/json</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3923 bytes)</span></span></code></pre></div>
@@ -144,7 +144,7 @@ dataset (which would take eleven hours) and suppresses the warning:</p>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
 <span><span class="va">search</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">GET</span> https://api.fda.gov/drug/event.json?api_key=[API_KEY]&amp;search=&amp;limit=2</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">GET</span> https://api.fda.gov/drug/event.json?search=&amp;limit=2</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Status</span>: 200 OK</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Content-Type</span>: application/json</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3923 bytes)</span></span></code></pre></div>
@@ -314,7 +314,7 @@ they are discussed below.</p>
 <span>  paging <span class="op">=</span> <span class="st">"no-quiet"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search_unrefined</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
-<span><span class="co">#&gt; [1] 225</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 224</span></span></code></pre></div>
 <p>Let’s compare this to our refined search, where we add double-quotes
 around the search term:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -325,7 +325,7 @@ around the search term:</p>
 <span>  limit <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search_refined</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
-<span><span class="co">#&gt; [1] 124</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 123</span></span></code></pre></div>
 <p>As you can see, the unrefined search picked up 101 more results, most
 of which would have probably been non-thiazide diuretics.</p>
 </div>
@@ -356,19 +356,19 @@ brand names, we are choosing to only extract the first one.</p>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"openfda"</span>, <span class="st">"brand_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "NAPROXEN"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [1] "OMEPRAZOLE"</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [1] "BASIC CARE LANSOPRAZOLE"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] "FEXOFENADINE HCL AND PSEUDOEPHEDRINE HCI"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[4]]</span></span>
 <span><span class="co">#&gt; [1] "ALL DAY ALLERGY"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[5]]</span></span>
-<span><span class="co">#&gt; [1] "FEXOFENADINE HCL AND PSEUDOEPHEDRINE HCI"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "PURELAX"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="let-openfda-construct-the-search-term">Let <code>openFDA()</code> construct the search term<a class="anchor" aria-label="anchor" href="#let-openfda-construct-the-search-term"></a>
@@ -384,7 +384,7 @@ this.</p>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Number of results: 60"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Number of results: 54"</span></span></code></pre></div>
 <p>You can include as many fields as you like, as long as you only
 provide each field once. By default, the terms are combined with an
 <code>OR</code> operator in <code><a href="../reference/openFDA.html">openFDA()</a></code>. The below search
@@ -397,7 +397,7 @@ taken by mouth.</p>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Number of results: 7027"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Number of results: 7008"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="pre-construct-a-search-term">Pre-construct a search term<a class="anchor" aria-label="anchor" href="#pre-construct-a-search-term"></a>
@@ -425,7 +425,7 @@ argument to <code>"and"</code>:</p>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Number of results: 57"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Number of results: 51"</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -500,7 +500,7 @@ message to the console</li>
 <span>                 limit <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>                 endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                 paging <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1990) than your `limit` (500).</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1987) than your `limit` (500).</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> With 500 results per page, pagination will require 4 queries to retrieve all</span></span>
 <span><span class="co">#&gt;   of these results. This will take at least 1s.</span></span></code></pre></div>
 </div>
