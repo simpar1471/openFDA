@@ -147,28 +147,32 @@ openFDA <- function(search = "",
                     api_key = get_api_key(),
                     paging = rlang::peek_option("openFDA.paging"),
                     warn_on_http_error = TRUE) {
-  # Check params and drop NULL entries
+  # Check params; drop NULL args from request query
   check_warn_on_http_error_arg(warn_on_http_error)
+  api_key <- check_openFDA_string_arg(api_key, "api_key")
   paging <- check_paging_arg(paging)
-  req_params <- list(api_key = check_openFDA_string_arg(api_key, "api_key"),
-                     search = format_search_term(search),
+  req_params <- list(search = format_search_term(search),
                      sort = format_sort_term(sort),
                      count = check_openFDA_string_arg(count, "count"),
                      limit = check_openFDA_int_arg(limit, "limit"),
                      skip = check_openFDA_int_arg(skip, "skip")) |>
     vctrs::list_drop_empty()
+
+  # Build request then perform
   url <- endpoint_url(endpoint)
   req_openFDA <- httr2::request(base_url = url) |>
+    httr2::req_url_query(!!!req_params) |>
     httr2::req_user_agent(
       string = "openFDA for R (https://www.github.com/simpar1471/openFDA)"
     ) |>
-    httr2::req_url_query(!!!req_params) |>
+    httr2::req_auth_basic(username = api_key, password = "") |>
+    httr2::req_throttle(rate = 240 / 60) |>
     httr2::req_error(
       is_error = \(resp) openFDA_error_handling(resp, warn_on_http_error)
-    ) |>
-    httr2::req_throttle(240 / 60)
+    )
   resp_openFDA <- httr2::req_perform(req_openFDA)
 
+  # Paging logic
   if (resp_openFDA$status_code == 200) {
     if (paging_as_lgl(resp_openFDA, paging)) {
       resp_openFDA <- req_openFDA |>
@@ -180,15 +184,6 @@ openFDA <- function(search = "",
     }
   }
 
-  # Sanitise output if running in examples/vignettes, as OPENFDA_KEY will be
-  # present
-  if (httr2::secret_has_key("OPENFDA_KEY")) {
-    if (inherits(resp_openFDA, "httr2_response")) {
-      resp_openFDA <- sanitise_api_key(resp_openFDA)
-    } else {
-      resp_openFDA <- purrr::map(resp_openFDA, sanitise_api_key)
-    }
-  }
   resp_openFDA
 }
 

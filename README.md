@@ -87,7 +87,7 @@ search <- openFDA(
 search
 #> <httr2_response>
 #> GET
-#> https://api.fda.gov/drug/drugsfda.json?api_key=[API_KEY]&search=openfda.generic_name:furosemide&limit=5
+#> https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:furosemide&limit=5
 #> Status: 200 OK
 #> Content-Type: application/json
 #> Body: In memory (44596 bytes)
