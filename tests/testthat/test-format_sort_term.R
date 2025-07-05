@@ -20,17 +20,17 @@ test_that("format_sort_term throws expected errors", {
 
   ## Bad class
   expect_error(
-    format_sort_term(sort = c(NA_integer_)),
+    format_sort_term(sort = NA_integer_),
     class = "openFDA_sort_invalid_class"
   )
   expect_error(
-    format_sort_term(sort = c(as.complex(1))),
+    format_sort_term(sort = as.complex(1)),
     class = "openFDA_sort_invalid_class"
   )
 
   ## Has missing values
   expect_error(
-    format_sort_term(sort = c(NA_character_)),
+    format_sort_term(sort = NA_character_),
     class = "openFDA_sort_is_NA"
   )
   expect_error(
