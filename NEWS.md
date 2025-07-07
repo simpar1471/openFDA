@@ -1,5 +1,6 @@
 # openFDA (development version)
 
+* API keys are now stored/retrieved using the `keyring` package. This is a more secure alternative to simply using environment variables, as users are prompted to supply the API key interactively (instead of storing them in a script). 
 * Added `paging` parameter to `openFDA()` function. This parameter controls whether paging (returning multiple sets of results for one query) occurs where necessary. Check out the documentation for `openFDA()` for more information. 
 * Added `openFDA.paging` option to openFDA, the default value of which is `"ask"`. A user can change this option to alter the default paging behaviour of the `openFDA()` function.
 * Added extra (hopefully clearer) content to package vignettes/articles. 

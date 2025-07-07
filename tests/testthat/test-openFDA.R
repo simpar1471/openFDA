@@ -3,7 +3,9 @@ encrypted_api_key <-
 rlang::push_options(openFDA.paging = "no-quiet")
 
 test_that("openFDA can call its API", {
-  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  suppressMessages(
+   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  )
 
   # Simple query
   resp <- openFDA(
@@ -14,7 +16,9 @@ test_that("openFDA can call its API", {
 })
 
 test_that("All openFDA endpoints are valid", {
-  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  suppressMessages(
+   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  )
 
   endpoints <- c("animalandveterinary-event", "drug-event",
                  "drug-label", "drug-ndc", "drug-enforcement",
@@ -34,7 +38,9 @@ test_that("All openFDA endpoints are valid", {
 })
 
 test_that("openFDA paging is possible", {
-  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  suppressMessages(
+   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  )
 
   # Query which requires paging
   resps <- openFDA(
@@ -47,7 +53,9 @@ test_that("openFDA paging is possible", {
 })
 
 test_that("openFDA paging information is printed", {
-  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  suppressMessages(
+   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  )
 
   # Query which requires paging
   expect_message(
@@ -59,7 +67,9 @@ test_that("openFDA paging information is printed", {
 test_that(
   desc = "openFDA paging fails if `paging == \"ask\" but not interactive", {
   skip_if(interactive())
-  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  suppressMessages(
+   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  )
 
     # Query which requires paging
     expect_error(
@@ -70,7 +80,9 @@ test_that(
 )
 
 test_that("openFDA throws formatted HTTP errors", {
-  set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  suppressMessages(
+   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  )
 
   # Error 400
   expect_warning(
@@ -140,7 +152,9 @@ test_that("openFDA throws formatted HTTP errors", {
 })
 
 test_that("openFDA errors on certain bad inputs", {
-  set_api_key("api_key_string")
+  suppressMessages(
+    set_api_key(api_key = "api_key_string")
+  )
 
   expect_error(
     openFDA(

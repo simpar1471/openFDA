@@ -27,19 +27,16 @@
 #'
 #'   * `"ask"` - `openFDA()` will warn you that pagination is required and ask
 #'     if you want this to be done. Depending on user input, either a single
-#'     `httr2` response object or a list of `httr2` response objects will be
-#'     returned
-#'   * `"yes"` - information on pagination will be printed to the console and
-#'     done automatically; a list of responses will be returned
-#'   * `"no"` - information on pagination will be printed to the console but
-#'     will not be performed; only the first response will be returned
-#'   * `"yes-quiet"` - same as `paging = "yes"` except no alert is printed to
-#'     the console
-#'   * `"no-quiet"` - same as `paging = "no"` except no alert is printed to
-#'     the console
-#' @param api_key A single-length character vector with your openFDA API key.
-#'   By default this is the result of `get_api_key()`. If `api_key` is an empty
-#'   string, an error will be thrown.
+#'     {httr2} response object or a list of {httr2} response objects will be
+#'     returned. This will throw an error if your R session is not in
+#'     interactive mode.
+#'   * `"always"` - `openFDA()` will always perform pagination. A list of
+#'     {httr2} responses will be returned when pagination occurs.
+#'   * `"never"` - `openFDA()` will never perform pagination. Only the first
+#'     {httr2} response will be returned.
+#' @param api_key A single-length character vector with your openFDA API key. By
+#'   default this is the result of `get_api_key()`. You must set this with
+#'   `set_api_key()`, or `openFDA()` will not work.
 #' @param endpoint A single-length character vector describing which openFDA
 #'   endpoint to target.
 #'
@@ -129,10 +126,9 @@
 #' Bright RA. **OpenFDA: an innovative platform providing access to a wealth of
 #' FDA's publicly available data** *J Am Med Inform Assoc* 2016,
 #' **23(3):596-600.** \doi{10.1093/jamia/ocv153}
-#' @seealso [format_search_term()] documents how input `search` vectors are
-#'   converted to openFDA API searches. Check out the openFDA
-#'   [options][openFDA_options] documentation to see how to set paging behaviour
-#'   across multiple `openFDA()` calls.
+#' @seealso Read the docs for [set_api_key()] to learn how to set your openFDA
+#'   API key. Check out [format_search_term()] to see how input `search` vectors
+#'   are converted to openFDA API searches.
 #' @return Either an `httr2` response object from [httr2::req_perform()] or list
 #'   of these objects, depending on whether pagination was required. You can use
 #'   [httr2::resp_body_json()] to extract JSON data from these responses.

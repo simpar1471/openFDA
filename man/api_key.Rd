@@ -5,29 +5,52 @@
 \alias{get_api_key}
 \title{Get and set your openFDA API keys}
 \usage{
-set_api_key(api_key)
+set_api_key(api_key, user = "openFDA")
 
-get_api_key()
+get_api_key(user = "openFDA")
 }
 \arguments{
-\item{api_key}{A single-length character vector with your openFDA API key.
-You can generate an API key on the
+\item{api_key}{A single-length character vector with your openFDA API key. Do
+not pass the key in as a parameter in your scripts, though: see the
+'Setting an openFDA API key' section below for more information. You can
+generate an API key on the
 \href{https://open.fda.gov/apis/authentication/}{FDA website}.}
+
+\item{user}{A single-length character vector, used as the \code{username} argument
+in \code{keyring::key_set()} and \code{keyring::key_get()}, respectively. The default
+is \code{"openFDA"}. Supply a custom value to this argument if for some reason
+you want to store multiple API  keys (though note that the API restricts
+the number of requests on a per-IP address basis, as well as on a per-key
+basis).}
 }
 \value{
-A single length character vector with your API key. For
-\code{set_api_key()}, this is returned invisibly.
+For \code{set_api_key()}, returns \code{NULL} invisibly. The function is
+called for its side effect: to store the openFDA API key securely using
+\code{keyring::key_set()}.
 
-For \code{get_api_key()}, an error will be thrown if no key has been set.
+For \code{get_api_key()}, returns the API key as a single string. An error
+will be thrown if no key is found or if the returned key is an empty string
+(\code{""}).
 }
 \description{
 Get and set your openFDA API keys
 }
-\note{
-The function stores your API key in the environment variable
-\code{OPENFDA_TOKEN} unti lthe end of the current R session. To permanently set
-the API key for a given project, set \code{OPENFDA_TOKEN} in \code{.Renviron}.
+\section{Setting an openFDA API key}{
+API keys are the sort of thing that should be stored securely. For that
+reason, \code{set_api_key()} and \code{get_api_key()} utilise the
+\href{https://keyring.r-lib.org/}{keyring} package for storing/retrieving the API
+key. It is best practice not to set your API key by passing it directly to
+\code{set_api_key()}, or you risk exposing it either in your scripts or in
+\code{.Rhistory}.
+
+Instead, start an interactive R session and run \code{set_api_key()}. R will
+prompt you to enter your API key, which will then be stored for future use
+without logging the key somewhere unsecure.
+
+As for the key itself? It will be stored securely using \code{keyring::key_set()}.
+Once set on a machine, you shouldn't need to run \code{set_api_key()} again.
 }
+
 \examples{
 # Set your openFDA API key with `set_api_key()`
 api_key <- "example_api_key"
@@ -36,7 +59,7 @@ set_api_key(api_key)
 # Retrieve it with `get_api_key()`
 get_api_key()
 
-# An error will be thrown if your API key is an empty string.
+# An error will be thrown if a retrieved API key is an empty string.
 set_api_key("")
 
 try(get_api_key())

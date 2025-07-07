@@ -88,9 +88,9 @@ contamination, bad smell) with tobacco products.
 This argument is case-sensitive. By default, the package will target the
 Drugs@FDA endpoint (\code{"drugs-drugsfda"}).}
 
-\item{api_key}{A single-length character vector with your openFDA API key.
-By default this is the result of \code{get_api_key()}. If \code{api_key} is an empty
-string, an error will be thrown.}
+\item{api_key}{A single-length character vector with your openFDA API key. By
+default this is the result of \code{get_api_key()}. You must set this with
+\code{set_api_key()}, or \code{openFDA()} will not work.}
 
 \item{paging}{A single string describing whether results should be paged,
 and whether relevant alerts should be printed to the console. By default,
@@ -154,8 +154,7 @@ FDA's publicly available data} \emph{J Am Med Inform Assoc} 2016,
 \strong{23(3):596-600.} \doi{10.1093/jamia/ocv153}
 }
 \seealso{
-\code{\link[=format_search_term]{format_search_term()}} documents how input \code{search} vectors are
-converted to openFDA API searches. Check out the openFDA
-\link[=openFDA_options]{options} documentation to see how to set paging behaviour
-across multiple \code{openFDA()} calls.
+Read the docs for \code{\link[=set_api_key]{set_api_key()}} to learn how to set your openFDA
+API key. Check out \code{\link[=format_search_term]{format_search_term()}} to see how input \code{search} vectors
+are converted to openFDA API searches.
 }

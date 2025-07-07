@@ -12,12 +12,12 @@ template:
 reference:
 - title: Query the openFDA API
   contents: openFDA
+- title: Get/set your openFDA API key
+  contents: set_api_key
 - title: Construct openFDA query components
   contents:
   - format_search_term
   - format_sort_term
-- title: Get/set your openFDA API key
-  contents: set_api_key
 - title: openFDA package-level options
   contents: openFDA_options
 navbar:

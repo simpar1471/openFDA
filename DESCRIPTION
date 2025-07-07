@@ -24,7 +24,8 @@ Imports:
     purrr (>= 0.2.3),
     rlang,
     vctrs (>= 0.4.0),
-    prettyunits
+    prettyunits,
+    keyring
 Config/Needs/website: rmarkdown
 Suggests: 
     knitr,
