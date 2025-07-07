@@ -8,6 +8,11 @@ test_that("You can set and get an API key (with keyring support)", {
   # develop on Windows. On GitHub, the env-var backend is user which does not
   # have keyring support
   skip_if_not(keyring::has_keyring_support())
+  # Create keyring for this test
+  try(
+    keyring::keyring_create(keyring = "openFDA", password = "password"),
+    silent = TRUE
+  )
 
   encrypted_api_key <- paste0("TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk",
                               "-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ")
