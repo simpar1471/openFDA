@@ -87,6 +87,13 @@ queries. This short guide will get you started with
 complicated queries. We start by loading openFDA.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simpar1471/openFDA" class="external-link">openFDA</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> OpenFDA API key set.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> You can retrieve the key with the following code:</span></span>
+<span><span class="co">#&gt;   `keyring::key_get(service = <span style="color: #0000BB;">"OPENFDA_KEY"</span>, user = <span style="color: #0000BB;">"openFDA"</span>)`</span></span></code></pre>
 <div class="section level2">
 <h2 id="the-openfda-api">The openFDA API<a class="anchor" aria-label="anchor" href="#the-openfda-api"></a>
 </h2>
@@ -106,7 +113,7 @@ as our searches get lots of results. Therefore, to prevent paging, we
 set the package-level option <code>openFDA.paging</code> to
 <code>"no"</code>. Now <code><a href="../reference/openFDA.html">openFDA()</a></code> will automatically
 <strong>not</strong> perform paging, even when it’s possible.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"openFDA.paging"</span> <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -118,11 +125,15 @@ terms. For example, this snippet retrieves 2 records about
 <strong>adverse events</strong> in the <strong>drugs</strong> endpoint.
 The empty search string (<code>""</code>) means the results will be
 non-specific.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">""</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-event"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (19028302) than your `limit` (2).</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> With 2 results per page, pagination will require 9,514,151 queries to</span></span>
 <span><span class="co">#&gt;   retrieve all of these results. This will take at least 11h 43s.</span></span>
@@ -137,11 +148,15 @@ whole dataset, but used <code>limit</code> to only pull out the first
 two results. We can suppress this warning by setting <code>paging</code>
 to <code>"no-quiet"</code>. This ensures you don’t page the whole
 dataset (which would take eleven hours) and suppresses the warning:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">""</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-event"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="va">search</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">GET</span> https://api.fda.gov/drug/event.json?search=&amp;limit=2</span></span>
@@ -154,7 +169,7 @@ dataset (which would take eleven hours) and suppresses the warning:</p>
 <p>The function returns an <a href="https://httr2.r-lib.org" class="external-link">httr2</a> response object, with
 attached JSON data. We use <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to
 extract the underlying data.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">json</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span></span></code></pre></div>
 <p>If you don’t specify a field to <code>count</code> on, the JSON data
 has two sections - <code>meta</code> and <code>results</code>.</p>
@@ -183,7 +198,7 @@ the <code>limit</code> parameter in <code><a href="../reference/openFDA.html">op
 <code>results.total</code> - How many results were there in total
 matching your <code>search</code> criteria?</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">json</span><span class="op">$</span><span class="va">meta</span></span>
 <span><span class="co">#&gt; $disclaimer</span></span>
 <span><span class="co">#&gt; [1] "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service."</span></span>
@@ -213,7 +228,7 @@ matching your <code>search</code> criteria?</li>
 <p>For non-<code>count</code> queries, this will be a set of records
 which were found in the endpoint and match your <code>search</code>
 term.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">json</span><span class="op">$</span><span class="va">results</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$safetyreportid</span></span>
@@ -236,12 +251,16 @@ for each member in the openFDA field you specified for
 <code>count</code>. For example, let’s look at drug manufacturers in the
 <a href="https://open.fda.gov/apis/drug/drugsfda/" class="external-link">Drugs@FDA
 endpoint</a> for <code>"paracetamol"</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">count</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"openfda.generic_name:ketamine"</span>,</span>
 <span>                 endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                 count <span class="op">=</span> <span class="st">"openfda.manufacturer_name.exact"</span>,</span>
 <span>                 paging <span class="op">=</span> <span class="st">"no"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="va">count</span><span class="op">$</span><span class="va">results</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [[1]]$term</span></span>
@@ -263,8 +282,12 @@ demonstrated on the <a href="https://open.fda.gov/apis/timeseries/" class="exter
 they count the number of received records per day in the
 <code>drug/event</code> endpoint. With the openFDA package, you could do
 it in R like this:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>endpoint <span class="op">=</span> <span class="st">"drug-event"</span>, count <span class="op">=</span> <span class="st">"receiptdate"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="co"># Extract the counts from the response as a data frame</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">resp</span>, simplifyDataFrame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">"results"</span><span class="op">)</span></span>
@@ -306,24 +329,32 @@ will collect all drugs which have the words <code>"thiazide"</code> or
 (i.e. <code>construct_search_term()</code>) for assembling search terms;
 they are discussed below.</p>
 <p>Let’s do an unrefined search first:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search_unrefined</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span></span>
 <span>  search <span class="op">=</span> <span class="st">"openfda.pharm_class_epc:thiazide diuretic"</span>,</span>
 <span>  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  paging <span class="op">=</span> <span class="st">"no-quiet"</span></span>
 <span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search_unrefined</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
 <span><span class="co">#&gt; [1] 224</span></span></code></pre></div>
 <p>Let’s compare this to our refined search, where we add double-quotes
 around the search term:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search_refined</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span></span>
 <span>  search <span class="op">=</span> <span class="st">"openfda.pharm_class_epc:\"thiazide diuretic\""</span>,</span>
 <span>  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>  paging <span class="op">=</span> <span class="st">"no-quiet"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search_refined</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
 <span><span class="co">#&gt; [1] 123</span></span></code></pre></div>
 <p>As you can see, the unrefined search picked up 101 more results, most
@@ -345,12 +376,16 @@ looks for up to 5 records which were submitted by Walmart and are taken
 orally. We can use <a href="https://purrr.tidyverse.org/" class="external-link">purrr</a> functions to extract a brand
 name for each record. Note that though a single record can have multiple
 brand names, we are choosing to only extract the first one.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search_term</span> <span class="op">&lt;-</span> <span class="st">"openfda.manufacturer_name:Walmart+AND+openfda.route=oral"</span></span>
 <span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="va">search_term</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="va">json</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">json</span><span class="op">$</span><span class="va">results</span>, .f <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"openfda"</span>, <span class="st">"brand_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -378,11 +413,15 @@ with many field/search term pairs to the <code>search</code> parameter.
 The function will automatically add double quotes (<code>""</code>)
 around your search terms, if you’re providing field/value pairs like
 this.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"amoxicillin"</span><span class="op">)</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Number of results: 54"</span></span></code></pre></div>
 <p>You can include as many fields as you like, as long as you only
@@ -390,12 +429,16 @@ provide each field once. By default, the terms are combined with an
 <code>OR</code> operator in <code><a href="../reference/openFDA.html">openFDA()</a></code>. The below search
 strategy will therefore pick up all entries in <a href="https://open.fda.gov/apis/drug/drugsfda/" class="external-link">Drugs@FDA</a> which are
 taken by mouth.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"amoxicillin"</span>,</span>
 <span>                             <span class="st">"openfda.route"</span> <span class="op">=</span> <span class="st">"oral"</span><span class="op">)</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Number of results: 7008"</span></span></code></pre></div>
 </div>
@@ -404,7 +447,7 @@ taken by mouth.</p>
 </h4>
 <p>You can use <code><a href="../reference/format_search_term.html">format_search_term()</a></code> to pre-generate strings
 to pass to <code><a href="../reference/openFDA.html">openFDA()</a></code> as <code>search</code>:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/format_search_term.html">format_search_term</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"amoxicillin"</span>, <span class="st">"openfda.route"</span> <span class="op">=</span> <span class="st">"oral"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -412,18 +455,22 @@ to pass to <code><a href="../reference/openFDA.html">openFDA()</a></code> as <co
 <p>Sometimes you will want to combine multiple search terms with
 <code>AND</code> operators. To do this, set the <code>mode</code>
 argument to <code>"and"</code>:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_search_term.html">format_search_term</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"amoxicillin"</span>, <span class="st">"openfda.route"</span> <span class="op">=</span> <span class="st">"oral"</span><span class="op">)</span>,</span>
 <span>  mode <span class="op">=</span> <span class="st">"and"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">search_term</span></span>
 <span><span class="co">#&gt; [1] "openfda.generic_name:%22amoxicillin%22+AND+openfda.route:%22oral%22"</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="va">search_term</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Number of results: 51"</span></span></code></pre></div>
 </div>
@@ -441,13 +488,17 @@ yourself <em>without double-quotes</em> or use
 <code><a href="../reference/format_search_term.html">format_search_term()</a></code> with <code>exact = FALSE</code>. If
 you try to search with both double-quotes and the wildcard character,
 you will get a 404 error from openFDA.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search_term</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_search_term.html">format_search_term</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfda.generic_name"</span> <span class="op">=</span> <span class="st">"*sartan"</span><span class="op">)</span>,</span>
 <span>                                  exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="va">search_term</span>,</span>
 <span>                  count <span class="op">=</span> <span class="st">"openfda.manufacturer_name.exact"</span>,</span>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  paging <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span>, simplifyDataFrame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>        <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">"results"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -495,11 +546,15 @@ message to the console</li>
 </ul>
 <p>When paging is performed, <code><a href="../reference/openFDA.html">openFDA()</a></code> returns a list of
 <a href="https://httr2.r-lib.org" class="external-link">httr2</a> response objects, instead of a single response:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/openFDA.html">openFDA</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"openfda.manufacturer_name:Pharma"</span>,</span>
 <span>                 limit <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>                 endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                 paging <span class="op">=</span> <span class="st">"yes"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
+<span><span class="co">#&gt; Warning in default_backend_auto(): Selecting 'env' backend. Secrets are stored</span></span>
+<span><span class="co">#&gt; in environment variables</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1987) than your `limit` (500).</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> With 500 results per page, pagination will require 4 queries to retrieve all</span></span>
 <span><span class="co">#&gt;   of these results. This will take at least 1s.</span></span></code></pre></div>

@@ -45,7 +45,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="openfda-development-version">openFDA (development version)<a class="anchor" aria-label="anchor" href="#openfda-development-version"></a></h2>
-<ul><li>Added <code>paging</code> parameter to <code><a href="../reference/openFDA.html">openFDA()</a></code> function. This parameter controls whether paging (returning multiple sets of results for one query) occurs where necessary. Check out the documentation for <code><a href="../reference/openFDA.html">openFDA()</a></code> for more information.</li>
+<ul><li>API keys are now stored/retrieved using the <code>keyring</code> package. This is a more secure alternative to simply using environment variables, as users are prompted to supply the API key interactively (instead of storing them in a script).</li>
+<li>Added <code>paging</code> parameter to <code><a href="../reference/openFDA.html">openFDA()</a></code> function. This parameter controls whether paging (returning multiple sets of results for one query) occurs where necessary. Check out the documentation for <code><a href="../reference/openFDA.html">openFDA()</a></code> for more information.</li>
 <li>Added <code>openFDA.paging</code> option to openFDA, the default value of which is <code>"ask"</code>. A user can change this option to alter the default paging behaviour of the <code><a href="../reference/openFDA.html">openFDA()</a></code> function.</li>
 <li>Added extra (hopefully clearer) content to package vignettes/articles.</li>
 <li>Added minimum R version (4.1.0)</li>

@@ -147,9 +147,9 @@ Drugs@FDA endpoint (<code>"drugs-drugsfda"</code>).</p></dd>
 
 
 <dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
-<dd><p>A single-length character vector with your openFDA API key.
-By default this is the result of <code><a href="api_key.html">get_api_key()</a></code>. If <code>api_key</code> is an empty
-string, an error will be thrown.</p></dd>
+<dd><p>A single-length character vector with your openFDA API key. By
+default this is the result of <code><a href="api_key.html">get_api_key()</a></code>. You must set this with
+<code><a href="api_key.html">set_api_key()</a></code>, or <code>openFDA()</code> will not work.</p></dd>
 
 
 <dt id="arg-paging">paging<a class="anchor" aria-label="anchor" href="#arg-paging"></a></dt>
@@ -193,10 +193,9 @@ FDA's publicly available data</strong> <em>J Am Med Inform Assoc</em> 2016,
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="format_search_term.html">format_search_term()</a></code> documents how input <code>search</code> vectors are
-converted to openFDA API searches. Check out the openFDA
-<a href="openFDA_options.html">options</a> documentation to see how to set paging behaviour
-across multiple <code>openFDA()</code> calls.</p></div>
+    <div class="dont-index"><p>Read the docs for <code><a href="api_key.html">set_api_key()</a></code> to learn how to set your openFDA
+API key. Check out <code><a href="format_search_term.html">format_search_term()</a></code> to see how input <code>search</code> vectors
+are converted to openFDA API searches.</p></div>
     </div>
 
     <div class="section level2">
@@ -215,6 +214,13 @@ across multiple <code>openFDA()</code> calls.</p></div>
 <span class="r-in"><span>  <span class="co"># The function returns an `httr2` object</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> OpenFDA API key set.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> You can retrieve the key with the following code:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   `keyring::key_get(service = <span style="color: #0000BB;">"OPENFDA_KEY"</span>, user = <span style="color: #0000BB;">"openFDA"</span>)`</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name:gilead%2A&amp;limit=2&amp;skip=10</span>
