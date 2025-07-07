@@ -52,12 +52,13 @@ The full documentation for the API is online, so look at the [openFDA
 website](https://open.fda.gov/apis/) to get a full feel for the API
 itself.
 
-Before using the package, you will need to generate one at the [openFDA
-webpage](https://open.fda.gov/apis/authentication/). With an API key you
-can make 240 requests per minute, and are limited to 120,000 requests
-per day (the package will handle this request rate throttling for you).
-Without a key, you can only make 1000 requests a day. For this package,
-if you try to run `openFDA()` without setting an API key, it will fail:
+Before using the package, you will need to generate an API key on the
+[openFDA website](https://open.fda.gov/apis/authentication/). With an
+API key you can make 240 requests per minute, and are limited to 120,000
+requests per day (the package will handle this request rate throttling
+for you). Without a key, you can only make 1000 requests a day. For this
+package, if you try to run `openFDA()` without setting an API key, it
+will fail:
 
 ``` r
 search <- openFDA(
@@ -65,7 +66,7 @@ search <- openFDA(
   limit = 5
 )
 #> Error:
-#> ! API key not found by keyring package.
+#> ! No openFDA API key was found by `keyring::key_get()`.
 #> ℹ To use openFDA, you must set an openFDA API key. Go to
 #>   <https://open.fda.gov/apis/authentication/> to get an openFDA API key, then
 #>   use `set_api_key()` to cache it for use in this and future sessions.
@@ -74,18 +75,17 @@ search <- openFDA(
 That’s not good. To fix this error, get an API key from the webpage
 linked above. Once you have your API key, use `set_api_key()` to store
 your API key. Once you run this function, **openFDA** will ‘know’ your
-API key until the session ends. Let’s try using `openFDA()` again, after
-setting an API key:
+API key, even for future sessions:
 
 ``` r
 # n.b. this API key is a fake, just for demonstration
 set_api_key(api_key = "iHXeqlbXtlYEwX9MYLwyCBuiZxfn98Sj3oX2FNtSx")
+#> ! OpenFDA API key set.
+#> ℹ You can retrieve the key with the following code:
+#>   `keyring::key_get(service = "OPENFDA_KEY", user = "openFDA")`
 ```
 
-    #> ! OpenFDA API key set.
-    #> ℹ You can retrieve the key with the following code:
-    #>   `keyring::key_get(service = "OPENFDA_KEY", user = "openFDA", keyring =
-    #>   "openFDA")`
+Let’s try using `openFDA()` again, now that you have an API key:
 
 ``` r
 search <- openFDA(
@@ -99,7 +99,7 @@ search
 #> https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:furosemide&limit=5
 #> Status: 200 OK
 #> Content-Type: application/json
-#> Body: In memory (44596 bytes)
+#> Body: In memory (44851 bytes)
 ```
 
 The returned `httr2` response object contains JSON data from the API -
@@ -127,7 +127,7 @@ purrr::map_chr(
 )
 #> [1] "Hospira, Inc."                  "Hikma Pharmaceuticals USA Inc."
 #> [3] "Hikma Pharmaceuticals USA Inc." "Hikma Pharmaceuticals USA Inc."
-#> [5] "Camber Pharmaceuticals, Inc."
+#> [5] "Gland Pharma Limited"
 ```
 
 ## Other R packages for openFDA
