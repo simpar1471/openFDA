@@ -143,7 +143,8 @@
 #'   resp <- openFDA(search = "openfda.manufacturer_name:gilead*",
 #'                   limit = 2,
 #'                   skip = 10,
-#'                   paging = "no-quiet")
+#'                   paging = "never",
+#'                   paging_verbosity = "quiet")
 #'
 #'   # The function returns an `httr2` object
 #'   print(resp)

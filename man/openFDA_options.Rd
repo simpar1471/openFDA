@@ -62,10 +62,10 @@ options("openFDA.paging")
 rlang::peek_options("openFDA.paging")
 
 # Set using base R...
-options(openFDA.paging = "yes")
+options(openFDA.paging = "always")
 
 # ... or use the rlang package
-rlang::push_options(openFDA.paging = "no")
+rlang::push_options(openFDA.paging = "never")
 
 # (Just to check it's changed)
 rlang::peek_option("openFDA.paging")

@@ -129,9 +129,10 @@ check_openFDA_string_arg <- function(param,
     }
   }
   if (!is.null(values) && !param %in% values) {
+    cli_vals <-  cli::cli_vec(values, style = list("vec-last" = " or "))
     cli::cli_abort(
       c("!" = "{.var {vname}} is invalid.",
-        "i" = "{.var {vname}} must be one of {.val {values}}.",
+        "i" = "{.var {vname}} must be one of {.val {cli_vals}}.",
         "x" = "{.var {vname}} was {.val {param}}."),
       call = call,
       class = "openFDA_invalid_string_param_value"
