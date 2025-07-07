@@ -85,7 +85,7 @@ test_that("API key functions throw expected errors based on `api_key`", {
   } else {
     keyring::key_delete("OPENFDA_KEY", "openFDA")
   }
-  expect_error(get_api_key(), class = "openFDA_api_key_not_set")
+  expect_error(get_api_key(), class = "openFDA_api_key_missing")
 })
 
 test_that("Error if `!interactive()` and missing api_key arg", {

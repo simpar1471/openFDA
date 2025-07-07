@@ -153,13 +153,15 @@ get_api_key <- function(user = "openFDA") {
       keyring::key_get(service = service, username = user)
     },
     error = function(cnd) {
-      throw_api_key_error(err = "API key not found by {.pkg keyring} package.",
-                          class = "openFDA_api_key_not_set")
+      throw_api_key_error(err = "No openFDA API key was found by
+                                 {.fn keyring::key_get}.",
+                          class = "openFDA_api_key_missing")
     }
   )
   if (!nzchar(api_key)) {
     throw_api_key_error(
-      err = "API key retrieved by {.pkg keyring} was empty ({.val {\"\"}}).",
+      err = "The openFDA API key retrieved by {.pkg keyring} was empty
+             ({.val {\"\"}}).",
       class = "openFDA_api_key_empty"
     )
   }

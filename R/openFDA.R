@@ -203,7 +203,7 @@ openFDA <- function(
     httr2::req_auth_basic(username = api_key, password = "") |>
     httr2::req_throttle(rate = 240 / 60) |>
     httr2::req_error(
-      is_error = \(resp) openFDA_error_handling(resp, handle_http_errors)
+      is_error = \(resp) openFDA_http_error_handling(resp, handle_http_errors)
     )
   resp_openFDA <- httr2::req_perform(req_openFDA)
 
@@ -329,10 +329,9 @@ endpoint_url <- function(endpoint) {
 #' Catch common HTTP errors in `openFDA()` calls
 #' @param req_openFDA A httr2 request object, which will be used to query the
 #'   openFDA API.
-#' @param handle_http_errors Scalar logical value. If `TRUE`, the function will
-#'   issue a warning based on the HTTP error encountered
+#' @inheritParams openFDA
 #' @noRd
-openFDA_error_handling <- function(resp, handle_http_errors) {
+openFDA_http_error_handling <- function(resp, handle_http_errors) {
   status <- httr2::resp_status(resp)
   if (status != 200) {
     call <- rlang::caller_env(n = 6)
