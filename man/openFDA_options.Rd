@@ -20,13 +20,15 @@ setting this option, the value must be one of:
 \itemize{
 \item \code{"ask"} - \code{openFDA()} will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
-{httr2} response object or a list of {httr2} response objects will be
-returned. This will throw an error if your R session is not in
-interactive mode. When setting this option, the value must be one of:
+\href{https://httr2.r-lib.org/}{httr2} response object or a list of
+\href{https://httr2.r-lib.org/}{httr2} response objects will be returned. This
+will throw an error if your R session is not in interactive mode. When s
+etting this option, the value must be one of:
 \item \code{"always"} - \code{openFDA()} will always perform pagination. A list of
-{httr2} responses will be returned when pagination occurs.
+\href{https://httr2.r-lib.org/}{httr2} responses will be returned when
+pagination occurs.
 \item \code{"never"} - \code{openFDA()} will never perform pagination. Only the first
-{httr2} response will be returned.
+\href{https://httr2.r-lib.org/}{httr2} response will be returned.
 }
 \item \code{openFDA.paging_verbosity}: customise openFDA's verbosity when paging. The
 default is \code{"verbose"}. When setting this option, the value must be one of:
@@ -41,11 +43,13 @@ to the console when requests to the openFDA server were not \verb{200 OK}. The
 default is \code{"warn"}. When setting this option, the value must be one of:
 \itemize{
 \item \code{"warn"}: If the returned HTTP code is not 200, issue a warning to the
-console and return the underlying {httr2} response object.
+console and return the underlying \href{https://httr2.r-lib.org/}{httr2}
+response object.
 \item \code{"error"}: If the returned HTTP code is not 200, throw an (informative)
 error.
 \item \code{"silent"}: If the returned HTTP code is not 200, return the underlying
-{httr2} response object without printing a warning.
+\href{https://httr2.r-lib.org/}{httr2} response object without printing a
+warning.
 }
 }
 }

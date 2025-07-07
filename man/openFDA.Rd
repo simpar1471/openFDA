@@ -104,13 +104,14 @@ Permissible values for \code{paging} include:
 \itemize{
 \item \code{"ask"} - \code{openFDA()} will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
-{httr2} response object or a list of {httr2} response objects will be
-returned. This will throw an error if your R session is not in
-interactive mode.
+\href{https://httr2.r-lib.org/}{httr2} response object or a list of
+\href{https://httr2.r-lib.org/}{httr2} response objects will be returned. This
+will throw an error if your R session is not in interactive mode.
 \item \code{"always"} - \code{openFDA()} will always perform pagination. A list of
-{httr2} responses will be returned when pagination occurs.
+\href{https://httr2.r-lib.org/}{httr2} responses will be returned when
+pagination occurs.
 \item \code{"never"} - \code{openFDA()} will never perform pagination. Only the first
-{httr2} response will be returned.
+\href{https://httr2.r-lib.org/}{httr2} response will be returned.
 }}
 
 \item{paging_verbosity}{A single string describing whether messages about
@@ -140,11 +141,13 @@ By default, \code{openFDA()} uses the string stored in
 \code{"warn"}. Permissible values for \code{handle_http_errors} include:
 \itemize{
 \item \code{"warn"}: If the returned HTTP code is not 200, issue a warning to the
-console and return the underlying {httr2} response object.
+console and return the underlying \href{https://httr2.r-lib.org/}{httr2}
+response object.
 \item \code{"error"}: If the returned HTTP code is not 200, throw an (informative)
 error.
 \item \code{"silent"}: If the returned HTTP code is not 200, return the underlying
-{httr2} response object without printing a warning.
+\href{https://httr2.r-lib.org/}{httr2} response object without printing a
+warning.
 }}
 }
 \value{

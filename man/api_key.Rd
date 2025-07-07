@@ -59,8 +59,6 @@ set_api_key(api_key)
 # Retrieve it with `get_api_key()`
 get_api_key()
 
-# An error will be thrown if a retrieved API key is an empty string.
-set_api_key("")
-
-try(get_api_key())
+# An error will be thrown you try to set your API key to an empty string.
+try(set_api_key(""))
 }

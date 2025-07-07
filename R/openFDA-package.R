@@ -20,13 +20,15 @@ NULL
 #'
 #'   - `"ask"` - `openFDA()` will warn you that pagination is required and ask
 #'     if you want this to be done. Depending on user input, either a single
-#'     {httr2} response object or a list of {httr2} response objects will be
-#'     returned. This will throw an error if your R session is not in
-#'     interactive mode. When setting this option, the value must be one of:
+#'     [httr2](https://httr2.r-lib.org/) response object or a list of
+#'     [httr2](https://httr2.r-lib.org/) response objects will be returned. This
+#'     will throw an error if your R session is not in interactive mode. When s
+#'     etting this option, the value must be one of:
 #'   - `"always"` - `openFDA()` will always perform pagination. A list of
-#'     {httr2} responses will be returned when pagination occurs.
+#'     [httr2](https://httr2.r-lib.org/) responses will be returned when
+#'     pagination occurs.
 #'   - `"never"` - `openFDA()` will never perform pagination. Only the first
-#'     {httr2} response will be returned.
+#'     [httr2](https://httr2.r-lib.org/) response will be returned.
 #' * `openFDA.paging_verbosity`: customise openFDA's verbosity when paging. The
 #'   default is `"verbose"`. When setting this option, the value must be one of:
 #'
@@ -39,12 +41,13 @@ NULL
 #'   default is `"warn"`. When setting this option, the value must be one of:
 #'
 #'   - `"warn"`: If the returned HTTP code is not 200, issue a warning to the
-#'     console and return the underlying {httr2} response object.
+#'     console and return the underlying [httr2](https://httr2.r-lib.org/)
+#'     response object.
 #'   - `"error"`: If the returned HTTP code is not 200, throw an (informative)
 #'     error.
 #'   - `"silent"`: If the returned HTTP code is not 200, return the underlying
-#'     {httr2} response object without printing a warning.
-#'
+#'     [httr2](https://httr2.r-lib.org/) response object without printing a
+#'     warning.
 #' @examples
 #' # Access with base R...
 #' options("openFDA.paging")

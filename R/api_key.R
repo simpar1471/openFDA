@@ -18,10 +18,8 @@
 #' # Retrieve it with `get_api_key()`
 #' get_api_key()
 #'
-#' # An error will be thrown if a retrieved API key is an empty string.
-#' set_api_key("")
-#'
-#' try(get_api_key())
+#' # An error will be thrown you try to set your API key to an empty string.
+#' try(set_api_key(""))
 #' @details
 #' # Setting an openFDA API key
 #' API keys are the sort of thing that should be stored securely. For that
