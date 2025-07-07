@@ -40,9 +40,9 @@ We start by loading openFDA.
 library(openFDA)
 ```
 
-```{r set-api-key, echo = FALSE, message = FALSE}
-try(suppressMessages(set_api_key(Sys.getenv("OPENFDA_TOKEN"))),
-    silent = TRUE)
+```{r set_key, echo = FALSE}
+# This API key is only used for this vignette
+set_api_key("tvzdUXoC3Yi21hhxtKKochJlQgm6y1Lr7uhmjcpT")
 ```
 
 # The openFDA API
