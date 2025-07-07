@@ -26,6 +26,11 @@ options("openFDA.paging" = "never",
         "openFDA.paging_verbosity" = "quiet")
 ```
 
+```{r set-api-key, echo = FALSE, message = FALSE}
+try(suppressMessages(set_api_key(Sys.getenv("OPENFDA_TOKEN"))),
+    silent = TRUE)
+```
+
 # Get brand names and EPCs from generic BNF terms
 
 First, we'll use `openFDA()` to retrieve brand names for the drugs we are interested in from the British National Formulary (BNF), a reference book for prescribed used in the United Kingdom.

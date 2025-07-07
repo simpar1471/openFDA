@@ -40,6 +40,11 @@ We start by loading openFDA.
 library(openFDA)
 ```
 
+```{r set-api-key, echo = FALSE, message = FALSE}
+try(suppressMessages(set_api_key(Sys.getenv("OPENFDA_TOKEN"))),
+    silent = TRUE)
+```
+
 # The openFDA API
 The openFDA API makes public FDA data available from a simple, public API.
 Users of this API have access to FDA data on food, human and veterinary drugs, devices, and more.
