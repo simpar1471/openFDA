@@ -146,6 +146,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
+      "version": ">= 0.2.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -170,6 +171,7 @@
       "@type": "SoftwareApplication",
       "identifier": "vctrs",
       "name": "vctrs",
+      "version": ">= 0.4.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -190,9 +192,21 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=prettyunits"
     },
+    "9": {
+      "@type": "SoftwareApplication",
+      "identifier": "keyring",
+      "name": "keyring",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=keyring"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "85.63KB",
+  "fileSize": "107.438KB",
   "releaseNotes": "https://github.com/simpar1471/openFDA/blob/master/NEWS.md",
   "readme": "https://github.com/simpar1471/openFDA/blob/main/README.md",
   "contIntegration": ["https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml", "https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml", "https://app.codecov.io/gh/simpar1471/openFDA", "https://github.com/simpar1471/openFDA/actions?query=workflow%3Apkgcheck"],
