@@ -38,5 +38,7 @@ NULL
 #'
 #' # (Just to check it's changed)
 #' rlang::peek_options("openFDA.paging")
+#' @return Nothing - they're package-level options, so changing them alters the
+#'   behaviour of `openFDA()`.
 #' @name openFDA_options
 NULL
