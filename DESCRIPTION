@@ -21,9 +21,9 @@ Imports:
     cli,
     httr2,
     checkmate,
-    purrr,
+    purrr (>= 0.2.3),
     rlang,
-    vctrs,
+    vctrs (>= 0.4.0),
     prettyunits
 Config/Needs/website: rmarkdown
 Suggests: 
