@@ -58,8 +58,9 @@
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>  api_key <span class="op">=</span> <span class="fu"><a href="api_key.html">get_api_key</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  paging <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/local_options.html" class="external-link">peek_option</a></span><span class="op">(</span><span class="st">"openFDA.paging"</span><span class="op">)</span>,</span>
-<span>  warn_on_http_error <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  paging <span class="op">=</span> <span class="fu">get_openFDA_option</span><span class="op">(</span><span class="st">"openFDA.paging"</span><span class="op">)</span>,</span>
+<span>  paging_verbosity <span class="op">=</span> <span class="fu">get_openFDA_option</span><span class="op">(</span><span class="st">"openFDA.paging_verbosity"</span><span class="op">)</span>,</span>
+<span>  handle_http_errors <span class="op">=</span> <span class="fu">get_openFDA_option</span><span class="op">(</span><span class="st">"openFDA.handle_http_errors"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -87,8 +88,8 @@ will throw an error.</p></dd>
 <dd><p>A single string denoting a field on which to count results. If
 <code>NULL</code> (the default), results will be returned in full to the user. Specify
 this parameter if you want to count occurrences of results within your
-search term - go to <a href="https://open.fda.gov/apis/query-syntax/" class="external-link">https://open.fda.gov/apis/query-syntax/</a> for more
-information.</p></dd>
+search term. The <a href="https://open.fda.gov/apis/query-syntax/" class="external-link">openFDA website</a>
+has more information on how to <code>count</code> by a specific field.</p></dd>
 
 
 <dt id="arg-limit">limit<a class="anchor" aria-label="anchor" href="#arg-limit"></a></dt>
@@ -153,29 +154,54 @@ default this is the result of <code><a href="api_key.html">get_api_key()</a></co
 
 
 <dt id="arg-paging">paging<a class="anchor" aria-label="anchor" href="#arg-paging"></a></dt>
-<dd><p>A single string describing whether results should be paged,
-and whether relevant alerts should be printed to the console. By default,
-<code>openFDA()</code> uses the string stored in <code>options("openFDA.paging")</code>, which
-has the value <code>"ask"</code>. Permissible values include:</p><ul><li><p><code>"ask"</code> - <code>openFDA()</code> will warn you that pagination is required and ask
+<dd><p>A single string describing whether results should be paged. You
+can set this on a per-function call level with this parameter, or edit
+the <a href="openFDA_options.html">package-level option</a> <code>openFDA.paging</code> to set paging
+behaviour across multiple <code>openFDA()</code> calls.</p>
+<p>By default, <code>openFDA()</code> uses the string stored in
+<code>options("openFDA.paging")</code>, which has the default value <code>"ask"</code>.
+Permissible values for <code>paging</code> include:</p><ul><li><p><code>"ask"</code> - <code>openFDA()</code> will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
-<code>httr2</code> response object or a list of <code>httr2</code> response objects will be
-returned</p></li>
-<li><p><code>"yes"</code> - information on pagination will be printed to the console and
-done automatically; a list of responses will be returned</p></li>
-<li><p><code>"no"</code> - information on pagination will be printed to the console but
-will not be performed; only the first response will be returned</p></li>
-<li><p><code>"yes-quiet"</code> - same as <code>paging = "yes"</code> except no alert is printed to
-the console</p></li>
-<li><p><code>"no-quiet"</code> - same as <code>paging = "no"</code> except no alert is printed to
-the console</p></li>
+httr2 response object or a list of httr2 response objects will be
+returned. This will throw an error if your R session is not in
+interactive mode.</p></li>
+<li><p><code>"always"</code> - <code>openFDA()</code> will always perform pagination. A list of
+httr2 responses will be returned when pagination occurs.</p></li>
+<li><p><code>"never"</code> - <code>openFDA()</code> will never perform pagination. Only the first
+httr2 response will be returned.</p></li>
 </ul></dd>
 
 
-<dt id="arg-warn-on-http-error">warn_on_http_error<a class="anchor" aria-label="anchor" href="#arg-warn-on-http-error"></a></dt>
-<dd><p>A scalar logical value. If <code>TRUE</code> (the default),
-common openFDA HTTP errors will cause explanatory warnings to be printed
-If <code>FALSE</code>, the underlying httr2 response object will be returned with
-no extra warnings.</p></dd>
+<dt id="arg-paging-verbosity">paging_verbosity<a class="anchor" aria-label="anchor" href="#arg-paging-verbosity"></a></dt>
+<dd><p>A single string describing whether messages about
+pagination should be printed to the console. You can set this on a
+per-function call level with this parameter, or edit the <a href="openFDA_options.html">package-level option</a> <code>openFDA.paging_verbosity</code> to set this behaviour
+across multiple <code>openFDA()</code> calls.</p>
+<p>By default, <code>openFDA()</code> uses the string stored in
+<code>options("openFDA.paging_verbosity")</code>, which has the default value
+<code>"verbose"</code>. Permissible values for <code>paging_verbosity</code> include:</p><ul><li><p><code>"verbose"</code> - If paging can be performed, print a message to the console,
+stating how many requests are required with a minimum estimate for the
+time this will take.</p></li>
+<li><p><code>"quiet"</code> - Even if paging can be performed, do not print messages about
+it  to the console.</p></li>
+</ul></dd>
+
+
+<dt id="arg-handle-http-errors">handle_http_errors<a class="anchor" aria-label="anchor" href="#arg-handle-http-errors"></a></dt>
+<dd><p>A single string defining how to handle HTTP codes
+other than <code>200 OK</code>. You can set this on a per-function call level with
+this parameter, or edit the <a href="openFDA_options.html">package-level option</a>
+<code>openFDA.handle_http_errors</code> to set this behaviour across multiple
+<code>openFDA()</code> calls.</p>
+<p>By default, <code>openFDA()</code> uses the string stored in
+<code>options("openFDA.handle_http_errors")</code>, which has the default value
+<code>"warn"</code>. Permissible values for <code>handle_http_errors</code> include:</p><ul><li><p><code>"warn"</code>: If the returned HTTP code is not 200, issue a warning to the
+console and return the underlying httr2 response object.</p></li>
+<li><p><code>"error"</code>: If the returned HTTP code is not 200, throw an (informative)
+error.</p></li>
+<li><p><code>"silent"</code>: If the returned HTTP code is not 200, return the underlying
+httr2 response object without printing a warning.</p></li>
+</ul></dd>
 
 </dl></div>
     <div class="section level2">
@@ -221,12 +247,9 @@ are converted to openFDA API searches.</p></div>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   `keyring::key_get(service = <span style="color: #0000BB;">"OPENFDA_KEY"</span>, user = <span style="color: #0000BB;">"openFDA"</span>)`</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name:gilead%2A&amp;limit=2&amp;skip=10</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 200 OK</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Content-Type</span>: application/json</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (38569 bytes)</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in openFDA(search = "openfda.manufacturer_name:gilead*", limit = 2,     skip = 10, paging = "no-quiet"):</span> <span style="color: #BBBB00;">!</span> `paging` is invalid.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> `paging` must be one of <span style="color: #0000BB;">"always"</span>, <span style="color: #0000BB;">"ask"</span>, and <span style="color: #0000BB;">"never"</span>.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> `paging` was <span style="color: #0000BB;">"no-quiet"</span>.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Bad inputs will cause informative errors - here, a bad API key is supplied</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>

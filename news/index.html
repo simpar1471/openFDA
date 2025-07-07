@@ -45,9 +45,20 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="openfda-development-version">openFDA (development version)<a class="anchor" aria-label="anchor" href="#openfda-development-version"></a></h2>
-<ul><li>API keys are now stored/retrieved using the <code>keyring</code> package. This is a more secure alternative to simply using environment variables, as users are prompted to supply the API key interactively (instead of storing them in a script).</li>
+<ul><li>
+<strong>BREAKING CHANGES:</strong>
+<ul><li>Changed name of <code>warn_on_http_error</code> to <code>handle_http_errors</code> to reflect the new package-level option.</li>
+</ul></li>
+<li>API keys are now stored/retrieved using the <code>keyring</code> package. This is a more secure alternative to simply using environment variables, as users are prompted to supply the API key interactively (instead of storing them in a script).</li>
 <li>Added <code>paging</code> parameter to <code><a href="../reference/openFDA.html">openFDA()</a></code> function. This parameter controls whether paging (returning multiple sets of results for one query) occurs where necessary. Check out the documentation for <code><a href="../reference/openFDA.html">openFDA()</a></code> for more information.</li>
-<li>Added <code>openFDA.paging</code> option to openFDA, the default value of which is <code>"ask"</code>. A user can change this option to alter the default paging behaviour of the <code><a href="../reference/openFDA.html">openFDA()</a></code> function.</li>
+<li>Added package-level options to openFDA
+<ul><li>
+<code>openFDA.paging</code>; the default value of which is <code>"ask"</code>. A user can change this option to alter the default paging behaviour of the <code><a href="../reference/openFDA.html">openFDA()</a></code> function (to <code>"always"</code> page results or <code>"never"</code> page results).</li>
+<li>
+<code>openFDA.paging_verbosity</code>; the default value of which is <code>"verbose"</code>. A user can change this option to control whether messages about potential paging are printed to the console.</li>
+<li>
+<code>openFDA.handle_http_errors</code>; the default value of which is <code>"warn"</code>. A user can change this option to alter how non-<code>200 OK</code> HTTP codes are handled (they can be silenced or trigger errors).</li>
+</ul></li>
 <li>Added extra (hopefully clearer) content to package vignettes/articles.</li>
 <li>Added minimum R version (4.1.0)</li>
 </ul></div>

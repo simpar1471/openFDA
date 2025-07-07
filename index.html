@@ -73,7 +73,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The easiest way to install openFDA is to get it from CRAN:</p>
+<p>The easiest way to install openFDA is to get it from CRAN. However, given a spate of recent improvements which are not yet on CRAN, you may have a better time using the development version. Nonetheless, to install from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"openFDA"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
@@ -96,15 +96,20 @@
 <span>  search <span class="op">=</span> <span class="st">"openfda.generic_name:furosemide"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `get_api_key()`:</span></span>
-<span><span class="co">#&gt; ! To use openFDA, you must set an openFDA API key.</span></span>
-<span><span class="co">#&gt; ℹ Go to &lt;https://open.fda.gov/apis/authentication/&gt; to get an openFDA API key,</span></span>
-<span><span class="co">#&gt;   then supply it to `set_api_key()` to cache it for use in this session.</span></span></code></pre></div>
+<span><span class="co">#&gt; Error:</span></span>
+<span><span class="co">#&gt; ! API key not found by keyring package.</span></span>
+<span><span class="co">#&gt; ℹ To use openFDA, you must set an openFDA API key. Go to</span></span>
+<span><span class="co">#&gt;   &lt;https://open.fda.gov/apis/authentication/&gt; to get an openFDA API key, then</span></span>
+<span><span class="co">#&gt;   use `set_api_key()` to cache it for use in this and future sessions.</span></span></code></pre></div>
 <p>That’s not good. To fix this error, get an API key from the webpage linked above. Once you have your API key, use <code><a href="reference/api_key.html">set_api_key()</a></code> to store your API key. Once you run this function, <strong>openFDA</strong> will ‘know’ your API key until the session ends. Let’s try using <code><a href="reference/openFDA.html">openFDA()</a></code> again, after setting an API key:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># n.b. this API key is a fake, just for demonstration</span></span>
 <span><span class="fu"><a href="reference/api_key.html">set_api_key</a></span><span class="op">(</span>api_key <span class="op">=</span> <span class="st">"iHXeqlbXtlYEwX9MYLwyCBuiZxfn98Sj3oX2FNtSx"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#&gt; ! OpenFDA API key set.</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; ℹ You can retrieve the key with the following code:</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;   `keyring::key_get(service = "OPENFDA_KEY", user = "openFDA", keyring =</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt;   "openFDA")`</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/openFDA.html">openFDA</a></span><span class="op">(</span></span>
 <span>  search <span class="op">=</span> <span class="st">"openfda.generic_name:furosemide"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">5</span></span>
@@ -118,7 +123,7 @@
 <span><span class="co">#&gt; Content-Type: application/json</span></span>
 <span><span class="co">#&gt; Body: In memory (44596 bytes)</span></span></code></pre></div>
 <p>The returned <code>httr2</code> response object contains JSON data from the API - you can use <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to extract the JSON data as a nested list, then extract the fields you want.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">json</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">json</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">openfda</span><span class="op">$</span><span class="va">brand_name</span></span>
@@ -128,7 +133,7 @@
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [1] "Loop Diuretic [EPC]"</span></span></code></pre></div>
 <p>I’ve found <a href="https://purrr.tidyverse.org/" class="external-link">purrr</a> to be very useful for parsing this data quickly.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span></span>
 <span>  .x <span class="op">=</span> <span class="va">json</span><span class="op">$</span><span class="va">results</span>, </span>
 <span>  .f <span class="op">=</span> \<span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"openfda"</span>, <span class="st">"manufacturer_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
