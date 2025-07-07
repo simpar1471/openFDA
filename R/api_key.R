@@ -68,8 +68,7 @@ set_api_key <- function(api_key, user = "openFDA") {
   service <- "OPENFDA_KEY"
 
   # Create keyring if it doesn't exist; if it's locked, unlock it
-
-  if (keyring::has_keyring_support()) {
+  if (keyring::has_keyring_support() && interactive()) {
     openFDA_keyring <- "openFDA"
     openFDA_keyring_exists <-
       openFDA_keyring %in% keyring::keyring_list()$keyring
@@ -115,7 +114,7 @@ set_api_key <- function(api_key, user = "openFDA") {
       class = "openfda_api_key_set"
     )
   } else {
-    # For backends without keyring support
+    # For backends without keyring support or running in non-interactive mode
     if (api_key_not_provided) {
       keyring::key_set(service = service,
                        user = user,
