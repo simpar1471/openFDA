@@ -43,17 +43,25 @@
 #' @rdname api_key
 #' @export
 set_api_key <- function(api_key, user = "openFDA") {
+  user <- check_openFDA_string_arg(user, vname = "user", null_ok = FALSE)
   api_key_not_provided <- rlang::is_missing(api_key)
   if (api_key_not_provided && !interactive()) {
     cli::cli_abort(
-      message = c("!" = "You must be running R in interactive mode to use
-                         {.fn set_api_key} without providing a value to the
-                         `api_key` argument."),
+      c("!" = "You must be running R in interactive mode to use
+               {.fn set_api_key} without providing a value to the `api_key`
+               argument."),
       class = "openfda_set_api_key_needs_interactive_mode"
     )
   }
   if (!api_key_not_provided) {
     check_openFDA_string_arg(api_key, vname = "api_key")
+    if (api_key == "") {
+      cli::cli_abort(
+        c("!" = "If providing `api_key`, it must not be an empty string
+                 ({.val \"\"})"),
+        class = "openfda_set_api_key_used_empty_string"
+      )
+    }
   }
 
   # hardcoded
@@ -84,8 +92,6 @@ set_api_key <- function(api_key, user = "openFDA") {
       )
       keyring::keyring_create(keyring = "openFDA")
     }
-
-    # Check if
 
     # Add openFDA API key to keyring
     if (api_key_not_provided) {
@@ -138,6 +144,7 @@ set_api_key <- function(api_key, user = "openFDA") {
 #' @rdname api_key
 #' @export
 get_api_key <- function(user = "openFDA") {
+  user <- check_openFDA_string_arg(user, vname = "user", null_ok = FALSE)
   # hardcoded
   service <- "OPENFDA_KEY"
   api_key <- rlang::try_fetch(
