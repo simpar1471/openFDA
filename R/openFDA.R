@@ -20,20 +20,6 @@
 #' @param skip A single integer describing how many records should be skipped.
 #'   If more records are skipped than are found in your search, the openFDA
 #'   API will return a 404 error.
-#' @param paging A single string describing whether results should be paged,
-#'   and whether relevant alerts should be printed to the console. By default,
-#'   `openFDA()` uses the string stored in `options("openFDA.paging")`, which
-#'   has the value `"ask"`. Permissible values include:
-#'
-#'   * `"ask"` - `openFDA()` will warn you that pagination is required and ask
-#'     if you want this to be done. Depending on user input, either a single
-#'     {httr2} response object or a list of {httr2} response objects will be
-#'     returned. This will throw an error if your R session is not in
-#'     interactive mode.
-#'   * `"always"` - `openFDA()` will always perform pagination. A list of
-#'     {httr2} responses will be returned when pagination occurs.
-#'   * `"never"` - `openFDA()` will never perform pagination. Only the first
-#'     {httr2} response will be returned.
 #' @param api_key A single-length character vector with your openFDA API key. By
 #'   default this is the result of `get_api_key()`. You must set this with
 #'   `set_api_key()`, or `openFDA()` will not work.
@@ -95,10 +81,55 @@
 #'
 #'   This argument is case-sensitive. By default, the package will target the
 #'   Drugs@FDA endpoint (`"drugs-drugsfda"`).
-#' @param warn_on_http_error A scalar logical value. If `TRUE` (the default),
-#'   common openFDA HTTP errors will cause explanatory warnings to be printed
-#'   If `FALSE`, the underlying httr2 response object will be returned with
-#'   no extra warnings.
+#' @param paging A single string describing whether results should be paged. You
+#'   can set this on a per-function call level with this parameter, or edit
+#'   the [package-level option][openFDA_options] `openFDA.paging` to set paging
+#'   behaviour across multiple `openFDA()` calls.
+#'
+#'   By default, `openFDA()` uses the string stored in
+#'   `options("openFDA.paging")`, which has the default value `"ask"`.
+#'   Permissible values for `paging` include:
+#'
+#'   * `"ask"` - `openFDA()` will warn you that pagination is required and ask
+#'     if you want this to be done. Depending on user input, either a single
+#'     {httr2} response object or a list of {httr2} response objects will be
+#'     returned. This will throw an error if your R session is not in
+#'     interactive mode.
+#'   * `"always"` - `openFDA()` will always perform pagination. A list of
+#'     {httr2} responses will be returned when pagination occurs.
+#'   * `"never"` - `openFDA()` will never perform pagination. Only the first
+#'     {httr2} response will be returned.
+#' @param paging_verbosity A single string describing whether messages about
+#'   pagination should be printed to the console. You can set this on a
+#'   per-function call level with this parameter, or edit the [package-level
+#'   option][openFDA_options] `openFDA.paging_verbosity` to set this behaviour
+#'   across multiple `openFDA()` calls.
+#'
+#'   By default, `openFDA()` uses the string stored in
+#'   `options("openFDA.paging_verbosity")`, which has the default value
+#'   `"verbose"`. Permissible values for `paging_verbosity` include:
+#'
+#'   * `"verbose"` - If paging can be performed, print a message to the console,
+#'     stating how many requests are required with a minimum estimate for the
+#'     time this will take.
+#'   * `"quiet"` - Even if paging can be performed, do not print messages about
+#'     it  to the console.
+#' @param handle_http_errors A single string defining how to handle HTTP codes
+#'   other than `200 OK`. You can set this on a per-function call level with
+#'   this parameter, or edit the [package-level option][openFDA_options]
+#'   `openFDA.handle_http_errors` to set this behaviour across multiple
+#'   `openFDA()` calls.
+#'
+#'   By default, `openFDA()` uses the string stored in
+#'   `options("openFDA.handle_http_errors")`, which has the default value
+#'   `"warn"`. Permissible values for `handle_http_errors` include:
+#'
+#'   * `"warn"`: If the returned HTTP code is not 200, issue a warning to the
+#'     console and return the underlying {httr2} response object.
+#'   * `"error"`: If the returned HTTP code is not 200, throw an (informative)
+#'     error.
+#'   * `"silent"`: If the returned HTTP code is not 200, return the underlying
+#'     {httr2} response object without printing a warning.
 #' @examples
 #' if (httr2::secret_has_key("OPENFDA_KEY")) {
 #'   set_api_key(httr2::secret_decrypt(
@@ -134,19 +165,23 @@
 #'   [httr2::resp_body_json()] to extract JSON data from these responses.
 #' @rdname openFDA
 #' @export
-openFDA <- function(search = "",
-                    sort = NULL,
-                    count = NULL,
-                    limit = 1000,
-                    skip = NULL,
-                    endpoint = "drug-drugsfda",
-                    api_key = get_api_key(),
-                    paging = rlang::peek_option("openFDA.paging"),
-                    warn_on_http_error = TRUE) {
-  # Check params; drop NULL args from request query
-  check_warn_on_http_error_arg(warn_on_http_error)
+openFDA <- function(
+  search = "",
+  sort = NULL,
+  count = NULL,
+  limit = 1000,
+  skip = NULL,
+  endpoint = "drug-drugsfda",
+  api_key = get_api_key(),
+  paging = get_openFDA_option("openFDA.paging"),
+  paging_verbosity = get_openFDA_option("openFDA.paging_verbosity"),
+  handle_http_errors = get_openFDA_option("openFDA.handle_http_errors")
+) {
+  # Check params + drop NULL args from request query
   api_key <- check_openFDA_string_arg(api_key, "api_key")
-  paging <- check_paging_arg(paging)
+  check_arg_with_option(paging, "paging")
+  check_arg_with_option(paging_verbosity, "paging_verbosity")
+  check_arg_with_option(handle_http_errors, "handle_http_errors")
   req_params <- list(search = format_search_term(search),
                      sort = format_sort_term(sort),
                      count = check_openFDA_string_arg(count, "count"),
@@ -164,13 +199,13 @@ openFDA <- function(search = "",
     httr2::req_auth_basic(username = api_key, password = "") |>
     httr2::req_throttle(rate = 240 / 60) |>
     httr2::req_error(
-      is_error = \(resp) openFDA_error_handling(resp, warn_on_http_error)
+      is_error = \(resp) openFDA_error_handling(resp, handle_http_errors)
     )
   resp_openFDA <- httr2::req_perform(req_openFDA)
 
   # Paging logic
   if (resp_openFDA$status_code == 200) {
-    if (paging_as_lgl(resp_openFDA, paging)) {
+    if (paging_as_lgl(resp_openFDA, paging, paging_verbosity)) {
       resp_openFDA <- req_openFDA |>
         httr2::req_perform_iterative(
           next_req = httr2::iterate_with_link_url(rel = "next"),
@@ -185,7 +220,19 @@ openFDA <- function(search = "",
 
 # openFDA() paging logic (internal) --------------------------------------------
 
-paging_as_lgl <- function(resp_openFDA, paging) {
+#' User interaction with respect to paging
+#' @param total,limit Single-length integerish variables denoting the total
+#'   results found in openFDA for a given query, and the limit on the number of
+#'   responses as imposed by the package user.
+#' @param resp_openFDA An httr2 response object from `openFDA()`
+#' @inheritParams openFDA
+#' @returns For paging_as_lgl(), returns a single boolean value denoting whether
+#'   or not paging will be performed. For `paging_inform()`, returns `NULL`
+#'   invisibly and may emit a message about paging. For `paging_ask()`, returns
+#'   user input about whether or not they want paging to be performed.
+#' @rdname paging
+#' @noRd
+paging_as_lgl <- function(resp_openFDA, paging, paging_verbosity) {
   resp_has_link_header <- httr2::resp_header_exists(resp_openFDA,
                                                     header = "Link")
   json <- httr2::resp_body_json(resp_openFDA)
@@ -197,17 +244,23 @@ paging_as_lgl <- function(resp_openFDA, paging) {
     return(FALSE)
   }
   results <- httr2::resp_body_json(resp_openFDA)$meta$results
-  if (paging %in% c("yes", "ask", "no")) {
-    paging_inform(results$total, results$limit)
-  }
+  if (paging_verbosity == "verbose") paging_inform(results$total, results$limit)
   if (paging == "ask") {
     if (paging_ask(results$total, results$limit) == 1) {
       return(TRUE)
     }
   }
-  grepl(paging, pattern = "^yes")
+  paging == "always"
 }
 
+#' User interaction with respect to paging
+#' @param total,limit Single-length integerish variables denoting the total
+#'   results found in openFDA for a given query, and the limit on the number of
+#'   responses as imposed by the package user.
+#' @returns For `paging_inform()`, returns NULL invisibly. For `paging_ask()`,
+#'   returns user input about whether or not they want paging to be performed.
+#' @rdname paging
+#' @noRd
 paging_inform <- function(total, limit) {
   n_queries <- ceiling(total / limit)
   cli_n_queries <- prettyNum(n_queries, big.mark = ",")
@@ -221,8 +274,13 @@ paging_inform <- function(total, limit) {
     class = "openfda_message_paging"
   )
   cat("\n")
+  invisible(NULL)
 }
 
+#' Ask an end-user if they want `openFDA()` to page through all results
+#' @inheritParams paging_inform
+#' @rdname paging
+#' @noRd
 paging_ask <- function(total, limit) {
   input <- utils::menu(
     title = "Do you want openFDA to retrieve all results?",
@@ -267,12 +325,12 @@ endpoint_url <- function(endpoint) {
 #' Catch common HTTP errors in `openFDA()` calls
 #' @param req_openFDA A httr2 request object, which will be used to query the
 #'   openFDA API.
-#' @param warn_on_http_error Scalar logical value. If `TRUE`, the function will
+#' @param handle_http_errors Scalar logical value. If `TRUE`, the function will
 #'   issue a warning based on the HTTP error encountered
 #' @noRd
-openFDA_error_handling <- function(resp, warn_on_http_error) {
+openFDA_error_handling <- function(resp, handle_http_errors) {
   status <- httr2::resp_status(resp)
-  if (status != 200 && warn_on_http_error) {
+  if (status != 200 && handle_http_errors != "silent") {
     call <- rlang::caller_env(n = 6)
     msg <- switch(as.character(status),
                   `400` = openFDA_err_400_msg(resp),
@@ -280,8 +338,11 @@ openFDA_error_handling <- function(resp, warn_on_http_error) {
                   `404` = openFDA_err_404_msg(resp),
                   `500` = openFDA_err_500_msg(resp),
                   openFDA_err_generic_msg(resp))
-    cli::cli_warn(message = msg, call = call,
-                  class = paste0("openFDA_http_error_", status))
+    cli_fn <- switch(handle_http_errors,
+                     "warn" = cli::cli_warn,
+                     "error" = cli::cli_abort)
+    class <- paste0("openFDA_http_error_", status)
+    cli_fn(message = msg, call = call, class = class)
   }
   FALSE
 }

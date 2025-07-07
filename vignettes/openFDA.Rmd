@@ -40,10 +40,6 @@ We start by loading openFDA.
 library(openFDA)
 ```
 
-```{r set_key, echo = FALSE}
-set_api_key("tvzdUXoC3Yi21hhxtKKochJlQgm6y1Lr7uhmjcpT")
-```
-
 # The openFDA API
 The openFDA API makes public FDA data available from a simple, public API.
 Users of this API have access to FDA data on food, human and veterinary drugs, devices, and more.
@@ -55,11 +51,11 @@ With this package, however, that can be handled for you.
 By default, `openFDA()` will ask you if you want to retrieve all possible results.
 However, asking for user input isn't possible when in a vignette.
 Additionally, we don't want to do paging for these examples, as our searches get lots of results.
-Therefore, to prevent paging, we set the package-level option `openFDA.paging` to `"no"`.
+Therefore, to prevent paging, we set the package-level option `openFDA.paging` to `"never"`.
 Now `openFDA()` will automatically **not** perform paging, even when it's possible.
 
-```{r set-paging}
-options("openFDA.paging" = "no-quiet")
+```{r set-paging, echo = TRUE}
+options(openFDA.paging = "never")
 ```
 
 # A simple openFDA query
@@ -70,21 +66,32 @@ The empty search string (`""`) means the results will be non-specific.
 ```{r example1}
 search <- openFDA(search = "",
                   endpoint = "drug-event",
-                  limit = 2,
-                  paging = "no")
+                  limit = 2)
 search
 ```
 
 The warning given about pagination is because we searched on the whole dataset, but used `limit` to only pull out the first two results.
-We can suppress this warning by setting `paging` to `"no-quiet"`.
-This ensures you don't page the whole dataset (which would take eleven hours) and suppresses the warning:
+We can suppress this warning by setting `paging_verbosity` to `"quiet"`.
+Now we won't page the whole dataset, because `paging == "never"`, and we won't get that warning either:
 
 ```{r example2}
 search <- openFDA(search = "",
                   endpoint = "drug-event",
                   limit = 2,
-                  paging = "no-quiet")
+                  paging = "never",
+                  paging_verbosity = "quiet")
 search
+```
+
+Instead of setting the `paging` and `paging_verbosity` arguments each time you
+call the function, it is better to set the package-level option for these
+behaviours. You can do this with any function that edits options:
+
+```{r set-options}
+options(
+  openFDA.paging = "never",
+  openFDA.paging_verbosity = "quiet"
+)
 ```
 
 ## openFDA results
@@ -127,8 +134,7 @@ For example, let's look at drug manufacturers in the [Drugs@FDA endpoint](https:
 ```{r example_4a_count_names, out.lines = 10}
 count <- openFDA(search = "openfda.generic_name:ketamine",
                  endpoint = "drug-drugsfda",
-                 count = "openfda.manufacturer_name.exact",
-                 paging = "no") |>
+                 count = "openfda.manufacturer_name.exact") |>
   httr2::resp_body_json()
 count$results
 ```
@@ -173,8 +179,7 @@ Let's do an unrefined search first:
 search_unrefined <- openFDA(
   search = "openfda.pharm_class_epc:thiazide diuretic",
   endpoint = "drug-drugsfda",
-  limit = 1,
-  paging = "no-quiet"
+  limit = 1
 )
 httr2::resp_body_json(search_unrefined)$meta$results$total
 ```
@@ -185,7 +190,6 @@ Let's compare this to our refined search, where we add double-quotes around the 
 search_refined <- openFDA(
   search = "openfda.pharm_class_epc:\"thiazide diuretic\"",
   endpoint = "drug-drugsfda",
-  paging = "no-quiet",
   limit = 1
 )
 httr2::resp_body_json(search_refined)$meta$results$total
@@ -207,7 +211,6 @@ Note that though a single record can have multiple brand names, we are choosing 
 search_term <- "openfda.manufacturer_name:Walmart+AND+openfda.route=oral"
 search <- openFDA(search = search_term,
                   endpoint = "drug-drugsfda",
-                  paging = "no-quiet",
                   limit = 5)
 json <- httr2::resp_body_json(search)
 purrr::map(json$results, .f = \(x) {
@@ -222,8 +225,7 @@ The function will automatically add double quotes (`""`) around your search term
 ```{r example_5d_format_scalar_search_term}
 search <- openFDA(search = c("openfda.generic_name" = "amoxicillin"),
                   endpoint = "drug-drugsfda",
-                  limit = 1,
-                  paging = "no-quiet")
+                  limit = 1)
 paste("Number of results:", httr2::resp_body_json(search)$meta$results$total)
 ```
 
@@ -235,8 +237,7 @@ The below search strategy will therefore pick up all entries in [Drugs@FDA](http
 search <- openFDA(search = c("openfda.generic_name" = "amoxicillin",
                              "openfda.route" = "oral"),
                   endpoint = "drug-drugsfda",
-                  limit = 1,
-                  paging = "no-quiet")
+                  limit = 1)
 paste("Number of results:", httr2::resp_body_json(search)$meta$results$total)
 ```
 
@@ -261,8 +262,7 @@ search_term
 ```{r example_5h_nonscalar_search_term_run}
 search <- openFDA(search = search_term,
                   endpoint = "drug-drugsfda",
-                  limit = 1,
-                  paging = "no-quiet")
+                  limit = 1)
 paste("Number of results:", httr2::resp_body_json(search)$meta$results$total)
 ```
 
@@ -271,6 +271,7 @@ You can use the wildcard character `"*"` to match zero or more characters.
 For example, we could take the prototypical ending to a common drug class - e.g. the **sartans**, which are angiotensin-II receptor blockers - and see which manufacturers are most represented in Drugs@FDA for this class.
 When using wildcards, either pre-format the string yourself *without double-quotes* or use `format_search_term()` with `exact = FALSE`.
 If you try to search with both double-quotes and the wildcard character, you will get a 404 error from openFDA.
+In the code block below, we use a wildcard to find all drugs with generic names ending with `"sartan"`, and count on the manufacturer names.
 
 ```{r example_6_wildcards, out.lines = 15}
 search_term <- format_search_term(c("openfda.generic_name" = "*sartan"),
@@ -278,7 +279,7 @@ search_term <- format_search_term(c("openfda.generic_name" = "*sartan"),
 search <- openFDA(search = search_term,
                   count = "openfda.manufacturer_name.exact",
                   endpoint = "drug-drugsfda",
-                  paging = "yes")
+                  paging = "always")
 results <- httr2::resp_body_json(search, simplifyDataFrame = TRUE) |>
         purrr::pluck("results")
 head(results, n = 10)
@@ -304,9 +305,11 @@ When paging is performed, `openFDA()` returns a list of `{httr2}` response objec
 
 ```{r example_7_paging}
 resps <- openFDA(search = "openfda.manufacturer_name:Pharma",
-                 limit = 500,
+                 limit = 750,
                  endpoint = "drug-drugsfda",
-                 paging = "yes")
+                 paging = "always",
+                 paging_verbosity = "verbose")
+resps
 ```
 
 # Other openFDA API features

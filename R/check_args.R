@@ -1,41 +1,3 @@
-#' Check that the `warn_on_http_error` argument in `format_search_term()` is
-#' appropriate
-#' @inheritParams format_search_term
-#' @noRd
-check_warn_on_http_error_arg <- function(warn_on_http_error,
-                                         call = rlang::caller_env()) {
-  is_valid <- checkmate::test_logical(warn_on_http_error, len = 1,
-                                      any.missing = FALSE)
-  if (!is_valid) {
-    if (!is.logical(warn_on_http_error)) {
-      cli::cli_abort(
-        c("{.var warn_on_http_error} must be of class {.cls logical}.",
-          "x" = "{.var warn_on_http_error} was class {.cls
-                 {class(warn_on_http_error)}}."),
-        call = call,
-        class = "openFDA_wohe_invalid_class")
-    }
-    if (length(warn_on_http_error) != 1) {
-      cli::cli_abort(
-        c("{.var warn_on_http_error} must be of length 1.",
-          "x" = "{.var warn_on_http_error} has {length(warn_on_http_error)}
-                 element{?s}."),
-        call = call,
-        class = "openFDA_wohe_invalid_length"
-      )
-    }
-    if (is.na(warn_on_http_error)) {
-      cli::cli_abort(
-        message = "{.var warn_on_http_error} must not be missing ({.val
-                   {warn_on_http_error}}).",
-        call = call,
-        class = "openFDA_wohe_is_NA"
-      )
-    }
-  }
-  warn_on_http_error
-}
-
 #' Check that the `search` argument in `format_search_term()` is appropriate
 #' @inheritParams format_search_term
 #' @noRd
@@ -129,31 +91,79 @@ check_sort_arg <- function(sort, call = rlang::caller_env()) {
 
 #' Assert that users have passed string data to the right openFDA parameters
 #' @param param The `count`, `api_key`, or `paging` arguments from [openFDA()].
+#' @param vname A single string with the variable's name in `openFDA()`.
+#' @param values A character vector defining acceptable values for `param`.
+#'   The default, NULL, indicates that `param` can be any string.
 #' @return Invisibly returns `param` if checks are satisfied, or throws an
 #'   error.
 #' @noRd
-check_openFDA_string_arg <- function(param, vname, call = rlang::caller_env()) {
-  is_valid <- checkmate::test_string(param, null.ok = TRUE)
+check_openFDA_string_arg <- function(param,
+                                     vname,
+                                     values = NULL,
+                                     null_ok = TRUE,
+                                     call = rlang::caller_env()) {
+  is_valid <- checkmate::test_string(param, null.ok = null_ok, na.ok = FALSE)
   if (!is_valid) {
-    if (!is.character(param)) {
-      cli::cli_abort(
-        c("{.var {vname}} must be be of class {.cls character}.",
-          "x" = "{.var {vname}} was class {.cls {class(param)}}."),
-        call = call,
-        class = "openFDA_invalid_string_param_class"
-      )
-    }
     if (length(param) != 1) {
       cli::cli_abort(
-        c("{.var {vname}} must be of length 1.",
+        c("!" = "{.var {vname}} must be of length 1.",
           "x" = "{.var {vname}} has {length(param)} element{?s}."),
         call = call,
         class = "openFDA_invalid_string_param_length"
       )
     }
+    if (is.na(param)) {
+      cli::cli_abort(
+        c("!" = "{.var {vname}} must not be missing ({.val {param}})."),
+        call = call,
+        class = "openFDA_invalid_string_param_missing"
+      )
+    }
+    if (!is.character(param)) {
+      cli::cli_abort(
+        c("!" = "{.var {vname}} must be be of class {.cls character}.",
+          "x" = "{.var {vname}} was class {.cls {class(param)}}."),
+        call = call,
+        class = "openFDA_invalid_string_param_class"
+      )
+    }
   }
-  param
+  if (!is.null(values) && !param %in% values) {
+    cli::cli_abort(
+      c("!" = "{.var {vname}} is invalid.",
+        "i" = "{.var {vname}} must be one of {.val {values}}.",
+        "x" = "{.var {vname}} was {.val {param}}."),
+      call = call,
+      class = "openFDA_invalid_string_param_value"
+    )
+  }
+  invisible(param)
 }
+
+#' Check that arguments in `openFDA()` with a related package-level option are
+#' appropriate
+#' @inheritParams format_search_term
+#' @noRd
+check_arg_with_option <- function(param, vname, call = rlang::caller_env()) {
+  retrieve <- paste0("openFDA.", vname)
+  param <- check_openFDA_string_arg(param = param,
+                                    vname = vname,
+                                    values = valid_openFDA_options[[retrieve]],
+                                    null_ok = FALSE,
+                                    call = call)
+  if (vname == "paging") {
+    if (param == "ask" && !interactive()) {
+      cli::cli_abort(
+        c("!" = "The `paging` argument must not be `\"ask\"` if R is not running
+                 interactively."),
+        class = "openfda_paging_is_ask_when_uninteractive",
+        call = call
+      )
+    }
+  }
+  invisible(param)
+}
+
 
 #' Assert that users have passed integerish data to the right openFDA parameters
 #' @param param One of `count`, `limit`, or `skip` from [openFDA()].
@@ -243,23 +253,4 @@ check_mode_arg <- function(mode) {
       class = "openFDA_mode_invalid_value"
     )
   }
-}
-
-#' Check that the `paging` argument in `openFDA()` is appropriate
-#' @inheritParams openFDA
-#' @noRd
-check_paging_arg <- function(paging, call = rlang::caller_env()) {
-  check_openFDA_string_arg(paging, vname = "paging", call = call)
-  rlang::arg_match(arg = paging,
-                   values = c("ask", "yes", "yes-quiet", "no", "no-quiet"),
-                   error_call = call)
-  if (paging == "ask" && !interactive()) {
-    cli::cli_abort(
-      message = c("!" = "The `paging` argument must not be `\"ask\"` if R is not
-                         running interactively."),
-      class = "openfda_paging_is_ask_when_uninteractive",
-      call = call
-    )
-  }
-  paging
 }

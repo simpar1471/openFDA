@@ -1,6 +1,8 @@
 encrypted_api_key <-
   "TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ"
-rlang::push_options(openFDA.paging = "no-quiet")
+#
+rlang::push_options(openFDA.paging = "never",
+                    openFDA.paging_verbosity = "quiet")
 
 test_that("openFDA can call its API", {
   suppressMessages(
@@ -31,7 +33,11 @@ test_that("All openFDA endpoints are valid", {
                  "other-substance", "other-unii", "tobacco-problem")
   purrr::map(endpoints, function(endpoint) {
     resp <- expect_no_warning(suppressMessages(
-      openFDA(search = "", endpoint = endpoint, limit = 1, paging = "no-quiet")
+      openFDA(search = "",
+              endpoint = endpoint,
+              limit = 1,
+              paging = "never",
+              paging_verbosity = "quiet")
     ))
     expect_s3_class(resp, class = "httr2_response")
   })
@@ -46,7 +52,7 @@ test_that("openFDA paging is possible", {
   resps <- openFDA(
     search = "openfda.brand_name:o*",
     limit = 300,
-    paging = "yes-quiet"
+    paging = "always"
   )
 
   purrr::map(resps, \(resp) expect_s3_class(resp, "httr2_response"))
@@ -59,7 +65,10 @@ test_that("openFDA paging information is printed", {
 
   # Query which requires paging
   expect_message(
-    openFDA(search = "openfda.brand_name:o*", limit = 300, paging = "no"),
+    openFDA(search = "openfda.brand_name:o*",
+            limit = 300,
+            paging = "never",
+            paging_verbosity = "verbose"),
     class = "openfda_message_paging"
   )
 })
@@ -136,19 +145,23 @@ test_that("openFDA throws formatted HTTP errors", {
   )
   expect_s3_class(resp, "httr2_response")
 
-  # Mock up a response with a non-customised error messaage
-  temporary_mock <- function(req) {
-    httr2::response_json(status_code = 503)
+  # Mock up a response with a non-customised error messaage. In this case, no
+  # special warning will be performed, but the error class will be specific to
+  # the
+  for (http_status_code in c(408, 503, 504)) {
+    temporary_mock <- function(req) {
+      httr2::response_json(status_code = http_status_code)
+    }
+    expect_warning(
+      httr2::with_mocked_responses(temporary_mock, {
+        openFDA(
+          search = "openfda.brand_name:\"verapamil\"",
+          limit = 1
+        )
+      }),
+      class = paste0("openFDA_http_error_", http_status_code)
+    )
   }
-  expect_warning(
-    httr2::with_mocked_responses(temporary_mock, {
-      openFDA(
-        search = "openfda.brand_name:\"verapamil\"",
-        limit = 1
-      )
-    }),
-    class ="openFDA_http_error_503"
-  )
 })
 
 test_that("openFDA errors on certain bad inputs", {
@@ -238,7 +251,7 @@ test_that("openFDA errors on certain bad inputs", {
   expect_error(
     openFDA(search = c("openfda.brand_name" = "ozempic"),
             paging = "bad-value"),
-    regexp = "`paging` must be one of"
+    class = "openFDA_invalid_string_param_value"
   )
   expect_error(
     openFDA(search = c("openfda.brand_name" = "ozempic"),
@@ -248,19 +261,19 @@ test_that("openFDA errors on certain bad inputs", {
 
   ## warn_on_http_error
   expect_error(
-    openFDA(search = "", warn_on_http_error = 1),
-    class = "openFDA_wohe_invalid_class"
+    openFDA(search = "", handle_http_errors = 1),
+    class = "openFDA_invalid_string_param_class"
   )
   expect_error(
-    openFDA(search = "", warn_on_http_error = NULL),
-    class = "openFDA_wohe_invalid_class"
+    openFDA(search = "", handle_http_errors = NULL),
+    class = "openFDA_invalid_string_param_length"
   )
   expect_error(
-    openFDA(search = "", warn_on_http_error = c(TRUE, FALSE)),
-    class = "openFDA_wohe_invalid_length"
+    openFDA(search = "", handle_http_errors = c(TRUE, FALSE)),
+    class = "openFDA_invalid_string_param_length"
   )
   expect_error(
-    openFDA(search = "", warn_on_http_error = NA),
-    class = "openFDA_wohe_is_NA"
+    openFDA(search = "", handle_http_errors = NA),
+    class = "openFDA_invalid_string_param_missing"
   )
 })

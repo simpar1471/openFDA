@@ -12,8 +12,9 @@ openFDA(
   skip = NULL,
   endpoint = "drug-drugsfda",
   api_key = get_api_key(),
-  paging = rlang::peek_option("openFDA.paging"),
-  warn_on_http_error = TRUE
+  paging = get_openFDA_option("openFDA.paging"),
+  paging_verbosity = get_openFDA_option("openFDA.paging_verbosity"),
+  handle_http_errors = get_openFDA_option("openFDA.handle_http_errors")
 )
 }
 \arguments{
@@ -32,8 +33,8 @@ will throw an error.}
 \item{count}{A single string denoting a field on which to count results. If
 \code{NULL} (the default), results will be returned in full to the user. Specify
 this parameter if you want to count occurrences of results within your
-search term - go to \url{https://open.fda.gov/apis/query-syntax/} for more
-information.}
+search term. The \href{https://open.fda.gov/apis/query-syntax/}{openFDA website}
+has more information on how to \code{count} by a specific field.}
 
 \item{limit}{A single integerish value describing the limit on the number of
 records to retrieve. An error will be thrown if \code{limit} is more than \code{1000}
@@ -92,29 +93,59 @@ Drugs@FDA endpoint (\code{"drugs-drugsfda"}).}
 default this is the result of \code{get_api_key()}. You must set this with
 \code{set_api_key()}, or \code{openFDA()} will not work.}
 
-\item{paging}{A single string describing whether results should be paged,
-and whether relevant alerts should be printed to the console. By default,
-\code{openFDA()} uses the string stored in \code{options("openFDA.paging")}, which
-has the value \code{"ask"}. Permissible values include:
+\item{paging}{A single string describing whether results should be paged. You
+can set this on a per-function call level with this parameter, or edit
+the \link[=openFDA_options]{package-level option} \code{openFDA.paging} to set paging
+behaviour across multiple \code{openFDA()} calls.
+
+By default, \code{openFDA()} uses the string stored in
+\code{options("openFDA.paging")}, which has the default value \code{"ask"}.
+Permissible values for \code{paging} include:
 \itemize{
 \item \code{"ask"} - \code{openFDA()} will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
-\code{httr2} response object or a list of \code{httr2} response objects will be
-returned
-\item \code{"yes"} - information on pagination will be printed to the console and
-done automatically; a list of responses will be returned
-\item \code{"no"} - information on pagination will be printed to the console but
-will not be performed; only the first response will be returned
-\item \code{"yes-quiet"} - same as \code{paging = "yes"} except no alert is printed to
-the console
-\item \code{"no-quiet"} - same as \code{paging = "no"} except no alert is printed to
-the console
+{httr2} response object or a list of {httr2} response objects will be
+returned. This will throw an error if your R session is not in
+interactive mode.
+\item \code{"always"} - \code{openFDA()} will always perform pagination. A list of
+{httr2} responses will be returned when pagination occurs.
+\item \code{"never"} - \code{openFDA()} will never perform pagination. Only the first
+{httr2} response will be returned.
 }}
 
-\item{warn_on_http_error}{A scalar logical value. If \code{TRUE} (the default),
-common openFDA HTTP errors will cause explanatory warnings to be printed
-If \code{FALSE}, the underlying httr2 response object will be returned with
-no extra warnings.}
+\item{paging_verbosity}{A single string describing whether messages about
+pagination should be printed to the console. You can set this on a
+per-function call level with this parameter, or edit the \link[=openFDA_options]{package-level option} \code{openFDA.paging_verbosity} to set this behaviour
+across multiple \code{openFDA()} calls.
+
+By default, \code{openFDA()} uses the string stored in
+\code{options("openFDA.paging_verbosity")}, which has the default value
+\code{"verbose"}. Permissible values for \code{paging_verbosity} include:
+\itemize{
+\item \code{"verbose"} - If paging can be performed, print a message to the console,
+stating how many requests are required with a minimum estimate for the
+time this will take.
+\item \code{"quiet"} - Even if paging can be performed, do not print messages about
+it  to the console.
+}}
+
+\item{handle_http_errors}{A single string defining how to handle HTTP codes
+other than \verb{200 OK}. You can set this on a per-function call level with
+this parameter, or edit the \link[=openFDA_options]{package-level option}
+\code{openFDA.handle_http_errors} to set this behaviour across multiple
+\code{openFDA()} calls.
+
+By default, \code{openFDA()} uses the string stored in
+\code{options("openFDA.handle_http_errors")}, which has the default value
+\code{"warn"}. Permissible values for \code{handle_http_errors} include:
+\itemize{
+\item \code{"warn"}: If the returned HTTP code is not 200, issue a warning to the
+console and return the underlying {httr2} response object.
+\item \code{"error"}: If the returned HTTP code is not 200, throw an (informative)
+error.
+\item \code{"silent"}: If the returned HTTP code is not 200, return the underlying
+{httr2} response object without printing a warning.
+}}
 }
 \value{
 Either an \code{httr2} response object from \code{\link[httr2:req_perform]{httr2::req_perform()}} or list

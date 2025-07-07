@@ -22,7 +22,8 @@ Let's start by loading the package.
 
 ```{r setup}
 library(openFDA)
-options("openFDA.paging" = "no-quiet")
+options("openFDA.paging" = "never",
+        "openFDA.paging_verbosity" = "quiet")
 ```
 
 # Get brand names and EPCs from generic BNF terms
@@ -198,7 +199,7 @@ We can use these generic names of interest to get even more brand names:
 more_brand_names <- purrr::map(
   .x = fda_generics,
   .f = \(generic) {
-    openFDA(c("openfda.generic_name" = paste0("\"", generic, "\""))) |>
+    openFDA(c("openfda.generic_name" = generic)) |>
       httr2::resp_body_json() |>
       extract_openFDA_field(openfda_field = "brand_name") |>
       tolower()

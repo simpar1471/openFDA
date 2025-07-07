@@ -26,7 +26,10 @@ validated for clinical or production use.
 
 ## Installation
 
-The easiest way to install openFDA is to get it from CRAN:
+The easiest way to install openFDA is to get it from CRAN. However,
+given a spate of recent improvements which are not yet on CRAN, you may
+have a better time using the development version. Nonetheless, to
+install from CRAN:
 
 ``` r
 install.packages("openFDA")
@@ -61,10 +64,11 @@ search <- openFDA(
   search = "openfda.generic_name:furosemide",
   limit = 5
 )
-#> Error in `get_api_key()`:
-#> ! To use openFDA, you must set an openFDA API key.
-#> ℹ Go to <https://open.fda.gov/apis/authentication/> to get an openFDA API key,
-#>   then supply it to `set_api_key()` to cache it for use in this session.
+#> Error:
+#> ! API key not found by keyring package.
+#> ℹ To use openFDA, you must set an openFDA API key. Go to
+#>   <https://open.fda.gov/apis/authentication/> to get an openFDA API key, then
+#>   use `set_api_key()` to cache it for use in this and future sessions.
 ```
 
 That’s not good. To fix this error, get an API key from the webpage
@@ -77,6 +81,11 @@ setting an API key:
 # n.b. this API key is a fake, just for demonstration
 set_api_key(api_key = "iHXeqlbXtlYEwX9MYLwyCBuiZxfn98Sj3oX2FNtSx")
 ```
+
+    #> ! OpenFDA API key set.
+    #> ℹ You can retrieve the key with the following code:
+    #>   `keyring::key_get(service = "OPENFDA_KEY", user = "openFDA", keyring =
+    #>   "openFDA")`
 
 ``` r
 search <- openFDA(
