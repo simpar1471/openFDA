@@ -334,7 +334,7 @@ endpoint_url <- function(endpoint) {
 #' @noRd
 openFDA_error_handling <- function(resp, handle_http_errors) {
   status <- httr2::resp_status(resp)
-  if (status != 200 && handle_http_errors != "silent") {
+  if (status != 200) {
     call <- rlang::caller_env(n = 6)
     msg <- switch(as.character(status),
                   `400` = openFDA_err_400_msg(resp),
@@ -342,11 +342,12 @@ openFDA_error_handling <- function(resp, handle_http_errors) {
                   `404` = openFDA_err_404_msg(resp),
                   `500` = openFDA_err_500_msg(resp),
                   openFDA_err_generic_msg(resp))
-    cli_fn <- switch(handle_http_errors,
+    cnd_fn <- switch(handle_http_errors,
                      "warn" = cli::cli_warn,
-                     "error" = cli::cli_abort)
+                     "error" = cli::cli_abort,
+                     "silent" = rlang::signal)
     class <- paste0("openFDA_http_error_", status)
-    cli_fn(message = msg, call = call, class = class)
+    cnd_fn(message = msg, call = call, class = class)
   }
   FALSE
 }

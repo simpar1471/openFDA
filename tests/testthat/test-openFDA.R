@@ -1,6 +1,5 @@
 encrypted_api_key <-
   "TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ"
-#
 rlang::push_options(openFDA.paging = "never",
                     openFDA.paging_verbosity = "quiet")
 
@@ -71,6 +70,15 @@ test_that("openFDA paging information is printed", {
             paging_verbosity = "verbose"),
     class = "openfda_message_paging"
   )
+
+  # Query which requires paging
+  expect_no_message(
+    openFDA(search = "openfda.brand_name:o*",
+            limit = 300,
+            paging = "never",
+            paging_verbosity = "quiet"),
+    class = "openfda_message_paging"
+  )
 })
 
 test_that(
@@ -93,74 +101,106 @@ test_that("openFDA throws formatted HTTP errors", {
    set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
   )
 
-  # Error 400
-  expect_warning(
-    resp <- openFDA(
-      search = "openfda.brand_name=\"verapamil\"",
-      sort = c("invalid_field" = "asc"),
-      limit = 1
-    ),
-    class ="openFDA_http_error_400"
-  )
-  expect_s3_class(resp, "httr2_response")
+  for (handle_http_errors in c("error", "warn", "silent")) {
+    expect_fn <- switch(handle_http_errors,
+                        "warn" = expect_warning,
+                        "error" = expect_error,
+                        "silent" = expect_success)
+    rlang::push_options(openFDA.handle_http_errors = handle_http_errors)
 
-  # Error 403
-  expect_warning(
-    resp <- openFDA(
-      search = "openfda.brand_name:\"verapamil\"\"",
-      limit = 1,
-      api_key = "really_bad_api_key"
-    ),
-    class ="openFDA_http_error_403"
-  )
-  expect_s3_class(resp, "httr2_response")
-
-  # Error 404 - because search returns nothing
-  expect_warning(
-    resp <- openFDA(
-      search = c("openfda.brand_name" = "3129084"),
-      limit = 1
-    ),
-    class ="openFDA_http_error_404"
-  )
-  expect_s3_class(resp, "httr2_response")
-
-  # Error 404 - because `skip` is so high
-  expect_warning(
-    resp <- openFDA(
-      search = c("openfda.brand_name" = "naproxen"),
-      skip = 500
-    ),
-    class ="openFDA_http_error_404"
-  )
-  expect_s3_class(resp, "httr2_response")
-
-  # Error 500
-  expect_warning(
-    resp <- openFDA(
-      search = "openfda.brand_name:\"verapamil\"\"",
-      limit = 1
-    ),
-    class ="openFDA_http_error_500"
-  )
-  expect_s3_class(resp, "httr2_response")
-
-  # Mock up a response with a non-customised error messaage. In this case, no
-  # special warning will be performed, but the error class will be specific to
-  # the
-  for (http_status_code in c(408, 503, 504)) {
-    temporary_mock <- function(req) {
-      httr2::response_json(status_code = http_status_code)
-    }
-    expect_warning(
-      httr2::with_mocked_responses(temporary_mock, {
-        openFDA(
-          search = "openfda.brand_name:\"verapamil\"",
-          limit = 1
-        )
-      }),
-      class = paste0("openFDA_http_error_", http_status_code)
+    expect_condition(
+      resp <- openFDA(
+        search = "openfda.brand_name=\"verapamil\"",
+        sort = c("invalid_field" = "asc"),
+        limit = 1
+      ),
+      class ="openFDA_http_error_400"
     )
+    if (handle_http_errors != "error") {
+      expect_s3_class(resp, "httr2_response")
+      rm(resp)
+    } else {
+      expect_warning(rm(resp))
+    }
+
+    # Error 403 - usually an invalid API key
+    expect_condition(
+      resp <- openFDA(
+        search = "openfda.brand_name:\"verapamil\"\"",
+        limit = 1,
+        api_key = "really_bad_api_key"
+      ),
+      class = "openFDA_http_error_403"
+    )
+    if (handle_http_errors != "error") {
+      expect_s3_class(resp, "httr2_response")
+      rm(resp)
+    } else {
+      expect_warning(rm(resp))
+    }
+
+    # Error 404 - because search returns nothing
+    expect_condition(
+      resp <- openFDA(
+        search = c("openfda.brand_name" = "3129084"),
+        limit = 1
+      ),
+      class ="openFDA_http_error_404"
+    )
+    if (handle_http_errors != "error") {
+      expect_s3_class(resp, "httr2_response")
+      rm(resp)
+    } else {
+      expect_warning(rm(resp))
+    }
+
+    # Error 404 - because `skip` is too high
+    expect_condition(
+      resp <- openFDA(
+        search = c("openfda.brand_name" = "naproxen"),
+        skip = 500
+      ),
+      class ="openFDA_http_error_404"
+    )
+    if (handle_http_errors != "error") {
+      expect_s3_class(resp, "httr2_response")
+      rm(resp)
+    } else {
+      expect_warning(rm(resp))
+    }
+
+    # Error 500
+    expect_condition(
+      resp <- openFDA(
+        search = "openfda.brand_name:\"verapamil\"\"",
+        limit = 1
+      ),
+      class ="openFDA_http_error_500"
+    )
+    if (handle_http_errors != "error") {
+      expect_s3_class(resp, "httr2_response")
+      rm(resp)
+    } else {
+      expect_warning(rm(resp))
+    }
+
+    # Mock up responses with non-customised error messages. In this case, no
+    # special warning will be performed, but the condition class will be
+    # specific to the HTTP error
+    for (http_status_code in c(408, 503, 504)) {
+      temporary_mock <- function(req) {
+        httr2::response_json(status_code = http_status_code)
+      }
+      expect_condition(
+        httr2::with_mocked_responses(temporary_mock, {
+          openFDA(
+            search = "openfda.brand_name:\"verapamil\"",
+            limit = 1
+          )
+        }),
+        class = paste0("openFDA_http_error_", http_status_code)
+      )
+    }
   }
 })
 
