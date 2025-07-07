@@ -10,7 +10,7 @@ status](https://www.r-pkg.org/badges/version/openFDA)](https://CRAN.R-project.or
 [![R-CMD-check](https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml)
 [![check-no-suggests](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg)](https://app.codecov.io/gh/simpar1471/openFDA)
+coverage](https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg?token=1Y7FL87Z21)](https://codecov.io/gh/simpar1471/openFDA)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)

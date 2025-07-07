@@ -206,7 +206,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "111.371KB",
+  "fileSize": "111.384KB",
   "releaseNotes": "https://github.com/simpar1471/openFDA/blob/master/NEWS.md",
   "readme": "https://github.com/simpar1471/openFDA/blob/main/README.md",
   "contIntegration": ["https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml", "https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml", "https://app.codecov.io/gh/simpar1471/openFDA", "https://github.com/simpar1471/openFDA/actions?query=workflow%3Apkgcheck"],
