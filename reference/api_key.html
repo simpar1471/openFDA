@@ -117,14 +117,10 @@ Once set on a machine, you shouldn't need to run <code>set_api_key()</code> agai
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "example_api_key"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># An error will be thrown if a retrieved API key is an empty string.</span></span></span>
-<span class="r-in"><span><span class="fu">set_api_key</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_api_key(""):</span> <span style="color: #BBBB00;">!</span> If providing `api_key`, it must not be an empty string (<span style="color: #0000BB;">"\"\""</span>)</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_api_key</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "example_api_key"</span>
+<span class="r-in"><span><span class="co"># An error will be thrown you try to set your API key to an empty string.</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">set_api_key</span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in set_api_key("") : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BBBB00;">!</span> If providing `api_key`, it must not be an empty string (<span style="color: #0000BB;">"\"\""</span>)</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -65,13 +65,15 @@ change the behaviour of <code><a href="openFDA.html">openFDA()</a></code>.</p>
 are enough results that <a href="https://open.fda.gov/apis/paging/" class="external-link">paging is required</a>. The default is <code>"ask"</code>. When
 setting this option, the value must be one of:</p><ul><li><p><code>"ask"</code> - <code><a href="openFDA.html">openFDA()</a></code> will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
-httr2 response object or a list of httr2 response objects will be
-returned. This will throw an error if your R session is not in
-interactive mode. When setting this option, the value must be one of:</p></li>
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response object or a list of
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response objects will be returned. This
+will throw an error if your R session is not in interactive mode. When s
+etting this option, the value must be one of:</p></li>
 <li><p><code>"always"</code> - <code><a href="openFDA.html">openFDA()</a></code> will always perform pagination. A list of
-httr2 responses will be returned when pagination occurs.</p></li>
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> responses will be returned when
+pagination occurs.</p></li>
 <li><p><code>"never"</code> - <code><a href="openFDA.html">openFDA()</a></code> will never perform pagination. Only the first
-httr2 response will be returned.</p></li>
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response will be returned.</p></li>
 </ul></li>
 <li><p><code>openFDA.paging_verbosity</code>: customise openFDA's verbosity when paging. The
 default is <code>"verbose"</code>. When setting this option, the value must be one of:</p><ul><li><p><code>"verbose"</code> - If paging can be performed, print a message to the console,
@@ -82,11 +84,13 @@ time this will take.</p></li>
 <li><p><code>openFDA.handle_http_errors</code>: customise whether <code><a href="openFDA.html">openFDA()</a></code> prints warnings
 to the console when requests to the openFDA server were not <code>200 OK</code>. The
 default is <code>"warn"</code>. When setting this option, the value must be one of:</p><ul><li><p><code>"warn"</code>: If the returned HTTP code is not 200, issue a warning to the
-console and return the underlying httr2 response object.</p></li>
+console and return the underlying <a href="https://httr2.r-lib.org/" class="external-link">httr2</a>
+response object.</p></li>
 <li><p><code>"error"</code>: If the returned HTTP code is not 200, throw an (informative)
 error.</p></li>
 <li><p><code>"silent"</code>: If the returned HTTP code is not 200, return the underlying
-httr2 response object without printing a warning.</p></li>
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response object without printing a
+warning.</p></li>
 </ul></li>
 </ul></div>
 

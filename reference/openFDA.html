@@ -162,13 +162,14 @@ behaviour across multiple <code>openFDA()</code> calls.</p>
 <code>options("openFDA.paging")</code>, which has the default value <code>"ask"</code>.
 Permissible values for <code>paging</code> include:</p><ul><li><p><code>"ask"</code> - <code>openFDA()</code> will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
-httr2 response object or a list of httr2 response objects will be
-returned. This will throw an error if your R session is not in
-interactive mode.</p></li>
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response object or a list of
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response objects will be returned. This
+will throw an error if your R session is not in interactive mode.</p></li>
 <li><p><code>"always"</code> - <code>openFDA()</code> will always perform pagination. A list of
-httr2 responses will be returned when pagination occurs.</p></li>
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> responses will be returned when
+pagination occurs.</p></li>
 <li><p><code>"never"</code> - <code>openFDA()</code> will never perform pagination. Only the first
-httr2 response will be returned.</p></li>
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response will be returned.</p></li>
 </ul></dd>
 
 
@@ -196,11 +197,13 @@ this parameter, or edit the <a href="openFDA_options.html">package-level option<
 <p>By default, <code>openFDA()</code> uses the string stored in
 <code>options("openFDA.handle_http_errors")</code>, which has the default value
 <code>"warn"</code>. Permissible values for <code>handle_http_errors</code> include:</p><ul><li><p><code>"warn"</code>: If the returned HTTP code is not 200, issue a warning to the
-console and return the underlying httr2 response object.</p></li>
+console and return the underlying <a href="https://httr2.r-lib.org/" class="external-link">httr2</a>
+response object.</p></li>
 <li><p><code>"error"</code>: If the returned HTTP code is not 200, throw an (informative)
 error.</p></li>
 <li><p><code>"silent"</code>: If the returned HTTP code is not 200, return the underlying
-httr2 response object without printing a warning.</p></li>
+<a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response object without printing a
+warning.</p></li>
 </ul></dd>
 
 </dl></div>
