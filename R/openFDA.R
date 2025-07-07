@@ -12,8 +12,8 @@
 #' @param count A single string denoting a field on which to count results. If
 #'   `NULL` (the default), results will be returned in full to the user. Specify
 #'   this parameter if you want to count occurrences of results within your
-#'   search term - go to <https://open.fda.gov/apis/query-syntax/> for more
-#'   information.
+#'   search term. The [openFDA website](https://open.fda.gov/apis/query-syntax/)
+#'   has more information on how to `count` by a specific field.
 #' @param limit A single integerish value describing the limit on the number of
 #'   records to retrieve. An error will be thrown if `limit` is more than `1000`
 #'   (the default).
@@ -431,17 +431,3 @@ retrieve_openFDA_query <- function(resp) {
     paste0(collapse = "&")
 }
 
-# Sanitise API key (internal) --------------------------------------------------
-
-#' Sanitise API keys in `openFDA()` outputs
-#' @param url A single-length character vector with the URL used to query the
-#'   openFDA API. This contains an API keys.
-#' @returns A single-length character vector with a sanitised URL.
-#' @noRd
-sanitise_api_key <- function(resp) {
-  sanitised_url <- sub(x = resp$url, pattern = "(?<=api_key\\=).*(?=\\&search)",
-                       replacement = "[API_KEY]", perl = TRUE)
-  resp$url <- sanitised_url
-  resp$request$url <- sanitised_url
-  resp
-}
