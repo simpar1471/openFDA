@@ -176,7 +176,8 @@ check_openFDA_int_arg <- function(param, vname, call = rlang::caller_env()) {
   if (!is_valid) {
     if (!is.numeric(param)) {
       cli::cli_abort(
-        c("{.var {vname}} must be either {.cls numeric} or {.cls integer}.",
+        c("!" = "{.var {vname}} must be either {.cls numeric} or
+                 {.cls integer}.",
           "x" = "{.var {vname}} was class {.cls {class(param)}}."),
         call = call,
         class = "openFDA_invalid_int_param_class"
@@ -184,7 +185,7 @@ check_openFDA_int_arg <- function(param, vname, call = rlang::caller_env()) {
     }
     if (length(param) != 1) {
       cli::cli_abort(
-        c("{.var {vname}} must be of length 1.",
+        c("!" = "{.var {vname}} must be of length 1.",
           "x" = "{.var {vname}} has {length(param)} element{?s}."),
         call = call,
         class = "openFDA_invalid_int_param_length"
@@ -192,7 +193,7 @@ check_openFDA_int_arg <- function(param, vname, call = rlang::caller_env()) {
     }
     if (param < 1 && vname != "limit") {
       cli::cli_abort(
-        c("{.var {vname}} must be more than {.val {0L}}.",
+        c("!" = "{.var {vname}} must be more than {.val {0L}}.",
           "x" = "{.var {vname}} was {.val {param}}."),
         call = call,
         class = "openFDA_int_param_below_zero"
@@ -202,7 +203,7 @@ check_openFDA_int_arg <- function(param, vname, call = rlang::caller_env()) {
   if (vname == "limit") {
     if (param < 0 || param > 1000) {
       cli::cli_abort(
-        c("{.var limit} must be between {.val {0L}} and {.val {1000L}}.",
+        c("!" = "{.var limit} must be between {.val {0L}} and {.val {1000L}}.",
           "x" = "{.var limit} was {.val {param}}."),
         call = call,
         class = "openFDA_limit_oob"
@@ -212,7 +213,7 @@ check_openFDA_int_arg <- function(param, vname, call = rlang::caller_env()) {
   if (vname == "skip") {
     if (!is.null(param) && param > 25000) {
       cli::cli_abort(
-        c("{.var skip} must be less than {.val {25000L}}.",
+        c("!" = "{.var skip} must be less than {.val {25000L}}.",
           "x" = "{.var skip} was {.val {param}}."),
         call = call,
         class = "openFDA_skip_too_large"
@@ -230,7 +231,7 @@ check_mode_arg <- function(mode) {
   if (!checkmate::test_string(mode)) {
     if (length(mode) != 1) {
         cli::cli_abort(
-          c("{.var mode} must be of length 1.",
+          c("!" = "{.var mode} must be of length 1.",
             "x" = "{.var mode} has {length(mode)} element{?s}."),
           call = rlang::caller_env(),
           class = "openFDA_mode_invalid_length"
@@ -238,7 +239,7 @@ check_mode_arg <- function(mode) {
       }
       if (!is.character(mode)) {
         cli::cli_abort(
-          c("{.var mode} must be of class {.cls character}.",
+          c("!" = "{.var mode} must be of class {.cls character}.",
             "x" = "{.var mode} was class {.cls {class(mode)}}."),
           call = rlang::caller_env(),
           class = "openFDA_mode_invalid_class"
@@ -247,7 +248,7 @@ check_mode_arg <- function(mode) {
   }
   if (!mode %in% opts) {
     cli::cli_abort(
-      c("{.var mode} must be one of either {.val and} or {.val or}.",
+      c("!" = "{.var mode} must be one of either {.val and} or {.val or}.",
         "x" = "{.var mode} was {.val {mode}}."),
       call = rlang::caller_env(),
       class = "openFDA_mode_invalid_value"
