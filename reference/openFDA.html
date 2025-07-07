@@ -238,7 +238,8 @@ are converted to openFDA API searches.</p></div>
 <span class="r-in"><span>  <span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">openFDA</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"openfda.manufacturer_name:gilead*"</span>,</span></span>
 <span class="r-in"><span>                  limit <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>                  skip <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>                  paging <span class="op">=</span> <span class="st">"no-quiet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  paging <span class="op">=</span> <span class="st">"never"</span>,</span></span>
+<span class="r-in"><span>                  paging_verbosity <span class="op">=</span> <span class="st">"quiet"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># The function returns an `httr2` object</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></span>
@@ -250,9 +251,12 @@ are converted to openFDA API searches.</p></div>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   `keyring::key_get(service = <span style="color: #0000BB;">"OPENFDA_KEY"</span>, user = <span style="color: #0000BB;">"openFDA"</span>)`</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in openFDA(search = "openfda.manufacturer_name:gilead*", limit = 2,     skip = 10, paging = "no-quiet"):</span> <span style="color: #BBBB00;">!</span> `paging` is invalid.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> `paging` must be one of <span style="color: #0000BB;">"always"</span>, <span style="color: #0000BB;">"ask"</span>, and <span style="color: #0000BB;">"never"</span>.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> `paging` was <span style="color: #0000BB;">"no-quiet"</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name:gilead%2A&amp;limit=2&amp;skip=10</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 200 OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Content-Type</span>: application/json</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (38569 bytes)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Bad inputs will cause informative errors - here, a bad API key is supplied</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
