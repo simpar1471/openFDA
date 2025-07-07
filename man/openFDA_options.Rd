@@ -3,6 +3,10 @@
 \name{openFDA_options}
 \alias{openFDA_options}
 \title{Options consulted by openFDA}
+\value{
+Nothing - they're package-level options, so changing them alters the
+behaviour of \code{openFDA()}.
+}
 \description{
 User-configurable options used by openFDA, which provide a mechanism
 for setting default behaviour.
@@ -13,9 +17,11 @@ of \code{paging} in \code{openFDA()}.
 \section{Options for the openFDA package}{
 
 \itemize{
-\item \code{openFDA.paging}: customize the default behaviour of \code{openFDA()} when there
+\item \code{openFDA.paging}: customise the default behaviour of \code{openFDA()} when there
 are enough results that \href{https://open.fda.gov/apis/paging/}{paging is required}. The new value of this option
 should be one of \code{c("ask", "yes", "no", "yes-quiet", "no-quiet")}.
+\item \code{openFDA.verbosity_paging}: customise openFDA's verbosity when paging. This
+should have the value
 }
 }
 
