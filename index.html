@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="index.html">openFDA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,26 +90,26 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simpar1471/openFDA" class="external-link">openFDA</a></span><span class="op">)</span></span></code></pre></div>
 <p>The full documentation for the API is online, so look at the <a href="https://open.fda.gov/apis/" class="external-link">openFDA website</a> to get a full feel for the API itself.</p>
-<p>Before using the package, you will need to generate one at the <a href="https://open.fda.gov/apis/authentication/" class="external-link">openFDA webpage</a>. With an API key you can make 240 requests per minute, and are limited to 120,000 requests per day (the package will handle this request rate throttling for you). Without a key, you can only make 1000 requests a day. For this package, if you try to run <code><a href="reference/openFDA.html">openFDA()</a></code> without setting an API key, it will fail:</p>
+<p>Before using the package, you will need to generate an API key on the <a href="https://open.fda.gov/apis/authentication/" class="external-link">openFDA website</a>. With an API key you can make 240 requests per minute, and are limited to 120,000 requests per day (the package will handle this request rate throttling for you). Without a key, you can only make 1000 requests a day. For this package, if you try to run <code><a href="reference/openFDA.html">openFDA()</a></code> without setting an API key, it will fail:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/openFDA.html">openFDA</a></span><span class="op">(</span></span>
 <span>  search <span class="op">=</span> <span class="st">"openfda.generic_name:furosemide"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">5</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error:</span></span>
-<span><span class="co">#&gt; ! API key not found by keyring package.</span></span>
+<span><span class="co">#&gt; ! No openFDA API key was found by `keyring::key_get()`.</span></span>
 <span><span class="co">#&gt; ℹ To use openFDA, you must set an openFDA API key. Go to</span></span>
 <span><span class="co">#&gt;   &lt;https://open.fda.gov/apis/authentication/&gt; to get an openFDA API key, then</span></span>
 <span><span class="co">#&gt;   use `set_api_key()` to cache it for use in this and future sessions.</span></span></code></pre></div>
-<p>That’s not good. To fix this error, get an API key from the webpage linked above. Once you have your API key, use <code><a href="reference/api_key.html">set_api_key()</a></code> to store your API key. Once you run this function, <strong>openFDA</strong> will ‘know’ your API key until the session ends. Let’s try using <code><a href="reference/openFDA.html">openFDA()</a></code> again, after setting an API key:</p>
+<p>That’s not good. To fix this error, get an API key from the webpage linked above. Once you have your API key, use <code><a href="reference/api_key.html">set_api_key()</a></code> to store your API key. Once you run this function, <strong>openFDA</strong> will ‘know’ your API key, even for future sessions:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># n.b. this API key is a fake, just for demonstration</span></span>
-<span><span class="fu"><a href="reference/api_key.html">set_api_key</a></span><span class="op">(</span>api_key <span class="op">=</span> <span class="st">"iHXeqlbXtlYEwX9MYLwyCBuiZxfn98Sj3oX2FNtSx"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#&gt; ! OpenFDA API key set.</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; ℹ You can retrieve the key with the following code:</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;   `keyring::key_get(service = "OPENFDA_KEY", user = "openFDA", keyring =</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt;   "openFDA")`</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<span><span class="fu"><a href="reference/api_key.html">set_api_key</a></span><span class="op">(</span>api_key <span class="op">=</span> <span class="st">"iHXeqlbXtlYEwX9MYLwyCBuiZxfn98Sj3oX2FNtSx"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ! OpenFDA API key set.</span></span>
+<span><span class="co">#&gt; ℹ You can retrieve the key with the following code:</span></span>
+<span><span class="co">#&gt;   `keyring::key_get(service = "OPENFDA_KEY", user = "openFDA")`</span></span></code></pre></div>
+<p>Let’s try using <code><a href="reference/openFDA.html">openFDA()</a></code> again, now that you have an API key:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">search</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/openFDA.html">openFDA</a></span><span class="op">(</span></span>
 <span>  search <span class="op">=</span> <span class="st">"openfda.generic_name:furosemide"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">5</span></span>
@@ -121,9 +121,9 @@
 <span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:furosemide&amp;limit=5</span></span>
 <span><span class="co">#&gt; Status: 200 OK</span></span>
 <span><span class="co">#&gt; Content-Type: application/json</span></span>
-<span><span class="co">#&gt; Body: In memory (44596 bytes)</span></span></code></pre></div>
+<span><span class="co">#&gt; Body: In memory (44851 bytes)</span></span></code></pre></div>
 <p>The returned <code>httr2</code> response object contains JSON data from the API - you can use <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to extract the JSON data as a nested list, then extract the fields you want.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">json</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">json</span><span class="op">$</span><span class="va">results</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">openfda</span><span class="op">$</span><span class="va">brand_name</span></span>
@@ -133,14 +133,14 @@
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [1] "Loop Diuretic [EPC]"</span></span></code></pre></div>
 <p>I’ve found <a href="https://purrr.tidyverse.org/" class="external-link">purrr</a> to be very useful for parsing this data quickly.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span></span>
 <span>  .x <span class="op">=</span> <span class="va">json</span><span class="op">$</span><span class="va">results</span>, </span>
 <span>  .f <span class="op">=</span> \<span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"openfda"</span>, <span class="st">"manufacturer_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Hospira, Inc."                  "Hikma Pharmaceuticals USA Inc."</span></span>
 <span><span class="co">#&gt; [3] "Hikma Pharmaceuticals USA Inc." "Hikma Pharmaceuticals USA Inc."</span></span>
-<span><span class="co">#&gt; [5] "Camber Pharmaceuticals, Inc."</span></span></code></pre></div>
+<span><span class="co">#&gt; [5] "Gland Pharma Limited"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="other-r-packages-for-openfda">Other R packages for openFDA<a class="anchor" aria-label="anchor" href="#other-r-packages-for-openfda"></a>
