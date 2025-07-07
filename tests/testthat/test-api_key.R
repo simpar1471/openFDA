@@ -28,11 +28,19 @@ test_that("You can set and get an API key (with keyring support)", {
 
   # In backends with keyring support, errors should be thrown if the API key is
   # an empty string
-  keyring::key_set_with_value(service = "OPENFDA_KEY",
+  if (interactive()) {
+    keyring::key_set_with_value(service = "OPENFDA_KEY",
                               username =  "openFDA",
                               password = "",
                               keyring = "openFDA")
-  expect_error(get_api_key(), class = "openFDA_api_key_empty")
+    expect_error(get_api_key(), class = "openFDA_api_key_empty")
+  }
+
+  # Set value to a valid API key before ending this block of tests
+  expect_message(
+    expect_null(set_api_key(decrypted_key)),
+    class = "openfda_api_key_set"
+  )
 })
 
 # API key editing without keyrings are supported -------------------------------
