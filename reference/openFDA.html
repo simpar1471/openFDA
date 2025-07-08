@@ -229,26 +229,35 @@ are converted to openFDA API searches.</p></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'insert_example_cassette' is not an exported object from 'namespace:vcr'</span>
-<span class="r-in"><span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">openFDA</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"openfda.manufacturer_name:gilead*"</span>,</span></span>
-<span class="r-in"><span>                limit <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>                skip <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>                paging <span class="op">=</span> <span class="st">"never"</span>,</span></span>
-<span class="r-in"><span>                paging_verbosity <span class="op">=</span> <span class="st">"quiet"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The openFDA API returned a 403 error.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> This usually means that an invalid `api_key` was used.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Your API key was <span style="color: #0000BB;">"example_api_key"</span>.</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/secrets.html" class="external-link">secret_has_key</a></span><span class="op">(</span><span class="st">"OPENFDA_KEY"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co"># You would set your own key in interactive mode</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="api_key.html">set_api_key</a></span><span class="op">(</span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/secrets.html" class="external-link">secret_decrypt</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"OPENFDA_KEY"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># The function returns an `httr2` object</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">resp</span> <span class="op">&lt;-</span> <span class="fu">openFDA</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"openfda.manufacturer_name:gilead*"</span>,</span></span>
+<span class="r-in"><span>                  limit <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>                  skip <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>                  paging <span class="op">=</span> <span class="st">"never"</span>,</span></span>
+<span class="r-in"><span>                  paging_verbosity <span class="op">=</span> <span class="st">"quiet"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># The function returns an `httr2` object</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">resp</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> OpenFDA API key set.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> You can retrieve the key with the following code:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   `keyring::key_get(service = <span style="color: #0000BB;">"OPENFDA_KEY"</span>, user = <span style="color: #0000BB;">"openFDA"</span>)`</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Selecting ‘env’ backend. Secrets are stored in environment variables</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name:gilead%2A&amp;limit=2&amp;skip=10</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 403 Forbidden</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 200 OK</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Content-Type</span>: application/json</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (136 bytes)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (33283 bytes)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Bad inputs will cause informative errors - here, a bad API key is supplied</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
@@ -259,8 +268,6 @@ are converted to openFDA API searches.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in openFDA(search = "openfda.manufacturer_name:gilead*", api_key = "BAD_API_KEY",  : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BBBB00;">!</span> The `paging` argument must not be `"ask"` if R is not running</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   interactively.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> no cassette in use currently</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> net connect disabled</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
