@@ -4,6 +4,10 @@ rlang::push_options(openFDA.paging = "never",
                     openFDA.paging_verbosity = "quiet")
 
 test_that("openFDA can call its API", {
+# This test we skip on CRAN, but keep in CI --> tests that the openFDA API is
+# actually available with a very simple query
+test_that("openFDA can call its API and reach correct endpoints", {
+  skip_if_offline()
   suppressMessages(
    set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
   )
@@ -11,15 +15,10 @@ test_that("openFDA can call its API", {
   # Simple query
   resp <- openFDA(
     search = c("openfda.brand_name" = "ozempic"),
-    limit = 5
+    limit = 2
   )
   expect_s3_class(resp, "httr2_response")
-})
-
-test_that("All openFDA endpoints are valid", {
-  suppressMessages(
-   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
-  )
+  expect_equal(httr2::resp_body_json(resp)$meta$results$limit, expected = 2)
 
   endpoints <- c("animalandveterinary-event", "drug-event",
                  "drug-label", "drug-ndc", "drug-enforcement",
@@ -42,168 +41,156 @@ test_that("All openFDA endpoints are valid", {
   })
 })
 
-test_that("openFDA paging is possible", {
-  suppressMessages(
-   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
-  )
+test_that(
+  desc = "openFDA paging is possible with correct printing behaviour", {
+  vcr::use_cassette("test-paging", {
+    # Query which requires paging
+    resps <- openFDA(search = "openfda.generic_name:\"semaglutide\"",
+                     limit = 2,
+                     paging = "always",
+                     paging_verbosity = "quiet")
+    purrr::map(resps, \(resp) expect_s3_class(resp, "httr2_response"))
 
-  # Query which requires paging
-  resps <- openFDA(
-    search = "openfda.brand_name:o*",
-    limit = 300,
-    paging = "always"
-  )
-
-  purrr::map(resps, \(resp) expect_s3_class(resp, "httr2_response"))
+    # Query which requires paging
+    expect_message(
+      openFDA(search = "openfda.generic_name:\"semaglutide\"",
+              limit = 2,
+              paging = "never",
+              paging_verbosity = "verbose"),
+      class = "openfda_message_paging"
+    )
+    # Query which requires paging
+    expect_no_message(
+      openFDA(search = "openfda.generic_name:\"semaglutide\"",
+              limit = 2,
+              paging = "never",
+              paging_verbosity = "quiet"),
+      class = "openfda_message_paging"
+    )
+  })
 })
 
-test_that("openFDA paging information is printed", {
-  suppressMessages(
-   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
-  )
-
-  # Query which requires paging
-  expect_message(
-    openFDA(search = "openfda.brand_name:o*",
-            limit = 300,
-            paging = "never",
-            paging_verbosity = "verbose"),
-    class = "openfda_message_paging"
-  )
-
-  # Query which requires paging
-  expect_no_message(
-    openFDA(search = "openfda.brand_name:o*",
-            limit = 300,
-            paging = "never",
-            paging_verbosity = "quiet"),
-    class = "openfda_message_paging"
-  )
-})
-
+# Does not need vcr as error is thrown *before* any HTTP requests sent
 test_that(
   desc = "openFDA paging fails if `paging == \"ask\" but not interactive", {
   skip_if(interactive())
-  suppressMessages(
-   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  # Query which requires paging
+  expect_error(
+    openFDA(search = "openfda.brand_name:o*",
+            limit = 300,
+            api_key = "placeholder_key",
+            paging = "ask"),
+    class = "openfda_paging_is_ask_when_uninteractive"
   )
-
-    # Query which requires paging
-    expect_error(
-      openFDA(search = "openfda.brand_name:o*", limit = 300, paging = "ask"),
-      class = "openfda_paging_is_ask_when_uninteractive"
-    )
-  }
-)
-
-test_that("openFDA throws formatted HTTP errors", {
-  suppressMessages(
-   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
-  )
-
-  for (handle_http_errors in c("error", "warn", "silent")) {
-    expect_fn <- switch(handle_http_errors,
-                        "warn" = expect_warning,
-                        "error" = expect_error,
-                        "silent" = expect_success)
-    rlang::push_options(openFDA.handle_http_errors = handle_http_errors)
-
-    expect_condition(
-      resp <- openFDA(
-        search = "openfda.brand_name=\"verapamil\"",
-        sort = c("invalid_field" = "asc"),
-        limit = 1
-      ),
-      class ="openFDA_http_error_400"
-    )
-    if (handle_http_errors != "error") {
-      expect_s3_class(resp, "httr2_response")
-      rm(resp)
-    } else {
-      expect_warning(rm(resp))
-    }
-
-    # Error 403 - usually an invalid API key
-    expect_condition(
-      resp <- openFDA(
-        search = "openfda.brand_name:\"verapamil\"\"",
-        limit = 1,
-        api_key = "really_bad_api_key"
-      ),
-      class = "openFDA_http_error_403"
-    )
-    if (handle_http_errors != "error") {
-      expect_s3_class(resp, "httr2_response")
-      rm(resp)
-    } else {
-      expect_warning(rm(resp))
-    }
-
-    # Error 404 - because search returns nothing
-    expect_condition(
-      resp <- openFDA(
-        search = c("openfda.brand_name" = "3129084"),
-        limit = 1
-      ),
-      class ="openFDA_http_error_404"
-    )
-    if (handle_http_errors != "error") {
-      expect_s3_class(resp, "httr2_response")
-      rm(resp)
-    } else {
-      expect_warning(rm(resp))
-    }
-
-    # Error 404 - because `skip` is too high
-    expect_condition(
-      resp <- openFDA(
-        search = c("openfda.brand_name" = "naproxen"),
-        skip = 500
-      ),
-      class ="openFDA_http_error_404"
-    )
-    if (handle_http_errors != "error") {
-      expect_s3_class(resp, "httr2_response")
-      rm(resp)
-    } else {
-      expect_warning(rm(resp))
-    }
-
-    # Error 500
-    expect_condition(
-      resp <- openFDA(
-        search = "openfda.brand_name:\"verapamil\"\"",
-        limit = 1
-      ),
-      class ="openFDA_http_error_500"
-    )
-    if (handle_http_errors != "error") {
-      expect_s3_class(resp, "httr2_response")
-      rm(resp)
-    } else {
-      expect_warning(rm(resp))
-    }
-
-    # Mock up responses with non-customised error messages. In this case, no
-    # special warning will be performed, but the condition class will be
-    # specific to the HTTP error
-    for (http_status_code in c(408, 503, 504)) {
-      temporary_mock <- function(req) {
-        httr2::response_json(status_code = http_status_code)
-      }
-      expect_condition(
-        httr2::with_mocked_responses(temporary_mock, {
-          openFDA(
-            search = "openfda.brand_name:\"verapamil\"",
-            limit = 1
-          )
-        }),
-        class = paste0("openFDA_http_error_", http_status_code)
-      )
-    }
-  }
 })
 
+test_that("openFDA throws formatted HTTP errors", {
+  vcr::use_cassette("test-handle_http_errors", {
+    for (handle_http_errors in c("error", "warn", "silent")) {
+      expect_fn <- switch(handle_http_errors,
+                          "warn" = expect_warning,
+                          "error" = expect_error,
+                          "silent" = expect_success)
+      rlang::push_options(openFDA.handle_http_errors = handle_http_errors)
+
+      expect_condition(
+        resp <- openFDA(
+          search = "openfda.brand_name=\"verapamil\"",
+          sort = c("invalid_field" = "asc"),
+          limit = 1
+        ),
+        class ="openFDA_http_error_400"
+      )
+      if (handle_http_errors != "error") {
+        expect_s3_class(resp, "httr2_response")
+        rm(resp)
+      } else {
+        expect_warning(rm(resp))
+      }
+
+      # Error 403 - usually an invalid API key
+      expect_condition(
+        resp <- openFDA(
+          search = "openfda.brand_name:\"verapamil\"\"",
+          limit = 1,
+          api_key = "really_bad_api_key"
+        ),
+        class = "openFDA_http_error_403"
+      )
+      if (handle_http_errors != "error") {
+        expect_s3_class(resp, "httr2_response")
+        rm(resp)
+      } else {
+        expect_warning(rm(resp))
+      }
+
+      # Error 404 - because search returns nothing
+      expect_condition(
+        resp <- openFDA(
+          search = c("openfda.brand_name" = "3129084"),
+          limit = 1
+        ),
+        class ="openFDA_http_error_404"
+      )
+      if (handle_http_errors != "error") {
+        expect_s3_class(resp, "httr2_response")
+        rm(resp)
+      } else {
+        expect_warning(rm(resp))
+      }
+
+      # Error 404 - because `skip` is too high
+      expect_condition(
+        resp <- openFDA(
+          search = c("openfda.brand_name" = "naproxen"),
+          skip = 500
+        ),
+        class ="openFDA_http_error_404"
+      )
+      if (handle_http_errors != "error") {
+        expect_s3_class(resp, "httr2_response")
+        rm(resp)
+      } else {
+        expect_warning(rm(resp))
+      }
+
+      # Error 500
+      expect_condition(
+        resp <- openFDA(
+          search = "openfda.brand_name:\"verapamil\"\"",
+          limit = 1
+        ),
+        class ="openFDA_http_error_500"
+      )
+      if (handle_http_errors != "error") {
+        expect_s3_class(resp, "httr2_response")
+        rm(resp)
+      } else {
+        expect_warning(rm(resp))
+      }
+
+      # Mock up responses with non-customised error messages. In this case, no
+      # special warning will be performed, but the condition class will be
+      # specific to the HTTP error
+      for (http_status_code in c(408, 503, 504)) {
+        temporary_mock <- function(req) {
+          httr2::response_json(status_code = http_status_code)
+        }
+        expect_condition(
+          httr2::with_mocked_responses(temporary_mock, {
+            openFDA(
+              search = "openfda.brand_name:\"verapamil\"",
+              limit = 1
+            )
+          }),
+          class = paste0("openFDA_http_error_", http_status_code)
+        )
+      }
+    }
+  })
+})
+
+# Also doesn't require vcr --> errors occur before `httr2::req_perform()`
 test_that("openFDA errors on certain bad inputs", {
   suppressMessages(
     set_api_key(api_key = "api_key_string")

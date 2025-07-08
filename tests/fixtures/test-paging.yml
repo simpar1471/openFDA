@@ -1,0 +1,3840 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22semaglutide%22&limit=2
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Tue, 08 Jul 2025 19:29:24 GMT
+      etag: W/"6417-f9qmpt+5Ge9FQ9OHdprE6lZpeVM"
+      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx->;
+        rel="next"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnte1qoeulhcqeh2ak5g
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '239'
+      x-vcap-request-id: 24c1a74b-be72-42ec-4ed9-c3b8e3acc1da
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "meta": {
+            "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+            "terms": "https://open.fda.gov/terms/",
+            "license": "https://open.fda.gov/license/",
+            "last_updated": "2025-07-02",
+            "results": {
+              "skip": 0,
+              "limit": 2,
+              "total": 3
+            }
+          },
+          "results": [
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "11",
+                  "submission_status": "AP",
+                  "submission_status_date": "20240308",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "77770",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s011lbl.pdf",
+                      "date": "20240308",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "77775",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s011ltr.pdf",
+                      "date": "20240311",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80167",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2024/215256Orig1s011.pdf",
+                      "date": "20241105",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "6",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230214",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "73507",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256Orig1s006lbl.pdf",
+                      "date": "20230215",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "73508",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/215256Orig1s006ltr.pdf",
+                      "date": "20230216",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210604",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "TYPE 10",
+                  "submission_class_code_description": "Type 10 - New Indication Submitted as Distinct NDA - Not Consolidated",
+                  "application_docs": [
+                    {
+                      "id": "67724",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/215256s000lbl.pdf",
+                      "date": "20210607",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "67729",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2021/215256Orig1s000ltr.pdf",
+                      "date": "20210607",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "69772",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2021/215256Orig1s000TOC.cfm",
+                      "date": "20211227",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "7",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230721",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "74868",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/215256Orig1s007ltr.pdf",
+                      "date": "20230724",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "74874",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256s007lbl.pdf",
+                      "date": "20230724",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "5",
+                  "submission_status": "AP",
+                  "submission_status_date": "20221223",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "73036",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215256s005lbl.pdf",
+                      "date": "20221227",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "73054",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/215256Orig1s005ltr.pdf",
+                      "date": "20221227",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "3",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220824",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "71941",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215256s003lbl.pdf",
+                      "date": "20220829",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "15",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241127",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80452",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s015ltr.pdf",
+                      "date": "20241129",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80472",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s015lbl.pdf",
+                      "date": "20241203",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80473",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s015lbl.pdf#page=35",
+                      "date": "20241203",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80129",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s021ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80134",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s021lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA215256",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA215256"
+                ],
+                "brand_name": [
+                  "WEGOVY"
+                ],
+                "generic_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4501",
+                  "0169-4525",
+                  "0169-4505",
+                  "0169-4517",
+                  "0169-4524"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "SUBCUTANEOUS"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "2553501",
+                  "2553506",
+                  "2553601",
+                  "2553603",
+                  "2553802",
+                  "2553803",
+                  "2553901",
+                  "2553903",
+                  "2554102",
+                  "2554104"
+                ],
+                "spl_id": [
+                  "6d001eae-d777-46c0-a89b-d55cae3faf7b"
+                ],
+                "spl_set_id": [
+                  "ee06186f-2aa3-4990-a760-757579d8f77b"
+                ],
+                "package_ndc": [
+                  "0169-4525-01",
+                  "0169-4525-14",
+                  "0169-4525-90",
+                  "0169-4525-94",
+                  "0169-4505-01",
+                  "0169-4505-14",
+                  "0169-4501-01",
+                  "0169-4501-14",
+                  "0169-4517-01",
+                  "0169-4517-14",
+                  "0169-4524-01",
+                  "0169-4524-14"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "005",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2.4MG/0.75ML (2.4MG/0.75ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1MG/0.5ML (1MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "0.25MG/0.5ML (0.25MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1.7MG/0.75ML (1.7MG/0.75ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "0.5MG/0.5ML (0.5MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            },
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230922",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "75551",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/209637Orig1s020,s021ltr.pdf",
+                      "date": "20230925",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "75555",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s020s021lbl.pdf",
+                      "date": "20230925",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20171205",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "TYPE 1",
+                  "submission_class_code_description": "Type 1 - New Molecular Entity",
+                  "application_docs": [
+                    {
+                      "id": "50622",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2017/209637lbl.pdf",
+                      "date": "20171206",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "50623",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2017/209637s000ltr.pdf",
+                      "date": "20171207",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "51050",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/nda/2017/209637Orig1s000TOC.cfm",
+                      "date": "20180116",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "3",
+                  "submission_status": "AP",
+                  "submission_status_date": "20200116",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "61593",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2020/209637s003lbl.pdf",
+                      "date": "20200117",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "61599",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2020/209637Orig1s003ltr.pdf",
+                      "date": "20200117",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20190409",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "58271",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2019/209637s001lbl.pdf",
+                      "date": "20190410",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "58289",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/209637Orig1s001ltr.pdf",
+                      "date": "20190411",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "32",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80127",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/209637Orig1s032ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80142",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/209637s032lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80143",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/209637s032lbl.pdf#page=27",
+                      "date": "20241105",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "8",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210412",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "67048",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2021/209637Orig1s008ltr.pdf",
+                      "date": "20210413",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "67060",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/209637s008lbl.pdf",
+                      "date": "20210414",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "20",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230922",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "75550",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/209637Orig1s020,s021ltr.pdf",
+                      "date": "20230925",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "75556",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s020s021lbl.pdf",
+                      "date": "20230925",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "12",
+                  "submission_status": "AP",
+                  "submission_status_date": "20221006",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "72275",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/209637Orig1s012ltr.pdf",
+                      "date": "20221007",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "72295",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637s012lbl.pdf",
+                      "date": "20221011",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "72296",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637s012lbl.pdf#page=27",
+                      "date": "20221011",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "4",
+                  "submission_status": "AP",
+                  "submission_status_date": "20191127",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "61094",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/209637Orig1s004ltr.pdf",
+                      "date": "20191129",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "61112",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2019/209637s004lbl.pdf",
+                      "date": "20191202",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "25",
+                  "submission_status": "AP",
+                  "submission_status_date": "20250128",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80998",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/209637s025lbl.pdf",
+                      "date": "20250205",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80999",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/209637s025lbl.pdf#page=32",
+                      "date": "20250205",
+                      "type": "Medication Guide"
+                    },
+                    {
+                      "id": "81169",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2025/209637Orig1s025ltr.pdf",
+                      "date": "20250207",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "9",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220328",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "70639",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/209637Orig1s009ltr.pdf",
+                      "date": "20220329",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "70644",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637Orig1s009lbl.pdf",
+                      "date": "20220329",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA209637",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA209637"
+                ],
+                "brand_name": [
+                  "OZEMPIC"
+                ],
+                "generic_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4130",
+                  "0169-4136",
+                  "0169-4132",
+                  "0169-4772",
+                  "0169-4181"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "SUBCUTANEOUS"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "1991306",
+                  "1991311",
+                  "1991316",
+                  "1991317",
+                  "2398841",
+                  "2398842",
+                  "2599362",
+                  "2599365",
+                  "2619152",
+                  "2619154"
+                ],
+                "spl_id": [
+                  "b9d0b8d8-820e-416d-82f4-4e51eeacae4f"
+                ],
+                "spl_set_id": [
+                  "adec4fd2-6858-4c99-91d4-531f5f2a2d79"
+                ],
+                "package_ndc": [
+                  "0169-4136-11",
+                  "0169-4136-02",
+                  "0169-4132-90",
+                  "0169-4132-97",
+                  "0169-4132-11",
+                  "0169-4132-12",
+                  "0169-4130-01",
+                  "0169-4130-13",
+                  "0169-4772-11",
+                  "0169-4772-12",
+                  "0169-4772-90",
+                  "0169-4772-97",
+                  "0169-4181-03",
+                  "0169-4181-13",
+                  "0169-4181-90",
+                  "0169-4181-97"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "8MG/3ML (2.68MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2MG/1.5ML (1.34MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2MG/3ML (0.68MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "4MG/3ML (1.34MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            }
+          ]
+        }
+  recorded_at: 2025-07-08 19:29:25 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22semaglutide%22&limit=2
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Tue, 08 Jul 2025 19:29:24 GMT
+      etag: W/"6417-f9qmpt+5Ge9FQ9OHdprE6lZpeVM"
+      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx->;
+        rel="next"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnte1qqngc1pet6f6n5g
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '239'
+      x-vcap-request-id: 35ec10ae-e71d-458c-59e6-3c70b36951d2
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "meta": {
+            "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+            "terms": "https://open.fda.gov/terms/",
+            "license": "https://open.fda.gov/license/",
+            "last_updated": "2025-07-02",
+            "results": {
+              "skip": 0,
+              "limit": 2,
+              "total": 3
+            }
+          },
+          "results": [
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "11",
+                  "submission_status": "AP",
+                  "submission_status_date": "20240308",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "77770",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s011lbl.pdf",
+                      "date": "20240308",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "77775",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s011ltr.pdf",
+                      "date": "20240311",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80167",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2024/215256Orig1s011.pdf",
+                      "date": "20241105",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "6",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230214",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "73507",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256Orig1s006lbl.pdf",
+                      "date": "20230215",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "73508",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/215256Orig1s006ltr.pdf",
+                      "date": "20230216",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210604",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "TYPE 10",
+                  "submission_class_code_description": "Type 10 - New Indication Submitted as Distinct NDA - Not Consolidated",
+                  "application_docs": [
+                    {
+                      "id": "67724",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/215256s000lbl.pdf",
+                      "date": "20210607",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "67729",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2021/215256Orig1s000ltr.pdf",
+                      "date": "20210607",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "69772",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2021/215256Orig1s000TOC.cfm",
+                      "date": "20211227",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "7",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230721",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "74868",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/215256Orig1s007ltr.pdf",
+                      "date": "20230724",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "74874",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256s007lbl.pdf",
+                      "date": "20230724",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "5",
+                  "submission_status": "AP",
+                  "submission_status_date": "20221223",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "73036",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215256s005lbl.pdf",
+                      "date": "20221227",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "73054",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/215256Orig1s005ltr.pdf",
+                      "date": "20221227",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "3",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220824",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "71941",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215256s003lbl.pdf",
+                      "date": "20220829",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "15",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241127",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80452",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s015ltr.pdf",
+                      "date": "20241129",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80472",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s015lbl.pdf",
+                      "date": "20241203",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80473",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s015lbl.pdf#page=35",
+                      "date": "20241203",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80129",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s021ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80134",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s021lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA215256",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA215256"
+                ],
+                "brand_name": [
+                  "WEGOVY"
+                ],
+                "generic_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4501",
+                  "0169-4525",
+                  "0169-4505",
+                  "0169-4517",
+                  "0169-4524"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "SUBCUTANEOUS"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "2553501",
+                  "2553506",
+                  "2553601",
+                  "2553603",
+                  "2553802",
+                  "2553803",
+                  "2553901",
+                  "2553903",
+                  "2554102",
+                  "2554104"
+                ],
+                "spl_id": [
+                  "6d001eae-d777-46c0-a89b-d55cae3faf7b"
+                ],
+                "spl_set_id": [
+                  "ee06186f-2aa3-4990-a760-757579d8f77b"
+                ],
+                "package_ndc": [
+                  "0169-4525-01",
+                  "0169-4525-14",
+                  "0169-4525-90",
+                  "0169-4525-94",
+                  "0169-4505-01",
+                  "0169-4505-14",
+                  "0169-4501-01",
+                  "0169-4501-14",
+                  "0169-4517-01",
+                  "0169-4517-14",
+                  "0169-4524-01",
+                  "0169-4524-14"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "005",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2.4MG/0.75ML (2.4MG/0.75ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1MG/0.5ML (1MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "0.25MG/0.5ML (0.25MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1.7MG/0.75ML (1.7MG/0.75ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "0.5MG/0.5ML (0.5MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            },
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230922",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "75551",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/209637Orig1s020,s021ltr.pdf",
+                      "date": "20230925",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "75555",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s020s021lbl.pdf",
+                      "date": "20230925",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20171205",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "TYPE 1",
+                  "submission_class_code_description": "Type 1 - New Molecular Entity",
+                  "application_docs": [
+                    {
+                      "id": "50622",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2017/209637lbl.pdf",
+                      "date": "20171206",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "50623",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2017/209637s000ltr.pdf",
+                      "date": "20171207",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "51050",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/nda/2017/209637Orig1s000TOC.cfm",
+                      "date": "20180116",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "3",
+                  "submission_status": "AP",
+                  "submission_status_date": "20200116",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "61593",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2020/209637s003lbl.pdf",
+                      "date": "20200117",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "61599",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2020/209637Orig1s003ltr.pdf",
+                      "date": "20200117",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20190409",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "58271",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2019/209637s001lbl.pdf",
+                      "date": "20190410",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "58289",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/209637Orig1s001ltr.pdf",
+                      "date": "20190411",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "32",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80127",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/209637Orig1s032ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80142",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/209637s032lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80143",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/209637s032lbl.pdf#page=27",
+                      "date": "20241105",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "8",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210412",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "67048",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2021/209637Orig1s008ltr.pdf",
+                      "date": "20210413",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "67060",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/209637s008lbl.pdf",
+                      "date": "20210414",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "20",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230922",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "75550",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/209637Orig1s020,s021ltr.pdf",
+                      "date": "20230925",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "75556",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s020s021lbl.pdf",
+                      "date": "20230925",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "12",
+                  "submission_status": "AP",
+                  "submission_status_date": "20221006",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "72275",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/209637Orig1s012ltr.pdf",
+                      "date": "20221007",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "72295",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637s012lbl.pdf",
+                      "date": "20221011",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "72296",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637s012lbl.pdf#page=27",
+                      "date": "20221011",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "4",
+                  "submission_status": "AP",
+                  "submission_status_date": "20191127",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "61094",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/209637Orig1s004ltr.pdf",
+                      "date": "20191129",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "61112",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2019/209637s004lbl.pdf",
+                      "date": "20191202",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "25",
+                  "submission_status": "AP",
+                  "submission_status_date": "20250128",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80998",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/209637s025lbl.pdf",
+                      "date": "20250205",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80999",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/209637s025lbl.pdf#page=32",
+                      "date": "20250205",
+                      "type": "Medication Guide"
+                    },
+                    {
+                      "id": "81169",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2025/209637Orig1s025ltr.pdf",
+                      "date": "20250207",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "9",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220328",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "70639",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/209637Orig1s009ltr.pdf",
+                      "date": "20220329",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "70644",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637Orig1s009lbl.pdf",
+                      "date": "20220329",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA209637",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA209637"
+                ],
+                "brand_name": [
+                  "OZEMPIC"
+                ],
+                "generic_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4130",
+                  "0169-4136",
+                  "0169-4132",
+                  "0169-4772",
+                  "0169-4181"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "SUBCUTANEOUS"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "1991306",
+                  "1991311",
+                  "1991316",
+                  "1991317",
+                  "2398841",
+                  "2398842",
+                  "2599362",
+                  "2599365",
+                  "2619152",
+                  "2619154"
+                ],
+                "spl_id": [
+                  "b9d0b8d8-820e-416d-82f4-4e51eeacae4f"
+                ],
+                "spl_set_id": [
+                  "adec4fd2-6858-4c99-91d4-531f5f2a2d79"
+                ],
+                "package_ndc": [
+                  "0169-4136-11",
+                  "0169-4136-02",
+                  "0169-4132-90",
+                  "0169-4132-97",
+                  "0169-4132-11",
+                  "0169-4132-12",
+                  "0169-4130-01",
+                  "0169-4130-13",
+                  "0169-4772-11",
+                  "0169-4772-12",
+                  "0169-4772-90",
+                  "0169-4772-97",
+                  "0169-4181-03",
+                  "0169-4181-13",
+                  "0169-4181-90",
+                  "0169-4181-97"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "8MG/3ML (2.68MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2MG/1.5ML (1.34MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2MG/3ML (0.68MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "4MG/3ML (1.34MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            }
+          ]
+        }
+  recorded_at: 2025-07-08 19:29:25 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx-
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Tue, 08 Jul 2025 19:29:25 GMT
+      etag: W/"3260-9wKMXKbz8a/+qI6iIQO+XCwClqA"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnte1qspmjk7q70ch5l0
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '237'
+      x-vcap-request-id: 43fe5a3c-cfae-4336-5d6b-382b7d0d9b69
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "meta": {
+            "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+            "terms": "https://open.fda.gov/terms/",
+            "license": "https://open.fda.gov/license/",
+            "last_updated": "2025-07-02",
+            "results": {
+              "skip": 0,
+              "limit": 2,
+              "total": 3
+            }
+          },
+          "results": [
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20200116",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "61591",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2020/213182s000,213051s001lbl.pdf",
+                      "date": "20200117",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "61603",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2020/213182Orig1s000, 213051Orig1s001ltr.pdf",
+                      "date": "20200117",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "23",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80128",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/213051Orig1s023ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80140",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/213051s023lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241209",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80545",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/213051Orig1s020,213051Orig1s021lbl.pdf",
+                      "date": "20250211",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80547",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/213051s020s021lbl.pdf#page=25",
+                      "date": "20241210",
+                      "type": "Medication Guide"
+                    },
+                    {
+                      "id": "80551",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/213051Orig1s020,213051Orig1s021ltr.pdf",
+                      "date": "20241210",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "11",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220610",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "71296",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/213051s011lbl.pdf",
+                      "date": "20220614",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "71305",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/213051Orig1s011ltr.pdf",
+                      "date": "20220614",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "6",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210430",
+                  "review_priority": "N/A",
+                  "submission_class_code": "MANUF (CMC)",
+                  "submission_class_code_description": "Manufacturing (CMC)",
+                  "application_docs": [
+                    {
+                      "id": "67412",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/213051s006lbl.pdf",
+                      "date": "20210505",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "18",
+                  "submission_status": "AP",
+                  "submission_status_date": "20240124",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "77291",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/213051Orig1s018ltr.pdf",
+                      "date": "20240125",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "77299",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/213051s018lbl.pdf",
+                      "date": "20240125",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20190920",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "TYPE 3",
+                  "submission_class_code_description": "Type 3 - New Dosage Form",
+                  "application_docs": [
+                    {
+                      "id": "60077",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/213051s000lbl.pdf",
+                      "date": "20190920",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "60094",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/213051Orig1s000ltr.pdf",
+                      "date": "20190924",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "63478",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/nda/2019/213051Orig1s000TOC.cfm",
+                      "date": "20200610",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "20",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241209",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80546",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/213051Orig1s020,213051Orig1s021lbl.pdf",
+                      "date": "20250211",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80550",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/213051Orig1s020,213051Orig1s021ltr.pdf",
+                      "date": "20241210",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "12",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230112",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "73152",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/213051Orig1s012ltr.pdf",
+                      "date": "20230113",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "73157",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/213051s012lbl.pdf",
+                      "date": "20230113",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA213051",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA213051"
+                ],
+                "brand_name": [
+                  "RYBELSUS"
+                ],
+                "generic_name": [
+                  "ORAL SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4303",
+                  "0169-4307",
+                  "0169-4314",
+                  "0169-4815",
+                  "0169-4804",
+                  "0169-4809"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "ORAL"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "2200644",
+                  "2200650",
+                  "2200652",
+                  "2200654",
+                  "2200656",
+                  "2200658",
+                  "2707547",
+                  "2707549",
+                  "2707551",
+                  "2707553",
+                  "2707555",
+                  "2707557"
+                ],
+                "spl_id": [
+                  "e07308f9-a9c7-4695-9a39-33a54c6ce33c"
+                ],
+                "spl_set_id": [
+                  "27f15fac-7d98-4114-a2ec-92494a91da98"
+                ],
+                "package_ndc": [
+                  "0169-4303-01",
+                  "0169-4303-13",
+                  "0169-4303-90",
+                  "0169-4303-93",
+                  "0169-4303-30",
+                  "0169-4303-99",
+                  "0169-4307-01",
+                  "0169-4307-13",
+                  "0169-4307-30",
+                  "0169-4314-01",
+                  "0169-4314-13",
+                  "0169-4314-30",
+                  "0169-4815-30",
+                  "0169-4815-90",
+                  "0169-4804-30",
+                  "0169-4809-30"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "006",
+                  "reference_drug": "Yes",
+                  "brand_name": "RYBELSUS",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "9MG"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "TABLET",
+                  "route": "ORAL",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "RYBELSUS",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1.5MG"
+                    }
+                  ],
+                  "reference_standard": "No",
+                  "dosage_form": "TABLET",
+                  "route": "ORAL",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "RYBELSUS",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "7MG"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "TABLET",
+                  "route": "ORAL",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "005",
+                  "reference_drug": "Yes",
+                  "brand_name": "RYBELSUS",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "4MG"
+                    }
+                  ],
+                  "reference_standard": "No",
+                  "dosage_form": "TABLET",
+                  "route": "ORAL",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "RYBELSUS",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "14MG"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "TABLET",
+                  "route": "ORAL",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "RYBELSUS",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "3MG"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "TABLET",
+                  "route": "ORAL",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            }
+          ]
+        }
+  recorded_at: 2025-07-08 19:29:25 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22semaglutide%22&limit=2
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Tue, 08 Jul 2025 19:29:25 GMT
+      etag: W/"6417-f9qmpt+5Ge9FQ9OHdprE6lZpeVM"
+      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx->;
+        rel="next"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnte1quttiv3ef3a0bc0
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '236'
+      x-vcap-request-id: 5d6dff09-ac35-4b89-6f0e-8136580d6a35
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "meta": {
+            "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+            "terms": "https://open.fda.gov/terms/",
+            "license": "https://open.fda.gov/license/",
+            "last_updated": "2025-07-02",
+            "results": {
+              "skip": 0,
+              "limit": 2,
+              "total": 3
+            }
+          },
+          "results": [
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "11",
+                  "submission_status": "AP",
+                  "submission_status_date": "20240308",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "77770",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s011lbl.pdf",
+                      "date": "20240308",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "77775",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s011ltr.pdf",
+                      "date": "20240311",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80167",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2024/215256Orig1s011.pdf",
+                      "date": "20241105",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "6",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230214",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "73507",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256Orig1s006lbl.pdf",
+                      "date": "20230215",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "73508",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/215256Orig1s006ltr.pdf",
+                      "date": "20230216",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210604",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "TYPE 10",
+                  "submission_class_code_description": "Type 10 - New Indication Submitted as Distinct NDA - Not Consolidated",
+                  "application_docs": [
+                    {
+                      "id": "67724",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/215256s000lbl.pdf",
+                      "date": "20210607",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "67729",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2021/215256Orig1s000ltr.pdf",
+                      "date": "20210607",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "69772",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2021/215256Orig1s000TOC.cfm",
+                      "date": "20211227",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "7",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230721",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "74868",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/215256Orig1s007ltr.pdf",
+                      "date": "20230724",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "74874",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256s007lbl.pdf",
+                      "date": "20230724",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "5",
+                  "submission_status": "AP",
+                  "submission_status_date": "20221223",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "73036",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215256s005lbl.pdf",
+                      "date": "20221227",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "73054",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/215256Orig1s005ltr.pdf",
+                      "date": "20221227",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "3",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220824",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "71941",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215256s003lbl.pdf",
+                      "date": "20220829",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "15",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241127",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80452",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s015ltr.pdf",
+                      "date": "20241129",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80472",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s015lbl.pdf",
+                      "date": "20241203",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80473",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s015lbl.pdf#page=35",
+                      "date": "20241203",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80129",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s021ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80134",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s021lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA215256",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA215256"
+                ],
+                "brand_name": [
+                  "WEGOVY"
+                ],
+                "generic_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4501",
+                  "0169-4525",
+                  "0169-4505",
+                  "0169-4517",
+                  "0169-4524"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "SUBCUTANEOUS"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "2553501",
+                  "2553506",
+                  "2553601",
+                  "2553603",
+                  "2553802",
+                  "2553803",
+                  "2553901",
+                  "2553903",
+                  "2554102",
+                  "2554104"
+                ],
+                "spl_id": [
+                  "6d001eae-d777-46c0-a89b-d55cae3faf7b"
+                ],
+                "spl_set_id": [
+                  "ee06186f-2aa3-4990-a760-757579d8f77b"
+                ],
+                "package_ndc": [
+                  "0169-4525-01",
+                  "0169-4525-14",
+                  "0169-4525-90",
+                  "0169-4525-94",
+                  "0169-4505-01",
+                  "0169-4505-14",
+                  "0169-4501-01",
+                  "0169-4501-14",
+                  "0169-4517-01",
+                  "0169-4517-14",
+                  "0169-4524-01",
+                  "0169-4524-14"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "005",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2.4MG/0.75ML (2.4MG/0.75ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1MG/0.5ML (1MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "0.25MG/0.5ML (0.25MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1.7MG/0.75ML (1.7MG/0.75ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "0.5MG/0.5ML (0.5MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            },
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230922",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "75551",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/209637Orig1s020,s021ltr.pdf",
+                      "date": "20230925",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "75555",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s020s021lbl.pdf",
+                      "date": "20230925",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20171205",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "TYPE 1",
+                  "submission_class_code_description": "Type 1 - New Molecular Entity",
+                  "application_docs": [
+                    {
+                      "id": "50622",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2017/209637lbl.pdf",
+                      "date": "20171206",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "50623",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2017/209637s000ltr.pdf",
+                      "date": "20171207",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "51050",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/nda/2017/209637Orig1s000TOC.cfm",
+                      "date": "20180116",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "3",
+                  "submission_status": "AP",
+                  "submission_status_date": "20200116",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "61593",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2020/209637s003lbl.pdf",
+                      "date": "20200117",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "61599",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2020/209637Orig1s003ltr.pdf",
+                      "date": "20200117",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20190409",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "58271",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2019/209637s001lbl.pdf",
+                      "date": "20190410",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "58289",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/209637Orig1s001ltr.pdf",
+                      "date": "20190411",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "32",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80127",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/209637Orig1s032ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80142",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/209637s032lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80143",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/209637s032lbl.pdf#page=27",
+                      "date": "20241105",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "8",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210412",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "67048",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2021/209637Orig1s008ltr.pdf",
+                      "date": "20210413",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "67060",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/209637s008lbl.pdf",
+                      "date": "20210414",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "20",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230922",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "75550",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/209637Orig1s020,s021ltr.pdf",
+                      "date": "20230925",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "75556",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s020s021lbl.pdf",
+                      "date": "20230925",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "12",
+                  "submission_status": "AP",
+                  "submission_status_date": "20221006",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "72275",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/209637Orig1s012ltr.pdf",
+                      "date": "20221007",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "72295",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637s012lbl.pdf",
+                      "date": "20221011",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "72296",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637s012lbl.pdf#page=27",
+                      "date": "20221011",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "4",
+                  "submission_status": "AP",
+                  "submission_status_date": "20191127",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "61094",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/209637Orig1s004ltr.pdf",
+                      "date": "20191129",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "61112",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2019/209637s004lbl.pdf",
+                      "date": "20191202",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "25",
+                  "submission_status": "AP",
+                  "submission_status_date": "20250128",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80998",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/209637s025lbl.pdf",
+                      "date": "20250205",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80999",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/209637s025lbl.pdf#page=32",
+                      "date": "20250205",
+                      "type": "Medication Guide"
+                    },
+                    {
+                      "id": "81169",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2025/209637Orig1s025ltr.pdf",
+                      "date": "20250207",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "9",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220328",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "70639",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/209637Orig1s009ltr.pdf",
+                      "date": "20220329",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "70644",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637Orig1s009lbl.pdf",
+                      "date": "20220329",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA209637",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA209637"
+                ],
+                "brand_name": [
+                  "OZEMPIC"
+                ],
+                "generic_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4130",
+                  "0169-4136",
+                  "0169-4132",
+                  "0169-4772",
+                  "0169-4181"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "SUBCUTANEOUS"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "1991306",
+                  "1991311",
+                  "1991316",
+                  "1991317",
+                  "2398841",
+                  "2398842",
+                  "2599362",
+                  "2599365",
+                  "2619152",
+                  "2619154"
+                ],
+                "spl_id": [
+                  "b9d0b8d8-820e-416d-82f4-4e51eeacae4f"
+                ],
+                "spl_set_id": [
+                  "adec4fd2-6858-4c99-91d4-531f5f2a2d79"
+                ],
+                "package_ndc": [
+                  "0169-4136-11",
+                  "0169-4136-02",
+                  "0169-4132-90",
+                  "0169-4132-97",
+                  "0169-4132-11",
+                  "0169-4132-12",
+                  "0169-4130-01",
+                  "0169-4130-13",
+                  "0169-4772-11",
+                  "0169-4772-12",
+                  "0169-4772-90",
+                  "0169-4772-97",
+                  "0169-4181-03",
+                  "0169-4181-13",
+                  "0169-4181-90",
+                  "0169-4181-97"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "8MG/3ML (2.68MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2MG/1.5ML (1.34MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2MG/3ML (0.68MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "4MG/3ML (1.34MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            }
+          ]
+        }
+  recorded_at: 2025-07-08 19:29:25 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22semaglutide%22&limit=2
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Tue, 08 Jul 2025 19:29:25 GMT
+      etag: W/"6417-f9qmpt+5Ge9FQ9OHdprE6lZpeVM"
+      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx->;
+        rel="next"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnte1r1btiifj6our62g
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '236'
+      x-vcap-request-id: a8236443-33ff-4edd-5c85-438e8514d7fd
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "meta": {
+            "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+            "terms": "https://open.fda.gov/terms/",
+            "license": "https://open.fda.gov/license/",
+            "last_updated": "2025-07-02",
+            "results": {
+              "skip": 0,
+              "limit": 2,
+              "total": 3
+            }
+          },
+          "results": [
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "11",
+                  "submission_status": "AP",
+                  "submission_status_date": "20240308",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "77770",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s011lbl.pdf",
+                      "date": "20240308",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "77775",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s011ltr.pdf",
+                      "date": "20240311",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80167",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2024/215256Orig1s011.pdf",
+                      "date": "20241105",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "6",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230214",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "73507",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256Orig1s006lbl.pdf",
+                      "date": "20230215",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "73508",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/215256Orig1s006ltr.pdf",
+                      "date": "20230216",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210604",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "TYPE 10",
+                  "submission_class_code_description": "Type 10 - New Indication Submitted as Distinct NDA - Not Consolidated",
+                  "application_docs": [
+                    {
+                      "id": "67724",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/215256s000lbl.pdf",
+                      "date": "20210607",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "67729",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2021/215256Orig1s000ltr.pdf",
+                      "date": "20210607",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "69772",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/nda/2021/215256Orig1s000TOC.cfm",
+                      "date": "20211227",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "7",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230721",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "74868",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/215256Orig1s007ltr.pdf",
+                      "date": "20230724",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "74874",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/215256s007lbl.pdf",
+                      "date": "20230724",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "5",
+                  "submission_status": "AP",
+                  "submission_status_date": "20221223",
+                  "review_priority": "PRIORITY",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "73036",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215256s005lbl.pdf",
+                      "date": "20221227",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "73054",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/215256Orig1s005ltr.pdf",
+                      "date": "20221227",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "3",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220824",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "71941",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215256s003lbl.pdf",
+                      "date": "20220829",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "15",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241127",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80452",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s015ltr.pdf",
+                      "date": "20241129",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80472",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s015lbl.pdf",
+                      "date": "20241203",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80473",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s015lbl.pdf#page=35",
+                      "date": "20241203",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80129",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/215256Orig1s021ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80134",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/215256s021lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA215256",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA215256"
+                ],
+                "brand_name": [
+                  "WEGOVY"
+                ],
+                "generic_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4501",
+                  "0169-4525",
+                  "0169-4505",
+                  "0169-4517",
+                  "0169-4524"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "SUBCUTANEOUS"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "2553501",
+                  "2553506",
+                  "2553601",
+                  "2553603",
+                  "2553802",
+                  "2553803",
+                  "2553901",
+                  "2553903",
+                  "2554102",
+                  "2554104"
+                ],
+                "spl_id": [
+                  "6d001eae-d777-46c0-a89b-d55cae3faf7b"
+                ],
+                "spl_set_id": [
+                  "ee06186f-2aa3-4990-a760-757579d8f77b"
+                ],
+                "package_ndc": [
+                  "0169-4525-01",
+                  "0169-4525-14",
+                  "0169-4525-90",
+                  "0169-4525-94",
+                  "0169-4505-01",
+                  "0169-4505-14",
+                  "0169-4501-01",
+                  "0169-4501-14",
+                  "0169-4517-01",
+                  "0169-4517-14",
+                  "0169-4524-01",
+                  "0169-4524-14"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "005",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2.4MG/0.75ML (2.4MG/0.75ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1MG/0.5ML (1MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "0.25MG/0.5ML (0.25MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "1.7MG/0.75ML (1.7MG/0.75ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "WEGOVY",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "0.5MG/0.5ML (0.5MG/0.5ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            },
+            {
+              "submissions": [
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "21",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230922",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "75551",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/209637Orig1s020,s021ltr.pdf",
+                      "date": "20230925",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "75555",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s020s021lbl.pdf",
+                      "date": "20230925",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "ORIG",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20171205",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "TYPE 1",
+                  "submission_class_code_description": "Type 1 - New Molecular Entity",
+                  "application_docs": [
+                    {
+                      "id": "50622",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2017/209637lbl.pdf",
+                      "date": "20171206",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "50623",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2017/209637s000ltr.pdf",
+                      "date": "20171207",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "51050",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/nda/2017/209637Orig1s000TOC.cfm",
+                      "date": "20180116",
+                      "type": "Review"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "3",
+                  "submission_status": "AP",
+                  "submission_status_date": "20200116",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "61593",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2020/209637s003lbl.pdf",
+                      "date": "20200117",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "61599",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2020/209637Orig1s003ltr.pdf",
+                      "date": "20200117",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "1",
+                  "submission_status": "AP",
+                  "submission_status_date": "20190409",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "58271",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2019/209637s001lbl.pdf",
+                      "date": "20190410",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "58289",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/209637Orig1s001ltr.pdf",
+                      "date": "20190411",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "32",
+                  "submission_status": "AP",
+                  "submission_status_date": "20241101",
+                  "review_priority": "901 REQUIRED",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "80127",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2024/209637Orig1s032ltr.pdf",
+                      "date": "20241105",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "80142",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2024/209637s032lbl.pdf",
+                      "date": "20241105",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80143",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/209637s032lbl.pdf#page=27",
+                      "date": "20241105",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "8",
+                  "submission_status": "AP",
+                  "submission_status_date": "20210412",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "67048",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2021/209637Orig1s008ltr.pdf",
+                      "date": "20210413",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "67060",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2021/209637s008lbl.pdf",
+                      "date": "20210414",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "20",
+                  "submission_status": "AP",
+                  "submission_status_date": "20230922",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "75550",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2023/209637Orig1s020,s021ltr.pdf",
+                      "date": "20230925",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "75556",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2023/209637s020s021lbl.pdf",
+                      "date": "20230925",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "12",
+                  "submission_status": "AP",
+                  "submission_status_date": "20221006",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "72275",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/209637Orig1s012ltr.pdf",
+                      "date": "20221007",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "72295",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637s012lbl.pdf",
+                      "date": "20221011",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "72296",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637s012lbl.pdf#page=27",
+                      "date": "20221011",
+                      "type": "Medication Guide"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "4",
+                  "submission_status": "AP",
+                  "submission_status_date": "20191127",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "LABELING",
+                  "submission_class_code_description": "Labeling",
+                  "application_docs": [
+                    {
+                      "id": "61094",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/appletter/2019/209637Orig1s004ltr.pdf",
+                      "date": "20191129",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "61112",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2019/209637s004lbl.pdf",
+                      "date": "20191202",
+                      "type": "Label"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "25",
+                  "submission_status": "AP",
+                  "submission_status_date": "20250128",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "80998",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/209637s025lbl.pdf",
+                      "date": "20250205",
+                      "type": "Label"
+                    },
+                    {
+                      "id": "80999",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2025/209637s025lbl.pdf#page=32",
+                      "date": "20250205",
+                      "type": "Medication Guide"
+                    },
+                    {
+                      "id": "81169",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2025/209637Orig1s025ltr.pdf",
+                      "date": "20250207",
+                      "type": "Letter"
+                    }
+                  ]
+                },
+                {
+                  "submission_type": "SUPPL",
+                  "submission_number": "9",
+                  "submission_status": "AP",
+                  "submission_status_date": "20220328",
+                  "review_priority": "STANDARD",
+                  "submission_class_code": "EFFICACY",
+                  "submission_class_code_description": "Efficacy",
+                  "application_docs": [
+                    {
+                      "id": "70639",
+                      "url": "https://www.accessdata.fda.gov/drugsatfda_docs/appletter/2022/209637Orig1s009ltr.pdf",
+                      "date": "20220329",
+                      "type": "Letter"
+                    },
+                    {
+                      "id": "70644",
+                      "url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2022/209637Orig1s009lbl.pdf",
+                      "date": "20220329",
+                      "type": "Label"
+                    }
+                  ]
+                }
+              ],
+              "application_number": "NDA209637",
+              "sponsor_name": "NOVO",
+              "openfda": {
+                "application_number": [
+                  "NDA209637"
+                ],
+                "brand_name": [
+                  "OZEMPIC"
+                ],
+                "generic_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "manufacturer_name": [
+                  "Novo Nordisk"
+                ],
+                "product_ndc": [
+                  "0169-4130",
+                  "0169-4136",
+                  "0169-4132",
+                  "0169-4772",
+                  "0169-4181"
+                ],
+                "product_type": [
+                  "HUMAN PRESCRIPTION DRUG"
+                ],
+                "route": [
+                  "SUBCUTANEOUS"
+                ],
+                "substance_name": [
+                  "SEMAGLUTIDE"
+                ],
+                "rxcui": [
+                  "1991306",
+                  "1991311",
+                  "1991316",
+                  "1991317",
+                  "2398841",
+                  "2398842",
+                  "2599362",
+                  "2599365",
+                  "2619152",
+                  "2619154"
+                ],
+                "spl_id": [
+                  "b9d0b8d8-820e-416d-82f4-4e51eeacae4f"
+                ],
+                "spl_set_id": [
+                  "adec4fd2-6858-4c99-91d4-531f5f2a2d79"
+                ],
+                "package_ndc": [
+                  "0169-4136-11",
+                  "0169-4136-02",
+                  "0169-4132-90",
+                  "0169-4132-97",
+                  "0169-4132-11",
+                  "0169-4132-12",
+                  "0169-4130-01",
+                  "0169-4130-13",
+                  "0169-4772-11",
+                  "0169-4772-12",
+                  "0169-4772-90",
+                  "0169-4772-97",
+                  "0169-4181-03",
+                  "0169-4181-13",
+                  "0169-4181-90",
+                  "0169-4181-97"
+                ],
+                "nui": [
+                  "N0000178480",
+                  "M0160181",
+                  "N0000020058"
+                ],
+                "pharm_class_epc": [
+                  "GLP-1 Receptor Agonist [EPC]"
+                ],
+                "pharm_class_cs": [
+                  "Glucagon-Like Peptide 1 [CS]"
+                ],
+                "pharm_class_moa": [
+                  "Glucagon-like Peptide-1 (GLP-1) Agonists [MoA]"
+                ],
+                "unii": [
+                  "53AXN4NNHX"
+                ]
+              },
+              "products": [
+                {
+                  "product_number": "003",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "8MG/3ML (2.68MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "001",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2MG/1.5ML (1.34MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "004",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "2MG/3ML (0.68MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                },
+                {
+                  "product_number": "002",
+                  "reference_drug": "Yes",
+                  "brand_name": "OZEMPIC",
+                  "active_ingredients": [
+                    {
+                      "name": "SEMAGLUTIDE",
+                      "strength": "4MG/3ML (1.34MG/ML)"
+                    }
+                  ],
+                  "reference_standard": "Yes",
+                  "dosage_form": "SOLUTION",
+                  "route": "SUBCUTANEOUS",
+                  "marketing_status": "Prescription"
+                }
+              ]
+            }
+          ]
+        }
+  recorded_at: 2025-07-08 19:29:25 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.0.0

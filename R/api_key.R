@@ -11,6 +11,9 @@
 #'   the number of requests on a per-IP address basis, as well as on a per-key
 #'   basis).
 #' @examples
+#' \dontshow{
+#'   try(prior_api_key <- get_api_key(), silent = TRUE)
+#' }
 #' # Set your openFDA API key with `set_api_key()`
 #' api_key <- "example_api_key"
 #' set_api_key(api_key)
@@ -20,6 +23,9 @@
 #'
 #' # An error will be thrown you try to set your API key to an empty string.
 #' try(set_api_key(""))
+#' \dontshow{
+#'   try(set_api_key(api_key = prior_api_key), silent = TRUE)
+#' }
 #' @section Setting an openFDA API key:
 #' API keys are the sort of thing that should be stored securely. For that
 #' reason, `set_api_key()` and `get_api_key()` utilise the

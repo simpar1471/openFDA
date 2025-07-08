@@ -15,9 +15,9 @@ License: GPL (>= 3)
 URL: https://github.com/simpar1471/openFDA,
     https://simpar1471.github.io/openFDA/
 BugReports: https://github.com/simpar1471/openFDA/issues
-Depends:
+Depends: 
     R (>= 4.1.0)
-Imports:
+Imports: 
     cli,
     httr2,
     checkmate,
@@ -27,11 +27,12 @@ Imports:
     prettyunits,
     keyring
 Config/Needs/website: rmarkdown
-Suggests: 
+Suggests:
     knitr,
     rmarkdown,
+    stringr,
     testthat (>= 3.0.0),
-    stringr
+    vcr (>= 0.6.0)
 Config/testthat/edition: 3
 Config/testthat/start-first: options
 Encoding: UTF-8
