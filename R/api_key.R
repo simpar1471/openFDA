@@ -20,8 +20,7 @@
 #'
 #' # An error will be thrown you try to set your API key to an empty string.
 #' try(set_api_key(""))
-#' @details
-#' # Setting an openFDA API key
+#' @section Setting an openFDA API key:
 #' API keys are the sort of thing that should be stored securely. For that
 #' reason, `set_api_key()` and `get_api_key()` utilise the
 #' [keyring](https://keyring.r-lib.org/) package for storing/retrieving the API
@@ -35,6 +34,17 @@
 #'
 #' As for the key itself? It will be stored securely using `keyring::key_set()`.
 #' Once set on a machine, you shouldn't need to run `set_api_key()` again.
+#'
+#' ## Creating a new keyring
+#' If your current [keyring backend][keyring::backends] supports named keyrings,
+#' then when using `set_api_key()` for the first time you will be prompted to
+#' create a new keyring called `"openFDA"` using `keyring::keyring_create()`.
+#'
+#' When asked to do this, you will need to enter a password which can be used to
+#' 'lock' and 'unlock' this new keyring (see `keyring::keyring_lock()` for
+#' details). However, you shouldn't need to use this password in the future, as
+#' the keyring will remain unlocked unless you use `keyring::keyring_lock()` to
+#' lock the `"openFDA"` keyring.
 #' @returns For `set_api_key()`, returns `NULL` invisibly. The function is
 #'   called for its side effect: to store the openFDA API key securely using
 #'   `keyring::key_set()`.
@@ -47,7 +57,9 @@ set_api_key <- function(api_key, user = "openFDA") {
     cli::cli_abort(
       c("!" = "You must be running R in interactive mode to use
                {.fn set_api_key} without providing a value to the `api_key`
-               argument."),
+               argument.",
+        "i" = "If you can run {.fn set_api_key} in interactive mode, please do
+               so. Check out the {.fn set_api_key} docs for more information."),
       class = "openfda_set_api_key_needs_interactive_mode"
     )
   }
@@ -75,14 +87,16 @@ set_api_key <- function(api_key, user = "openFDA") {
       cli::cli_inform(
         message = c("i" = "The {.val {openFDA_keyring}} keyring is locked.
                            Please unlock with your {.val {openFDA_keyring}}
-                           keyring password."),
+                           keyring password with {.fn
+                           keyring::keyring_unlock}."),
         class = "openfda_keyring_locked"
       )
       keyring::keyring_unlock(keyring = "openFDA")
     } else if (!openFDA_keyring_exists) {
       cli::cli_inform(
         message = c("!" = "No keyring named {.val {openFDA_keyring}} exists.",
-                    "i" = "You will be prompted to create one. It requires a
+                    "i" = "You will be prompted to create one with {.fn
+                           keyring::keyring_create}. This requires a
                            password, so please pick one you're likely to
                            remember."),
         class = "openfda_keyring_doesnt_exist"

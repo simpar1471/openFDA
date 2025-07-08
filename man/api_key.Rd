@@ -36,6 +36,7 @@ will be thrown if no key is found or if the returned key is an empty string
 Get and set your openFDA API keys
 }
 \section{Setting an openFDA API key}{
+
 API keys are the sort of thing that should be stored securely. For that
 reason, \code{set_api_key()} and \code{get_api_key()} utilise the
 \href{https://keyring.r-lib.org/}{keyring} package for storing/retrieving the API
@@ -49,6 +50,18 @@ without logging the key somewhere unsecure.
 
 As for the key itself? It will be stored securely using \code{keyring::key_set()}.
 Once set on a machine, you shouldn't need to run \code{set_api_key()} again.
+\subsection{Creating a new keyring}{
+
+If your current \link[keyring:backends]{keyring backend} supports named keyrings,
+then when using \code{set_api_key()} for the first time you will be prompted to
+create a new keyring called \code{"openFDA"} using \code{keyring::keyring_create()}.
+
+When asked to do this, you will need to enter a password which can be used to
+'lock' and 'unlock' this new keyring (see \code{keyring::keyring_lock()} for
+details). However, you shouldn't need to use this password in the future, as
+the keyring will remain unlocked unless you use \code{keyring::keyring_lock()} to
+lock the \code{"openFDA"} keyring.
+}
 }
 
 \examples{
