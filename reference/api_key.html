@@ -87,7 +87,9 @@ will be thrown if no key is found or if the returned key is an empty string
     </div>
     <div class="section level2">
     <h2 id="setting-an-openfda-api-key">Setting an openFDA API key<a class="anchor" aria-label="anchor" href="#setting-an-openfda-api-key"></a></h2>
-    <p>API keys are the sort of thing that should be stored securely. For that
+
+
+<p>API keys are the sort of thing that should be stored securely. For that
 reason, <code>set_api_key()</code> and <code>get_api_key()</code> utilise the
 <a href="https://keyring.r-lib.org/" class="external-link">keyring</a> package for storing/retrieving the API
 key. It is best practice not to set your API key by passing it directly to
@@ -97,7 +99,20 @@ key. It is best practice not to set your API key by passing it directly to
 prompt you to enter your API key, which will then be stored for future use
 without logging the key somewhere unsecure.</p>
 <p>As for the key itself? It will be stored securely using <code><a href="https://keyring.r-lib.org/reference/key_get.html" class="external-link">keyring::key_set()</a></code>.
-Once set on a machine, you shouldn't need to run <code>set_api_key()</code> again.</p>
+Once set on a machine, you shouldn't need to run <code>set_api_key()</code> again.</p><div class="section">
+<h3 id="creating-a-new-keyring">Creating a new keyring<a class="anchor" aria-label="anchor" href="#creating-a-new-keyring"></a></h3>
+
+
+<p>If your current <a href="https://keyring.r-lib.org/reference/backends.html" class="external-link">keyring backend</a> supports named keyrings,
+then when using <code>set_api_key()</code> for the first time you will be prompted to
+create a new keyring called <code>"openFDA"</code> using <code><a href="https://keyring.r-lib.org/reference/has_keyring_support.html" class="external-link">keyring::keyring_create()</a></code>.</p>
+<p>When asked to do this, you will need to enter a password which can be used to
+'lock' and 'unlock' this new keyring (see <code><a href="https://keyring.r-lib.org/reference/has_keyring_support.html" class="external-link">keyring::keyring_lock()</a></code> for
+details). However, you shouldn't need to use this password in the future, as
+the keyring will remain unlocked unless you use <code><a href="https://keyring.r-lib.org/reference/has_keyring_support.html" class="external-link">keyring::keyring_lock()</a></code> to
+lock the <code>"openFDA"</code> keyring.</p>
+</div>
+
     </div>
 
     <div class="section level2">
