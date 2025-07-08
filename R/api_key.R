@@ -12,7 +12,7 @@
 #'   basis).
 #' @examples
 #' \dontshow{
-#'   try(prior_api_key <- get_api_key(), silent = TRUE)
+#'   suppressMessages(try(prior_api_key <- get_api_key(), silent = TRUE))
 #' }
 #' # Set your openFDA API key with `set_api_key()`
 #' api_key <- "example_api_key"
@@ -24,7 +24,7 @@
 #' # An error will be thrown you try to set your API key to an empty string.
 #' try(set_api_key(""))
 #' \dontshow{
-#'   try(set_api_key(api_key = prior_api_key), silent = TRUE)
+#'   suppressMessages(try(set_api_key(api_key = prior_api_key), silent = TRUE))
 #' }
 #' @section Setting an openFDA API key:
 #' API keys are the sort of thing that should be stored securely. For that

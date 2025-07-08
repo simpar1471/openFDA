@@ -134,17 +134,21 @@
 #'     [httr2](https://httr2.r-lib.org/) response object without printing a
 #'     warning.
 #' @examples
-#' \dontshow{
-#'   vcr::insert_example_cassette("openFDA_examples", package = "openFDA")
-#' }
-#' resp <- openFDA(search = "openfda.manufacturer_name:gilead*",
-#'                 limit = 2,
-#'                 skip = 10,
-#'                 paging = "never",
-#'                 paging_verbosity = "quiet")
+#' if (httr2::secret_has_key("OPENFDA_KEY")) {
+#'   set_api_key(httr2::secret_decrypt(
+#'     "TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ",
+#'     "OPENFDA_KEY"
+#'   ))
 #'
-#' # The function returns an `httr2` object
-#' print(resp)
+#'   resp <- openFDA(search = "openfda.manufacturer_name:gilead*",
+#'                   limit = 2,
+#'                   skip = 10,
+#'                   paging = "never",
+#'                   paging_verbosity = "quiet")
+#'
+#'   # The function returns an `httr2` object
+#'   print(resp)
+#' }
 #'
 #' # Bad inputs will cause informative errors - here, a bad API key is supplied
 #' try(
@@ -152,9 +156,6 @@
 #'           api_key = "BAD_API_KEY",
 #'           limit = 1)
 #' )
-#' \dontshow{
-#'   vcr::eject_cassette()
-#' }
 #' @references
 #' Kass-Hout TA, Xu Z, Mohebbi M, Nelsen H, Baker A, LEvine J, Johansen E,
 #' Bright RA. **OpenFDA: an innovative platform providing access to a wealth of
