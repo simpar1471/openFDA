@@ -3,7 +3,10 @@ encrypted_api_key <-
 rlang::push_options(openFDA.paging = "never",
                     openFDA.paging_verbosity = "quiet")
 
-test_that("openFDA can call its API", {
+# test_that("openFDA is memoised", {
+#   expect_true(memoise::is.memoised(openFDA))
+# })
+
 # This test we skip on CRAN, but keep in CI --> tests that the openFDA API is
 # actually available with a very simple query
 test_that("openFDA can call its API and reach correct endpoints", {
