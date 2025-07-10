@@ -114,12 +114,12 @@ set_api_key <- function(api_key, user = "openFDA") {
     # Add openFDA API key to keyring
     if (api_key_not_provided) {
       key_set(service = service,
-              user = user,
+              username = user,
               keyring = openFDA_keyring,
               prompt = "openFDA API key:")
     } else {
       keyring::key_set_with_value(service = service,
-                                  user = user,
+                                  username = user,
                                   keyring = openFDA_keyring,
                                   password = api_key)
     }
@@ -136,11 +136,11 @@ set_api_key <- function(api_key, user = "openFDA") {
     # For backends without keyring support or running in non-interactive mode
     if (api_key_not_provided) {
       key_set(service = service,
-              user = user,
+              username = user,
               prompt = "openFDA API key:")
     } else {
       keyring::key_set_with_value(service = service,
-                                  user = user,
+                                  username = user,
                                   password = api_key)
     }
     cli::cli_inform(

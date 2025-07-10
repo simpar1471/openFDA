@@ -24,9 +24,9 @@ test_that("You can set and get an API key (with keyring support)", {
     keyring_create = function(keyring) {
       keyring::keyring_create(keyring = keyring, password = "password")
     },
-    key_set = function(service, user, keyring, prompt) {
+    key_set = function(service, username, keyring, prompt) {
       rlang::signal(message = prompt, class = "openfda_api_key_set_with_mock")
-      keyring::key_set_with_value(service, user, decrypted_key, keyring)
+      keyring::key_set_with_value(service, username, decrypted_key, keyring)
     },
     code = {
       ## a. No keyring exists --> should issue messages
@@ -102,9 +102,9 @@ test_that("You can set and get an API key", {
   ## Interactive
   with_mocked_bindings(
     interactive = function() TRUE,
-    key_set = function(service, user, prompt) {
+    key_set = function(service, username, prompt) {
       rlang::signal(message = prompt, class = "openfda_api_key_set_with_mock")
-      keyring::key_set_with_value(service, user, decrypted_key)
+      keyring::key_set_with_value(service, username, decrypted_key)
     },
     code = {
       expect_condition(set_api_key(),
