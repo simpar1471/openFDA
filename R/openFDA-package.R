@@ -2,6 +2,10 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom keyring key_get
+#' @importFrom keyring key_set
+#' @importFrom keyring keyring_create
+#' @importFrom keyring keyring_unlock
 ## usethis namespace: end
 NULL
 

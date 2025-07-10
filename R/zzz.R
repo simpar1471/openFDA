@@ -10,3 +10,7 @@
                       openFDA.paging_verbosity = "verbose",
                       openFDA.handle_http_errors = NULL)
 }
+
+# To allow mocking of interactive() in tests, see:
+# https://testthat.r-lib.org/reference/local_mocked_bindings.html
+interactive <- NULL

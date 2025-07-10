@@ -85,6 +85,7 @@ set_api_key <- function(api_key, user = "openFDA") {
 
   # Create keyring if it doesn't exist; if it's locked, unlock it
   if (keyring::has_keyring_support() && interactive()) {
+    # hardcoded
     openFDA_keyring <- "openFDA"
     openFDA_keyring_exists <-
       openFDA_keyring %in% keyring::keyring_list()$keyring
@@ -97,7 +98,7 @@ set_api_key <- function(api_key, user = "openFDA") {
                            keyring::keyring_unlock}."),
         class = "openfda_keyring_locked"
       )
-      keyring::keyring_unlock(keyring = "openFDA")
+      keyring_unlock(keyring = "openFDA")
     } else if (!openFDA_keyring_exists) {
       cli::cli_inform(
         message = c("!" = "No keyring named {.val {openFDA_keyring}} exists.",
@@ -107,15 +108,15 @@ set_api_key <- function(api_key, user = "openFDA") {
                            remember."),
         class = "openfda_keyring_doesnt_exist"
       )
-      keyring::keyring_create(keyring = "openFDA")
+      keyring_create(keyring = "openFDA")
     }
 
     # Add openFDA API key to keyring
     if (api_key_not_provided) {
-      keyring::key_set(service = service,
-                       user = user,
-                       keyring = openFDA_keyring,
-                       prompt = "openFDA API key:")
+      key_set(service = service,
+              user = user,
+              keyring = openFDA_keyring,
+              prompt = "openFDA API key:")
     } else {
       keyring::key_set_with_value(service = service,
                                   user = user,
@@ -134,9 +135,9 @@ set_api_key <- function(api_key, user = "openFDA") {
   } else {
     # For backends without keyring support or running in non-interactive mode
     if (api_key_not_provided) {
-      keyring::key_set(service = service,
-                       user = user,
-                       prompt = "openFDA API key:")
+      key_set(service = service,
+              user = user,
+              prompt = "openFDA API key:")
     } else {
       keyring::key_set_with_value(service = service,
                                   user = user,
@@ -166,11 +167,11 @@ get_api_key <- function(user = "openFDA") {
   service <- "OPENFDA_KEY"
   api_key <- rlang::try_fetch(
     if (keyring::has_keyring_support() && interactive()) {
-      keyring::key_get(service = service,
-                       username = user,
-                       keyring = "openFDA")
+      key_get(service = service,
+              username = user,
+              keyring = "openFDA")
     } else {
-      keyring::key_get(service = service, username = user)
+      key_get(service = service, username = user)
     },
     error = function(cnd) {
       throw_api_key_error(err = "No openFDA API key was found by
