@@ -11,8 +11,9 @@ rlang::push_options(openFDA.paging = "never",
 # actually available with a very simple query
 test_that("openFDA can call its API and reach correct endpoints", {
   skip_if_offline()
-  suppressMessages(
-   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY"))
+  expect_message(
+   set_api_key(httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY")),
+   class = "openfda_api_key_set"
   )
 
   # Simple query
@@ -78,14 +79,18 @@ test_that(
 test_that(
   desc = "openFDA paging fails if `paging == \"ask\" but not interactive", {
   skip_if_not_installed(pkg = "vcr")
-  skip_if(interactive())
   # Query which requires paging
-  expect_error(
-    openFDA(search = "openfda.brand_name:o*",
-            limit = 300,
-            api_key = "placeholder_key",
-            paging = "ask"),
-    class = "openfda_paging_is_ask_when_uninteractive"
+  with_mocked_bindings(
+    interactive = function() FALSE,
+    code = {
+      expect_error(
+        openFDA(search = "openfda.brand_name:o*",
+                limit = 300,
+                api_key = "placeholder_key",
+                paging = "ask"),
+        class = "openfda_paging_is_ask_when_uninteractive"
+      )
+    }
   )
 })
 
@@ -185,7 +190,7 @@ test_that("openFDA throws formatted HTTP errors", {
         expect_condition(
           httr2::with_mocked_responses(temporary_mock, {
             openFDA(
-              search = "openfda.brand_name:\"verapamil\"",
+              search = c("openfda.brand_name" = paste0("__", http_status_code)),
               limit = 1
             )
           }),
@@ -199,9 +204,8 @@ test_that("openFDA throws formatted HTTP errors", {
 # Doesn't require vcr and no need to skip on CRAN --> errors occur before
 # `httr2::req_perform()`
 test_that("openFDA errors on certain bad inputs", {
-  suppressMessages(
-    set_api_key(api_key = "api_key_string")
-  )
+  expect_message(set_api_key(api_key = "api_key_string"),
+                 class = "openfda_api_key_set")
 
   expect_error(
     openFDA(

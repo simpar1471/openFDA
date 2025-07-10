@@ -19,9 +19,9 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Tue, 08 Jul 2025 19:29:24 GMT
-      etag: W/"6417-f9qmpt+5Ge9FQ9OHdprE6lZpeVM"
-      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx->;
+      date: Thu, 10 Jul 2025 11:46:54 GMT
+      etag: W/"6417-2PYjMEIuFOY/KR0j0DMrIiXuIsQ"
+      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf>;
         rel="next"
       strict-transport-security:
       - max-age=31536000;
@@ -30,13 +30,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnte1qoeulhcqeh2ak5g
+      x-api-umbrella-request-id: cnugkf9qr7m5i57pbjn0
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '239'
-      x-vcap-request-id: 24c1a74b-be72-42ec-4ed9-c3b8e3acc1da
+      x-ratelimit-remaining: '213'
+      x-vcap-request-id: 77ad73a8-3066-4ab2-7175-2e25072d3c33
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -47,7 +47,7 @@ http_interactions:
             "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
             "terms": "https://open.fda.gov/terms/",
             "license": "https://open.fda.gov/license/",
-            "last_updated": "2025-07-02",
+            "last_updated": "2025-07-09",
             "results": {
               "skip": 0,
               "limit": 2,
@@ -843,8 +843,8 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-08 19:29:25 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.0.0
+  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
     uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22semaglutide%22&limit=2
@@ -865,9 +865,9 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Tue, 08 Jul 2025 19:29:24 GMT
-      etag: W/"6417-f9qmpt+5Ge9FQ9OHdprE6lZpeVM"
-      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx->;
+      date: Thu, 10 Jul 2025 11:46:54 GMT
+      etag: W/"6417-2PYjMEIuFOY/KR0j0DMrIiXuIsQ"
+      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf>;
         rel="next"
       strict-transport-security:
       - max-age=31536000;
@@ -876,13 +876,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnte1qqngc1pet6f6n5g
+      x-api-umbrella-request-id: cnugkfbv31pent5q0rgg
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '239'
-      x-vcap-request-id: 35ec10ae-e71d-458c-59e6-3c70b36951d2
+      x-ratelimit-remaining: '212'
+      x-vcap-request-id: e4b3e666-0545-4dc1-5850-4bb767b2a92c
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -893,7 +893,7 @@ http_interactions:
             "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
             "terms": "https://open.fda.gov/terms/",
             "license": "https://open.fda.gov/license/",
-            "last_updated": "2025-07-02",
+            "last_updated": "2025-07-09",
             "results": {
               "skip": 0,
               "limit": 2,
@@ -1689,11 +1689,11 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-08 19:29:25 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.0.0
+  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx-
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf
     body:
       encoding: ''
       string: ''
@@ -1706,13 +1706,13 @@ http_interactions:
     headers:
       access-control-allow-credentials: 'true'
       access-control-allow-origin: '*'
-      age: '0'
+      age: '2'
       cache-control: no-cache, no-store, must-revalidate
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Tue, 08 Jul 2025 19:29:25 GMT
-      etag: W/"3260-9wKMXKbz8a/+qI6iIQO+XCwClqA"
+      date: Thu, 10 Jul 2025 11:46:55 GMT
+      etag: W/"3260-RKltsBMzPGiXmfunZ+9AiOtPnCQ"
       strict-transport-security:
       - max-age=31536000;
       - max-age=31536000; preload
@@ -1720,13 +1720,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnte1qspmjk7q70ch5l0
+      x-api-umbrella-request-id: cnugkfekh9d1l9cinvn0
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '237'
-      x-vcap-request-id: 43fe5a3c-cfae-4336-5d6b-382b7d0d9b69
+      x-ratelimit-remaining: '211'
+      x-vcap-request-id: 2efa0c64-ed79-491b-6d4f-1071259a8a18
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -1737,7 +1737,7 @@ http_interactions:
             "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
             "terms": "https://open.fda.gov/terms/",
             "license": "https://open.fda.gov/license/",
-            "last_updated": "2025-07-02",
+            "last_updated": "2025-07-09",
             "results": {
               "skip": 0,
               "limit": 2,
@@ -2144,8 +2144,8 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-08 19:29:25 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.0.0
+  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
     uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22semaglutide%22&limit=2
@@ -2166,9 +2166,9 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Tue, 08 Jul 2025 19:29:25 GMT
-      etag: W/"6417-f9qmpt+5Ge9FQ9OHdprE6lZpeVM"
-      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx->;
+      date: Thu, 10 Jul 2025 11:46:55 GMT
+      etag: W/"6417-2PYjMEIuFOY/KR0j0DMrIiXuIsQ"
+      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf>;
         rel="next"
       strict-transport-security:
       - max-age=31536000;
@@ -2177,13 +2177,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnte1quttiv3ef3a0bc0
+      x-api-umbrella-request-id: cnugkfh3orckf3bq52kg
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '236'
-      x-vcap-request-id: 5d6dff09-ac35-4b89-6f0e-8136580d6a35
+      x-ratelimit-remaining: '211'
+      x-vcap-request-id: 9ee9f0a1-ddd5-495f-5f94-c47b47f78ab5
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -2194,7 +2194,7 @@ http_interactions:
             "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
             "terms": "https://open.fda.gov/terms/",
             "license": "https://open.fda.gov/license/",
-            "last_updated": "2025-07-02",
+            "last_updated": "2025-07-09",
             "results": {
               "skip": 0,
               "limit": 2,
@@ -2990,8 +2990,8 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-08 19:29:25 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.0.0
+  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
     uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22semaglutide%22&limit=2
@@ -3012,9 +3012,9 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Tue, 08 Jul 2025 19:29:25 GMT
-      etag: W/"6417-f9qmpt+5Ge9FQ9OHdprE6lZpeVM"
-      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DZKDg4pcBmHiQdPkOGjx->;
+      date: Thu, 10 Jul 2025 11:46:55 GMT
+      etag: W/"6417-2PYjMEIuFOY/KR0j0DMrIiXuIsQ"
+      link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf>;
         rel="next"
       strict-transport-security:
       - max-age=31536000;
@@ -3023,13 +3023,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnte1r1btiifj6our62g
+      x-api-umbrella-request-id: cnugkfk0m5qamdnvgcfg
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '236'
-      x-vcap-request-id: a8236443-33ff-4edd-5c85-438e8514d7fd
+      x-ratelimit-remaining: '210'
+      x-vcap-request-id: 18d405de-e6ca-4494-6f8c-d626e685fd3a
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -3040,7 +3040,7 @@ http_interactions:
             "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
             "terms": "https://open.fda.gov/terms/",
             "license": "https://open.fda.gov/license/",
-            "last_updated": "2025-07-02",
+            "last_updated": "2025-07-09",
             "results": {
               "skip": 0,
               "limit": 2,
@@ -3836,5 +3836,5 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-08 19:29:25 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.0.0
+  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
