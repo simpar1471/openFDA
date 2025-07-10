@@ -151,16 +151,22 @@ warning.
 }}
 }
 \value{
-Either an \code{httr2} response object from \code{\link[httr2:req_perform]{httr2::req_perform()}} or list
-of these objects, depending on whether pagination was required. You can use
-\code{\link[httr2:resp_body_raw]{httr2::resp_body_json()}} to extract JSON data from these responses.
+Either an \href{https://httr2.r-lib.org/}{httr2} response object from
+\code{\link[httr2:req_perform]{httr2::req_perform()}} or list of these objects, depending on whether
+pagination was required. You can use \code{\link[httr2:resp_body_raw]{httr2::resp_body_json()}} to extract
+JSON data from these responses.
 }
 \description{
 Send requests to the openFDA API
 }
+\note{
+Internally, the functions in \code{openFDA()} which call the API itself are
+cached with \code{memoise::memoise()}. Consequently, you should find that
+repeated queries run faster than the first query, assuming you don't change
+your query parameters.
+}
 \examples{
 if (httr2::secret_has_key("OPENFDA_KEY")) {
-  # You would set your own key in interactive mode
   set_api_key(httr2::secret_decrypt(
     "TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ",
     "OPENFDA_KEY"

@@ -1,5 +1,8 @@
 .onLoad <- function(libname, pkgname) {
-  # openFDA <<- memoise::memoise(openFDA)
+  # Memoise openFDA HTTP activity
+  openFDA <<- memoise::memoise(openFDA)
+
+  # Set default options
   rlang::push_options(openFDA.paging = "ask",
                       openFDA.paging_verbosity = "verbose",
                       openFDA.handle_http_errors = "warn")
@@ -7,7 +10,7 @@
 
 .onUnload <- function(libname, pkgname) {
   rlang::push_options(openFDA.paging = NULL,
-                      openFDA.paging_verbosity = "verbose",
+                      openFDA.paging_verbosity = NULL,
                       openFDA.handle_http_errors = NULL)
 }
 

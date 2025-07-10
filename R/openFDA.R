@@ -156,6 +156,11 @@
 #'           api_key = "BAD_API_KEY",
 #'           limit = 1)
 #' )
+#' @note
+#' Internally, the functions in `openFDA()` which call the API itself are
+#' cached with `memoise::memoise()`. Consequently, you should find that
+#' repeated queries run faster than the first query, assuming you don't change
+#' your query parameters.
 #' @references
 #' Kass-Hout TA, Xu Z, Mohebbi M, Nelsen H, Baker A, LEvine J, Johansen E,
 #' Bright RA. **OpenFDA: an innovative platform providing access to a wealth of
@@ -164,9 +169,10 @@
 #' @seealso Read the docs for [set_api_key()] to learn how to set your openFDA
 #'   API key. Check out [format_search_term()] to see how input `search` vectors
 #'   are converted to openFDA API searches.
-#' @return Either an `httr2` response object from [httr2::req_perform()] or list
-#'   of these objects, depending on whether pagination was required. You can use
-#'   [httr2::resp_body_json()] to extract JSON data from these responses.
+#' @return Either an [httr2](https://httr2.r-lib.org/) response object from
+#'   [httr2::req_perform()] or list of these objects, depending on whether
+#'   pagination was required. You can use [httr2::resp_body_json()] to extract
+#'   JSON data from these responses.
 #' @rdname openFDA
 #' @export
 openFDA <- function(

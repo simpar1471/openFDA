@@ -3,9 +3,9 @@ encrypted_api_key <-
 rlang::push_options(openFDA.paging = "never",
                     openFDA.paging_verbosity = "quiet")
 
-# test_that("openFDA is memoised", {
-#   expect_true(memoise::is.memoised(openFDA))
-# })
+test_that("openFDA internals are memoised", {
+  expect_true(memoise::is.memoised(openFDA))
+})
 
 # This test we skip on CRAN, but keep in CI --> tests that the openFDA API is
 # actually available with a very simple query
@@ -94,17 +94,24 @@ test_that(
   )
 })
 
-test_that("openFDA throws formatted HTTP errors", {
+test_that("openFDA throws formatted HTTP conditions", {
   skip_if_not_installed(pkg = "vcr")
+
   vcr::use_cassette("test-handle_http_errors", {
     for (handle_http_errors in c("error", "warn", "silent")) {
+      # As we are repeating, reset the memoise cache
+      memoise::forget(openFDA)
+
+      # Set function for expectations
       expect_fn <- switch(handle_http_errors,
                           "warn" = expect_warning,
                           "error" = expect_error,
-                          "silent" = expect_success)
+                          "silent" = expect_condition)
+      # Set package-level option
       rlang::push_options(openFDA.handle_http_errors = handle_http_errors)
 
-      expect_condition(
+      # Error 400 - bad sorting field
+      expect_fn(
         resp <- openFDA(
           search = "openfda.brand_name=\"verapamil\"",
           sort = c("invalid_field" = "asc"),
@@ -120,7 +127,7 @@ test_that("openFDA throws formatted HTTP errors", {
       }
 
       # Error 403 - usually an invalid API key
-      expect_condition(
+      expect_fn(
         resp <- openFDA(
           search = "openfda.brand_name:\"verapamil\"\"",
           limit = 1,
@@ -136,7 +143,7 @@ test_that("openFDA throws formatted HTTP errors", {
       }
 
       # Error 404 - because search returns nothing
-      expect_condition(
+      expect_fn(
         resp <- openFDA(
           search = c("openfda.brand_name" = "3129084"),
           limit = 1
@@ -151,7 +158,7 @@ test_that("openFDA throws formatted HTTP errors", {
       }
 
       # Error 404 - because `skip` is too high
-      expect_condition(
+      expect_fn(
         resp <- openFDA(
           search = c("openfda.brand_name" = "naproxen"),
           skip = 500
@@ -166,7 +173,7 @@ test_that("openFDA throws formatted HTTP errors", {
       }
 
       # Error 500
-      expect_condition(
+      expect_fn(
         resp <- openFDA(
           search = "openfda.brand_name:\"verapamil\"\"",
           limit = 1
@@ -187,7 +194,7 @@ test_that("openFDA throws formatted HTTP errors", {
         temporary_mock <- function(req) {
           httr2::response_json(status_code = http_status_code)
         }
-        expect_condition(
+        expect_fn(
           httr2::with_mocked_responses(temporary_mock, {
             openFDA(
               search = c("openfda.brand_name" = paste0("__", http_status_code)),

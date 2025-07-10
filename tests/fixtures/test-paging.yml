@@ -19,7 +19,7 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 11:46:54 GMT
+      date: Thu, 10 Jul 2025 16:17:07 GMT
       etag: W/"6417-2PYjMEIuFOY/KR0j0DMrIiXuIsQ"
       link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf>;
         rel="next"
@@ -30,13 +30,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnugkf9qr7m5i57pbjn0
+      x-api-umbrella-request-id: cnukg5ijp1lt0kmda2mg
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '213'
-      x-vcap-request-id: 77ad73a8-3066-4ab2-7175-2e25072d3c33
+      x-ratelimit-remaining: '217'
+      x-vcap-request-id: 783c9f28-b765-4b2f-4657-000fb88e76e0
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -843,7 +843,7 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_at: 2025-07-10 16:17:08 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
@@ -865,7 +865,7 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 11:46:54 GMT
+      date: Thu, 10 Jul 2025 16:17:07 GMT
       etag: W/"6417-2PYjMEIuFOY/KR0j0DMrIiXuIsQ"
       link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf>;
         rel="next"
@@ -876,13 +876,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnugkfbv31pent5q0rgg
+      x-api-umbrella-request-id: cnukg5l8h8der1kksv9g
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '212'
-      x-vcap-request-id: e4b3e666-0545-4dc1-5850-4bb767b2a92c
+      x-ratelimit-remaining: '217'
+      x-vcap-request-id: 8330fb40-95e8-45d5-67a8-c1a0cc0b7c3b
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -1689,7 +1689,7 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_at: 2025-07-10 16:17:08 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
@@ -1706,12 +1706,12 @@ http_interactions:
     headers:
       access-control-allow-credentials: 'true'
       access-control-allow-origin: '*'
-      age: '2'
+      age: '0'
       cache-control: no-cache, no-store, must-revalidate
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 11:46:55 GMT
+      date: Thu, 10 Jul 2025 16:17:08 GMT
       etag: W/"3260-RKltsBMzPGiXmfunZ+9AiOtPnCQ"
       strict-transport-security:
       - max-age=31536000;
@@ -1720,13 +1720,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnugkfekh9d1l9cinvn0
+      x-api-umbrella-request-id: cnukg5nasp75cuid0dvg
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '211'
-      x-vcap-request-id: 2efa0c64-ed79-491b-6d4f-1071259a8a18
+      x-ratelimit-remaining: '215'
+      x-vcap-request-id: 66d3d60b-bf7b-4b56-520c-ea4f37a24a08
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -2144,7 +2144,7 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_at: 2025-07-10 16:17:08 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
@@ -2166,7 +2166,7 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 11:46:55 GMT
+      date: Thu, 10 Jul 2025 16:17:08 GMT
       etag: W/"6417-2PYjMEIuFOY/KR0j0DMrIiXuIsQ"
       link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf>;
         rel="next"
@@ -2177,13 +2177,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnugkfh3orckf3bq52kg
+      x-api-umbrella-request-id: cnukg5pgvi06t6375ieg
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '211'
-      x-vcap-request-id: 9ee9f0a1-ddd5-495f-5f94-c47b47f78ab5
+      x-ratelimit-remaining: '214'
+      x-vcap-request-id: f341defb-4859-4ba5-7c65-7baabe4f7f56
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -2990,7 +2990,7 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_at: 2025-07-10 16:17:08 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
@@ -3012,7 +3012,7 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 11:46:55 GMT
+      date: Thu, 10 Jul 2025 16:17:08 GMT
       etag: W/"6417-2PYjMEIuFOY/KR0j0DMrIiXuIsQ"
       link: <https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name%3A%22semaglutide%22&limit=2&skip=0&search_after=0%3DC-F-8pcBIMiVPoupJ-xf>;
         rel="next"
@@ -3023,13 +3023,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnugkfk0m5qamdnvgcfg
+      x-api-umbrella-request-id: cnukg5s4a0crhbe9qgeg
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '210'
-      x-vcap-request-id: 18d405de-e6ca-4494-6f8c-d626e685fd3a
+      x-ratelimit-remaining: '213'
+      x-vcap-request-id: 6d82b226-a52c-4e8a-664e-369a7781562b
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -3836,5 +3836,5 @@ http_interactions:
             }
           ]
         }
-  recorded_at: 2025-07-10 11:46:56 GMT
+  recorded_at: 2025-07-10 16:17:08 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
