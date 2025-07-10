@@ -13,6 +13,10 @@ test_that("You can set and get an API key (with keyring support)", {
     keyring::keyring_create(keyring = "openFDA", password = "password"),
     silent = TRUE
   )
+  try(
+    keyring::keyring_unlock(keyring = "openFDA", password = "password"),
+    silent = TRUE
+  )
 
   encrypted_api_key <- paste0("TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk",
                               "-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ")
@@ -30,9 +34,9 @@ test_that("You can set and get an API key (with keyring support)", {
   # an empty string
   if (interactive()) {
     keyring::key_set_with_value(service = "OPENFDA_KEY",
-                              username =  "openFDA",
-                              password = "",
-                              keyring = "openFDA")
+                                username =  "openFDA",
+                                password = "",
+                                keyring = "openFDA")
     expect_error(get_api_key(), class = "openFDA_api_key_empty")
   }
 
