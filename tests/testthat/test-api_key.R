@@ -1,79 +1,76 @@
+# Set-up -----------------------------------------------------------------------
+
+## Use env-var backed; supported on all systems (and default on GitHub)
+options(keyring_backend = keyring::backend_env)
+
 # Set/get API key with keyrings ------------------------------------------------
 
 test_that("You can set and get an API key (with keyring support)", {
-  # Only run on windows, as there's the Windows credential manager
-  skip_on_os(c("mac", "linux", "solaris"))
-  options(keyring_backend = keyring::backend_wincred)
-  # Skip if no keyring support - I test a backend *with* keyring support as I
-  # develop on Windows. On GitHub, the env-var backend is user which does not
-  # have keyring support
-  skip_if_not(keyring::has_keyring_support())
-
-  encrypted_api_key <- paste0("TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk",
-                              "-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ")
-  decrypted_key <- httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY")
-
-
-  # 1. In interactive mode, can a user create a new a keyring and then save the
-  #    API key? Use mocking to replicate interactive inputs.
+  # 1. In interactive mode, can a user create a new keyring and save the API
+  #    key? Mocking interactive() + keyring functions.
   with_mocked_bindings(
     interactive = function() TRUE,
-    keyring_unlock = function(keyring) {
-      keyring::keyring_unlock(keyring = "openFDA", password = "password")
-    },
+    has_keyring_support = function() TRUE,
+    keyring_list = function() list(keyring = "not-openFDA"),
     keyring_create = function(keyring) {
-      keyring::keyring_create(keyring = keyring, password = "password")
+      rlang::signal(message = keyring, class = "openfda_test_keyring_created")
     },
     key_set = function(service, username, keyring, prompt) {
-      rlang::signal(message = prompt, class = "openfda_api_key_set_with_mock")
-      keyring::key_set_with_value(service, username, decrypted_key, keyring)
+      rlang::signal(message = prompt, class = "openfda_test_api_key_set")
     },
     code = {
-      ## a. No keyring exists --> should issue messages
-      try(keyring::key_delete(service = "OPENFDA_KEY",
-                              username = "openFDA",
-                              keyring = "openFDA"),
-          silent = TRUE)
-      try(keyring::keyring_delete(keyring = "openFDA"), silent = TRUE)
-      expect_message(set_api_key(decrypted_key),
-                     class = "openfda_keyring_doesnt_exist") |>
+      set_api_key() |>
+        expect_null() |>
+        expect_message(class = "openfda_keyring_doesnt_exist") |>
+        expect_condition(class = "openfda_test_keyring_created") |>
+        expect_condition(class = "openfda_test_api_key_set") |>
         expect_message(class = "openfda_api_key_set")
+  })
 
-      ## b. keyring exists but is locked --> should issue messages
-      keyring::keyring_lock(keyring = "openFDA")
-      expect_message(set_api_key(decrypted_key),
-                     class = "openfda_keyring_locked") |>
-        expect_message(class = "openfda_api_key_set")
-
-      ## c. keyring exists and is unlocked, no specific key provided --> should
-      ##    still set a new API key, check that right code reached with
-      ##    rlang::signal in mocked `key_set()`
-      expect_condition(set_api_key(),
-                       class = "openfda_api_key_set_with_mock") |>
-        expect_message(class = "openfda_api_key_set")
-    }
-  )
-
-  # 2. In non-interactive mode, can a user set the API key?
-  try(keyring::keyring_create(keyring = "openFDA", password = "password"),
-      silent = TRUE)
-  try(keyring::keyring_unlock(keyring = "openFDA", password = "password"),
-      silent = TRUE)
-  # `set_api_key() should return NULL but issue a message
-  expect_message(
-    expect_null(set_api_key(decrypted_key)),
-    class = "openfda_api_key_set"
-  )
-
-  # 3. Now check whether the stored API key is the same as this one
+  ## 2. Keyring exists but is locked
   with_mocked_bindings(
     interactive = function() TRUE,
+    has_keyring_support = function() TRUE,
+    keyring_list = function() list(keyring = "openFDA"),
+    keyring_is_locked = function (keyring) TRUE,
+    keyring_unlock = function(keyring) {
+      rlang::signal(message = keyring, class = "openfda_test_keyring_unlocked")
+    },
+    key_set = function(service, username, keyring, prompt) {
+      rlang::signal(message = prompt, class = "openfda_test_api_key_set")
+    },
     code = {
-      expect_equal(get_api_key(), decrypted_key)
+      set_api_key() |>
+        expect_null() |>
+        expect_condition(class = "openfda_test_keyring_unlocked") |>
+        expect_message(class = "openfda_keyring_locked") |>
+        expect_condition(class = "openfda_test_api_key_set") |>
+        expect_message(class = "openfda_api_key_set")
     }
   )
 
-  # 4. Throw error if the returned API key is an empty string
+  # 4. Get API key from an existing keyring
+  test_key <- "TEST-KEY-01"
+  with_mocked_bindings(
+    interactive = function() FALSE,
+    keyring_list = function() list(keyring = "openFDA"),
+    has_keyring_support = function() TRUE,
+    keyring_is_locked = function(openFDA_keyring) FALSE,
+    key_get = function(service, username, keyring) {
+      rlang::signal(message = "{service}; {username}; {keyring}",
+                    class = "openfda_test_api_key_get_from_keyring")
+      test_key
+    },
+    code = {
+      get_api_key() |>
+        expect_equal(test_key) |>
+        expect_condition(class = "openfda_test_api_key_get_from_keyring") |>
+        expect_no_error(class = "openfda_api_key_missing") |>
+        expect_no_error(class = "openfda_api_key_missing")
+    }
+  )
+
+  # 5. Throw error if the returned API key is an empty string
   with_mocked_bindings(
     interactive = function() TRUE,
     key_get = function(service, username, keyring) "",
@@ -85,52 +82,44 @@ test_that("You can set and get an API key (with keyring support)", {
 
 # Set/get API key without keyrings ---------------------------------------------
 
-options(keyring_backend = keyring::backend_env)
-
 test_that("You can set and get an API key", {
-  # Test should skip on CRAN automatically from use of `httr2::secret_decrypt()`
-  # BUT just to be sure
-  skip_on_cran()
-
-  encrypted_api_key <- paste0("TEaDtqdFMq9_Montij5p9IY6T57IyqkbF8IYFVOpk",
-                              "-ttxotFUNdJSxgccAnkq4nQhplaf-r3deQ")
-  decrypted_key <- httr2::secret_decrypt(encrypted_api_key, "OPENFDA_KEY")
-
-  # 1. Check that you can set an API key through interactive/non-interactive
-  #     means
-
-  ## Interactive
+  # 1. Check that you can set an API key interactively
+  test_key <- "TEST-KEY-01"
   with_mocked_bindings(
     interactive = function() TRUE,
     key_set = function(service, username, prompt) {
       rlang::signal(message = prompt, class = "openfda_api_key_set_with_mock")
-      keyring::key_set_with_value(service, username, decrypted_key)
+      keyring::key_set_with_value(service, username, password = test_key)
     },
     code = {
-      expect_condition(set_api_key(),
-                       class = "openfda_api_key_set_with_mock") |>
+      set_api_key() |>
+        expect_null() |>
+        expect_condition(class = "openfda_api_key_set_with_mock") |>
         expect_message(class = "openfda_api_key_set")
-      expect_equal(get_api_key(), decrypted_key)
+      expect_equal(get_api_key(), test_key)
     }
   )
 
-  keyring::key_set_with_value(service = "OPENFDA_KEY",
-                              username = "openFDA",
-                              password = "temp-key")
-  expect_equal(get_api_key(), "temp-key")
-
-  ## Not interactive
-  expect_message(
-    expect_null(set_api_key(decrypted_key)),
-    class = "openfda_api_key_set"
+  # 2. Check that you can set an API key by passing in value
+  test_key <- "TEST-KEY-02"
+  with_mocked_bindings(
+    interactive = function() FALSE,
+    key_set_with_value = function(service, username, password) {
+      rlang::signal(message = password, class = "openfda_api_key_set_with_mock")
+      keyring::key_set_with_value(service, username, password = password)
+    },
+    code = {
+      set_api_key(test_key) |>
+        expect_null() |>
+        expect_condition(class = "openfda_api_key_set_with_mock") |>
+        expect_message(class = "openfda_api_key_set")
+      expect_equal(get_api_key(), test_key)
+    }
   )
-
-  # Now check whether the stored API key is the same as this one
-  expect_equal(get_api_key(), decrypted_key)
 })
 
-test_that("API key functions throw expected errors based on `api_key`", {
-  ## Errors if api_key input is bad
+test_that("API key functions throw expected errors", {
+  ## Errors if api_key input is bad class/length
   expect_error(
     set_api_key(c("string_one", "string_two")),
     class = "openFDA_invalid_string_param_length"
@@ -139,20 +128,24 @@ test_that("API key functions throw expected errors based on `api_key`", {
     set_api_key(239179024359703452790),
     class = "openFDA_invalid_string_param_class"
   )
-  ## Errors if api_key input is empty
+  ## Error if set_api_key() input is empty
   expect_error(set_api_key(""),
                class = "openfda_set_api_key_used_empty_string")
 
-  ## Errors if api_key wasn't set or has been removed
-  if (keyring::has_keyring_support()) {
-    keyring::key_delete("OPENFDA_KEY", "openFDA", "openFDA")
-  } else {
-    keyring::key_delete("OPENFDA_KEY", "openFDA")
-  }
-  expect_error(get_api_key(), class = "openFDA_api_key_missing")
-})
+  ## Error if api_key wasn't set or has been removed
+  with_mocked_bindings(
+    has_keyring_support = function() FALSE,
+    key_get = function(service, username, keyring = NULL) {
+      cli::cli_abort(
+        message = "Mocking keyring retrieval error with service {.val
+                   {service}} and user {.val {user}}",
+        class = "openfda_test_key_not_found"
+      )
+    },
+    code = expect_error(get_api_key(), class = "openFDA_api_key_missing")
+  )
 
-test_that("Error if `!interactive()` and missing api_key arg", {
+  ## Error if not interactive and api_key not supplied
   with_mocked_bindings(
     interactive = function() FALSE,
     code = {

@@ -84,21 +84,15 @@ set_api_key <- function(api_key, user = "openFDA") {
   service <- "OPENFDA_KEY"
 
   # Create keyring if it doesn't exist; if it's locked, unlock it
-  if (keyring::has_keyring_support() && interactive()) {
+  if (has_keyring_support() && interactive()) {
     # hardcoded
     openFDA_keyring <- "openFDA"
-    openFDA_keyring_exists <-
-      openFDA_keyring %in% keyring::keyring_list()$keyring
+    openFDA_keyring_exists <- openFDA_keyring_exists()
 
-    if (openFDA_keyring_exists && keyring::keyring_is_locked(openFDA_keyring)) {
-      cli::cli_inform(
-        message = c("i" = "The {.val {openFDA_keyring}} keyring is locked.
-                           Please unlock with your {.val {openFDA_keyring}}
-                           keyring password with {.fn
-                           keyring::keyring_unlock}."),
-        class = "openfda_keyring_locked"
-      )
-      keyring_unlock(keyring = "openFDA")
+    check_keyring_lock(openFDA_keyring)
+
+    if (openFDA_keyring_exists && keyring_is_locked(openFDA_keyring)) {
+
     } else if (!openFDA_keyring_exists) {
       cli::cli_inform(
         message = c("!" = "No keyring named {.val {openFDA_keyring}} exists.",
@@ -110,19 +104,10 @@ set_api_key <- function(api_key, user = "openFDA") {
       )
       keyring_create(keyring = "openFDA")
     }
-
-    # Add openFDA API key to keyring
-    if (api_key_not_provided) {
-      key_set(service = service,
-              username = user,
-              keyring = openFDA_keyring,
-              prompt = "openFDA API key:")
-    } else {
-      keyring::key_set_with_value(service = service,
-                                  username = user,
-                                  keyring = openFDA_keyring,
-                                  password = api_key)
-    }
+    key_set(service = service,
+            username = user,
+            keyring = openFDA_keyring,
+            prompt = "openFDA API key:")
     cli::cli_inform(
       message = c(
         "!" = "OpenFDA API key set.",
@@ -135,13 +120,9 @@ set_api_key <- function(api_key, user = "openFDA") {
   } else {
     # For backends without keyring support or running in non-interactive mode
     if (api_key_not_provided) {
-      key_set(service = service,
-              username = user,
-              prompt = "openFDA API key:")
+      key_set(service = service, username = user, prompt = "openFDA API key:")
     } else {
-      keyring::key_set_with_value(service = service,
-                                  username = user,
-                                  password = api_key)
+      key_set_with_value(service = service, username = user, password = api_key)
     }
     cli::cli_inform(
       message = c(
@@ -152,7 +133,6 @@ set_api_key <- function(api_key, user = "openFDA") {
       class = "openfda_api_key_set"
     )
   }
-
   invisible(NULL)
 }
 
@@ -165,11 +145,12 @@ get_api_key <- function(user = "openFDA") {
   user <- check_openFDA_string_arg(user, vname = "user", null_ok = FALSE)
   # hardcoded
   service <- "OPENFDA_KEY"
+  keyring <- "openFDA"
+  using_keyring <- openFDA_keyring_exists()
   api_key <- rlang::try_fetch(
-    if (keyring::has_keyring_support() && interactive()) {
-      key_get(service = service,
-              username = user,
-              keyring = "openFDA")
+    if (using_keyring) {
+      check_keyring_lock(keyring)
+      key_get(service = service, username = user, keyring = keyring)
     } else {
       key_get(service = service, username = user)
     },
@@ -181,8 +162,8 @@ get_api_key <- function(user = "openFDA") {
   )
   if (!nzchar(api_key)) {
     throw_api_key_error(
-      err = "The openFDA API key retrieved by {.pkg keyring} was empty
-             ({.val {\"\"}}).",
+      err = "The openFDA API key retrieved by {.fn keyring::key_get} was an
+             empty string ({.val {\"\"}}).",
       class = "openFDA_api_key_empty"
     )
   }
@@ -208,4 +189,31 @@ throw_api_key_error <- function(err,
     class = class,
     call = call
   )
+}
+
+# Keyring helpers (internal) ---------------------------------------------------
+
+#' Check if openFDA keyring exists
+#' @noRd
+openFDA_keyring_exists <- function(openFDA_keyring = "openFDA") {
+  has_keyring_support() && "openFDA" %in% keyring_list()
+}
+
+#' Check whether a keyring is locked, and if so - unlock it
+#' @param openFDA_keyring A keyring name for openFDA. This is always
+#'   `"openFDA"` but is being left as a param in case later users want
+#'   flexibility.
+#' @noRd
+check_keyring_lock <- function(openFDA_keyring) {
+  if (openFDA_keyring_exists() && keyring_is_locked(openFDA_keyring)) {
+    cli::cli_inform(
+      message = c("i" = "The {.val {openFDA_keyring}} keyring is locked.
+                         Please unlock with your {.val {openFDA_keyring}}
+                         keyring {.fn keyring::keyring_unlock} and the password
+                         you set previously."),
+      class = "openfda_keyring_locked"
+    )
+    if (interactive()) keyring_unlock(keyring = openFDA_keyring)
+    invisible(NULL)
+  }
 }
