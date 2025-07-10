@@ -121,7 +121,7 @@
 <span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:furosemide&amp;limit=5</span></span>
 <span><span class="co">#&gt; Status: 200 OK</span></span>
 <span><span class="co">#&gt; Content-Type: application/json</span></span>
-<span><span class="co">#&gt; Body: In memory (44851 bytes)</span></span></code></pre></div>
+<span><span class="co">#&gt; Body: In memory (25782 bytes)</span></span></code></pre></div>
 <p>The returned <code>httr2</code> response object contains JSON data from the API - you can use <code><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">httr2::resp_body_json()</a></code> to extract the JSON data as a nested list, then extract the fields you want.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">json</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span></span>
@@ -138,9 +138,9 @@
 <span>  .x <span class="op">=</span> <span class="va">json</span><span class="op">$</span><span class="va">results</span>, </span>
 <span>  .f <span class="op">=</span> \<span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">result</span>, <span class="st">"openfda"</span>, <span class="st">"manufacturer_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Hospira, Inc."                  "Hikma Pharmaceuticals USA Inc."</span></span>
-<span><span class="co">#&gt; [3] "Hikma Pharmaceuticals USA Inc." "Hikma Pharmaceuticals USA Inc."</span></span>
-<span><span class="co">#&gt; [5] "Gland Pharma Limited"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Rising Pharma Holdings, Inc."   "Hikma Pharmaceuticals USA Inc."</span></span>
+<span><span class="co">#&gt; [3] "Civica, Inc."                   "Leading Pharma, LLC"           </span></span>
+<span><span class="co">#&gt; [5] "Meitheal Pharmaceuticals Inc."</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="other-r-packages-for-openfda">Other R packages for openFDA<a class="anchor" aria-label="anchor" href="#other-r-packages-for-openfda"></a>
@@ -191,7 +191,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=openFDA" class="external-link"><img src="https://www.r-pkg.org/badges/version/openFDA" alt="CRAN status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=openFDA" class="external-link"><img src="https://www.r-pkg.org/badges/version-last-release/openFDA" alt="CRAN status"></a></li>
 <li><a href="https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml" class="external-link"><img src="https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml/badge.svg" alt="check-no-suggests"></a></li>
 <li><a href="https://codecov.io/gh/simpar1471/openFDA" class="external-link"><img src="https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg?token=1Y7FL87Z21" alt="Codecov test coverage"></a></li>

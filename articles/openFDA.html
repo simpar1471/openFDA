@@ -325,7 +325,7 @@ they are discussed below.</p>
 <span>  limit <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search_unrefined</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
-<span><span class="co">#&gt; [1] 224</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 225</span></span></code></pre></div>
 <p>Let’s compare this to our refined search, where we add double-quotes
 around the search term:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -335,7 +335,7 @@ around the search term:</p>
 <span>  limit <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search_refined</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span></span>
-<span><span class="co">#&gt; [1] 123</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 124</span></span></code></pre></div>
 <p>As you can see, the unrefined search picked up 101 more results, most
 of which would have probably been non-thiazide diuretics.</p>
 </div>
@@ -365,19 +365,19 @@ brand names, we are choosing to only extract the first one.</p>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"openfda"</span>, <span class="st">"brand_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "NAPROXEN SODIUM 220MG"</span></span>
+<span><span class="co">#&gt; [1] "PURELAX"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] "CHILDREN ALLERGY"</span></span>
+<span><span class="co">#&gt; [1] "OMEPRAZOLE"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1] "COUNTERACT ALLERGY"</span></span>
+<span><span class="co">#&gt; [1] "OMEPRAZOLE"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt; [1] "AMAZON BASIC CARE ACETAMINOPHEN"</span></span>
+<span><span class="co">#&gt; [1] "GUAIFENESIN EXTENDED RELEASE"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[5]]</span></span>
-<span><span class="co">#&gt; [1] "NAPROXEN"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "ZEGERID OTC"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="let-openfda-construct-the-search-term">Let <code>openFDA()</code> construct the search term<a class="anchor" aria-label="anchor" href="#let-openfda-construct-the-search-term"></a>
@@ -392,7 +392,7 @@ this.</p>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Number of results: 54"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Number of results: 60"</span></span></code></pre></div>
 <p>You can include as many fields as you like, as long as you only
 provide each field once. By default, the terms are combined with an
 <code>OR</code> operator in <code><a href="../reference/openFDA.html">openFDA()</a></code>. The below search
@@ -404,7 +404,7 @@ taken by mouth.</p>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Number of results: 7008"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Number of results: 7028"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="pre-construct-a-search-term">Pre-construct a search term<a class="anchor" aria-label="anchor" href="#pre-construct-a-search-term"></a>
@@ -431,7 +431,7 @@ argument to <code>"and"</code>:</p>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Number of results: 51"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Number of results: 57"</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -459,17 +459,17 @@ wildcard to find all drugs with generic names ending with
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span>, simplifyDataFrame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>        <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">"results"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                                    term count</span></span>
-<span><span class="co">#&gt; 1       Alembic Pharmaceuticals Limited    15</span></span>
-<span><span class="co">#&gt; 2      Macleods Pharmaceuticals Limited    15</span></span>
-<span><span class="co">#&gt; 3          Alembic Pharmaceuticals Inc.    14</span></span>
-<span><span class="co">#&gt; 4              Aurobindo Pharma Limited    13</span></span>
-<span><span class="co">#&gt; 5           Lupin Pharmaceuticals, Inc.    10</span></span>
-<span><span class="co">#&gt; 6            Mylan Pharmaceuticals Inc.     7</span></span>
-<span><span class="co">#&gt; 7              Solco Healthcare US, LLC     7</span></span>
-<span><span class="co">#&gt; 8              Ascend Laboratories, LLC     6</span></span>
-<span><span class="co">#&gt; 9          Camber Pharmaceuticals, Inc.     6</span></span>
-<span><span class="co">#&gt; 10 Novartis Pharmaceuticals Corporation     6</span></span></code></pre></div>
+<span><span class="co">#&gt;                                term count</span></span>
+<span><span class="co">#&gt; 1   Alembic Pharmaceuticals Limited    15</span></span>
+<span><span class="co">#&gt; 2  Macleods Pharmaceuticals Limited    15</span></span>
+<span><span class="co">#&gt; 3      Alembic Pharmaceuticals Inc.    14</span></span>
+<span><span class="co">#&gt; 4          Aurobindo Pharma Limited    13</span></span>
+<span><span class="co">#&gt; 5       Lupin Pharmaceuticals, Inc.    10</span></span>
+<span><span class="co">#&gt; 6        Mylan Pharmaceuticals Inc.     7</span></span>
+<span><span class="co">#&gt; 7          Solco Healthcare US, LLC     7</span></span>
+<span><span class="co">#&gt; 8        Zydus Lifesciences Limited     7</span></span>
+<span><span class="co">#&gt; 9          Ascend Laboratories, LLC     6</span></span>
+<span><span class="co">#&gt; 10     Camber Pharmaceuticals, Inc.     6</span></span></code></pre></div>
 <p>It looks like <code>"Alembic Pharmaceuticals"</code> is very active
 in this space - interesting!</p>
 </div>
@@ -509,7 +509,7 @@ message to the console</li>
 <span>                 endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                 paging <span class="op">=</span> <span class="st">"always"</span>,</span>
 <span>                 paging_verbosity <span class="op">=</span> <span class="st">"verbose"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1987) than your `limit` (750).</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1991) than your `limit` (750).</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> With 750 results per page, pagination will require 3 queries to retrieve all</span></span>
 <span><span class="co">#&gt;   of these results. This will take at least 1s.</span></span>
 <span><span class="va">resps</span></span>
@@ -519,23 +519,23 @@ message to the console</li>
 <span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name:Pharma&amp;limit=750</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Status</span>: 200 OK</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Content-Type</span>: application/json</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3645457 bytes)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3637222 bytes)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">GET</span></span></span>
-<span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name%3APharma&amp;limit=750&amp;skip=0&amp;search_after=0%3DLqDg4pcBmHiQdPkOFzJL</span></span>
+<span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name%3APharma&amp;limit=750&amp;skip=0&amp;search_after=0%3DNuJ-8pcBIMiVPoupLQCr</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Status</span>: 200 OK</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Content-Type</span>: application/json</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3628262 bytes)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3655208 bytes)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">GET</span></span></span>
-<span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name%3APharma&amp;limit=750&amp;skip=0&amp;search_after=0%3DjKDg4pcBmHiQdPkOHUVf</span></span>
+<span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name%3APharma&amp;limit=750&amp;skip=0&amp;search_after=0%3Dl-F-8pcBIMiVPoupKfPL</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Status</span>: 200 OK</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Content-Type</span>: application/json</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (2325489 bytes)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (2338806 bytes)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="other-openfda-api-features">Other openFDA API features<a class="anchor" aria-label="anchor" href="#other-openfda-api-features"></a>
