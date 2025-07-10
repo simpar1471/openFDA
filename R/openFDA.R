@@ -192,12 +192,7 @@ openFDA <- function(
   check_arg_with_option(paging, "paging")
   check_arg_with_option(paging_verbosity, "paging_verbosity")
   check_arg_with_option(handle_http_errors, "handle_http_errors")
-  req_params <- list(search = format_search_term(search),
-                     sort = format_sort_term(sort),
-                     count = check_openFDA_string_arg(count, "count"),
-                     limit = check_openFDA_int_arg(limit, "limit"),
-                     skip = check_openFDA_int_arg(skip, "skip")) |>
-    vctrs::list_drop_empty()
+  req_params <- openFDA_query_list(search, sort, count, limit, skip)
 
   # Build request then perform
   url <- endpoint_url(endpoint)
@@ -227,6 +222,23 @@ openFDA <- function(
 
   resp_openFDA
 }
+
+# openFDA() query building (internal) ------------------------------------------
+
+#' Build a list with openFDA query parameters
+#' @inheritParams openFDA
+#' @note Moved to own function to force R CMD CHECK to see
+#'   `vctrs::list_drop_empty()`
+#' @noRd
+openFDA_query_list <- function(search, sort, count, limit, skip) {
+  list(search = format_search_term(search),
+       sort = format_sort_term(sort),
+       count = check_openFDA_string_arg(count, "count"),
+       limit = check_openFDA_int_arg(limit, "limit"),
+       skip = check_openFDA_int_arg(skip, "skip")) |>
+    vctrs::list_drop_empty()
+}
+
 
 # openFDA() paging logic (internal) --------------------------------------------
 
