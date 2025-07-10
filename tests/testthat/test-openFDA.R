@@ -46,6 +46,7 @@ test_that("openFDA can call its API and reach correct endpoints", {
 
 test_that(
   desc = "openFDA paging is possible with correct printing behaviour", {
+  skip_if_not_installed(pkg = "vcr")
   vcr::use_cassette("test-paging", {
     # Query which requires paging
     resps <- openFDA(search = "openfda.generic_name:\"semaglutide\"",
@@ -76,6 +77,7 @@ test_that(
 # Does not need vcr as error is thrown *before* any HTTP requests sent
 test_that(
   desc = "openFDA paging fails if `paging == \"ask\" but not interactive", {
+  skip_if_not_installed(pkg = "vcr")
   skip_if(interactive())
   # Query which requires paging
   expect_error(
@@ -88,6 +90,7 @@ test_that(
 })
 
 test_that("openFDA throws formatted HTTP errors", {
+  skip_if_not_installed(pkg = "vcr")
   vcr::use_cassette("test-handle_http_errors", {
     for (handle_http_errors in c("error", "warn", "silent")) {
       expect_fn <- switch(handle_http_errors,
@@ -193,7 +196,8 @@ test_that("openFDA throws formatted HTTP errors", {
   })
 })
 
-# Also doesn't require vcr --> errors occur before `httr2::req_perform()`
+# Doesn't require vcr and no need to skip on CRAN --> errors occur before
+# `httr2::req_perform()`
 test_that("openFDA errors on certain bad inputs", {
   suppressMessages(
     set_api_key(api_key = "api_key_string")
