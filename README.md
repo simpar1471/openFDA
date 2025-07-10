@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/openFDA)](https://CRAN.R-project.org/package=openFDA)
+status](https://www.r-pkg.org/badges/version-last-release/openFDA)](https://CRAN.R-project.org/package=openFDA)
 [![R-CMD-check](https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml)
 [![check-no-suggests](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml)
 [![Codecov test
@@ -99,7 +99,7 @@ search
 #> https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:furosemide&limit=5
 #> Status: 200 OK
 #> Content-Type: application/json
-#> Body: In memory (44851 bytes)
+#> Body: In memory (25782 bytes)
 ```
 
 The returned `httr2` response object contains JSON data from the API -
@@ -125,9 +125,9 @@ purrr::map_chr(
   .x = json$results, 
   .f = \(result) purrr::pluck(result, "openfda", "manufacturer_name", 1)
 )
-#> [1] "Hospira, Inc."                  "Hikma Pharmaceuticals USA Inc."
-#> [3] "Hikma Pharmaceuticals USA Inc." "Hikma Pharmaceuticals USA Inc."
-#> [5] "Gland Pharma Limited"
+#> [1] "Rising Pharma Holdings, Inc."   "Hikma Pharmaceuticals USA Inc."
+#> [3] "Civica, Inc."                   "Leading Pharma, LLC"           
+#> [5] "Meitheal Pharmaceuticals Inc."
 ```
 
 ## Other R packages for openFDA

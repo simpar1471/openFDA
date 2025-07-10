@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # openFDA
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/openFDA)](https://CRAN.R-project.org/package=openFDA)
+[![CRAN status](https://www.r-pkg.org/badges/version-last-release/openFDA)](https://CRAN.R-project.org/package=openFDA)
 [![R-CMD-check](https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml)
 [![check-no-suggests](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml/badge.svg)](https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml)
 [![Codecov test coverage](https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg?token=1Y7FL87Z21)](https://codecov.io/gh/simpar1471/openFDA)
