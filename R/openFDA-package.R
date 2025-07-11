@@ -10,5 +10,6 @@
 #' @importFrom keyring keyring_is_locked
 #' @importFrom keyring keyring_list
 #' @importFrom keyring keyring_unlock
+#' @importFrom utils menu
 ## usethis namespace: end
 NULL

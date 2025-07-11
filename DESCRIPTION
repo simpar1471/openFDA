@@ -26,7 +26,8 @@ Imports:
     vctrs (>= 0.4.0),
     prettyunits,
     keyring,
-    memoise
+    memoise,
+    utils
 Config/Needs/website: rmarkdown
 Suggests:
     knitr,

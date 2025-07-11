@@ -304,7 +304,7 @@ paging_inform <- function(total, limit) {
 #' @rdname paging
 #' @noRd
 paging_ask <- function(total, limit) {
-  input <- utils::menu(
+  input <- menu(
     title = "Do you want openFDA to retrieve all results?",
     choices = c(paste0("Yes (will perform ", ceiling(total / limit),
                        " requests)"),

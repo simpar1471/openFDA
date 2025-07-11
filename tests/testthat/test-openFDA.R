@@ -54,7 +54,7 @@ test_that(
                      limit = 2,
                      paging = "always",
                      paging_verbosity = "quiet")
-    purrr::map(resps, \(resp) expect_s3_class(resp, "httr2_response"))
+    purrr::walk(resps, \(resp) expect_s3_class(resp, "httr2_response"))
 
     # Query which requires paging
     expect_message(
@@ -71,6 +71,44 @@ test_that(
               paging = "never",
               paging_verbosity = "quiet"),
       class = "openfda_message_paging"
+    )
+
+    with_mocked_bindings(
+      interactive = function() TRUE,
+      menu = function(title, choices) {
+        rlang::signal(message = c(title, choices),
+                      class = "openFDA_test_paging_with_input")
+        1 # 1 = WILL PAGE; 2 = WON'T PAGE
+      },
+      code = {
+        openFDA(
+          search = "openfda.generic_name:\"semaglutide\"",
+          limit = 2,
+          paging = "ask",
+          paging_verbosity = "quiet"
+        ) |>
+          purrr::walk(\(resp) expect_s3_class(resp, "httr2_response")) |>
+          expect_condition(class = "openFDA_test_paging_with_input")
+      }
+    )
+
+    with_mocked_bindings(
+      interactive = function() TRUE,
+      menu = function(title, choices) {
+        rlang::signal(message = c(title, choices),
+                      class = "openFDA_test_paging_with_input")
+        2 # 1 = WILL PAGE; 2 = WON'T PAGE
+      },
+      code = {
+        openFDA(
+          search = "openfda.generic_name:\"tirzepatide\"",
+          limit = 1,
+          paging = "ask",
+          paging_verbosity = "quiet"
+        ) |>
+          expect_s3_class(class = "httr2_response") |>
+          expect_condition(class = "openFDA_test_paging_with_input")
+      }
     )
   })
 })

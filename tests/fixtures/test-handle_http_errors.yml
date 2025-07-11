@@ -19,20 +19,20 @@ http_interactions:
       content-length: '123'
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:00 GMT
+      date: Fri, 11 Jul 2025 11:39:23 GMT
       etag: W/"7b-YXSQm9yIUSoIv/rIi3ya3OZ8kH8"
       strict-transport-security:
       - max-age=31536000;
       - max-age=31536000; preload
       vary: Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukenqn1i9mugea8uv0
+      x-api-umbrella-request-id: cnv546uvr4spuk8vl1t0
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '239'
-      x-vcap-request-id: 3e7e432f-fc2d-4a7c-63e1-3ee059fb6dfd
+      x-ratelimit-remaining: '179'
+      x-vcap-request-id: baf3828d-140e-475a-7a0c-5447e338a97f
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -44,7 +44,7 @@ http_interactions:
             "message": "Sorting allowed by non-analyzed fields only: invalid_field"
           }
         }
-  recorded_at: 2025-07-10 16:14:10 GMT
+  recorded_at: 2025-07-11 11:39:28 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
@@ -59,16 +59,16 @@ http_interactions:
       status_code: 403
       message: Forbidden
     headers:
-      date: Thu, 10 Jul 2025 16:14:00 GMT
+      date: Fri, 11 Jul 2025 11:39:23 GMT
       content-type: application/json
       access-control-allow-origin: '*'
       content-encoding: gzip
       strict-transport-security: max-age=31536000; preload
       vary: Accept-Encoding
-      x-api-umbrella-request-id: cnukent7s5t9amffph90
+      x-api-umbrella-request-id: cnv54719ni7adklbn040
       x-cache: MISS
       x-content-type-options: nosniff
-      x-vcap-request-id: c00a9123-af98-47f8-6c81-98878632e621
+      x-vcap-request-id: fcda5a41-b4ce-4918-530e-b2165b999123
       x-xss-protection: 1; mode=block
       x-frame-options: DENY
     body:
@@ -81,60 +81,11 @@ http_interactions:
             "message": "An invalid api_key was supplied. Get one at https://api.fda.gov:443"
           }
         }
-  recorded_at: 2025-07-10 16:14:10 GMT
+  recorded_at: 2025-07-11 11:39:28 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
     uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%223129084%22&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
-  response:
-    status:
-      status_code: 404
-      message: Not Found
-    headers:
-      access-control-allow-credentials: 'true'
-      access-control-allow-origin: '*'
-      age: '0'
-      cache-control: no-cache, no-store, must-revalidate
-      content-encoding: gzip
-      content-security-policy: default-src 'none'
-      content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:00 GMT
-      etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
-      strict-transport-security:
-      - max-age=31536000;
-      - max-age=31536000; preload
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
-      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukenvgefqnccfc12ig
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-frame-options: deny
-      x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '238'
-      x-vcap-request-id: bb9a3255-ab16-4629-68e7-310f0aa62ede
-      x-xss-protection: 1; mode=block
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "NOT_FOUND",
-            "message": "No matches found!"
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22naproxen%22&limit=1000&skip=500
     body:
       encoding: ''
       string: ''
@@ -152,7 +103,7 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:01 GMT
+      date: Fri, 11 Jul 2025 11:39:24 GMT
       etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
       strict-transport-security:
       - max-age=31536000;
@@ -161,13 +112,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukeo22v4ngrlec8c7g
+      x-api-umbrella-request-id: cnv5473lpvjr7v4tlhng
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '237'
-      x-vcap-request-id: fd497260-207e-46d8-65c9-01e69045b32d
+      x-ratelimit-remaining: '178'
+      x-vcap-request-id: 53f5f00f-e254-47da-70b9-38d482a7e02a
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -179,418 +130,7 @@ http_interactions:
             "message": "No matches found!"
           }
         }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22verapamil%22%22&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
-  response:
-    status:
-      status_code: 500
-      message: Internal Server Error
-    headers:
-      access-control-allow-credentials: 'true'
-      access-control-allow-origin: '*'
-      age: '3'
-      cache-control: no-cache, no-store, must-revalidate
-      content-length: '220'
-      content-security-policy: default-src 'none'
-      content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:04 GMT
-      etag: W/"dc-Iqbv3kSthSrLR4wjEjnZen97oNk"
-      strict-transport-security:
-      - max-age=31536000;
-      - max-age=31536000; preload
-      vary: Accept-Encoding
-      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukeo4ojijefpvnd770
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-frame-options: deny
-      x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '236'
-      x-vcap-request-id: b7e64348-7905-4138-4262-76536b9fe1b0
-      x-xss-protection: 1; mode=block
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "SERVER_ERROR",
-            "message": "Check your request and try again",
-            "details": "[token_mgr_error] token_mgr_error: Lexical error at line 1, column 32.  Encountered: <EOF> after : \"\""
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name=%22verapamil%22&sort=invalid_field:asc&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
-  response:
-    status:
-      status_code: 400
-      message: Bad Request
-    headers:
-      access-control-allow-credentials: 'true'
-      access-control-allow-origin: '*'
-      age: '0'
-      cache-control: no-cache, no-store, must-revalidate
-      content-length: '123'
-      content-security-policy: default-src 'none'
-      content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:05 GMT
-      etag: W/"7b-YXSQm9yIUSoIv/rIi3ya3OZ8kH8"
-      strict-transport-security:
-      - max-age=31536000;
-      - max-age=31536000; preload
-      vary: Accept-Encoding
-      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukep1qg3u4toqqv7u0
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-frame-options: deny
-      x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '235'
-      x-vcap-request-id: 7d8d3904-5f25-4f80-7dcd-7160181c7d15
-      x-xss-protection: 1; mode=block
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "BAD_REQUEST",
-            "message": "Sorting allowed by non-analyzed fields only: invalid_field"
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22verapamil%22%22&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic cmVhbGx5X2JhZF9hcGlfa2V5Og==
-  response:
-    status:
-      status_code: 403
-      message: Forbidden
-    headers:
-      date: Thu, 10 Jul 2025 16:14:05 GMT
-      content-type: application/json
-      access-control-allow-origin: '*'
-      content-encoding: gzip
-      strict-transport-security: max-age=31536000; preload
-      vary: Accept-Encoding
-      x-api-umbrella-request-id: cnukep4crknnf2rrq0d0
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-vcap-request-id: a9f98a08-4857-4bdf-7e13-cc0d73f0fefd
-      x-xss-protection: 1; mode=block
-      x-frame-options: DENY
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "API_KEY_INVALID",
-            "message": "An invalid api_key was supplied. Get one at https://api.fda.gov:443"
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%223129084%22&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
-  response:
-    status:
-      status_code: 404
-      message: Not Found
-    headers:
-      access-control-allow-credentials: 'true'
-      access-control-allow-origin: '*'
-      age: '0'
-      cache-control: no-cache, no-store, must-revalidate
-      content-encoding: gzip
-      content-security-policy: default-src 'none'
-      content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:05 GMT
-      etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
-      strict-transport-security:
-      - max-age=31536000;
-      - max-age=31536000; preload
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
-      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukep6cfufo0o8fqmrg
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-frame-options: deny
-      x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '234'
-      x-vcap-request-id: eabb0ee5-a6bd-4b86-4b38-0b4b9858983f
-      x-xss-protection: 1; mode=block
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "NOT_FOUND",
-            "message": "No matches found!"
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22naproxen%22&limit=1000&skip=500
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
-  response:
-    status:
-      status_code: 404
-      message: Not Found
-    headers:
-      access-control-allow-credentials: 'true'
-      access-control-allow-origin: '*'
-      age: '3'
-      cache-control: no-cache, no-store, must-revalidate
-      content-encoding: gzip
-      content-security-policy: default-src 'none'
-      content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:08 GMT
-      etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
-      strict-transport-security:
-      - max-age=31536000;
-      - max-age=31536000; preload
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
-      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukep8vbg9krquk25e0
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-frame-options: deny
-      x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '234'
-      x-vcap-request-id: 1cdb5246-4ce7-47a3-6a7a-bff0c4f2e49f
-      x-xss-protection: 1; mode=block
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "NOT_FOUND",
-            "message": "No matches found!"
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22verapamil%22%22&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
-  response:
-    status:
-      status_code: 500
-      message: Internal Server Error
-    headers:
-      access-control-allow-credentials: 'true'
-      access-control-allow-origin: '*'
-      age: '0'
-      cache-control: no-cache, no-store, must-revalidate
-      content-length: '220'
-      content-security-policy: default-src 'none'
-      content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:08 GMT
-      etag: W/"dc-Iqbv3kSthSrLR4wjEjnZen97oNk"
-      strict-transport-security:
-      - max-age=31536000;
-      - max-age=31536000; preload
-      vary: Accept-Encoding
-      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukepumuiukfp7kv970
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-frame-options: deny
-      x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '232'
-      x-vcap-request-id: e4ce6586-4cad-477e-6df3-830b17945aa5
-      x-xss-protection: 1; mode=block
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "SERVER_ERROR",
-            "message": "Check your request and try again",
-            "details": "[token_mgr_error] token_mgr_error: Lexical error at line 1, column 32.  Encountered: <EOF> after : \"\""
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name=%22verapamil%22&sort=invalid_field:asc&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
-  response:
-    status:
-      status_code: 400
-      message: Bad Request
-    headers:
-      access-control-allow-credentials: 'true'
-      access-control-allow-origin: '*'
-      age: '0'
-      cache-control: no-cache, no-store, must-revalidate
-      content-length: '123'
-      content-security-policy: default-src 'none'
-      content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:09 GMT
-      etag: W/"7b-YXSQm9yIUSoIv/rIi3ya3OZ8kH8"
-      strict-transport-security:
-      - max-age=31536000;
-      - max-age=31536000; preload
-      vary: Accept-Encoding
-      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukeq2p25ra4d240am0
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-frame-options: deny
-      x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '231'
-      x-vcap-request-id: fde4d26c-fda5-4b20-4c11-a1bacac6d677
-      x-xss-protection: 1; mode=block
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "BAD_REQUEST",
-            "message": "Sorting allowed by non-analyzed fields only: invalid_field"
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22verapamil%22%22&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic cmVhbGx5X2JhZF9hcGlfa2V5Og==
-  response:
-    status:
-      status_code: 403
-      message: Forbidden
-    headers:
-      date: Thu, 10 Jul 2025 16:14:09 GMT
-      content-type: application/json
-      access-control-allow-origin: '*'
-      content-encoding: gzip
-      strict-transport-security: max-age=31536000; preload
-      vary: Accept-Encoding
-      x-api-umbrella-request-id: cnukeq54aro2j801njh0
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-vcap-request-id: 1b6934e0-c19e-4e28-4eb0-c52f3a1bf014
-      x-xss-protection: 1; mode=block
-      x-frame-options: DENY
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "API_KEY_INVALID",
-            "message": "An invalid api_key was supplied. Get one at https://api.fda.gov:443"
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
-  recorded_with: vcr/1.7.0, webmockr/2.1.0
-- request:
-    method: get
-    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%223129084%22&limit=1
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
-  response:
-    status:
-      status_code: 404
-      message: Not Found
-    headers:
-      access-control-allow-credentials: 'true'
-      access-control-allow-origin: '*'
-      age: '0'
-      cache-control: no-cache, no-store, must-revalidate
-      content-encoding: gzip
-      content-security-policy: default-src 'none'
-      content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:09 GMT
-      etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
-      strict-transport-security:
-      - max-age=31536000;
-      - max-age=31536000; preload
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
-      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukeq6spr0k5vccaljg
-      x-cache: MISS
-      x-content-type-options: nosniff
-      x-frame-options: deny
-      x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '230'
-      x-vcap-request-id: 3fe2a9e0-fb98-460c-53d4-6e9cb88a3497
-      x-xss-protection: 1; mode=block
-    body:
-      encoding: ''
-      file: no
-      string: |-
-        {
-          "error": {
-            "code": "NOT_FOUND",
-            "message": "No matches found!"
-          }
-        }
-  recorded_at: 2025-07-10 16:14:10 GMT
+  recorded_at: 2025-07-11 11:39:28 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
@@ -612,7 +152,7 @@ http_interactions:
       content-encoding: gzip
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:10 GMT
+      date: Fri, 11 Jul 2025 11:39:24 GMT
       etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
       strict-transport-security:
       - max-age=31536000;
@@ -621,13 +161,13 @@ http_interactions:
       - Accept-Encoding
       - Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukeq9gvdjvbvpl94lg
+      x-api-umbrella-request-id: cnv54762qnf2hb2gpas0
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '229'
-      x-vcap-request-id: 9f439e0b-a5e0-4bb9-7cb0-0bfc3b546c0d
+      x-ratelimit-remaining: '178'
+      x-vcap-request-id: 8445e66f-3573-4412-537d-b76987cc53cb
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -639,7 +179,7 @@ http_interactions:
             "message": "No matches found!"
           }
         }
-  recorded_at: 2025-07-10 16:14:10 GMT
+  recorded_at: 2025-07-11 11:39:28 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
 - request:
     method: get
@@ -661,20 +201,20 @@ http_interactions:
       content-length: '220'
       content-security-policy: default-src 'none'
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Jul 2025 16:14:10 GMT
+      date: Fri, 11 Jul 2025 11:39:24 GMT
       etag: W/"dc-Iqbv3kSthSrLR4wjEjnZen97oNk"
       strict-transport-security:
       - max-age=31536000;
       - max-age=31536000; preload
       vary: Accept-Encoding
       via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
-      x-api-umbrella-request-id: cnukeqc0cb6bph6b6r40
+      x-api-umbrella-request-id: cnv54796uvllprtaf8a0
       x-cache: MISS
       x-content-type-options: nosniff
       x-frame-options: deny
       x-ratelimit-limit: '240'
-      x-ratelimit-remaining: '228'
-      x-vcap-request-id: 45b21312-804b-4d1e-7253-ce0ce3dec39e
+      x-ratelimit-remaining: '177'
+      x-vcap-request-id: 66989293-0b21-4600-49f4-7ade66f2f2ec
       x-xss-protection: 1; mode=block
     body:
       encoding: ''
@@ -687,5 +227,465 @@ http_interactions:
             "details": "[token_mgr_error] token_mgr_error: Lexical error at line 1, column 32.  Encountered: <EOF> after : \"\""
           }
         }
-  recorded_at: 2025-07-10 16:14:10 GMT
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name=%22verapamil%22&sort=invalid_field:asc&limit=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 400
+      message: Bad Request
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-length: '123'
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Fri, 11 Jul 2025 11:39:25 GMT
+      etag: W/"7b-YXSQm9yIUSoIv/rIi3ya3OZ8kH8"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary: Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnv547cia6nu5rb6j6rg
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '176'
+      x-vcap-request-id: db6fd293-b8e2-4e55-5ded-065fdb50f98d
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "BAD_REQUEST",
+            "message": "Sorting allowed by non-analyzed fields only: invalid_field"
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22verapamil%22%22&limit=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic cmVhbGx5X2JhZF9hcGlfa2V5Og==
+  response:
+    status:
+      status_code: 403
+      message: Forbidden
+    headers:
+      date: Fri, 11 Jul 2025 11:39:25 GMT
+      content-type: application/json
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      strict-transport-security: max-age=31536000; preload
+      vary: Accept-Encoding
+      x-api-umbrella-request-id: cnv547f2quqh7g78udpg
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-vcap-request-id: 5f62698c-30c6-4e95-7b51-f87ba49d3a8b
+      x-xss-protection: 1; mode=block
+      x-frame-options: DENY
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "API_KEY_INVALID",
+            "message": "An invalid api_key was supplied. Get one at https://api.fda.gov:443"
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%223129084%22&limit=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 404
+      message: Not Found
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Fri, 11 Jul 2025 11:39:25 GMT
+      etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnv547gu1o6qj4vdho60
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '176'
+      x-vcap-request-id: 8b9672f2-f2b1-42de-7d43-f8a281689fc4
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "NOT_FOUND",
+            "message": "No matches found!"
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22naproxen%22&limit=1000&skip=500
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 404
+      message: Not Found
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Fri, 11 Jul 2025 11:39:26 GMT
+      etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnv547jffeagtiekmvn0
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '175'
+      x-vcap-request-id: c90bfb1c-eaa2-4ca3-7681-afa924ab9f37
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "NOT_FOUND",
+            "message": "No matches found!"
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22verapamil%22%22&limit=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 500
+      message: Internal Server Error
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-length: '220'
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Fri, 11 Jul 2025 11:39:26 GMT
+      etag: W/"dc-Iqbv3kSthSrLR4wjEjnZen97oNk"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary: Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnv547lvlkk9k6bpccc0
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '174'
+      x-vcap-request-id: dec4f61d-961b-4b03-6684-d1d89c14cba0
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "SERVER_ERROR",
+            "message": "Check your request and try again",
+            "details": "[token_mgr_error] token_mgr_error: Lexical error at line 1, column 32.  Encountered: <EOF> after : \"\""
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name=%22verapamil%22&sort=invalid_field:asc&limit=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 400
+      message: Bad Request
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-length: '123'
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Fri, 11 Jul 2025 11:39:26 GMT
+      etag: W/"7b-YXSQm9yIUSoIv/rIi3ya3OZ8kH8"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary: Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnv547phpdpkvbkr0ct0
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '174'
+      x-vcap-request-id: f07844b4-fb29-43fb-6e22-e3b039f1b307
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "BAD_REQUEST",
+            "message": "Sorting allowed by non-analyzed fields only: invalid_field"
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22verapamil%22%22&limit=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic cmVhbGx5X2JhZF9hcGlfa2V5Og==
+  response:
+    status:
+      status_code: 403
+      message: Forbidden
+    headers:
+      date: Fri, 11 Jul 2025 11:39:27 GMT
+      content-type: application/json
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      strict-transport-security: max-age=31536000; preload
+      vary: Accept-Encoding
+      x-api-umbrella-request-id: cnv547rtug7ljej88ht0
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-vcap-request-id: 959717b4-c850-421e-6f4b-a26cc346da87
+      x-xss-protection: 1; mode=block
+      x-frame-options: DENY
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "API_KEY_INVALID",
+            "message": "An invalid api_key was supplied. Get one at https://api.fda.gov:443"
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%223129084%22&limit=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 404
+      message: Not Found
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Fri, 11 Jul 2025 11:39:27 GMT
+      etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnv547ubo01f9mgh7jv0
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '173'
+      x-vcap-request-id: a9f5f32b-bb18-4ae6-4832-acb80fd533bb
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "NOT_FOUND",
+            "message": "No matches found!"
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22naproxen%22&limit=1000&skip=500
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 404
+      message: Not Found
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-encoding: gzip
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Fri, 11 Jul 2025 11:39:27 GMT
+      etag: W/"50-Gov3eVBQAYPDbwMSq8YtHKLjrHw"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnv5481stinl93l0mvbg
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '172'
+      x-vcap-request-id: aae6411b-8599-4b7f-5587-c4285b00ed21
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "NOT_FOUND",
+            "message": "No matches found!"
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
+  recorded_with: vcr/1.7.0, webmockr/2.1.0
+- request:
+    method: get
+    uri: https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:%22verapamil%22%22&limit=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Authorization: Basic MTVsaTgxWkU3bXBlWkJUQ2tEMjBaZ0xnYUdnV1RkQmV1bWlJMnF4cjo=
+  response:
+    status:
+      status_code: 500
+      message: Internal Server Error
+    headers:
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      age: '0'
+      cache-control: no-cache, no-store, must-revalidate
+      content-length: '220'
+      content-security-policy: default-src 'none'
+      content-type: application/json; charset=utf-8
+      date: Fri, 11 Jul 2025 11:39:28 GMT
+      etag: W/"dc-Iqbv3kSthSrLR4wjEjnZen97oNk"
+      strict-transport-security:
+      - max-age=31536000;
+      - max-age=31536000; preload
+      vary: Accept-Encoding
+      via: https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      x-api-umbrella-request-id: cnv5484nn8enssg5gv50
+      x-cache: MISS
+      x-content-type-options: nosniff
+      x-frame-options: deny
+      x-ratelimit-limit: '240'
+      x-ratelimit-remaining: '172'
+      x-vcap-request-id: b7b2f186-3d99-47a1-76c0-403b164e3750
+      x-xss-protection: 1; mode=block
+    body:
+      encoding: ''
+      file: no
+      string: |-
+        {
+          "error": {
+            "code": "SERVER_ERROR",
+            "message": "Check your request and try again",
+            "details": "[token_mgr_error] token_mgr_error: Lexical error at line 1, column 32.  Encountered: <EOF> after : \"\""
+          }
+        }
+  recorded_at: 2025-07-11 11:39:28 GMT
   recorded_with: vcr/1.7.0, webmockr/2.1.0
