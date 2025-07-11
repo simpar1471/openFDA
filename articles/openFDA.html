@@ -365,19 +365,19 @@ brand names, we are choosing to only extract the first one.</p>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"openfda"</span>, <span class="st">"brand_name"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "PURELAX"</span></span>
+<span><span class="co">#&gt; [1] "RUGBY MUCUS RELIEF ER"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] "OMEPRAZOLE"</span></span>
+<span><span class="co">#&gt; [1] "NICOTINE MINI"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1] "OMEPRAZOLE"</span></span>
+<span><span class="co">#&gt; [1] "KIRKLAND SIGNATURE ESOMEPRAZOLE MAGNESIUM"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt; [1] "GUAIFENESIN EXTENDED RELEASE"</span></span>
+<span><span class="co">#&gt; [1] "NAPROXEN SODIUM 220MG"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[5]]</span></span>
-<span><span class="co">#&gt; [1] "ZEGERID OTC"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "CHILDREN ALLERGY"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="let-openfda-construct-the-search-term">Let <code>openFDA()</code> construct the search term<a class="anchor" aria-label="anchor" href="#let-openfda-construct-the-search-term"></a>
@@ -404,7 +404,7 @@ taken by mouth.</p>
 <span>                  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                  limit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Number of results:"</span>, <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span><span class="op">$</span><span class="va">meta</span><span class="op">$</span><span class="va">results</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Number of results: 7028"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Number of results: 7031"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="pre-construct-a-search-term">Pre-construct a search term<a class="anchor" aria-label="anchor" href="#pre-construct-a-search-term"></a>
@@ -509,7 +509,7 @@ message to the console</li>
 <span>                 endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>                 paging <span class="op">=</span> <span class="st">"always"</span>,</span>
 <span>                 paging_verbosity <span class="op">=</span> <span class="st">"verbose"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1991) than your `limit` (750).</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> openFDA returned more results (1989) than your `limit` (750).</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> With 750 results per page, pagination will require 3 queries to retrieve all</span></span>
 <span><span class="co">#&gt;   of these results. This will take at least 1s.</span></span>
 <span><span class="va">resps</span></span>
@@ -519,23 +519,23 @@ message to the console</li>
 <span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name:Pharma&amp;limit=750</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Status</span>: 200 OK</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Content-Type</span>: application/json</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3637222 bytes)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3423691 bytes)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">GET</span></span></span>
-<span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name%3APharma&amp;limit=750&amp;skip=0&amp;search_after=0%3DNuJ-8pcBIMiVPoupLQCr</span></span>
+<span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name%3APharma&amp;limit=750&amp;skip=0&amp;search_after=0%3DLxet95cBe-x2G-Mulezt</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Status</span>: 200 OK</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Content-Type</span>: application/json</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3655208 bytes)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (3730081 bytes)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">GET</span></span></span>
-<span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name%3APharma&amp;limit=750&amp;skip=0&amp;search_after=0%3Dl-F-8pcBIMiVPoupKfPL</span></span>
+<span><span class="co">#&gt; https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name%3APharma&amp;limit=750&amp;skip=0&amp;search_after=0%3DjBet95cBe-x2G-MumvzL</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Status</span>: 200 OK</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">Content-Type</span>: application/json</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (2338806 bytes)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">Body</span>: In memory (2469989 bytes)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="other-openfda-api-features">Other openFDA API features<a class="anchor" aria-label="anchor" href="#other-openfda-api-features"></a>

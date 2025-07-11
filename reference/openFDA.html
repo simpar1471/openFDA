@@ -58,9 +58,9 @@
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  endpoint <span class="op">=</span> <span class="st">"drug-drugsfda"</span>,</span>
 <span>  api_key <span class="op">=</span> <span class="fu"><a href="api_key.html">get_api_key</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  paging <span class="op">=</span> <span class="fu">get_openFDA_option</span><span class="op">(</span><span class="st">"openFDA.paging"</span><span class="op">)</span>,</span>
-<span>  paging_verbosity <span class="op">=</span> <span class="fu">get_openFDA_option</span><span class="op">(</span><span class="st">"openFDA.paging_verbosity"</span><span class="op">)</span>,</span>
-<span>  handle_http_errors <span class="op">=</span> <span class="fu">get_openFDA_option</span><span class="op">(</span><span class="st">"openFDA.handle_http_errors"</span><span class="op">)</span></span>
+<span>  paging <span class="op">=</span> <span class="fu"><a href="openFDA_options.html">current_openFDA_options</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="st">"openFDA.paging"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>  paging_verbosity <span class="op">=</span> <span class="fu"><a href="openFDA_options.html">current_openFDA_options</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="st">"openFDA.paging_verbosity"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>  handle_http_errors <span class="op">=</span> <span class="fu"><a href="openFDA_options.html">current_openFDA_options</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="st">"openFDA.handle_http_errors"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -99,14 +99,15 @@ records to retrieve. An error will be thrown if <code>limit</code> is more than 
 
 
 <dt id="arg-skip">skip<a class="anchor" aria-label="anchor" href="#arg-skip"></a></dt>
-<dd><p>A single integer describing how many records should be skipped.
-If more records are skipped than are found in your search, the openFDA
-API will return a 404 error.</p></dd>
+<dd><p>A single integerish value describing how many records should be
+skipped. If more records are skipped than are found in your search, the
+openFDA API will return a 404 error.</p></dd>
 
 
 <dt id="arg-endpoint">endpoint<a class="anchor" aria-label="anchor" href="#arg-endpoint"></a></dt>
 <dd><p>A single-length character vector describing which openFDA
-endpoint to target.</p><ul><li><p><code>"animalandveterinary-event"</code>: Adverse event reports for
+endpoint to target (case-sensitive). By default, <code>openFDA()</code> targets the
+Drugs@FDA endpoint (<code>"drugs-drugsfda"</code>).</p><ul><li><p><code>"animalandveterinary-event"</code>: Adverse event reports for
 animal/veterinary drugs.</p></li>
 <li><p><code>"drug-event"</code>: Adverse event reports from <a href="https://open.fda.gov/data/faers/" class="external-link">FDA Adverse Event Reporting System</a></p></li>
 <li><p><code>"drug-label"</code>: Drug documentation in the <a href="https://www.fda.gov/industry/fda-data-standards-advisory-board/structured-product-labeling-resources" class="external-link">Structured Product Labeling</a>
@@ -143,8 +144,7 @@ proteins, nucleic acids, and more.</p></li>
 <li><p><code>"other-unii"</code>: Data from the <a href="https://www.fda.gov/industry/fda-data-standards-advisory-board/fdas-global-substance-registration-system" class="external-link">FDA's Global Substance Registration System</a>.</p></li>
 <li><p><code>"tobacco-problem"</code>: Data on problems (e.g. damage, defects,
 contamination, bad smell) with tobacco products.</p></li>
-</ul><p>This argument is case-sensitive. By default, the package will target the
-Drugs@FDA endpoint (<code>"drugs-drugsfda"</code>).</p></dd>
+</ul></dd>
 
 
 <dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
@@ -154,13 +154,11 @@ default this is the result of <code><a href="api_key.html">get_api_key()</a></co
 
 
 <dt id="arg-paging">paging<a class="anchor" aria-label="anchor" href="#arg-paging"></a></dt>
-<dd><p>A single string describing whether results should be paged. You
-can set this on a per-function call level with this parameter, or edit
-the <a href="openFDA_options.html">package-level option</a> <code>openFDA.paging</code> to set paging
-behaviour across multiple <code>openFDA()</code> calls.</p>
-<p>By default, <code>openFDA()</code> uses the string stored in
-<code>options("openFDA.paging")</code>, which has the default value <code>"ask"</code>.
-Permissible values for <code>paging</code> include:</p><ul><li><p><code>"ask"</code> - <code>openFDA()</code> will warn you that pagination is required and ask
+<dd><p>A single string describing whether results should be paged.
+<code>openFDA()</code> uses the value of  the package-level option <code>openFDA.paging</code>
+for this argument, but you can set this behaviour on a per-function call
+level with this parameter. You can edit the option itself with
+<code><a href="openFDA_options.html">openFDA_options()</a></code>. Permissible values for <code>paging_verbosity</code> include:</p><ul><li><p><code>"ask"</code> - <code>openFDA()</code> will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
 <a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response object or a list of
 <a href="https://httr2.r-lib.org/" class="external-link">httr2</a> response objects will be returned. This
@@ -175,12 +173,11 @@ pagination occurs.</p></li>
 
 <dt id="arg-paging-verbosity">paging_verbosity<a class="anchor" aria-label="anchor" href="#arg-paging-verbosity"></a></dt>
 <dd><p>A single string describing whether messages about
-pagination should be printed to the console. You can set this on a
-per-function call level with this parameter, or edit the <a href="openFDA_options.html">package-level option</a> <code>openFDA.paging_verbosity</code> to set this behaviour
-across multiple <code>openFDA()</code> calls.</p>
-<p>By default, <code>openFDA()</code> uses the string stored in
-<code>options("openFDA.paging_verbosity")</code>, which has the default value
-<code>"verbose"</code>. Permissible values for <code>paging_verbosity</code> include:</p><ul><li><p><code>"verbose"</code> - If paging can be performed, print a message to the console,
+pagination should be printed to the console. <code>openFDA()</code> uses the value of
+the package-level option <code>openFDA.paging_verbosity</code> for this argument, but
+you can set this behaviour on a per-function call level with this
+parameter. You can edit the option itself with <code><a href="openFDA_options.html">openFDA_options()</a></code>.
+Permissible values for <code>paging_verbosity</code> include:</p><ul><li><p><code>"verbose"</code> - If paging can be performed, print a message to the console,
 stating how many requests are required with a minimum estimate for the
 time this will take.</p></li>
 <li><p><code>"quiet"</code> - Even if paging can be performed, do not print messages about
@@ -190,13 +187,11 @@ it  to the console.</p></li>
 
 <dt id="arg-handle-http-errors">handle_http_errors<a class="anchor" aria-label="anchor" href="#arg-handle-http-errors"></a></dt>
 <dd><p>A single string defining how to handle HTTP codes
-other than <code>200 OK</code>. You can set this on a per-function call level with
-this parameter, or edit the <a href="openFDA_options.html">package-level option</a>
-<code>openFDA.handle_http_errors</code> to set this behaviour across multiple
-<code>openFDA()</code> calls.</p>
-<p>By default, <code>openFDA()</code> uses the string stored in
-<code>options("openFDA.handle_http_errors")</code>, which has the default value
-<code>"warn"</code>. Permissible values for <code>handle_http_errors</code> include:</p><ul><li><p><code>"warn"</code>: If the returned HTTP code is not 200, issue a warning to the
+other than <code>200 OK</code>. <code>openFDA()</code> uses the value of  the package-level
+option <code>openFDA.handle_http_errors</code> for this argument, but you can set this
+behaviour on a per-function call level with this parameter. You can edit
+the option itself with <code><a href="openFDA_options.html">openFDA_options()</a></code>. Permissible values for
+<code>handle_http_errors</code> include:</p><ul><li><p><code>"warn"</code>: If the returned HTTP code is not 200, issue a warning to the
 console and return the underlying <a href="https://httr2.r-lib.org/" class="external-link">httr2</a>
 response object.</p></li>
 <li><p><code>"error"</code>: If the returned HTTP code is not 200, throw an (informative)
@@ -216,10 +211,9 @@ JSON data from these responses.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>Internally, the functions in <code>openFDA()</code> which call the API itself are
-cached with <code><a href="https://memoise.r-lib.org/reference/memoise.html" class="external-link">memoise::memoise()</a></code>. Consequently, you should find that
-repeated queries run faster than the first query, assuming you don't change
-your query parameters.</p>
+    <p><code>openFDA()</code> caches its results with <code><a href="https://memoise.r-lib.org/reference/memoise.html" class="external-link">memoise::memoise()</a></code>. Consequently, you
+should find that repeated, identical queries run faster than the first query,
+assuming you don't change your query parameters.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -266,7 +260,7 @@ are converted to openFDA API searches.</p></div>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> https://api.fda.gov/drug/drugsfda.json?search=openfda.manufacturer_name:gilead%2A&amp;limit=2&amp;skip=10</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 200 OK</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Content-Type</span>: application/json</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (16062 bytes)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (15527 bytes)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Bad inputs will cause informative errors - here, a bad API key is supplied</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>

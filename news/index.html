@@ -58,6 +58,7 @@
 <li>
 <code>openFDA.handle_http_errors</code>; the default value of which is <code>"warn"</code>. A user can change this option to alter how non-<code>200 OK</code> HTTP codes are handled (they can be silenced or trigger errors).</li>
 </ul></li>
+<li>Added <code><a href="../reference/openFDA_options.html">openFDA_options()</a></code> and <code><a href="../reference/openFDA_options.html">current_openFDA_options()</a></code>, two functions which can be used to get/set and get openFDA package-level option values, respectively.</li>
 <li>API keys are now stored/retrieved using the <code>keyring</code> package. This is a more secure alternative to simply using environment variables, as users are prompted to supply the API key interactively (instead of storing them in a script).</li>
 <li>The <code><a href="../reference/openFDA.html">openFDA()</a></code> function now supports caching with <code><a href="https://memoise.r-lib.org/reference/memoise.html" class="external-link">memoise::memoise()</a></code>.</li>
 <li>Added extra (hopefully clearer) content to package vignettes/articles.</li>
