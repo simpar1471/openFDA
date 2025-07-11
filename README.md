@@ -15,6 +15,8 @@ coverage](https://codecov.io/gh/simpar1471/openFDA/graph/badge.svg?token=1Y7FL87
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![pkgcheck](https://github.com/simpar1471/openFDA/workflows/pkgcheck/badge.svg)](https://github.com/simpar1471/openFDA/actions?query=workflow%3Apkgcheck)
+[![Status at rOpenSci Software Peer
+Review](https://badges.ropensci.org/714_status.svg)](https://github.com/ropensci/software-review/issues/714)
 <!-- badges: end -->
 
 openFDA makes querying the [openFDA API](https://open.fda.gov/apis/)
@@ -99,7 +101,7 @@ search
 #> https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:furosemide&limit=5
 #> Status: 200 OK
 #> Content-Type: application/json
-#> Body: In memory (25782 bytes)
+#> Body: In memory (29294 bytes)
 ```
 
 The returned `httr2` response object contains JSON data from the API -
@@ -125,9 +127,9 @@ purrr::map_chr(
   .x = json$results, 
   .f = \(result) purrr::pluck(result, "openfda", "manufacturer_name", 1)
 )
-#> [1] "Rising Pharma Holdings, Inc."   "Hikma Pharmaceuticals USA Inc."
-#> [3] "Civica, Inc."                   "Leading Pharma, LLC"           
-#> [5] "Meitheal Pharmaceuticals Inc."
+#> [1] "Ipca Laboratories Limited"      "Hikma Pharmaceuticals USA Inc."
+#> [3] "Phlow Corporation"              "Amneal Pharmaceuticals LLC"    
+#> [5] "Accord Healthcare, Inc."
 ```
 
 ## Other R packages for openFDA
