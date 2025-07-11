@@ -13,7 +13,7 @@ test_that("`current_openFDA_options()` functions as desired", {
     openFDA.paging = "TEST-BAD-VALUE",
     expect_error(current_openFDA_options(),
                  class = "openFDA_bad_option_found",
-                 pattern = "Set a valid value for this option"),
+                 regexp = "Set a valid value for this option"),
   )
 
   ## Multiple bad options
@@ -22,7 +22,7 @@ test_that("`current_openFDA_options()` functions as desired", {
     openFDA.paging_verbosity = "LOUD!",
     expect_error(current_openFDA_options(),
                  class = "openFDA_bad_option_found",
-                 pattern = "Set valid values for these options")
+                 regexp = "Set valid values for these options")
   )
 })
 
