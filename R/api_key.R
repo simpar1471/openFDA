@@ -209,8 +209,8 @@ check_keyring_lock <- function(openFDA_keyring) {
     cli::cli_inform(
       message = c("i" = "The {.val {openFDA_keyring}} keyring is locked.
                          Please unlock with your {.val {openFDA_keyring}}
-                         keyring {.fn keyring::keyring_unlock} and the password
-                         you set previously."),
+                         keyring with {.fn keyring::keyring_unlock} and the 
+                         password you set previously."),
       class = "openfda_keyring_locked"
     )
     if (interactive()) keyring_unlock(keyring = openFDA_keyring)
