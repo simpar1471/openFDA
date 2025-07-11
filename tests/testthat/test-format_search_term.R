@@ -19,7 +19,10 @@ test_that("format_search_term generates expected strings", {
     format_search_term(c("openfda.brand_name" = "ozempic",
                     "openfda.generic_name" = "semaglutide"),
                   mode = "and"),
-    "openfda.brand_name:%22ozempic%22+AND+openfda.generic_name:%22semaglutide%22"
+    paste0(
+      "openfda.brand_name:%22ozempic%22", "+AND+",
+      "openfda.generic_name:%22semaglutide%22"
+    )
   )
 })
 
@@ -79,3 +82,4 @@ test_that("format_search_term throws expected errors", {
     class = "openFDA_mode_invalid_value"
   )
 })
+

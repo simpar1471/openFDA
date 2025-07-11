@@ -12,9 +12,9 @@ openFDA(
   skip = NULL,
   endpoint = "drug-drugsfda",
   api_key = get_api_key(),
-  paging = get_openFDA_option("openFDA.paging"),
-  paging_verbosity = get_openFDA_option("openFDA.paging_verbosity"),
-  handle_http_errors = get_openFDA_option("openFDA.handle_http_errors")
+  paging = current_openFDA_options()[["openFDA.paging"]],
+  paging_verbosity = current_openFDA_options()[["openFDA.paging_verbosity"]],
+  handle_http_errors = current_openFDA_options()[["openFDA.handle_http_errors"]]
 )
 }
 \arguments{
