@@ -75,6 +75,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "stringr",
+      "name": "stringr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stringr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
       "version": ">= 3.0.0",
@@ -88,15 +100,16 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "stringr",
-      "name": "stringr",
+      "identifier": "vcr",
+      "name": "vcr",
+      "version": ">= 0.6.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=stringr"
+      "sameAs": "https://CRAN.R-project.org/package=vcr"
     }
   ],
   "softwareRequirements": {
@@ -204,12 +217,29 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=keyring"
     },
+    "10": {
+      "@type": "SoftwareApplication",
+      "identifier": "memoise",
+      "name": "memoise",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=memoise"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "111.384KB",
+  "fileSize": "299.22KB",
   "releaseNotes": "https://github.com/simpar1471/openFDA/blob/master/NEWS.md",
   "readme": "https://github.com/simpar1471/openFDA/blob/main/README.md",
-  "contIntegration": ["https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml", "https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml", "https://app.codecov.io/gh/simpar1471/openFDA", "https://github.com/simpar1471/openFDA/actions?query=workflow%3Apkgcheck"],
+  "contIntegration": ["https://github.com/simpar1471/openFDA/actions/workflows/R-CMD-check.yaml", "https://github.com/simpar1471/openFDA/actions/workflows/check-no-suggests.yaml", "https://codecov.io/gh/simpar1471/openFDA", "https://github.com/simpar1471/openFDA/actions?query=workflow%3Apkgcheck"],
   "developmentStatus": "https://www.repostatus.org/#active",
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/714",
+    "provider": "https://ropensci.org"
+  },
   "keywords": ["openfda", "openfda-api", "rstats", "rstats-package"]
 }
