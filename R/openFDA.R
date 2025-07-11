@@ -17,14 +17,15 @@
 #' @param limit A single integerish value describing the limit on the number of
 #'   records to retrieve. An error will be thrown if `limit` is more than `1000`
 #'   (the default).
-#' @param skip A single integer describing how many records should be skipped.
-#'   If more records are skipped than are found in your search, the openFDA
-#'   API will return a 404 error.
+#' @param skip A single integerish value describing how many records should be
+#'   skipped. If more records are skipped than are found in your search, the
+#'   openFDA API will return a 404 error.
 #' @param api_key A single-length character vector with your openFDA API key. By
 #'   default this is the result of `get_api_key()`. You must set this with
 #'   `set_api_key()`, or `openFDA()` will not work.
 #' @param endpoint A single-length character vector describing which openFDA
-#'   endpoint to target.
+#'   endpoint to target (case-sensitive). By default, `openFDA()` targets the
+#'   Drugs@FDA endpoint (`"drugs-drugsfda"`).
 #'
 #'   * `"animalandveterinary-event"`: Adverse event reports for
 #'     animal/veterinary drugs.
@@ -78,17 +79,11 @@
 #'     System](https://www.fda.gov/industry/fda-data-standards-advisory-board/fdas-global-substance-registration-system).
 #'   * `"tobacco-problem"`: Data on problems (e.g. damage, defects,
 #'     contamination, bad smell) with tobacco products.
-#'
-#'   This argument is case-sensitive. By default, the package will target the
-#'   Drugs@FDA endpoint (`"drugs-drugsfda"`).
-#' @param paging A single string describing whether results should be paged. You
-#'   can set this on a per-function call level with this parameter, or edit
-#'   the [package-level option][openFDA_options] `openFDA.paging` to set paging
-#'   behaviour across multiple `openFDA()` calls.
-#'
-#'   By default, `openFDA()` uses the string stored in
-#'   `options("openFDA.paging")`, which has the default value `"ask"`.
-#'   Permissible values for `paging` include:
+#' @param paging A single string describing whether results should be paged.
+#'   `openFDA()` uses the value of  the package-level option `openFDA.paging`
+#'   for this argument, but you can set this behaviour on a per-function call
+#'   level with this parameter. You can edit the option itself with
+#'   `openFDA_options()`. Permissible values for `paging_verbosity` include:
 #'
 #'   * `"ask"` - `openFDA()` will warn you that pagination is required and ask
 #'     if you want this to be done. Depending on user input, either a single
@@ -101,14 +96,11 @@
 #'   * `"never"` - `openFDA()` will never perform pagination. Only the first
 #'     [httr2](https://httr2.r-lib.org/) response will be returned.
 #' @param paging_verbosity A single string describing whether messages about
-#'   pagination should be printed to the console. You can set this on a
-#'   per-function call level with this parameter, or edit the [package-level
-#'   option][openFDA_options] `openFDA.paging_verbosity` to set this behaviour
-#'   across multiple `openFDA()` calls.
-#'
-#'   By default, `openFDA()` uses the string stored in
-#'   `options("openFDA.paging_verbosity")`, which has the default value
-#'   `"verbose"`. Permissible values for `paging_verbosity` include:
+#'   pagination should be printed to the console. `openFDA()` uses the value of
+#'   the package-level option `openFDA.paging_verbosity` for this argument, but
+#'   you can set this behaviour on a per-function call level with this
+#'   parameter. You can edit the option itself with `openFDA_options()`.
+#'   Permissible values for `paging_verbosity` include:
 #'
 #'   * `"verbose"` - If paging can be performed, print a message to the console,
 #'     stating how many requests are required with a minimum estimate for the
@@ -116,14 +108,11 @@
 #'   * `"quiet"` - Even if paging can be performed, do not print messages about
 #'     it  to the console.
 #' @param handle_http_errors A single string defining how to handle HTTP codes
-#'   other than `200 OK`. You can set this on a per-function call level with
-#'   this parameter, or edit the [package-level option][openFDA_options]
-#'   `openFDA.handle_http_errors` to set this behaviour across multiple
-#'   `openFDA()` calls.
-#'
-#'   By default, `openFDA()` uses the string stored in
-#'   `options("openFDA.handle_http_errors")`, which has the default value
-#'   `"warn"`. Permissible values for `handle_http_errors` include:
+#'   other than `200 OK`. `openFDA()` uses the value of  the package-level
+#'   option `openFDA.handle_http_errors` for this argument, but you can set this
+#'   behaviour on a per-function call level with this parameter. You can edit
+#'   the option itself with `openFDA_options()`. Permissible values for
+#'   `handle_http_errors` include:
 #'
 #'   * `"warn"`: If the returned HTTP code is not 200, issue a warning to the
 #'     console and return the underlying [httr2](https://httr2.r-lib.org/)
@@ -157,10 +146,9 @@
 #'           limit = 1)
 #' )
 #' @note
-#' Internally, the functions in `openFDA()` which call the API itself are
-#' cached with `memoise::memoise()`. Consequently, you should find that
-#' repeated queries run faster than the first query, assuming you don't change
-#' your query parameters.
+#' `openFDA()` caches its results with `memoise::memoise()`. Consequently, you
+#' should find that repeated, identical queries run faster than the first query,
+#' assuming you don't change your query parameters.
 #' @references
 #' Kass-Hout TA, Xu Z, Mohebbi M, Nelsen H, Baker A, LEvine J, Johansen E,
 #' Bright RA. **OpenFDA: an innovative platform providing access to a wealth of

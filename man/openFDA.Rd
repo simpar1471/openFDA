@@ -40,12 +40,13 @@ has more information on how to \code{count} by a specific field.}
 records to retrieve. An error will be thrown if \code{limit} is more than \code{1000}
 (the default).}
 
-\item{skip}{A single integer describing how many records should be skipped.
-If more records are skipped than are found in your search, the openFDA
-API will return a 404 error.}
+\item{skip}{A single integerish value describing how many records should be
+skipped. If more records are skipped than are found in your search, the
+openFDA API will return a 404 error.}
 
 \item{endpoint}{A single-length character vector describing which openFDA
-endpoint to target.
+endpoint to target (case-sensitive). By default, \code{openFDA()} targets the
+Drugs@FDA endpoint (\code{"drugs-drugsfda"}).
 \itemize{
 \item \code{"animalandveterinary-event"}: Adverse event reports for
 animal/veterinary drugs.
@@ -84,23 +85,17 @@ proteins, nucleic acids, and more.
 \item \code{"other-unii"}: Data from the \href{https://www.fda.gov/industry/fda-data-standards-advisory-board/fdas-global-substance-registration-system}{FDA's Global Substance Registration System}.
 \item \code{"tobacco-problem"}: Data on problems (e.g. damage, defects,
 contamination, bad smell) with tobacco products.
-}
-
-This argument is case-sensitive. By default, the package will target the
-Drugs@FDA endpoint (\code{"drugs-drugsfda"}).}
+}}
 
 \item{api_key}{A single-length character vector with your openFDA API key. By
 default this is the result of \code{get_api_key()}. You must set this with
 \code{set_api_key()}, or \code{openFDA()} will not work.}
 
-\item{paging}{A single string describing whether results should be paged. You
-can set this on a per-function call level with this parameter, or edit
-the \link[=openFDA_options]{package-level option} \code{openFDA.paging} to set paging
-behaviour across multiple \code{openFDA()} calls.
-
-By default, \code{openFDA()} uses the string stored in
-\code{options("openFDA.paging")}, which has the default value \code{"ask"}.
-Permissible values for \code{paging} include:
+\item{paging}{A single string describing whether results should be paged.
+\code{openFDA()} uses the value of  the package-level option \code{openFDA.paging}
+for this argument, but you can set this behaviour on a per-function call
+level with this parameter. You can edit the option itself with
+\code{openFDA_options()}. Permissible values for \code{paging_verbosity} include:
 \itemize{
 \item \code{"ask"} - \code{openFDA()} will warn you that pagination is required and ask
 if you want this to be done. Depending on user input, either a single
@@ -115,13 +110,11 @@ pagination occurs.
 }}
 
 \item{paging_verbosity}{A single string describing whether messages about
-pagination should be printed to the console. You can set this on a
-per-function call level with this parameter, or edit the \link[=openFDA_options]{package-level option} \code{openFDA.paging_verbosity} to set this behaviour
-across multiple \code{openFDA()} calls.
-
-By default, \code{openFDA()} uses the string stored in
-\code{options("openFDA.paging_verbosity")}, which has the default value
-\code{"verbose"}. Permissible values for \code{paging_verbosity} include:
+pagination should be printed to the console. \code{openFDA()} uses the value of
+the package-level option \code{openFDA.paging_verbosity} for this argument, but
+you can set this behaviour on a per-function call level with this
+parameter. You can edit the option itself with \code{openFDA_options()}.
+Permissible values for \code{paging_verbosity} include:
 \itemize{
 \item \code{"verbose"} - If paging can be performed, print a message to the console,
 stating how many requests are required with a minimum estimate for the
@@ -131,14 +124,11 @@ it  to the console.
 }}
 
 \item{handle_http_errors}{A single string defining how to handle HTTP codes
-other than \verb{200 OK}. You can set this on a per-function call level with
-this parameter, or edit the \link[=openFDA_options]{package-level option}
-\code{openFDA.handle_http_errors} to set this behaviour across multiple
-\code{openFDA()} calls.
-
-By default, \code{openFDA()} uses the string stored in
-\code{options("openFDA.handle_http_errors")}, which has the default value
-\code{"warn"}. Permissible values for \code{handle_http_errors} include:
+other than \verb{200 OK}. \code{openFDA()} uses the value of  the package-level
+option \code{openFDA.handle_http_errors} for this argument, but you can set this
+behaviour on a per-function call level with this parameter. You can edit
+the option itself with \code{openFDA_options()}. Permissible values for
+\code{handle_http_errors} include:
 \itemize{
 \item \code{"warn"}: If the returned HTTP code is not 200, issue a warning to the
 console and return the underlying \href{https://httr2.r-lib.org/}{httr2}
@@ -160,10 +150,9 @@ JSON data from these responses.
 Send requests to the openFDA API
 }
 \note{
-Internally, the functions in \code{openFDA()} which call the API itself are
-cached with \code{memoise::memoise()}. Consequently, you should find that
-repeated queries run faster than the first query, assuming you don't change
-your query parameters.
+\code{openFDA()} caches its results with \code{memoise::memoise()}. Consequently, you
+should find that repeated, identical queries run faster than the first query,
+assuming you don't change your query parameters.
 }
 \examples{
 if (httr2::secret_has_key("OPENFDA_KEY")) {
